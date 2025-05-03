@@ -6,19 +6,33 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-docker": "docker build -t lab9.studio ."
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
+    "@apollo/client-integration-nextjs": "^0.12.2",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "next": "^15.3.2",
+    "pg": "^8.16.0",
+    "pino": "^9.7.0",
+    "pino-pretty": "^13.0.0",
+    "prismjs": "^1.30.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.1"
+    "zod": "^3.24.4",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.15.1",
+    "@types/prismjs": "^1.26.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

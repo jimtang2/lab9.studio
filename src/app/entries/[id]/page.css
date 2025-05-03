@@ -1,0 +1,68 @@
+@import "../../colors.css";
+
+#entry-content {
+	@apply flex flex-col items-stretch;
+	@apply relative min-h-0 max-h-[calc(100vh-60px)];
+	@apply pb-30 md:pb-0 bg-background;
+	@apply md:grid;
+	@apply md:grid-cols-[minmax(100px,1fr)_3fr];
+	@apply xl:grid-cols-[minmax(120px,1fr)_3fr_minmax(120px,1fr)];
+	@apply md:overflow-hidden;
+}
+
+.navigation {
+	@apply flex flex-row gap-4 justify-between items-center;
+	@apply bg-background px-3 py-1;
+	@apply md:hidden;
+}
+
+.navigation-button {
+	@apply flex flex-row items-center gap-3;
+	@apply text-nowrap;
+	@apply hover:underline;
+}
+
+.navigation-button span {
+	@apply max-w-[200px] sm:max-w-[300px] text-ellipsis overflow-x-hidden;
+}
+
+.navigation #index-button {
+	@apply md:hidden px-1;
+}
+
+#entry-content .entries-list {
+	@apply hidden flex-col items-stretch; 
+	@apply bg-background px-3;
+	@apply md:row-start-1 md:row-end-3 md:col-start-1 md:col-end-2;
+	@apply md:min-h-0 md:max-h-[calc(100vh-55px)];
+	@apply md:flex md:overflow-y-auto md:px-3 md:py-10;
+}
+
+#entry-content.show-index #index-button {
+	@apply text-accent font-bold;
+}
+
+#entry-content.show-index .entries-list {
+	@apply flex pt-2 md:pt-6;
+}
+
+#entry-content .entry-list-item {
+	@apply flex flex-row;
+	@apply p-1 md:p-1; 
+}
+
+#entry-content .entries-list .active {
+	@apply pointer-events-none;
+}
+
+#entry-content .active .entry-title {
+	@apply font-bold text-accent;
+}
+
+#entry-content .entry-title {
+	@apply text-base font-light;
+}
+
+#entry-content .entry-updated_at {
+	@apply text-sm font-light;
+}

@@ -1,26 +1,89 @@
-@import "tailwindcss";
+@import "./colors.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: Work, sans-serif;
+  @apply bg-background-1;
+  @apply min-h-screen;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-text;
+  @apply min-h-screen min-w-[360px] overflow-hidden;
+
+  @apply relative flex flex-col items-stretch; 
+  @apply md:grid; 
+  @apply md:grid-rows-[55px_auto];
 }
+
+main {
+  @apply md:row-start-2;
+  @apply overflow-x-hidden overflow-y-auto;
+}
+
+h1 {
+  @apply text-2xl font-bold;
+  @apply my-3 md:my-8;
+}
+
+h2 {
+  @apply text-xl font-bold;
+  @apply my-2 md:my-6;
+}
+
+h3 {
+  @apply text-lg font-bold;
+  @apply my-1 md:my-4;
+}
+
+p {
+
+}
+
+a, button {
+  @apply hover:text-accent hover:underline transition-[color];
+}
+
+ul {
+  @apply list-disc list-inside;
+}
+
+li {
+  @apply py-2;
+}
+
+img{
+
+}
+
+label {
+
+}
+
+pre {
+  @apply py-0 pl-6 my-2 whitespace-pre-wrap rounded-sm;
+}
+
+code {
+  @apply text-sm/6 pt-[1px];
+}
+
+form {
+
+}
+
+input {
+  @apply accent-accent;
+}
+
+input[type="submit"], input[type="button"], button {
+  @apply cursor-pointer;
+}
+
+input[type="text"], input[type="email"], textarea, select {
+
+}
+
+input[type="checkbox"] {
+  @apply w-4 h-4;
+}
+
