@@ -23,7 +23,7 @@ export default async function Footer() {
       
       ">
       <ul className="flex flex-row gap-4 text-sm">
-        <li>lab9.studio © 2025</li>
+        <li><a href="/">lab9.studio © 2025</a></li>
         <li><a href="/terms" className={`${currentPath == "/terms" ? "underline font-bold" : ""}`}>Terms</a></li> 
         <li><a href="/privacy" className={`${currentPath == "/privacy" ? "underline font-bold" : ""}`}>Privacy</a></li> 
 

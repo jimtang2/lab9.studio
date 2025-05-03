@@ -22,9 +22,7 @@ export default function Navigation() {
       h-full
       justify-center
       items-center">
-      <NavItem name="Home" path="/" />
       <NavItem name="Finance" path="/finance" />
-      <NavItem name="Tetris" path="/tetris" />
     </ul>
   </nav>)
 }

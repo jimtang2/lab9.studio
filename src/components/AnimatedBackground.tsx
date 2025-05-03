@@ -4,9 +4,9 @@ import Image from 'next/image'
 
 export default function AnimatedBackground() {
   const [_dx, _dy] = [0.02, 0.05]
-  const [x, setX] = useState(100)
-  const [y, setY] = useState(100)
-  const [dx, setDx] = useState(-1 * _dx)
+  const [x, setX] = useState(50)
+  const [y, setY] = useState(50)
+  const [dx, setDx] = useState(1 * _dx)
   const [dy, setDy] = useState(-1 * _dy)
 
   useEffect(() => {
