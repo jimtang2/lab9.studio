@@ -1,6 +1,7 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
+import Loading from "../app/loading"
 
 export default function AnimatedBackground() {
   const [_dx, _dy] = [0.02, 0.05]
@@ -60,15 +61,17 @@ export default function AnimatedBackground() {
       w-full 
       h-full 
     `}>
-      <Image
-        className="h-full object-none"
-        style={{ objectPosition: `${x}% ${y}%` }}
-        src="/17384x5558.jpg"
-        alt="Large Image"
-        height={5558}
-        width={17384}
-        loading="eager"
-      />
+      <Suspense fallback={<Loading />}>
+        <Image
+          className="h-full object-none"
+          style={{ objectPosition: `${x}% ${y}%` }}
+          src="/17384x5558.jpg"
+          alt="Large Image"
+          height={5558}
+          width={17384}
+          loading="eager"
+        />
+      </Suspense>
     </div>
   )
 }
