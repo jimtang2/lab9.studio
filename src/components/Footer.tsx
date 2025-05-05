@@ -13,7 +13,7 @@ export default async function Footer() {
       justify-center
       items-center
 
-      w-[calc(100vw-2px)]
+      w-[calc(100vw-4px)]
       h-[44px]
       m-px
       px-4

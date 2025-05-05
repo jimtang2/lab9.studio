@@ -28,24 +28,23 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
       antialiased 
       flex flex-col
       overflow-hidden
-      w-full
       h-screen
         `}>
-        <Suspense fallback={<Loading />}>
-          <LoaderTrigger />
-          <AnimatedBackground />
-        </Suspense>
+        <AnimatedBackground />
 
         <div className={`
           fixed 
           top-0
-          w-full 
           h-full 
           overflow-x-scroll
         `}>
-        <Navigation />
-        {children}
-        <Footer />
+          <Navigation />
+          <div className={`
+            min-h-[calc(100vh-88px)]
+          `}>
+            {children}  
+          </div>          
+          <Footer />
         </div>
       </body>
     </html>

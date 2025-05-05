@@ -41,4 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # large assets
-/public/17384x5558.jpg
+/public/*.jpg
+/public/*.jpeg

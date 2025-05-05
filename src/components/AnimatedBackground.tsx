@@ -9,6 +9,7 @@ export default function AnimatedBackground() {
   const [y, setY] = useState(50)
   const [dx, setDx] = useState(1 * _dx)
   const [dy, setDy] = useState(-1 * _dy)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let animationFrameId: number
@@ -61,17 +62,17 @@ export default function AnimatedBackground() {
       w-full 
       h-full 
     `}>
-      <Suspense fallback={<Loading />}>
-        <Image
-          className="h-full object-none"
-          style={{ objectPosition: `${x}% ${y}%` }}
-          src="/17384x5558.jpg"
-          alt="Large Image"
-          height={5558}
-          width={17384}
-          loading="eager"
-        />
-      </Suspense>
+      {isLoading && <Loading />}
+      <Image
+        className="h-full object-none"
+        style={{ objectPosition: `${x}% ${y}%` }}
+        src="/17384x5558_lq-3.jpg"
+        alt="Large Image"
+        height={5558}
+        width={17384}
+        loading="eager"
+        onLoad={() => setIsLoading(false)}
+      />
     </div>
   )
 }

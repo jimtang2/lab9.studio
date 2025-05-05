@@ -8,8 +8,6 @@ export default function Privacy() {
       items-center
       z-5
       py-2
-      px-8
-      min-h-[calc(100vh-88px)]
     `}
       style={{
         

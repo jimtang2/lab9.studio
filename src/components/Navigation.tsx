@@ -7,10 +7,9 @@ export default function Navigation() {
   <nav className="
     sticky
     top-[0px]
-    w-[calc(100vw-2px)]
+    w-[calc(100vw-4px)]
     h-[44px] 
     m-px 
-    px-4
     z-10
     backdrop-blur-sm"
       style={{
@@ -22,7 +21,7 @@ export default function Navigation() {
       h-full
       justify-center
       items-center">
-      <NavItem name="Finance" path="/finance" />
+      {/*<NavItem name="Finance" path="/finance" />*/}
     </ul>
   </nav>)
 }
