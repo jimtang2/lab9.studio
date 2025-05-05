@@ -36,7 +36,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
           fixed 
           top-0
           h-full 
-          overflow-x-scroll
+          overflow-hidden
         `}>
           <Navigation />
           <div className={`

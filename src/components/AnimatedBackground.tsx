@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Loading from "../app/loading"
 
 export default function AnimatedBackground() {
-  const [_dx, _dy] = [0.02, 0.05]
+  const [_dx, _dy] = [0.01, 0.02]
   const [x, setX] = useState(50)
   const [y, setY] = useState(50)
   const [dx, setDx] = useState(1 * _dx)
@@ -61,12 +61,17 @@ export default function AnimatedBackground() {
       top-0
       w-full 
       h-full 
+      z-0      
     `}>
       {isLoading && <Loading />}
       <Image
-        className="h-full object-none"
-        style={{ objectPosition: `${x}% ${y}%` }}
-        src="/17384x5558_lq-3.jpg"
+        className="h-full object-cover"
+        style={{ 
+          objectPosition: `${x}% ${y}%`,
+          height: "180vh",
+          width: "auto"
+        }}
+        src="/17384x5558.jpg"
         alt="Large Image"
         height={5558}
         width={17384}

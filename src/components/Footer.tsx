@@ -8,7 +8,7 @@ export default async function Footer() {
   const currentPath = headersList.get("x-pathname")  
 
   return (
-    <footer className="
+    <footer className={`
       flex flex-row 
       justify-center
       items-center
@@ -18,10 +18,14 @@ export default async function Footer() {
       m-px
       px-4
       z-10
+      backdrop-blur-sm
 
       sm:justify-end sm:items-center 
-      
-      ">
+      `}
+      style={{
+        background: "rgba(0,0,0,0.1)"
+      }}>
+>
       <ul className="flex flex-row gap-4 text-sm">
         <li><a href="/">lab9.studio © 2025</a></li>
         <li><a href="/terms" className={`${currentPath == "/terms" ? "underline font-bold" : ""}`}>Terms</a></li> 
