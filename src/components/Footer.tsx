@@ -25,7 +25,6 @@ export default async function Footer() {
       style={{
         background: "rgba(0,0,0,0.1)"
       }}>
->
       <ul className="flex flex-row gap-4 text-sm">
         <li><a href="/">lab9.studio © 2025</a></li>
         <li><a href="/terms" className={`${currentPath == "/terms" ? "underline font-bold" : ""}`}>Terms</a></li> 
