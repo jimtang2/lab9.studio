@@ -1,52 +1,35 @@
-import type { Metadata } from "next";
-import { Work_Sans } from "next/font/google";
+import type { Metadata } from "next"
 
-import "./globals.css";
+import "./globals.css"
 
-import {Suspense} from "react"
-
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
-import AnimatedBackground from "@/components/AnimatedBackground"
-import LoaderTrigger from "@/components/LoaderTrigger"
-import Loading from "./loading"
-
-const workSans = Work_Sans({
-  variable: "--font-work-sans",
-  subsets: ["latin"],
-});
+import NavBar from "@/components/NavBar"
+import Menu from "@/components/Menu"
 
 export const metadata: Metadata = {
   title: "lab9.studio",
   description: "built by jimtang",
-};
+}
 
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
-      <body className={`${workSans.variable} 
-      antialiased 
-      flex flex-col
-      overflow-hidden
-      h-screen
+      <body className={`
+        antialiased 
+        flex flex-col
+        bg-background
+        overflow-x-hidden
         `}>
-        <AnimatedBackground />
-
-        <div className={`
-          fixed 
-          top-0
-          h-full 
-          overflow-hidden
-        `}>
-          <Navigation />
-          <div className={`
-            min-h-[calc(100vh-88px)]
-          `}>
-            {children}  
-          </div>          
-          <Footer />
+        <div id="layout" className={`
+          flex flex-col`}>
+          <NavBar />
+          <div id="content" className={`
+            flex flex-row
+            min-h-[calc(100vh-44px)]`}>
+            <Menu />
+            {children}
+          </div>
         </div>
       </body>
     </html>
-  );
+  )
 }

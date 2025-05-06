@@ -6,6 +6,7 @@ export default function Home() {
       z-5
       py-2
       px-8
+      overflow-x-hidden
     `}>
       
     </main>
