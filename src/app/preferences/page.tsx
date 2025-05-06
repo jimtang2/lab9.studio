@@ -12,7 +12,7 @@ export default function Preferences() {
 	return (
 		<main>
 			<h1>Preferences</h1>
-			<Form>
+			<Form action="/preferences/reset">
 				<label htmlFor="theme">Color Theme</label>
 				<select name="theme" 
 					onChange={handleChangeColorScheme} 

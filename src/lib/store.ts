@@ -1,7 +1,20 @@
 import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { persist, createJSONStorage} from "zustand/middleware"
 
-export const useStore = create(
+type StoreState = {
+  showMenu: boolean
+  toggleMenu: () => void
+  colorScheme: string
+  toggleColorScheme: () => void
+  contactSubject: string
+  setContactSubject: (newSubject: string) => void
+  contactMessage: string 
+  setContactMessage: (newMessage: string) => void
+  contactEmail: string
+  setContactEmail: (newEmail: string) => void
+}
+
+export const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
       showMenu: false,
@@ -10,9 +23,9 @@ export const useStore = create(
       },
       colorScheme: "dark",
       toggleColorScheme: () => {
-        set({ colorScheme: get().colorScheme == "dark" ? "light" : "dark" })
+        set({ colorScheme: get().colorScheme === "dark" ? "light" : "dark" })
       },
-      contactSubject: "",
+      contactSubject: "feedback",
       setContactSubject: (newSubject) => {
         set({ contactSubject: newSubject})
       },
@@ -26,7 +39,8 @@ export const useStore = create(
       },
     }),
     {
-      name: "lab9.studio.local-storage"
+      name: "lab9.studio.ephemeral",
+      storage: createJSONStorage(() => localStorage)
     }
   )
 )

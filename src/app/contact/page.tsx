@@ -5,27 +5,25 @@ import { useStore } from "@/lib/store"
 
 export default function Contact() {
 
-  const { 
-    contactSubject, setContactSubject, 
-    contactMessage, setContactMessage, 
-    contactEmail, setContactEmail } = useStore()
+  const { contactSubject, setContactSubject, contactMessage, setContactMessage, contactEmail, setContactEmail } = useStore()
 
-  const handleChangeSubject = ({target: { value }}) => {
-    setContactSubject(value)
+
+  const handleChangeSubject = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setContactSubject(event.target.value)
   }
 
-  const handleChangeMessage = ({target: { value }}) => {
-    setContactMessage(value)
+  const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContactMessage(event.target.value)
   }
 
-  const handleChangeEmail = ({target: { value }}) => {
-    setContactEmail(value)
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContactEmail(event.target.value)
   }
 
   return (
     <main>
       <h1>Contact</h1>
-      <Form>
+      <Form action="/contact/submit">
         <label htmlFor="subject">Subject</label>
         <select name="subject" 
           onChange={handleChangeSubject}
