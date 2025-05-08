@@ -7,8 +7,7 @@ export default function GithubLink() {
       flex flex-row 
       items-center 
       p-2 
-      hover:bg-background-hl
-      rounded-sm" 
+      hover:bg-background-hl" 
       href="https://github.com/jimtang2">
       <img className="" alt="github icon" 
         src="/logos/github-icon.svg" 

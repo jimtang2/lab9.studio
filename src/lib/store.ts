@@ -1,6 +1,26 @@
 import { create } from "zustand"
 import { persist, createJSONStorage} from "zustand/middleware"
 
+type NavStoreState = {
+  title: string
+  setTitle: (newTitle: string) => void
+}
+
+export const useNavStore = create<NavStoreState>()(
+  persist(
+    (set, get, store) => ({
+      title: "Home",
+      setTitle: (newTitle) => {
+        set({ title: newTitle })
+      }
+    }),
+    {
+      name: "lab9.studio.nav-store",
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+)
+
 type MenuStoreState = {
   show: boolean
   toggleShow: () => void

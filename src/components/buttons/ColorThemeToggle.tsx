@@ -25,8 +25,7 @@ export default function GithubLink() {
       flex flex-row 
       items-center 
       p-2 
-      hover:bg-background-hl
-      rounded-sm" 
+      hover:bg-background-hl" 
       onClick={toggleColorScheme}>
       <Image
       	alt={svgAlt} 

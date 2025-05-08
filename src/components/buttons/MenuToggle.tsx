@@ -11,12 +11,12 @@ export default function MenuToggle() {
       self-stretch place-self-stretch`}>
       <button 
         onClick={toggleShow}
-        className="p-2 hover:bg-background-hl rounded-sm">
+        className="p-2 hover:bg-background-hl">
         <Image 
           className="" 
           src={"/heroicons/outline/bars-3.svg"} 
           alt={"Menu"} 
-          width={30} height={30}/>
+          width={26} height={26}/>
       </button>
     </li>
   )

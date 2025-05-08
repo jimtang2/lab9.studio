@@ -1,9 +1,12 @@
+"use client"
 import Image from "next/image"
-import MenuToggle from "./MenuToggle"
-import ColorThemeToggle from "./ColorThemeToggle"
-import GithubLink from "./GithubLink"
+import MenuToggle from "./buttons/MenuToggle"
+import ColorThemeToggle from "./buttons/ColorThemeToggle"
+import GithubLink from "./buttons/GithubLink"
+import { useNavStore } from "@/lib/store"
 
 export default function NavBar() {
+  const { title } = useNavStore()
   return (
   <nav className={`
     sticky
@@ -19,7 +22,11 @@ export default function NavBar() {
       justify-start
     `}>
       <MenuToggle />
-      <div className="flex-grow-1"></div>
+      <div className={`
+        flex flex-row items-center justify-center
+        flex-grow-1 pl-4
+        font-bold
+      `}>{title}</div>
       <ColorThemeToggle />
       <GithubLink />
     </ul>

@@ -70,9 +70,8 @@ body {
 }
 
 main {
-  @apply flex flex-col px-4;
+  @apply flex flex-col;
   @apply w-full;
-  @apply sm:p-4 sm:px-12;
 }
 
 .dark img{
@@ -103,18 +102,12 @@ label {
 input[type="submit"], input[type="button"] {
   @apply py-2 px-6 bg-accent text-text-contrast font-bold;
   @apply hover:bg-accent-lt;
-  @apply border border-accent-lt rounded-md;
   cursor: pointer;
 }
 
-input[type="submit"] {
-  @apply mt-6;
-}
-
-input[type="text"], input[type="email"] {
-  @apply md:w-md w-full;
-  @apply border border-divider rounded-md;
-  @apply p-2 mb-2;
+input, textarea, select {
+  @apply outline-none;
+  @apply border-none;
 }
 
 form {
@@ -122,15 +115,28 @@ form {
   @apply w-full max-w-md;
 }
 
-select {
-  @apply md:w-md w-full;
-  @apply border border-divider rounded-md;
-  @apply p-2 mb-2;
+input[type="text"], input[type="email"], select {
+  @apply px-4 mr-2;
 }
 
 textarea {
-  @apply md:w-md w-full;
-  @apply border border-divider rounded-md;
-  @apply p-2 mb-2;
+  @apply flex-grow-1;
+  @apply border border-divider;
+  @apply p-4 m-0;
   @apply resize-none;
+  @apply text-sm/7;
+}
+
+#toolbar button {
+  @apply flex flex-row items-center gap-4;
+  @apply bg-accent hover:bg-accent-lt px-4 ml-2;
+  @apply text-text-contrast
+}
+
+h3 {
+  @apply text-base/12 font-bold px-2 underline text-text;
+}
+
+p {
+  @apply text-base/8 px-2 text-text-lt;
 }

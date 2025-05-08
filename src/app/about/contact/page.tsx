@@ -1,9 +1,14 @@
 "use client"
+import { useState, useEffect } from "react"
 import Image from 'next/image'
 import Form from "next/form"
-import { useCacheStore } from "@/lib/store"
+import { useCacheStore, useSettingsStore } from "@/lib/store"
+import Title from "@/components/Title"
+import Toolbar from "@/components/Toolbar"
 
 export default function Contact() {
+  const [ isHydrated, setIsHydrated ] = useState(false)
+  const { colorScheme } = useSettingsStore()
 
   const { contactSubject, setContactSubject, contactMessage, setContactMessage, contactEmail, setContactEmail } = useCacheStore()
 
@@ -20,40 +25,30 @@ export default function Contact() {
     setContactEmail(event.target.value)
   }
 
+  const handleSend = () => {
+
+  }
+
+  useEffect(() => setIsHydrated(true), [])
+
   return (
     <main>
-      <h1>Contact</h1>
-      <Form action="/contact/submit">
-        <label htmlFor="subject">Subject</label>
+      <Title title="Contact" />
+      <Toolbar>
         <select name="subject" 
-          onChange={handleChangeSubject}
-          defaultValue={contactSubject}
           autoFocus>
-          <option value="feedback">Send user feedback</option>
-          <option value="support">Request technical support</option>
-          <option value="other">Other</option>
+          <option value="support">Technical Support</option>
+          <option value="feedback">Feedback</option>
         </select>
+        <div className="flex-grow-1"></div>
+        <button onClick={handleSend}>Send</button>
+      </Toolbar>
 
-        <label htmlFor="message">Message</label>
-        <textarea name="message" 
-          required
-          rows={5}
-          placeholder="Message"
-          defaultValue={contactMessage}
-          onChange={handleChangeMessage}
-        />
-
-        <label htmlFor="reply-to">E-mail</label>
-        <input type="email" name="email" 
-          required
-          placeholder="E-mail"
-          defaultValue={contactEmail}
-          onChange={handleChangeEmail}
-        />
-        
-        <input type="submit" 
-          value="Submit" />
-      </Form>
+      <textarea name="message" 
+        placeholder="Message"
+        defaultValue={contactMessage}
+        onChange={handleChangeMessage}
+      />
     </main>
   );
 }

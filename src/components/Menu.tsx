@@ -5,62 +5,6 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { useMenuStore } from "@/lib/store"
 
-export const menuItems: MenuItemProps[] = [
-  {
-    id: "home",
-    type: "link",
-    href: "/",
-    alt: "home icon",
-    icon: "/heroicons/outline/home.svg",
-    label: "Home",
-  },
-  {
-    id: "blog",
-    type: "link",
-    href: "/blog",
-    alt: "blog icon",
-    icon: "/heroicons/outline/pencil-square.svg",
-    label: "Blog",
-  },
-  {
-    id: "preferences",
-    type: "link",
-    href: "/preferences",
-    alt: "preferences icon",
-    icon: "/heroicons/outline/cog.svg",
-    label: "Preferences",
-  },
-  {
-    id: "divider-1",
-    type: "divider"
-  },
-  {
-    id: "about",
-    type: "group",
-    alt: "about icon",
-    icon: "/heroicons/outline/question-mark-circle.svg",
-    label: "About",
-  },
-  {
-    id: "terms",
-    type: "link",
-    parentId: "about",
-    href: "/about/terms",
-    alt: "about icon",
-    icon: "/heroicons/outline/clipboard-document-check.svg",
-    label: "Terms",
-  },
-  {
-    id: "contact",
-    type: "link",
-    parentId: "about",
-    href: "/about/contact",
-    alt: "contact icon",
-    icon: "/heroicons/outline/at-symbol.svg",
-    label: "Contact",
-  },
-]
-
 type MenuItemProps = {
   id: string
   type: "link" | "group" | "divider"
@@ -79,20 +23,20 @@ type MenuProps = {
 
 function Menu({ items }: MenuProps) {
   const { show } = useMenuStore()
-  let marginLeft = show === true ? "ml-[0px]" : "ml-[-60px]"
-  let marginLeftSM = show === true ? "sm:ml-[0px]" : "sm:ml-[-240px]"
 
   return (
     <div id="menu" 
       className={`
         content-stretch
         relative
-        w-[60px] min-w-[60px] ${marginLeft}
-        sm:w-[240px] sm:min-w-[240px] ${marginLeftSM}
-        transition-[margin-left]
+        w-[60px] min-w-[60px] 
+        sm:w-[240px] sm:min-w-[240px]
+        ml-[-60px] sm:ml-[-240px]
+        ${show && "ml-[0px] sm:ml-[0px] transition-[margin-left]"}
+        
         bg-background-lt
-        m-0 p-0 py-2 px-0
-        sm:px-4
+        m-0 p-0 
+        px-0 sm:px-4 
         border-r border-divider`}>
 
       <div className="sticky top-[calc(44px+1rem)] min-w-[60px]">
