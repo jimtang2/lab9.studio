@@ -7,7 +7,7 @@ import { useMenuStore } from "@/lib/store"
 
 type MenuItemProps = {
   id: string
-  type: "link" | "group" | "divider"
+  type: string
   parentId?: string
   href?: string
   alt?: string 
