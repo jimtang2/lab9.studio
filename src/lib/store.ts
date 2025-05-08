@@ -1,66 +1,92 @@
 import { create } from "zustand"
 import { persist, createJSONStorage} from "zustand/middleware"
 
-type StoreState = {
-  showMenu: boolean
-  toggleMenu: () => void
-  colorScheme: string
-  toggleColorScheme: () => void
-  contactSubject: string
-  setContactSubject: (newSubject: string) => void
-  contactMessage: string 
-  setContactMessage: (newMessage: string) => void
-  contactEmail: string
-  setContactEmail: (newEmail: string) => void
+type MenuStoreState = {
+  show: boolean
+  toggleShow: () => void
+  items: { 
+    [id: string]: {
+      collapsed: boolean
+    } 
+  }
+  getItemCollapsed: (id: string) => boolean
+  setItemCollapsed: (id: string, collapsed: boolean) => void
 }
 
-export const useStore = create<StoreState>()(
+export const useMenuStore = create<MenuStoreState>()(
   persist(
-    (set, get) => ({
-      showMenu: false,
-      toggleMenu: () => {
-        set({ showMenu: !get().showMenu })
+    (set, get, store) => ({
+      show: true,
+      toggleShow: () => {
+        set({ show: !get().show })
       },
-      colorScheme: "dark",
-      toggleColorScheme: () => {
-        set({ colorScheme: get().colorScheme === "dark" ? "light" : "dark" })
+      items: {
+        about: {
+          collapsed: false
+        }
       },
-      contactSubject: "feedback",
-      setContactSubject: (newSubject) => {
-        set({ contactSubject: newSubject})
+      getItemCollapsed: (id) => {
+        return get().items[id]?.collapsed
       },
-      contactMessage: "",
-      setContactMessage: (newMessage) => {
-        set({ contactMessage: newMessage})
-      },
-      contactEmail: "",
-      setContactEmail: (newEmail) => {
-        set({ contactEmail: newEmail})
+      setItemCollapsed: (id, collapsed) => {
+        set({ items: { [id]: { collapsed: collapsed } } })
       },
     }),
     {
-      name: "lab9.studio.ephemeral",
+      name: "lab9.studio.menu-store",
       storage: createJSONStorage(() => localStorage)
     }
   )
 )
 
-// export const useStore = create(
-//   (set, get) => ({
-//     showMenu: true,
-//     toggleMenu: () => {
-//       let show = get().showMenu
-//       switch(show) {
-//       case false:
-//         set({ showMenu: true})
-//         break
-//       case true:
-//         set({ showMenu: false})
-//         break
-//       default:
-//         set({ showMenu: true})
-//         break
-//       }      
-//     },
-//   })
-// )
+type SettingsStoreState = {
+  colorScheme: "dark" | "light"
+  toggleColorScheme: () => void
+}
+
+export const useSettingsStore = create<SettingsStoreState>()(
+  persist(
+    (set, get, store) => ({
+      colorScheme: "dark",
+      toggleColorScheme: () => {
+        set({ colorScheme: get().colorScheme === "dark" ? "light" : "dark" })
+      },
+    }),
+    {
+      name: "lab9.studio.settings-store",
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+)
+
+type CacheStoreState = {
+  contactSubject: string
+  contactMessage: string 
+  contactEmail: string
+  setContactSubject: (newSubject: string) => void
+  setContactMessage: (newMessage: string) => void
+  setContactEmail: (newEmail: string) => void  
+}
+
+export const useCacheStore = create<CacheStoreState>()(
+  persist(
+    (set, get, store) => ({
+      contactSubject: "feedback",
+      contactMessage: "",
+      contactEmail: "",
+      setContactSubject: (newSubject) => {
+        set({ contactSubject: newSubject})
+      },
+      setContactMessage: (newMessage) => {
+        set({ contactMessage: newMessage})
+      },
+      setContactEmail: (newEmail) => {
+        set({ contactEmail: newEmail})
+      },
+    }),
+    {
+      name: "lab9.studio.cache-store",
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+)

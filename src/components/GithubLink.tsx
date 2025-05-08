@@ -11,7 +11,7 @@ export default function GithubLink() {
       rounded-sm" 
       href="https://github.com/jimtang2">
       <img className="" alt="github icon" 
-        src="/github-mark.svg" 
+        src="/logos/github-icon.svg" 
         width={26} height={26} />
     </Link>)
 }

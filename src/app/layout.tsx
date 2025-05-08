@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 import NavBar from "@/components/NavBar"
-import Menu from "@/components/Menu"
+import Menu, { menuItems } from "@/components/Menu"
 
 export const metadata: Metadata = {
   title: "lab9.studio",
@@ -25,7 +25,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
           <div id="content" className={`
             flex flex-row
             min-h-[calc(100vh-44px)]`}>
-            <Menu />
+            <Menu items={menuItems}/>
             {children}
           </div>
         </div>

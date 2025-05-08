@@ -1,13 +1,13 @@
 "use client"
 import Image from "next/image"
 import { useEffect } from "react"
-import { useStore } from "@/lib/store"
+import { useSettingsStore } from "@/lib/store"
 
 
 export default function GithubLink() {
-	const { colorScheme, toggleColorScheme } = useStore()
+	const { colorScheme, toggleColorScheme } = useSettingsStore()
 
-	let svgIcon = colorScheme == "dark" ? "sun.svg" : "moon.svg"
+	let svgIcon = colorScheme == "dark" ? "/heroicons/outline/sun.svg" : "/heroicons/outline/moon.svg"
 	let svgAlt = colorScheme == "dark" ? "dark icon" : "light icon"
 
 	useEffect(() => {
@@ -20,10 +20,6 @@ export default function GithubLink() {
 		}
 	}, [colorScheme])
 
-	const handleClick = () => {
-		toggleColorScheme()
-	}
-
 	return (
     <button className="
       flex flex-row 
@@ -31,7 +27,7 @@ export default function GithubLink() {
       p-2 
       hover:bg-background-hl
       rounded-sm" 
-      onClick={handleClick}>
+      onClick={toggleColorScheme}>
       <Image
       	alt={svgAlt} 
         src={svgIcon}

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import MenuButton from "./MenuButton"
+import MenuToggle from "./MenuToggle"
 import ColorThemeToggle from "./ColorThemeToggle"
 import GithubLink from "./GithubLink"
 
@@ -8,7 +8,7 @@ export default function NavBar() {
   <nav className={`
     sticky
     w-screen h-[44px] top-[0px] z-20
-    px-2
+    px-2 sm:px-4
     bg-background-lt
     border-b border-divider
   `}>
@@ -18,11 +18,10 @@ export default function NavBar() {
       items-center
       justify-start
     `}>
-      <MenuButton />
+      <MenuToggle />
       <div className="flex-grow-1"></div>
       <ColorThemeToggle />
       <GithubLink />
-      <div className="sm:w-2"></div>
     </ul>
   </nav>)
 }
