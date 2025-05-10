@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import Title from "@/components/Title"
 
 export default function Privacy() {
   return (
-    <main className="p-4">
+    <main className={`
+      p-4
+    `}>
       <Title title="Privacy Policy" />
       <h3>Introduction</h3>
       <p>This Privacy Policy explains how lab9.studio collects, uses, and protects your information on lab9.studio.</p>

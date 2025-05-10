@@ -31,6 +31,8 @@ type MenuStoreState = {
   }
   getItemCollapsed: (id: string) => boolean
   setItemCollapsed: (id: string, collapsed: boolean) => void
+  // width: number
+  // setWidth: (newWidth: number) => void
 }
 
 export const useMenuStore = create<MenuStoreState>()(
@@ -51,6 +53,10 @@ export const useMenuStore = create<MenuStoreState>()(
       setItemCollapsed: (id, collapsed) => {
         set({ items: { [id]: { collapsed: collapsed } } })
       },
+      // width: 240,
+      // setWidth: (newWidth) => {
+      //   set({ width: newWidth })
+      // }
     }),
     {
       name: "lab9.studio.menu-store",
@@ -60,16 +66,22 @@ export const useMenuStore = create<MenuStoreState>()(
 )
 
 type SettingsStoreState = {
-  colorScheme: "dark" | "light"
-  toggleColorScheme: () => void
+  darkMode: boolean
+  priceWidget: boolean
+  allowCookies: boolean
+  anonymousAnalytics: boolean
+  toggle: (key) => void
 }
 
 export const useSettingsStore = create<SettingsStoreState>()(
   persist(
     (set, get, store) => ({
-      colorScheme: "dark",
-      toggleColorScheme: () => {
-        set({ colorScheme: get().colorScheme === "dark" ? "light" : "dark" })
+      darkMode: true,
+      priceWidget: true,
+      allowCookies: true,
+      anonymousAnalytics: true,
+      toggle: (key) => {
+        set({ [key]: !get()[key] })
       },
     }),
     {

@@ -2,15 +2,16 @@ import type { Metadata } from "next"
 
 import "./globals.css"
 
+import DarkModeAgent from "@/components/DarkModeAgent"
 import NavBar from "@/components/NavBar"
-import Menu from "@/components/Menu"
+import Menu, { MenuItemProps } from "@/components/Menu"
 
 export const metadata: Metadata = {
   title: "lab9.studio",
   description: "built by jimtang",
 }
 
-const menuItems = [
+const menuItems: MenuItemProps[] = [
   {
     id: "home",
     type: "link",
@@ -78,18 +79,21 @@ const menuItems = [
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
+      <DarkModeAgent />
+
       <body className={`
         antialiased 
         flex flex-col
         bg-background
         overflow-x-hidden
+        
         `}>
         <div id="layout" className={`
-          flex flex-col`}>
+          flex flex-col
+          min-h-screen`}>
           <NavBar />
           <div id="content" className={`
-            flex flex-row
-            min-h-[calc(100vh-44px)]`}>
+            flex flex-row flex-grow-1 items-stretch`}>
             <Menu items={menuItems}/>
             {children}
           </div>

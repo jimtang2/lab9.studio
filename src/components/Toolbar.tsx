@@ -7,9 +7,9 @@ export default function Toolbar({children,}: Readonly<{children: React.ReactNode
 	return (
 		<div id="toolbar" className={`
 			flex flex-row items-stretch justify-start
-			w-screen h-[44px] top-[44px] z-20
+			sticky top-[44px] z-10
+			h-[40px] min-h-[40px] max-h-[40px] 
 			bg-background-hl
 			border-b border-divider
-			${show && "pr-[60px] sm:pr-[240px] transition-[padding-right]"}
 		`}>{children}</div>)
 }

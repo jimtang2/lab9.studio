@@ -1,35 +1,24 @@
 "use client"
 import Image from "next/image"
-import { useEffect } from "react"
 import { useSettingsStore } from "@/lib/store"
 
-
-export default function GithubLink() {
-	const { colorScheme, toggleColorScheme } = useSettingsStore()
-
-	let svgIcon = colorScheme == "dark" ? "/heroicons/outline/sun.svg" : "/heroicons/outline/moon.svg"
-	let svgAlt = colorScheme == "dark" ? "dark icon" : "light icon"
-
-	useEffect(() => {
-		if (colorScheme == "dark") {
-			document.documentElement.classList.add("dark")
-			document.documentElement.classList.remove("light")
-		} else {
-			document.documentElement.classList.add("light")
-			document.documentElement.classList.remove("dark")
-		}
-	}, [colorScheme])
+export default function ColorThemeToggle() {
+	const { darkMode, toggle } = useSettingsStore()
+	let icon = darkMode ? "/heroicons/outline/sun.svg" : "/heroicons/outline/moon.svg"
+	let size = 26
 
 	return (
     <button className="
+    	hidden
       flex flex-row 
       items-center 
       p-2 
       hover:bg-background-hl" 
-      onClick={toggleColorScheme}>
+      onClick={() => toggle("darkMode")}>
       <Image
-      	alt={svgAlt} 
-        src={svgIcon}
-        width={26} height={26} />
+      	alt={"dark mode"} 
+        src={icon}
+        width={size} 
+        height={size} />
     </button>)
 }

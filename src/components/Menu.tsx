@@ -5,9 +5,11 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { useMenuStore } from "@/lib/store"
 
-type MenuItemProps = {
+type MenuItemType = "link" | "group" | "divider"
+
+export type MenuItemProps = {
   id: string
-  type: string
+  type: MenuItemType
   parentId?: string
   href?: string
   alt?: string 
@@ -17,7 +19,7 @@ type MenuItemProps = {
   height?: number
 }
 
-type MenuProps = { 
+interface MenuProps { 
   items: MenuItemProps[]
 }
 
@@ -27,23 +29,20 @@ function Menu({ items }: MenuProps) {
   return (
     <div id="menu" 
       className={`
-        content-stretch
+        z-15 
         relative
-        w-[60px] min-w-[60px] 
-        sm:w-[240px] sm:min-w-[240px]
-        ml-[-60px] sm:ml-[-240px]
-        ${show && "ml-[0px] sm:ml-[0px] transition-[margin-left]"}
-        
         bg-background-lt
-        m-0 p-0 
-        px-0 sm:px-4 
+        w-[60px] min-w-[60px] 
+        sm:w-[240px] sm:min-w-[240px] sm:max-w-[300px] sm:ml-[0px]
+        m-0 ml-[-60px]
+        px-0 sm:px-4  pb-8
+        transition-[margin-left]
+        ${show && "ml-[0px] "}
         border-r border-divider`}>
 
       <div className="sticky top-[calc(44px+1rem)] min-w-[60px]">
-        <ul>
-          {items.map(props => 
-            <MenuItem key={props.id} {...props} />)}
-        </ul>
+        {items.map(props => 
+          <MenuItem key={props.id} {...props} />)}
       </div>      
     </div>)
 }
@@ -73,6 +72,7 @@ function MenuItem({
 
   switch(type) {
   case "link":
+    let isChild = (typeof parentId) === "string"
     let parentCollapsed = false
     if (parentId !== null) {
       parentCollapsed = getItemCollapsed(parentId as string)
@@ -81,14 +81,14 @@ function MenuItem({
       throw new Error("invalid MenuItemProps")
     }
     return (
-      <li className={`
+      <div className={`
         ${isHydrated && parentCollapsed ? "hidden" : ""}
-        flex flex-col items-center
-        px-0 py-2 my-2 
+        px-0 py-2 my-1 
         sm:rounded-sm sm:px-2
         text-sm w-full
         ${isHydrated && isActive && "bg-accent text-text-contrast"}
-        ${isHydrated && !isActive && "hover:bg-background-hl"}`}>
+        ${isHydrated && !isActive && "hover:bg-background-hl"}
+        `}>
         <Link className={`
           flex flex-row items-center justify-center gap-4
           sm:justify-start
@@ -106,7 +106,7 @@ function MenuItem({
             {label}
           </span>
         </Link>
-      </li>)
+      </div>)
     break
   case "group":
     const handleCollapse = () => {
@@ -117,9 +117,8 @@ function MenuItem({
       return <></>
     }
     return (
-      <li className={`
-        flex flex-col items-center
-        px-0 py-2 my-2 
+      <div className={`
+        px-0 py-2 my-1 
         sm:rounded-sm sm:px-2
         text-sm w-full
         hover:bg-background-hl`}>
@@ -147,9 +146,9 @@ function MenuItem({
             width={16} 
             height={16}/>
         </button>
-      </li>)
+      </div>)
   case "divider":
-    return <li className={`border-t border-divider m-2`}></li>
+    return <div className={`border-t border-divider my-1`}></div>
   default:
     return <></>
   }

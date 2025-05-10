@@ -2,20 +2,16 @@
 import { useState, useEffect } from "react"
 import Image from 'next/image'
 import Form from "next/form"
-import { useCacheStore, useSettingsStore } from "@/lib/store"
+import { useMenuStore, useCacheStore, useSettingsStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 
 export default function Contact() {
   const [ isHydrated, setIsHydrated ] = useState(false)
   const { colorScheme } = useSettingsStore()
+  const { show } = useMenuStore()
 
   const { contactSubject, setContactSubject, contactMessage, setContactMessage, contactEmail, setContactEmail } = useCacheStore()
-
-
-  const handleChangeSubject = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setContactSubject(event.target.value)
-  }
 
   const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContactMessage(event.target.value)
@@ -32,11 +28,12 @@ export default function Contact() {
   useEffect(() => setIsHydrated(true), [])
 
   return (
-    <main>
+    <main className={`
+    `}>
       <Title title="Contact" />
       <Toolbar>
-        <select name="subject" 
-          autoFocus>
+        <select name="subject" defaultValue="subject">
+          <option disabled value="subject">Subject</option>
           <option value="support">Technical Support</option>
           <option value="feedback">Feedback</option>
         </select>

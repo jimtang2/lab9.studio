@@ -8,7 +8,8 @@ export default function MenuToggle() {
   return (
     <li className={`      
       flex justify-center items-center 
-      self-stretch place-self-stretch`}>
+      self-stretch place-self-stretch
+      sm:hidden`}>
       <button 
         onClick={toggleShow}
         className="p-2 hover:bg-background-hl">

@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import Title from "@/components/Title"
 
 export default function Terms() {
   return (
-    <main className="p-4">
+    <main className={`
+      p-4
+    `}>
       <Title title="Terms of Use" />
       <h3>Acceptance of Terms</h3>
       <p>By accessing lab9.studio, you agree to these Terms of Use. If you do not agree, do not use the site.</p>
