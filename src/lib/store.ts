@@ -65,12 +65,12 @@ export const useMenuStore = create<MenuStoreState>()(
   )
 )
 
-type SettingsStoreState = {
+export type SettingsStoreState = {
   darkMode: boolean
   priceWidget: boolean
   allowCookies: boolean
   anonymousAnalytics: boolean
-  toggle: (key) => void
+  toggle: (key: keyof SettingsStoreState) => void
 }
 
 export const useSettingsStore = create<SettingsStoreState>()(

@@ -2,14 +2,12 @@
 import { useState, useEffect } from "react"
 import Image from 'next/image'
 import Form from "next/form"
-import { useMenuStore, useCacheStore, useSettingsStore } from "@/lib/store"
+import { useCacheStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 
 export default function Contact() {
   const [ isHydrated, setIsHydrated ] = useState(false)
-  const { colorScheme } = useSettingsStore()
-  const { show } = useMenuStore()
 
   const { contactSubject, setContactSubject, contactMessage, setContactMessage, contactEmail, setContactEmail } = useCacheStore()
 

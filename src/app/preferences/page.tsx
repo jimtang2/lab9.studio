@@ -2,7 +2,7 @@
 import { Fragment, useState, useEffect } from "react"
 import Image from "next/image"
 
-import { useMenuStore, useSettingsStore } from "@/lib/store"
+import { useMenuStore, useSettingsStore, SettingsStoreState } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 
@@ -133,9 +133,9 @@ export default function Preferences() {
 
 function PreferenceListItem({ id, label, isCategorySelected = false }: PreferenceProps) {
 	const settings = useSettingsStore()
-	const isEnabled = settings[id]
-	const toggle = () => settings.toggle(id)
-	console.log(id, isCategorySelected)
+	const isEnabled = settings[id as keyof SettingsStoreState] as boolean
+	const toggle = () => settings.toggle(id as keyof SettingsStoreState)
+
 	return (
 		<div className={`
 			flex flex-row py-2 px-4
@@ -152,8 +152,8 @@ function PreferenceListItem({ id, label, isCategorySelected = false }: Preferenc
 
 function PreferenceColumnItem({ id, label, isCategorySelected = false }: PreferenceProps) {
 	const settings = useSettingsStore()
-	const isEnabled = settings[id]
-	const toggle = () => settings.toggle(id)
+	const isEnabled = settings[id as keyof SettingsStoreState] as boolean
+	const toggle = () => settings.toggle(id as keyof SettingsStoreState)
 
 	return (
 		<div className={`
