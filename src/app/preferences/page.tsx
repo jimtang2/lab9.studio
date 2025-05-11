@@ -94,15 +94,20 @@ export default function Preferences() {
 							<Fragment key={id} >
 								<a className={`
 									flex flow-row
-									pl-6 pr-2 py-2 my-0
-									cursor-pointer
-									${isHydrated && isActive && "bg-accent text-text-contrast"}
-									${isHydrated && !isActive && "hover:bg-background-lt"}
+									pt-2 pb-1 my-0 px-4
+									font-bold select-none
+
+									sm:font-normal
+									sm:pl-6 sm:pr-2 
+									sm:cursor-pointer
+									${isHydrated && isActive && "sm:bg-accent sm:text-text-contrast"}
+									${isHydrated && !isActive && "sm:hover:bg-background-lt"}
 								`}
 									onClick={() => handleSelectCategory(id)}>
 									<span className="flex-grow-1">{label}</span>
 									<Image 
 									  className={`
+									  	sm:block hidden
 									  	transition-[rotate]
 									  	sm:rotate-none
 									  	${isActive && "rotate-90"}
@@ -113,7 +118,7 @@ export default function Preferences() {
 									  height={16}/>
 								</a>
 								{items.map((preferenceProps) => 
-									<PreferenceListItem key={`pref-list-${preferenceProps.id}`} {...preferenceProps} isCategorySelected={isActive} />)}
+									<PreferenceListItem key={`pref-list-${preferenceProps.id}`} {...preferenceProps} />)}
 							</Fragment>)
 					})}
 				</div>
@@ -131,7 +136,7 @@ export default function Preferences() {
 		</main>)
 }
 
-function PreferenceListItem({ id, label, isCategorySelected = false }: PreferenceProps) {
+function PreferenceListItem({ id, label }: PreferenceProps) {
 	const settings = useSettingsStore()
 	const isEnabled = settings[id as keyof SettingsStoreState] as boolean
 	const toggle = () => settings.toggle(id as keyof SettingsStoreState)
@@ -140,7 +145,6 @@ function PreferenceListItem({ id, label, isCategorySelected = false }: Preferenc
 		<div className={`
 			flex flex-row py-2 px-4
 			sm:hidden
-			${isCategorySelected ? "block" : "hidden"}
 			hover:bg-background-lt
 		`} 
 			key={id} 

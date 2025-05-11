@@ -84,7 +84,7 @@ a label, button {
 }
 
 label {
-  @apply text-sm text-text-hl py-[2px] px-[4px];
+  @apply text-text-hl py-[2px] px-[4px];
 }
 
 input[type="submit"], input[type="button"] {
