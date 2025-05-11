@@ -76,7 +76,7 @@ export type SettingsStoreState = {
 export const useSettingsStore = create<SettingsStoreState>()(
   persist(
     (set, get, store) => ({
-      darkMode: true,
+      darkMode: false,
       priceWidget: true,
       allowCookies: true,
       anonymousAnalytics: true,
