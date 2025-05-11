@@ -44,7 +44,7 @@ export const useMenuStore = create<MenuStoreState>()(
       },
       items: {
         about: {
-          collapsed: false
+          collapsed: true
         }
       },
       getItemCollapsed: (id) => {

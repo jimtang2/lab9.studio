@@ -144,6 +144,7 @@ function PreferenceListItem({ id, label }: PreferenceProps) {
 	return (
 		<div className={`
 			flex flex-row py-2 px-4
+			items-center
 			sm:hidden
 			hover:bg-background-lt
 		`} 

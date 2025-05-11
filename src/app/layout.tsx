@@ -20,14 +20,14 @@ const menuItems: MenuItemProps[] = [
     icon: "/heroicons/outline/home.svg",
     label: "Home",
   },
-  {
-    id: "deck",
-    type: "link",
-    href: "/deck",
-    alt: "deck icon",
-    icon: "/heroicons/outline/square-3-stack-3d.svg",
-    label: "On Deck",
-  },
+  // {
+  //   id: "deck",
+  //   type: "link",
+  //   href: "/deck",
+  //   alt: "deck icon",
+  //   icon: "/heroicons/outline/square-3-stack-3d.svg",
+  //   label: "On Deck",
+  // },
   {
     id: "divider-1",
     type: "divider"
@@ -48,15 +48,6 @@ const menuItems: MenuItemProps[] = [
     label: "About",
   },
   {
-    id: "contact",
-    type: "link",
-    parentId: "about",
-    href: "/about/contact",
-    alt: "contact icon",
-    icon: "/heroicons/outline/at-symbol.svg",
-    label: "Contact",
-  },
-  {
     id: "terms",
     type: "link",
     parentId: "about",
@@ -73,6 +64,15 @@ const menuItems: MenuItemProps[] = [
     alt: "privacy icon",
     icon: "/heroicons/outline/clipboard-document-check.svg",
     label: "Privacy Policy",
+  },
+  {
+    id: "contact",
+    type: "link",
+    parentId: "about",
+    href: "/about/contact",
+    alt: "contact icon",
+    icon: "/heroicons/outline/at-symbol.svg",
+    label: "Contact",
   },
 ]
 

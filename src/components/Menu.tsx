@@ -33,7 +33,7 @@ function Menu({ items }: MenuProps) {
         relative
         bg-background-lt
         w-[60px] min-w-[60px] 
-        sm:w-[240px] sm:min-w-[240px] sm:max-w-[300px] sm:ml-[0px]
+        sm:w-[35%] sm:min-w-[240px] sm:max-w-[300px] sm:ml-[0px]
         m-0 ml-[-60px]
         px-0 sm:px-4  pb-8
         transition-[margin-left]
