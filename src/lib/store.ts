@@ -31,8 +31,7 @@ type MenuStoreState = {
   }
   getItemCollapsed: (id: string) => boolean
   setItemCollapsed: (id: string, collapsed: boolean) => void
-  // width: number
-  // setWidth: (newWidth: number) => void
+  revertToDefaults: () => void
 }
 
 export const useMenuStore = create<MenuStoreState>()(
@@ -53,10 +52,15 @@ export const useMenuStore = create<MenuStoreState>()(
       setItemCollapsed: (id, collapsed) => {
         set({ items: { [id]: { collapsed: collapsed } } })
       },
-      // width: 240,
-      // setWidth: (newWidth) => {
-      //   set({ width: newWidth })
-      // }
+      revertToDefaults: () => {
+        set({
+          items: {
+            about: {
+              collapsed: true
+            }
+          },
+        })
+      },
     }),
     {
       name: "lab9.studio.menu-store",
@@ -71,6 +75,7 @@ export type SettingsStoreState = {
   allowCookies: boolean
   anonymousAnalytics: boolean
   toggle: (key: keyof SettingsStoreState) => void
+  revertToDefaults: () => void
 }
 
 export const useSettingsStore = create<SettingsStoreState>()(
@@ -82,6 +87,14 @@ export const useSettingsStore = create<SettingsStoreState>()(
       anonymousAnalytics: true,
       toggle: (key) => {
         set({ [key]: !get()[key] })
+      },
+      revertToDefaults: () => {
+        set({
+          darkMode: false,
+          priceWidget: true,
+          allowCookies: true,
+          anonymousAnalytics: true,
+        })
       },
     }),
     {
@@ -98,12 +111,13 @@ type CacheStoreState = {
   setContactSubject: (newSubject: string) => void
   setContactMessage: (newMessage: string) => void
   setContactEmail: (newEmail: string) => void  
+  clear: () => void
 }
 
 export const useCacheStore = create<CacheStoreState>()(
   persist(
     (set, get, store) => ({
-      contactSubject: "feedback",
+      contactSubject: "subject",
       contactMessage: "",
       contactEmail: "",
       setContactSubject: (newSubject) => {
@@ -114,6 +128,13 @@ export const useCacheStore = create<CacheStoreState>()(
       },
       setContactEmail: (newEmail) => {
         set({ contactEmail: newEmail})
+      },
+      clear: () => {
+        set({
+          contactSubject: "subject",
+          contactMessage: "",
+          contactEmail: "",
+        })
       },
     }),
     {

@@ -2,9 +2,10 @@
 import { Fragment, useState, useEffect } from "react"
 import Image from "next/image"
 
-import { useMenuStore, useSettingsStore, SettingsStoreState } from "@/lib/store"
+import { useMenuStore, useSettingsStore, useCacheStore, SettingsStoreState } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
+import Modal from "@/components/Modal"
 
 type PreferenceCategoryProps = {
 	id: string 
@@ -52,13 +53,22 @@ const CATEGORIES: PreferenceCategoryProps[] = [
 export default function Preferences() {
 	const [ selectedCategory, setSelectedCategory ] = useState("")
 	const [ isHydrated, setIsHydrated ] = useState(false)
+	const [ showModal, setShowModal ] = useState(false)
+	const { revertToDefaults: revertSettings } = useSettingsStore()
+	const { clear: clearCache } = useCacheStore()
 
   const handleSelectCategory = (categoryId: string) => {
   	setSelectedCategory(categoryId)
   }
 
-	const handleReset = () => {
+	const handleClickReset = () => {
+		setShowModal(true)
+	}
 
+	const handleConfirmReset = () => {
+		setShowModal(false)
+		revertSettings()
+		clearCache()
 	}
 
   useEffect(() => {
@@ -71,8 +81,26 @@ export default function Preferences() {
 			<Title title="Preferences" />
 			<Toolbar>
 				<div className="flex-grow-1"></div>
-				<button onClick={handleReset}>Reset</button>
+				<button onClick={handleClickReset}>Reset</button>
 			</Toolbar>
+			<Modal 
+				show={showModal} 
+				title={"Reset settings to default?"}
+				message={"This resets all settings to their defaults"}>
+				<button 
+					className={`
+						flex flex-row justify-center basis-1/2
+						p-2
+					`}
+					onClick={() => setShowModal(false)}>Cancel</button>
+				<button 
+					className={`
+						flex flex-row justify-center basis-1/2
+						font-bold text-text
+						p-2
+					`}
+					onClick={handleConfirmReset}>Continue</button>
+			</Modal>
 
 			<div id="preferences-menu" 
 				className={`

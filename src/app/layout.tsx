@@ -1,10 +1,17 @@
-import type { Metadata } from "next"
+import type { Viewport, Metadata } from "next"
 
 import "./globals.css"
 
 import DarkModeAgent from "@/components/DarkModeAgent"
 import NavBar from "@/components/NavBar"
 import Menu, { MenuItemProps } from "@/components/Menu"
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "lab9.studio",
@@ -20,14 +27,14 @@ const menuItems: MenuItemProps[] = [
     icon: "/heroicons/outline/home.svg",
     label: "Home",
   },
-  // {
-  //   id: "deck",
-  //   type: "link",
-  //   href: "/deck",
-  //   alt: "deck icon",
-  //   icon: "/heroicons/outline/square-3-stack-3d.svg",
-  //   label: "On Deck",
-  // },
+  {
+    id: "deck",
+    type: "link",
+    href: "/deck",
+    alt: "deck icon",
+    icon: "/heroicons/outline/square-3-stack-3d.svg",
+    label: "On Deck",
+  },
   {
     id: "divider-1",
     type: "divider"

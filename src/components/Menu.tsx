@@ -29,7 +29,7 @@ function Menu({ items }: MenuProps) {
   return (
     <div id="menu" 
       className={`
-        z-15 
+        z-21
         relative
         bg-background-lt
         w-[60px] min-w-[60px] 
