@@ -11,7 +11,7 @@ type DropdownProps = {
 export default function Dropdown({ options, onChange, label }: DropdownProps) {
 	const [ showOptions, setShowOptions ] = useState(false)
 
-	const handleClickItem = (option) => {
+	const handleClickItem = (option: string) => {
 		setShowOptions(false)
 		onChange(option)
 	}
