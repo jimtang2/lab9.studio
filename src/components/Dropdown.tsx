@@ -30,15 +30,14 @@ export default function Dropdown({ options, onChange, label }: DropdownProps) {
 
 			<div className={`absolute
 				flex flex-col
-				top-[40px] m-2
+				w-fit top-[40px] m-1
 				bg-background-lt
 				border-divider border-1 rounded-xs
 				shadow-md
-				w-fit
 				${showOptions ? "block" : "hidden"}`}>
 				{options.map((option, idx) => 
 					<div key={idx} 
-						className={`py-3 pl-4 pr-10 text-nowrap cursor-pointer hover:bg-background-hl`}
+						className={`py-2 pl-4 pr-10 text-nowrap cursor-pointer hover:bg-background-hl`}
 						onClick={() => handleClickItem(option)}>{option}</div>
 					)}
 			</div>
