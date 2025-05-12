@@ -33,9 +33,9 @@ export default function Modal({show, title, message, children}: ModalProps) {
 						flex flex-col items-center justify-center
 						w-[300px] max-w-[90%]
 						m-auto mt-[-120px]
-						bg-background-lt
+						bg-background
 						border-divider rounded-md
-						select-none
+						select-none shadow-md
 					`}>
 						<div className={`w-full
 							p-2
@@ -66,7 +66,6 @@ export default function Modal({show, title, message, children}: ModalProps) {
 			<div className={`${show ? "flex flex-col items-center justify-center" : "hidden"}
 				absolute
 				w-full h-full z-19
-				bg-[#0001]
 				border-divider rounded-sm`}>
 			</div>
 

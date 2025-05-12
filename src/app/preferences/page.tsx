@@ -88,16 +88,13 @@ export default function Preferences() {
 				title={"Reset settings to default?"}
 				message={"This resets all settings to their defaults"}>
 				<button 
-					className={`
-						flex flex-row justify-center basis-1/2
-						p-2
+					className={`flex flex-row justify-center basis-1/2 p-2 hover:bg-background-lt
 					`}
 					onClick={() => setShowModal(false)}>Cancel</button>
 				<button 
 					className={`
 						flex flex-row justify-center basis-1/2
-						font-bold text-text
-						p-2
+						font-bold text-text p-2 hover:bg-background-lt
 					`}
 					onClick={handleConfirmReset}>Continue</button>
 			</Modal>

@@ -9,7 +9,7 @@ export default function Toolbar({children,}: Readonly<{children: React.ReactNode
 			flex flex-row items-stretch justify-start
 			sticky top-[44px] z-10
 			h-[40px] min-h-[40px] max-h-[40px] 
-			bg-background-hl
+			bg-background-lt
 			border-b border-divider
 		`}>{children}</div>)
 }

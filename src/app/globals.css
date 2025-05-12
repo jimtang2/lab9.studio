@@ -1,49 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background-1: var(--color-gray-50);
-  --background-2: var(--color-gray-100);
-  --background-3: var(--color-gray-200);
+  --background-1: var(--color-gray-150);
+  --background-2: var(--color-gray-200);
+  --background-3: var(--color-gray-300);
   --foreground-1: var(--color-gray-950);
   --foreground-2: var(--color-gray-800);
   --foreground-3: var(--color-gray-600);
   --foreground-contrast: var(--color-white);
-  --divider: var(--color-gray-300);
+  --divider: var(--color-gray-400);
   --alert: var(--color-red-800);
   --warning: var(--color-yellow-600);
-  --accent-1: var(--color-gray-800);
-  --accent-2: var(--color-gray-700);
+  --accent-1: var(--color-gray-700);
+  --accent-2: var(--color-gray-800);
 }
 
 .dark {
-  --background-1: var(--color-gray-950);
-  --background-2: var(--color-gray-900);
-  --background-3: var(--color-gray-800);
-  --foreground-1: var(--color-gray-50);
-  --foreground-2: var(--color-gray-100);
-  --foreground-3: var(--color-gray-200);
+  --background-1: var(--color-neutral-950);
+  --background-2: var(--color-neutral-900);
+  --background-3: var(--color-neutral-800);
+  --foreground-1: var(--color-neutral-50);
+  --foreground-2: var(--color-neutral-100);
+  --foreground-3: var(--color-neutral-200);
   --foreground-contrast: var(--color-white);
-  --divider: var(--color-gray-800);
+  --divider: var(--color-neutral-800);
   --alert: var(--color-red-300);
   --warning: var(--color-yellow-300);
-  --accent-1: var(--color-blue-800);
-  --accent-2: var(--color-blue-700);
+  --accent-1: var(--color-indigo-800);
+  --accent-2: var(--color-indigo-700);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.dark):not(.light) {
-    --background-1: var(--color-gray-950);
-    --background-2: var(--color-gray-900);
-    --background-3: var(--color-gray-800);
-    --foreground-1: var(--color-gray-50);
-    --foreground-2: var(--color-gray-100);
-    --foreground-3: var(--color-gray-200);
-    --foreground-contrast: var(--color-black);
-    --divider: var(--color-gray-800);
+    --background-1: var(--color-neutral-950);
+    --background-2: var(--color-neutral-900);
+    --background-3: var(--color-neutral-800);
+    --foreground-1: var(--color-neutral-50);
+    --foreground-2: var(--color-neutral-100);
+    --foreground-3: var(--color-neutral-200);
+    --foreground-contrast: var(--color-white);
+    --divider: var(--color-neutral-800);
     --alert: var(--color-red-300);
     --warning: var(--color-yellow-300);
-  --accent-1: var(--color-gray-800);
-  --accent-2: var(--color-gray-700);
+    --accent-1: var(--color-indigo-800);
+    --accent-2: var(--color-indigo-700);
   }
 }
 
