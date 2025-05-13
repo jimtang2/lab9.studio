@@ -48,6 +48,18 @@ const menuItems: MenuItemProps[] = [
     label: "Preferences",
   },
   {
+    id: "contact",
+    type: "link",
+    href: "/about/contact",
+    alt: "contact icon",
+    icon: "/heroicons/outline/at-symbol.svg",
+    label: "Contact",
+  },
+  {
+    id: "divider-2",
+    type: "divider"
+  },
+  {
     id: "about",
     type: "group",
     alt: "about icon",
@@ -71,15 +83,6 @@ const menuItems: MenuItemProps[] = [
     alt: "privacy icon",
     icon: "/heroicons/outline/clipboard-document-check.svg",
     label: "Privacy Policy",
-  },
-  {
-    id: "contact",
-    type: "link",
-    parentId: "about",
-    href: "/about/contact",
-    alt: "contact icon",
-    icon: "/heroicons/outline/at-symbol.svg",
-    label: "Contact",
   },
 ]
 

@@ -34,8 +34,8 @@ export default function Modal({show, title, message, children}: ModalProps) {
 						w-[300px] max-w-[90%]
 						m-auto mt-[-120px]
 						bg-background
-						border-divider rounded-md
-						select-none shadow-md
+						border-1 border-divider rounded-md
+						select-none shadow-xl
 					`}>
 						<div className={`w-full
 							p-2

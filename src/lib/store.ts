@@ -117,7 +117,7 @@ type CacheStoreState = {
 export const useCacheStore = create<CacheStoreState>()(
   persist(
     (set, get, store) => ({
-      contactSubject: "subject",
+      contactSubject: "",
       contactMessage: "",
       contactEmail: "",
       setContactSubject: (newSubject) => {

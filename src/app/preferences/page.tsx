@@ -188,6 +188,7 @@ function PreferenceColumnItem({ id, label, isCategorySelected = false }: Prefere
 	return (
 		<div className={`
 			flex flex-row py-2 px-4
+			items-center
 			hidden
 			${isCategorySelected && "sm:block"}
 			hover:bg-background-lt

@@ -6,15 +6,13 @@ import { useCacheStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 import Dropdown from "@/components/Dropdown"
+import { submitContactMessage } from "@/lib/actions"
 
 export default function Contact() {
-  const [ isHydrated, setIsHydrated ] = useState(false)
-  const [ subject, setSubject ] = useState("Choose subject")
+  const { contactSubject, contactMessage, contactEmail, setContactSubject, setContactMessage, setContactEmail } = useCacheStore()
 
-  const { contactSubject, setContactSubject, contactMessage, setContactMessage, contactEmail, setContactEmail } = useCacheStore()
-
-  const onChangeSubject = (subject: string) => {
-    setSubject(subject)
+  const onChangeSubject = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContactSubject(event.target.value)
   }
 
   const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,30 +23,51 @@ export default function Contact() {
     setContactEmail(event.target.value)
   }
 
-  const handleSend = () => {
-
+  const handleClickSend = () => {
+    // console.log(form)
+    // console.log(submitContactMessage)
+    console.log("send")
   }
-
-  useEffect(() => setIsHydrated(true), [])
 
   return (
     <main className={`
     `}>
-      <Title title="Contact" />
-      <Toolbar>
-        <Dropdown 
-          label={subject} 
-          options={["Feedback", "Technical Support"]}
-          onChange={onChangeSubject} />
-        <div className="flex-grow-1"></div>
-        <button onClick={handleSend}>Send</button>
-      </Toolbar>
+      <Form className="w-full" action={handleClickSend}>
+        <Title title="Contact" />
+        <Toolbar>
+          <div className="flex-grow-1"></div>
+          {/*<Dropdown label={subject} options={["Feedback", "Technical Support"]} onChange={onChangeSubject} />*/}
+          <button onClick={handleClickSend}>Send</button>
+        </Toolbar>
 
-      <textarea name="message" 
-        placeholder="Message"
-        defaultValue={contactMessage}
-        onChange={handleChangeMessage}
-      />
+        <label htmlFor="subject">Subject</label>
+        <input type="text" 
+          name="subject" 
+          required
+          placeholder="What's it about?"
+          defaultValue={contactSubject}
+          onChange={onChangeSubject}
+        />
+
+        <label htmlFor="message">Message</label>
+        <textarea name="message" 
+          rows={6}
+          required
+          placeholder="What's the matter?"
+          defaultValue={contactMessage}
+          onChange={handleChangeMessage}
+        />
+
+        <label htmlFor="email">E-mail</label>
+        <input type="text" 
+          name="email" 
+          className="mb-4"
+          required
+          placeholder="How to reach you?"
+          defaultValue={contactEmail}
+          onChange={handleChangeEmail}
+        />
+      </Form>
     </main>
   );
 }
