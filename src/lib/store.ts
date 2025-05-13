@@ -38,7 +38,7 @@ type MenuStoreState = {
 export const useMenuStore = create<MenuStoreState>()(
   persist(
     (set, get, store) => ({
-      show: true,
+      show: false,
       toggleShow: () => set({ show: !get().show }),
       setShow: (show) => set({ show: show }),
       items: {
