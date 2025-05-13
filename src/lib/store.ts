@@ -24,6 +24,7 @@ export const useNavStore = create<NavStoreState>()(
 type MenuStoreState = {
   show: boolean
   toggleShow: () => void
+  setShow: (show: boolean) => void
   items: { 
     [id: string]: {
       collapsed: boolean
@@ -38,9 +39,8 @@ export const useMenuStore = create<MenuStoreState>()(
   persist(
     (set, get, store) => ({
       show: true,
-      toggleShow: () => {
-        set({ show: !get().show })
-      },
+      toggleShow: () => set({ show: !get().show }),
+      setShow: (show) => set({ show: show }),
       items: {
         about: {
           collapsed: true

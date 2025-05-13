@@ -1,11 +1,10 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from 'next/image'
 import Form from "next/form"
 import { useCacheStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
-import Dropdown from "@/components/Dropdown"
 import { submitContactMessage } from "@/lib/actions"
 
 export default function Contact() {
@@ -25,18 +24,16 @@ export default function Contact() {
 
   const handleClickSend = () => {
     // console.log(form)
-    // console.log(submitContactMessage)
+    submitContactMessage()
     console.log("send")
   }
 
   return (
-    <main className={`
-    `}>
+    <main className={``}>
       <Form className="w-full" action={handleClickSend}>
         <Title title="Contact" />
         <Toolbar>
           <div className="flex-grow-1"></div>
-          {/*<Dropdown label={subject} options={["Feedback", "Technical Support"]} onChange={onChangeSubject} />*/}
           <button onClick={handleClickSend}>Send</button>
         </Toolbar>
 

@@ -3,6 +3,7 @@ import type { Viewport, Metadata } from "next"
 import "./globals.css"
 
 import DarkModeAgent from "@/components/DarkModeAgent"
+import AutoHideMenu from "@/components/AutoHideMenu"
 import NavBar from "@/components/NavBar"
 import Menu, { MenuItemProps } from "@/components/Menu"
 
@@ -90,6 +91,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   return (
     <html lang="en">
       <DarkModeAgent />
+      <AutoHideMenu />
 
       <body className={`
         antialiased 
