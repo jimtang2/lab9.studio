@@ -32,7 +32,7 @@ type MenuStoreState = {
   }
   getItemCollapsed: (id: string) => boolean
   setItemCollapsed: (id: string, collapsed: boolean) => void
-  revertToDefaults: () => void
+  reset: () => void
 }
 
 export const useMenuStore = create<MenuStoreState>()(
@@ -52,7 +52,7 @@ export const useMenuStore = create<MenuStoreState>()(
       setItemCollapsed: (id, collapsed) => {
         set({ items: { [id]: { collapsed: collapsed } } })
       },
-      revertToDefaults: () => {
+      reset: () => {
         set({
           items: {
             about: {
@@ -75,7 +75,7 @@ export type SettingsStoreState = {
   allowCookies: boolean
   anonymousAnalytics: boolean
   toggle: (key: keyof SettingsStoreState) => void
-  revertToDefaults: () => void
+  reset: () => void
 }
 
 export const useSettingsStore = create<SettingsStoreState>()(
@@ -88,7 +88,7 @@ export const useSettingsStore = create<SettingsStoreState>()(
       toggle: (key) => {
         set({ [key]: !get()[key] })
       },
-      revertToDefaults: () => {
+      reset: () => {
         set({
           darkMode: false,
           priceWidget: true,
@@ -111,7 +111,7 @@ type CacheStoreState = {
   setContactSubject: (newSubject: string) => void
   setContactMessage: (newMessage: string) => void
   setContactEmail: (newEmail: string) => void  
-  clear: () => void
+  reset: () => void
 }
 
 export const useCacheStore = create<CacheStoreState>()(
@@ -129,9 +129,9 @@ export const useCacheStore = create<CacheStoreState>()(
       setContactEmail: (newEmail) => {
         set({ contactEmail: newEmail})
       },
-      clear: () => {
+      reset: () => {
         set({
-          contactSubject: "subject",
+          contactSubject: "",
           contactMessage: "",
           contactEmail: "",
         })
@@ -139,6 +139,57 @@ export const useCacheStore = create<CacheStoreState>()(
     }),
     {
       name: "lab9.studio.cache-store",
+      storage: createJSONStorage(() => localStorage)
+    }
+  )
+)
+
+export type InboxItemProps = {
+  message: string
+  type: string
+  isRead: boolean
+  time: Date
+}
+
+type InboxStoreState = {
+  show: boolean
+  toggleShow: () => void
+  setShow: (show: boolean) => void
+  items: InboxItemProps[]
+  reset: () => void
+}
+
+const defaultInboxItems: InboxItemProps[] = [
+  {
+    message: "Welcome to lab9.studio",
+    type: "info",
+    isRead: false,
+    time: new Date()
+  },
+  {
+    message: "Sign up for newsletter",
+    type: "info",
+    isRead: false,
+    time: new Date()
+  }
+]
+
+export const useInboxStore = create<InboxStoreState>()(
+  persist(
+    (set, get, store) => ({
+      show: false,
+      toggleShow: () => set({ show: !get().show }),
+      setShow: (show) => set({ show: show }),
+      items: defaultInboxItems,
+      reset: () => {
+        set({
+          show: false,
+          items: defaultInboxItems
+        })
+      },
+    }),
+    {
+      name: "lab9.studio.inbox-store",
       storage: createJSONStorage(() => localStorage)
     }
   )

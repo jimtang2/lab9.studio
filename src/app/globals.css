@@ -1,66 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background-1: var(--color-gray-150);
-  --background-2: var(--color-gray-200);
-  --background-3: var(--color-gray-300);
+  --background-1: var(--color-neutral-200);
+  --background-2: var(--color-neutral-50);
+  --background-3: var(--color-neutral-300);
   --foreground-1: var(--color-gray-950);
   --foreground-2: var(--color-gray-800);
   --foreground-3: var(--color-gray-600);
-  --foreground-contrast: var(--color-white);
+  --foreground-contrast: var(--color-zinc-100);
   --divider: var(--color-gray-400);
   --alert: var(--color-red-800);
   --warning: var(--color-yellow-600);
-  --accent-1: var(--color-gray-700);
-  --accent-2: var(--color-gray-800);
+  --accent-1: var(--color-blue-600);
+  --accent-2: var(--color-blue-700);
+  --accent-3: var(--color-blue-800);
 }
 
 .dark {
-  --background-1: var(--color-neutral-900);
-  --background-2: var(--color-neutral-800);
-  --background-3: var(--color-neutral-700);
+  --background-1: var(--color-gray-950);
+  --background-2: var(--color-gray-950);
+  --background-3: var(--color-neutral-900);
   --foreground-1: var(--color-neutral-50);
   --foreground-2: var(--color-neutral-100);
-  --foreground-3: var(--color-neutral-200);
+  --foreground-3: var(--color-neutral-300);
   --foreground-contrast: var(--color-white);
-  --divider: var(--color-neutral-600);
+  --divider: var(--color-neutral-800);
   --alert: var(--color-red-300);
   --warning: var(--color-yellow-300);
-  --accent-1: var(--color-indigo-800);
-  --accent-2: var(--color-indigo-700);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.dark):not(.light) {
-    --background-1: var(--color-neutral-950);
-    --background-2: var(--color-neutral-900);
-    --background-3: var(--color-neutral-800);
-    --foreground-1: var(--color-neutral-50);
-    --foreground-2: var(--color-neutral-100);
-    --foreground-3: var(--color-neutral-200);
-    --foreground-contrast: var(--color-white);
-    --divider: var(--color-neutral-800);
-    --alert: var(--color-red-300);
-    --warning: var(--color-yellow-300);
-    --accent-1: var(--color-indigo-800);
-    --accent-2: var(--color-indigo-700);
-  }
+  --accent-1: var(--color-blue-700);
+  --accent-2: var(--color-blue-800);
+  --accent-3: var(--color-blue-900);
 }
 
 @theme inline {
-  --color-background: var(--background-1);
-  --color-background-lt: var(--background-2);
-  --color-background-hl: var(--background-3);
-  --color-text: var(--foreground-1);
-  --color-text-lt: var(--foreground-2);
-  --color-text-hl: var(--foreground-3);
+  --color-background: var(--background-2);
+  --color-background-lt: var(--background-1);
+  --color-background-dk: var(--background-3);
+  --color-text: var(--foreground-2);
+  --color-text-lt: var(--foreground-1);
+  --color-text-dk: var(--foreground-3);
   --color-text-contrast: var(--foreground-contrast);
+  --color-accent: var(--accent-2);
+  --color-accent-lt: var(--accent-1);
+  --color-accent-dk: var(--accent-3);
+
   --color-alert: var(--alert);
   --color-warning: var(--warning);
   --color-border-divider: var(--divider);
   --color-divider: var(--divider);
-  --color-accent: var(--accent-1);
-  --color-accent-lt: var(--accent-2);
 }
 
 body {
@@ -99,29 +86,36 @@ form {
 }
 
 form label {
-  @apply text-sm text-text-hl p-1 px-4 mx-2 mt-2;
+  @apply text-sm text-text-dk p-0 px-1 mx-2 mt-2;
 }
 
 label {
-  @apply text-sm text-text-hl p-1 mx-2;
+  @apply text-sm text-text-dk p-1 mx-2;
 }
 
 input[type="submit"], input[type="button"] {
   @apply py-2 px-6 bg-accent text-text-contrast font-bold;
-  @apply hover:bg-accent-lt;
-  cursor: pointer;
+  @apply hover:bg-accent-lt cursor-pointer;
 }
 
 input[type="text"], input[type="email"], textarea, select {
-  @apply py-2 px-4 mx-4;
+  @apply py-1 px-2 mx-2;
   @apply outline-none;
   @apply border-1 rounded-sm border-divider;
   @apply resize-none;
   @apply text-base/7;
 }
 
+input[type="checkbox"] {
+  @apply w-4 h-4 accent-accent-lt;
+}
+
 #toolbar button {
   @apply flex flex-row items-center gap-4;
   @apply bg-accent hover:bg-accent-lt px-4 ml-2;
-  @apply text-text-contrast
+  @apply text-text-contrast cursor-pointer;
+}
+
+#toolbar button[disabled] {
+  @apply bg-accent-lt;
 }

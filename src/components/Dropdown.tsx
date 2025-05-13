@@ -37,7 +37,7 @@ export default function Dropdown({ options, onChange, label }: DropdownProps) {
 				${showOptions ? "block" : "hidden"}`}>
 				{options.map((option, idx) => 
 					<div key={idx} 
-						className={`py-2 pl-4 pr-10 text-nowrap cursor-pointer hover:bg-background-hl`}
+						className={`py-2 pl-4 pr-10 text-nowrap cursor-pointer hover:bg-background-dk`}
 						onClick={() => handleClickItem(option)}>{option}</div>
 					)}
 			</div>

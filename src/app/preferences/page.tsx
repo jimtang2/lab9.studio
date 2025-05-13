@@ -2,7 +2,7 @@
 import { Fragment, useState, useEffect } from "react"
 import Image from "next/image"
 
-import { useMenuStore, useSettingsStore, useCacheStore, SettingsStoreState } from "@/lib/store"
+import { useMenuStore, useSettingsStore, useCacheStore, SettingsStoreState, useInboxStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 import Modal from "@/components/Modal"
@@ -54,8 +54,9 @@ export default function Preferences() {
 	const [ selectedCategory, setSelectedCategory ] = useState("")
 	const [ isHydrated, setIsHydrated ] = useState(false)
 	const [ showModal, setShowModal ] = useState(false)
-	const { revertToDefaults: revertSettings } = useSettingsStore()
-	const { clear: clearCache } = useCacheStore()
+	const { reset: resetSettings } = useSettingsStore()
+	const { reset: resetCache } = useCacheStore()
+	const { reset: resetInbox } = useInboxStore()
 
   const handleSelectCategory = (categoryId: string) => {
   	setSelectedCategory(categoryId)
@@ -67,8 +68,9 @@ export default function Preferences() {
 
 	const handleConfirmReset = () => {
 		setShowModal(false)
-		revertSettings()
-		clearCache()
+		resetSettings()
+		resetCache()
+		resetInbox()
 	}
 
   useEffect(() => {
@@ -120,8 +122,9 @@ export default function Preferences() {
 								<a className={`
 									flex flow-row
 									pt-2 pb-1 my-0 px-4
-									font-bold select-none
+									text-xl font-bold select-none
 
+									sm:text-base
 									sm:font-normal
 									sm:pl-6 sm:pr-2 
 									sm:cursor-pointer
@@ -135,7 +138,7 @@ export default function Preferences() {
 									  	sm:block hidden
 									  	transition-[rotate]
 									  	sm:rotate-none
-									  	${isActive && "rotate-90"}
+									  	${isActive && "rotate-90 dark:invert"}
 									  `}
 									  alt="chevron" 
 									  src={`/heroicons/outline/chevron-right.svg`} 
@@ -187,15 +190,15 @@ function PreferenceColumnItem({ id, label, isCategorySelected = false }: Prefere
 
 	return (
 		<div className={`
-			flex flex-row py-2 px-4
+			flex flex-row gap-2 py-2 px-4
 			items-center
 			hidden
-			${isCategorySelected && "sm:block"}
+			${isCategorySelected && "sm:flex"}
 			hover:bg-background-lt
 		`} 
 			key={id} 
 			onClick={toggle}>
 			<input className="mx-1 cursor-pointer" type="checkbox" name={id} checked={isEnabled} onChange={() => {}} />
-			<label className="flex-grow-1 cursor-pointer select-none" htmlFor={id}>{label}</label>
+			<span className="flex-grow-1 cursor-pointer select-none">{label}</span>
 		</div>)
 }

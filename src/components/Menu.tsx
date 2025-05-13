@@ -28,19 +28,17 @@ function Menu({ items }: MenuProps) {
 
   return (
     <div id="menu" 
-      className={`
-        z-21
-        relative
-        bg-background-lt
-        w-[60px] min-w-[60px] 
+      className={`relative
+        w-[60px] min-w-[60px] z-21
         sm:w-[35%] sm:min-w-[240px] sm:max-w-[300px] sm:ml-[0px]
         m-0 ml-[-60px]
-        px-0 sm:px-4  pb-8
+        px-0 sm:px-2 pb-8
         transition-[margin-left]
         ${show && "ml-[0px] "}
+        bg-background-lt
         border-r border-divider`}>
 
-      <div className="sticky top-[calc(44px+1rem)] min-w-[60px]">
+      <div className="sticky top-[0px] min-w-[60px]">
         {items.map(props => 
           <MenuItem key={props.id} {...props} />)}
       </div>      
@@ -87,10 +85,9 @@ function MenuItem({
         sm:rounded-sm sm:px-2
         text-sm w-full
         ${isHydrated && isActive && "bg-accent text-text-contrast"}
-        ${isHydrated && !isActive && "hover:bg-background-hl"}
         `}>
-        <Link className={`
-          flex flex-row items-center justify-center gap-4
+        <Link className={`flex flex-row 
+          items-center justify-center gap-4
           sm:justify-start
           w-full`}
           href={href!}>
@@ -120,8 +117,7 @@ function MenuItem({
       <div className={`
         px-0 py-2 my-1 
         sm:rounded-sm sm:px-2
-        text-sm w-full
-        hover:bg-background-hl`}>
+        text-sm w-full`}>
         <button className={`
           flex flex-row justify-center items-center gap-4
           sm:justify-start 
@@ -155,3 +151,71 @@ function MenuItem({
 }
 
 export default Menu
+
+export const menuItems: MenuItemProps[] = [
+  {
+    id: "home",
+    type: "link",
+    href: "/",
+    alt: "home icon",
+    icon: "/heroicons/solid/home.svg",
+    label: "Home",
+  },
+  {
+    id: "deck",
+    type: "link",
+    href: "/deck",
+    alt: "deck icon",
+    icon: "/heroicons/solid/square-3-stack-3d.svg",
+    label: "On Deck",
+  },
+  {
+    id: "divider-1",
+    type: "divider"
+  },
+  {
+    id: "preferences",
+    type: "link",
+    href: "/preferences",
+    alt: "preferences icon",
+    icon: "/heroicons/solid/cog.svg",
+    label: "Preferences",
+  },
+  {
+    id: "contact",
+    type: "link",
+    href: "/about/contact",
+    alt: "contact icon",
+    icon: "/heroicons/solid/at-symbol.svg",
+    label: "Contact",
+  },
+  {
+    id: "divider-2",
+    type: "divider"
+  },
+  {
+    id: "about",
+    type: "group",
+    alt: "about icon",
+    icon: "/heroicons/solid/question-mark-circle.svg",
+    label: "About",
+  },
+  {
+    id: "terms",
+    type: "link",
+    parentId: "about",
+    href: "/about/terms",
+    alt: "about icon",
+    icon: "/heroicons/solid/cursor-arrow-ripple.svg",
+    label: "Terms of Use",
+  },
+  {
+    id: "privacy",
+    type: "link",
+    parentId: "about",
+    href: "/about/privacy",
+    alt: "privacy icon",
+    icon: "/heroicons/solid/clipboard-document-check.svg",
+    label: "Privacy Policy",
+  },
+]

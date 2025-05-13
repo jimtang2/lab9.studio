@@ -9,11 +9,10 @@ export default function ColorThemeToggle() {
 
 	return (
     <button className="
-    	hidden
       flex flex-row 
       items-center 
       p-2 
-      hover:bg-background-hl" 
+      hover:bg-background-dk" 
       onClick={() => toggle("darkMode")}>
       <Image
       	alt={"dark mode"} 

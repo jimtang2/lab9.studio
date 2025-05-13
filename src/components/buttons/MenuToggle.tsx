@@ -12,7 +12,7 @@ export default function MenuToggle() {
       sm:hidden`}>
       <button 
         onClick={toggleShow}
-        className="p-2 hover:bg-background-hl">
+        className="p-2 hover:bg-background-lt cursor-pointer">
         <Image 
           className="" 
           src={"/heroicons/outline/bars-3.svg"} 
