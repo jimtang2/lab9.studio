@@ -3,16 +3,21 @@ import Image from "next/image"
 import { useInboxStore } from "@/lib/store"
 
 export default function InboxButton() {
-  const { toggleShow } = useInboxStore()
+  const { show, toggleShow } = useInboxStore()
+
+  const handleClick = () => {
+    toggleShow()
+  }
 
   return (
     <li id="inbox-icon" className={`relative
       flex justify-center items-center 
-      self-stretch place-self-stretch`}>
+      self-stretch place-self-stretch
+      sm:hidden`}>
       <button className="p-2 hover:bg-background-lt cursor-pointer"
-        onClick={toggleShow}>
+        onClick={handleClick}>
         <Image className="" 
-          src={"/heroicons/solid/bell.svg"} 
+          src={"/heroicons/solid/inbox.svg"} 
           alt={"Inbox"} 
           width={26} height={26}/>
         <Badge />

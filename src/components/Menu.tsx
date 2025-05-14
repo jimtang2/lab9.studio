@@ -7,7 +7,7 @@ import { useMenuStore } from "@/lib/store"
 
 type MenuItemType = "link" | "group" | "divider"
 
-export type MenuItemProps = {
+type MenuItemProps = {
   id: string
   type: MenuItemType
   parentId?: string
@@ -19,29 +19,86 @@ export type MenuItemProps = {
   height?: number
 }
 
-interface MenuProps { 
-  items: MenuItemProps[]
-}
+const MENU_ITEMS: MenuItemProps[] = [
+  {
+    id: "home",
+    type: "link",
+    href: "/",
+    alt: "home icon",
+    icon: "/heroicons/solid/home.svg",
+    label: "Home",
+  },
+  {
+    id: "deck",
+    type: "link",
+    href: "/deck",
+    alt: "deck icon",
+    icon: "/heroicons/solid/square-3-stack-3d.svg",
+    label: "On Deck",
+  },
+  {
+    id: "divider-1",
+    type: "divider"
+  },
+  {
+    id: "contact",
+    type: "link",
+    href: "/about/contact",
+    alt: "contact icon",
+    icon: "/heroicons/solid/at-symbol.svg",
+    label: "Contact",
+  },
+  {
+    id: "about",
+    type: "group",
+    alt: "about icon",
+    icon: "/heroicons/solid/question-mark-circle.svg",
+    label: "About",
+  },
+  {
+    id: "terms",
+    type: "link",
+    parentId: "about",
+    href: "/about/terms",
+    alt: "about icon",
+    icon: "/heroicons/solid/cursor-arrow-ripple.svg",
+    label: "Terms of Use",
+  },
+  {
+    id: "privacy",
+    type: "link",
+    parentId: "about",
+    href: "/about/privacy",
+    alt: "privacy icon",
+    icon: "/heroicons/solid/clipboard-document-check.svg",
+    label: "Privacy Policy",
+  },
+  {
+    id: "preferences",
+    type: "link",
+    href: "/preferences",
+    alt: "preferences icon",
+    icon: "/heroicons/solid/cog.svg",
+    label: "Preferences",
+  },
+]
 
-function Menu({ items }: MenuProps) {
+export default function Menu() {
   const { show } = useMenuStore()
 
   return (
     <div id="menu" 
       className={`relative
-        w-[60px] min-w-[60px] z-21
-        sm:w-[35%] sm:min-w-[240px] sm:max-w-[300px] sm:ml-[0px]
-        m-0 ml-[-60px]
-        px-0 sm:px-2 pb-8
+        w-[60px] min-w-[60px] px-0 m-0 sm:px-0 
+        sm:w-[20%] sm:min-w-[180px] sm:max-w-[220px] 
+        ml-[-60px] sm:ml-0
         transition-[margin-left]
-        ${show && "ml-[0px] "}
+        ${show ? "ml-[0px]" : ""}
         bg-background-lt
-        border-r border-divider`}>
+        border-r border-r-divider`}>
 
-      <div className="sticky top-[0px] min-w-[60px]">
-        {items.map(props => 
-          <MenuItem key={props.id} {...props} />)}
-      </div>      
+      {MENU_ITEMS.map((props: MenuItemProps) => 
+        <MenuItem key={props.id} {...props} />)}
     </div>)
 }
 
@@ -61,10 +118,8 @@ function MenuItem({
   
   const { getItemCollapsed, setItemCollapsed } = useMenuStore()
   const [ isCollapsed, setIsCollapsed ] = useState(false)
-  const [ isHydrated, setIsHydrated ] = useState(false) // for use in markup to ensure zustand initial state (before hydration) does not conflict with zustand persisted state (after hydration)
-  
+
   useEffect(() => {
-    setIsHydrated(true)
     setIsCollapsed(getItemCollapsed(id))
   }, [])
 
@@ -80,28 +135,20 @@ function MenuItem({
     }
     return (
       <div className={`
-        ${isHydrated && parentCollapsed ? "hidden" : ""}
+        ${parentCollapsed ? "hidden" : ""}
         px-0 py-2 my-1 
-        sm:rounded-sm sm:px-2
+        sm:px-2
         text-sm w-full
-        ${isHydrated && isActive && "bg-accent text-text-contrast"}
+        ${isActive ? "bg-accent text-text-contrast shadow-lg" : ""}
         `}>
         <Link className={`flex flex-row 
           items-center justify-center gap-4
           sm:justify-start
           w-full`}
           href={href!}>
-          <Image 
-            className={isHydrated && isActive ? "dark:invert" : ""}
-            alt={alt!} 
-            src={icon!} 
-            width={width} 
-            height={height}/>
-          <span 
-            className={`
-              hidden sm:block`}>
-            {label}
-          </span>
+          <Image alt={alt!} src={icon!} width={width} height={height}
+            className={isActive ? "dark:invert" : ""} />
+          <span className={`hidden sm:block`}>{label}</span>
         </Link>
       </div>)
     break
@@ -116,7 +163,7 @@ function MenuItem({
     return (
       <div className={`
         px-0 py-2 my-1 
-        sm:rounded-sm sm:px-2
+        sm:px-2
         text-sm w-full`}>
         <button className={`
           flex flex-row justify-center items-center gap-4
@@ -149,73 +196,3 @@ function MenuItem({
     return <></>
   }
 }
-
-export default Menu
-
-export const menuItems: MenuItemProps[] = [
-  {
-    id: "home",
-    type: "link",
-    href: "/",
-    alt: "home icon",
-    icon: "/heroicons/solid/home.svg",
-    label: "Home",
-  },
-  {
-    id: "deck",
-    type: "link",
-    href: "/deck",
-    alt: "deck icon",
-    icon: "/heroicons/solid/square-3-stack-3d.svg",
-    label: "On Deck",
-  },
-  {
-    id: "divider-1",
-    type: "divider"
-  },
-  {
-    id: "preferences",
-    type: "link",
-    href: "/preferences",
-    alt: "preferences icon",
-    icon: "/heroicons/solid/cog.svg",
-    label: "Preferences",
-  },
-  {
-    id: "contact",
-    type: "link",
-    href: "/about/contact",
-    alt: "contact icon",
-    icon: "/heroicons/solid/at-symbol.svg",
-    label: "Contact",
-  },
-  {
-    id: "divider-2",
-    type: "divider"
-  },
-  {
-    id: "about",
-    type: "group",
-    alt: "about icon",
-    icon: "/heroicons/solid/question-mark-circle.svg",
-    label: "About",
-  },
-  {
-    id: "terms",
-    type: "link",
-    parentId: "about",
-    href: "/about/terms",
-    alt: "about icon",
-    icon: "/heroicons/solid/cursor-arrow-ripple.svg",
-    label: "Terms of Use",
-  },
-  {
-    id: "privacy",
-    type: "link",
-    parentId: "about",
-    href: "/about/privacy",
-    alt: "privacy icon",
-    icon: "/heroicons/solid/clipboard-document-check.svg",
-    label: "Privacy Policy",
-  },
-]

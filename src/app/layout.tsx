@@ -15,15 +15,17 @@ export const metadata: Metadata = {
 }
 
 import DarkModeAgent from "@/components/DarkModeAgent"
-import AutoHideMenu from "@/components/AutoHideMenu"
+import {AutoHideMenu, AutoHideInbox} from "@/components/AutoHide"
 import NavBar from "@/components/NavBar"
-import Menu, { menuItems } from "@/components/Menu"
+import Menu from "@/components/Menu"
+import Inbox from "@/components/Inbox"
 
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
       <DarkModeAgent />
       <AutoHideMenu />
+      <AutoHideInbox />
 
       <body className={`
         antialiased 
@@ -36,10 +38,11 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
           flex flex-col
           min-h-screen`}>
           <NavBar />
-          <div id="content" className={`
+          <div id="content" className={`relative
             flex flex-row flex-grow-1 items-stretch`}>
-            <Menu items={menuItems}/>
+            <Menu />
             {children}
+            <Inbox />
           </div>
         </div>
       </body>

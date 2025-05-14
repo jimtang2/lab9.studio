@@ -7,19 +7,18 @@ import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 import Modal from "@/components/Modal"
 
-type PreferenceCategoryProps = {
+type PreferenceProps = {
+	id: string
+	label: string
+}
+
+type CategoryProps = {
 	id: string 
 	label: string
 	items: PreferenceProps[]
 }
 
-type PreferenceProps = {
-	id: string
-	label: string
-	isCategorySelected?: boolean
-}
-
-const CATEGORIES: PreferenceCategoryProps[] = [
+const PREFERENCE_CATEGORIES: CategoryProps[] = [
 	{
 		id: "settings",
 		label: "Settings",
@@ -27,10 +26,6 @@ const CATEGORIES: PreferenceCategoryProps[] = [
 			{
 				id: "darkMode",
 				label: "Dark mode"
-			},
-			{
-				id: "priceWidget",
-				label: "Show Price widget"
 			},
 		]
 	},
@@ -51,39 +46,25 @@ const CATEGORIES: PreferenceCategoryProps[] = [
 ]
 
 export default function Preferences() {
-	const [ selectedCategory, setSelectedCategory ] = useState("")
-	const [ isHydrated, setIsHydrated ] = useState(false)
+	const [ selectedCategoryId, setSelectedCategoryId ] = useState("")
 	const [ showModal, setShowModal ] = useState(false)
 	const { reset: resetSettings } = useSettingsStore()
 	const { reset: resetCache } = useCacheStore()
 	const { reset: resetInbox } = useInboxStore()
 
-  const handleSelectCategory = (categoryId: string) => {
-  	setSelectedCategory(categoryId)
-  }
-
-	const handleClickReset = () => {
-		setShowModal(true)
-	}
-
-	const handleConfirmReset = () => {
-		setShowModal(false)
+	function reset() {
 		resetSettings()
 		resetCache()
 		resetInbox()
+		setShowModal(false)
 	}
 
-  useEffect(() => {
-    setIsHydrated(true)
-  }, [])
-
 	return (
-		<main className={`
-		`}>
+		<main className={`w-full h-full min-h-[calc(100vh-44px)] bg-background flex flex-col`}>
 			<Title title="Preferences" />
 			<Toolbar>
 				<div className="flex-grow-1"></div>
-				<button onClick={handleClickReset}>Reset</button>
+				<button onClick={() => setShowModal(true)}>Reset</button>
 			</Toolbar>
 			<Modal 
 				show={showModal} 
@@ -98,107 +79,90 @@ export default function Preferences() {
 						flex flex-row justify-center basis-1/2
 						font-bold text-text p-2 hover:bg-background-lt
 					`}
-					onClick={handleConfirmReset}>Continue</button>
+					onClick={reset}>Continue</button>
 			</Modal>
 
-			<div id="preferences-menu" 
-				className={`
-					flex 
-					sm:flex-row sm:items-stretch
-					flex-col items-stretch
-					w-full h-full 
-					bg-background
-				`}>
-				<div id="preference-categories" 
-					className={`
-						flex flex-col items-stretch justify-start
-						sm:w-[240px] w-full
-						border-r border-divider 
-					`}>
-					{CATEGORIES.map(({ id, label, items }) => {
-						let isActive = id === selectedCategory 
-						return (
-							<Fragment key={id} >
-								<a className={`
-									flex flow-row
-									pt-2 pb-1 my-0 px-4
-									text-xl font-bold select-none
+			<div id="preferences-list-layout" 
+				className={`sm:hidden
+					flex flex-col items-stretch
+					flex-grow-1`}>
+				{PREFERENCE_CATEGORIES.map(({ id, label, items }: CategoryProps) => 
+					<Fragment key={id} >
+						<div className={`text-lg font-bold px-4 py-2 mt-2 
+							border-b-1 border-b-divider`}>{label}</div>
+						<div className={`flex flex-col 
+							items-stretch w-full
+							divide-y-1 divide-divider
+							border-b-1 border-b-divider`}>
+							{items.map((props: PreferenceProps) => 
+								<ListItem key={`list-${props.id}`} {...props} />)}
+						</div>
+					</Fragment>)}
+			</div>
 
-									sm:text-base
-									sm:font-normal
-									sm:pl-6 sm:pr-2 
-									sm:cursor-pointer
-									${isHydrated && isActive && "sm:bg-accent sm:text-text-contrast"}
-									${isHydrated && !isActive && "sm:hover:bg-background-lt"}
-								`}
-									onClick={() => handleSelectCategory(id)}>
-									<span className="flex-grow-1">{label}</span>
-									<Image 
-									  className={`
-									  	sm:block hidden
-									  	transition-[rotate]
-									  	sm:rotate-none
-									  	${isActive && "rotate-90 dark:invert"}
-									  `}
-									  alt="chevron" 
-									  src={`/heroicons/outline/chevron-right.svg`} 
-									  width={16} 
-									  height={16}/>
-								</a>
-								{items.map((preferenceProps) => 
-									<PreferenceListItem key={`pref-list-${preferenceProps.id}`} {...preferenceProps} />)}
-							</Fragment>)
-					})}
+			<div id="preferences-columns-layout" 
+				className={`hidden sm:flex
+					flex-row items-stretch
+					flex-grow-1
+					divide-x-1 divide-divider`}>
+
+				<div id="preferences-columns-layout-categories"
+					className={`flex flex-col items-stretch 
+						min-w-[240px] max-w-[300px] w-[40%]
+						`}>
+					{PREFERENCE_CATEGORIES.map(({ id, label}: CategoryProps) =>
+						<button key={`column-${id}`}
+							className={`flex flex-row 
+								justify-start items-center p-2 pl-4
+								border-b-1 border-b-divider
+								${id === selectedCategoryId ? "bg-accent text-text-contrast" : ""}`}
+							onClick={() => setSelectedCategoryId(id)}>
+							<span className="flex-grow-1 text-left">{label}</span>
+							<Image className={`${id === selectedCategoryId ? "dark:invert" : ""}`}
+							  width={16} height={16} alt="chevron" 
+							  src={`/heroicons/outline/chevron-right.svg`} />
+						</button>)}
 				</div>
-				
-				<div id="preferences" 
-					className={`
-						h-full
-						w-full sm:max-w-[360px]
-					`}>
-					{CATEGORIES.map(({ id, items }) => 
-						items.map((preferenceProps) => 
-							<PreferenceColumnItem key={`pref-column-${preferenceProps.id}`} {...preferenceProps} isCategorySelected={selectedCategory == id} />))}
+
+				<div id="preferences-columns-layout-preferences"
+						className={`flex flex-col items-stretch 
+							min-w-[240px] max-w-[320px] w-[60%]
+							divide-y-1 divide-divider`}>
+					{PREFERENCE_CATEGORIES.filter(({ id }: CategoryProps) => id === selectedCategoryId).map(({ id: _id, items }: CategoryProps) =>
+							<Fragment key={_id}>
+								{items.map((props: PreferenceProps) =>
+									<ColumnItem key={`column-${props.id}`} {...props} />)}
+							</Fragment>
+						)}
 				</div>
 			</div>
 		</main>)
 }
 
-function PreferenceListItem({ id, label }: PreferenceProps) {
+function ListItem({ id, label }: PreferenceProps) {
 	const settings = useSettingsStore()
 	const isEnabled = settings[id as keyof SettingsStoreState] as boolean
 	const toggle = () => settings.toggle(id as keyof SettingsStoreState)
 
 	return (
-		<div className={`
-			flex flex-row py-2 px-4
-			items-center
-			sm:hidden
-			hover:bg-background-lt
-		`} 
-			key={id} 
-			onClick={toggle}>
+		<div className={`flex flex-row items-center py-2 pr-4 ml-4`} key={id} onClick={toggle}>			
+			<span className="flex-grow-1 cursor-pointer select-none">{label}</span>
 			<input className="mx-1 cursor-pointer" type="checkbox" name={id} checked={isEnabled} onChange={() => {}} />
-			<label className="flex-grow-1 cursor-pointer select-none" htmlFor={id}>{label}</label>
 		</div>)
 }
 
-function PreferenceColumnItem({ id, label, isCategorySelected = false }: PreferenceProps) {
+function ColumnItem({ id, label }: PreferenceProps) {
 	const settings = useSettingsStore()
 	const isEnabled = settings[id as keyof SettingsStoreState] as boolean
 	const toggle = () => settings.toggle(id as keyof SettingsStoreState)
 
 	return (
-		<div className={`
-			flex flex-row gap-2 py-2 px-4
-			items-center
-			hidden
-			${isCategorySelected && "sm:flex"}
-			hover:bg-background-lt
-		`} 
+		<div className={`flex flex-row 
+			items-center gap-2 py-2 px-4
+			border-b-1 border-b-divider`} 
 			key={id} 
 			onClick={toggle}>
-			<input className="mx-1 cursor-pointer" type="checkbox" name={id} checked={isEnabled} onChange={() => {}} />
 			<span className="flex-grow-1 cursor-pointer select-none">{label}</span>
+			<input className="mx-1 cursor-pointer" type="checkbox" name={id} checked={isEnabled} onChange={() => {}} />
 		</div>)
 }

@@ -1,37 +1,96 @@
 "use client"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { useInboxStore, InboxItemProps } from "@/lib/store"
+import { useMenuStore, useInboxStore, InboxItem as InboxItemProps } from "@/lib/store"
 
-export default function InboxView() {
-  const { show, items } = useInboxStore()
+export default function Inbox() {
+  const { show: showMenu } = useMenuStore()
+  const { show: showInbox, items } = useInboxStore()
 	const [ display, setDisplay ] = useState(false)
 
   useEffect(() => {
-  	setDisplay(show)
-  }, [show])
+  	if (showInbox) {
+  		setDisplay(showInbox)	
+  	} 
+  }, [showInbox])
+
+  let count = items.filter(({ isRead}) => isRead === false).length
 
   return (
     <div id="inbox-view" 
-      className={`absolute top-[45px] right-[1px]
-        bg-background-dk 
-        border-1 border-divider rounded-sm shadow-xl
-	      divide-y-1 divide-divider
-        w-[320px] px-2
-        ${show ? "flex flex-col" : "hidden"}
-      	${display ? "opacity-100" : "opacity-0"}
-      	transition-[opacity] duration-300
-    		overflow-y-scroll
-    		max-h-screen`}>
-      {items.length === 0 ? <div>Nothing to show</div> : items.map((inboxItemProps: InboxItemProps, idx: number) => <InboxItem key={idx} {...inboxItemProps} />)}
+      className={`
+      	absolute z-40
+        border-l border-l-divider
+      	top-[0px] right-0 
+      	overscroll-auto
+
+      	transition-all ease-in-out
+      	${showMenu ? "w-[calc(100vw-60px)]" : "w-screen"}
+      	${showInbox ? "mr-[0]" : "mr-[-100vw]"}
+      	h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
+
+      	sm:relative 
+      	sm:min-w-[200px] sm:max-w-[240px]
+      	sm:mr-[0]
+         
+        bg-background-lt
+        border-l border-l-divider
+	      overflow-y-scroll`}>
+
+    	<div className={`relative flex flex-col
+        w-full h-full
+      	transition-[opacity] duration-300`}>
+
+    		{count > 0 ? 
+	    		items.map((inboxItemProps: InboxItemProps, idx: number) => 
+	    			<InboxItem key={idx} {...inboxItemProps} index={idx} />) : 
+	    		
+    		<InboxItem title="Inbox" message="Clear 🙂" type="info" time={new Date()} isRead={false} index={-1} />}
+    	</div>
     </div>)
 }
 
-function InboxItem({message, type, isRead, time}: InboxItemProps) {
+type _InboxItemProps = InboxItemProps & {
+	index: number
+}
+
+function InboxItem({title, message, type, time, isRead, index = -1}: _InboxItemProps) {
+	const [ pendingRemove, setPendingRemove ] = useState(false)
+	const { markItemAtIndexAsRead } = useInboxStore()
+
+	function handleClickXMark() {
+		setPendingRemove(true)
+	}
+
+	useEffect(() => {
+		if (!pendingRemove) return
+    const timer = setTimeout(() => {
+      markItemAtIndexAsRead(index)
+    }, 200)
+
+    return () => clearTimeout(timer)
+  }, [pendingRemove])
+
+	if (isRead === true) {
+		return <></>
+	}
+
 	return (
-		<div className={`flex flex-row items-center gap-3
-			p-3`}>
-			<Image src="/heroicons/outline/information-circle.svg" alt="inbox info icon" width={24} height={24} />
-			<span>{message}</span>
+		<div className={`flex flex-col items-stretch gap-2
+			p-4 bg-background-lt
+			sm:p-2
+			border-b-1 border-b-background-dk
+			transition-opacity ease-linear duration-300 
+			${pendingRemove ? "opacity-0" : "opacity-100"}`}>
+			<div className={`relative flex flex-row items-center gap-1`}>
+				<span className="font-bold flex-grow-1 whitespace-pre">{title}</span>
+				<button className={`${index === -1 ? "hidden" : ""} absolute right-[5px] top-[0px]`} onClick={handleClickXMark} type="button">
+					<Image src={"/heroicons/outline/x-mark.svg"} 
+						alt="inbox icon" width={20} height={20} />					
+				</button>
+			</div>
+			<div className={`whitespace-pre-wrap text-sm`}>
+				{message}
+			</div>
 		</div>)
 }

@@ -7,7 +7,7 @@ export default function Toolbar({children,}: Readonly<{children: React.ReactNode
 	return (
 		<div id="toolbar" className={`
 			flex flex-row items-stretch justify-start
-			sticky top-[44px] z-10
+			sticky top-[0px] z-10
 			h-[40px] min-h-[40px] max-h-[40px] 
 			bg-background-lt
 			border-b border-divider

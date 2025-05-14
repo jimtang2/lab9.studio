@@ -1,78 +1,75 @@
 "use client"
-import { useEffect, useActionState } from "react"
+import { useRef, useEffect, useActionState } from "react"
 import Image from 'next/image'
 import Form from "next/form"
-import { useCacheStore } from "@/lib/store"
+import { useCacheStore, useInboxStore } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 import { submitContactForm } from "./actions"
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null)
   const [state, formAction, pending] = useActionState(submitContactForm, null)
-
+  const { pushItem } = useInboxStore()
   const { contactSubject, contactMessage, contactEmail, setContactSubject, setContactMessage, setContactEmail } = useCacheStore()
 
-  const onChangeSubject = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function onChangeSubject(event: React.ChangeEvent<HTMLInputElement>) {
     setContactSubject(event.target.value)
   }
-
-  const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  function handleChangeMessage(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setContactMessage(event.target.value)
   }
-
-  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleChangeEmail(event: React.ChangeEvent<HTMLInputElement>) {
     setContactEmail(event.target.value)
+  }
+  function handleClickSend() {
+    if (formRef.current !== null) {
+      formRef.current.requestSubmit()
+    }
   }
 
   useEffect(() => {
-    if (state === null) {
-      return  
-    } 
-    if (state!.success === true) {
-
-    } else {
-
-    }
+    if (state === null) return
+    let success = state!.success === true
+    let email = state?.data?.email || ""
+    let error = state?.error || ""
+    pushItem({ 
+      title: success ? "Message Received" : "Failed to Send Message",
+      message: success ? `Thanks for contacting us. We will reply to: ${email}.` : `${error}`,
+      type: success ? "info" : "error",
+      time: new Date(),
+      isRead: false,
+    })
   }, [state])
 
   return (
     <main className={``}>
-      <Form className="w-full" action={formAction}>
-        <Title title="Contact" />
-        <Toolbar>
-          <div className="flex-grow-1"></div>
-          <button disabled={pending}>Send</button>
-        </Toolbar>
-
+      <Title title="Contact" />
+      <Toolbar>
+        <div className="flex-grow-1"></div>
+        <button onClick={handleClickSend} type="button">Send</button>
+      </Toolbar>
+      <Form className="self-center" action={formAction} ref={formRef}>
         <label htmlFor="subject">Subject</label>
         <input type="text" 
-          className="max-w-2xl"
           name="subject" 
-          required
-          placeholder="Subject"
+          placeholder="What's happening?"
           defaultValue={contactSubject}
-          onChange={onChangeSubject}
-        />
-
+          onChange={onChangeSubject} />
         <label htmlFor="message">Message</label>
         <textarea name="message" 
-          className="max-w-2xl"
           rows={6}
           required
-          placeholder="Message"
+          placeholder="Tell me more... No worries: no one will read this 🙃"
           defaultValue={contactMessage}
-          onChange={handleChangeMessage}
-        />
-
+          onChange={handleChangeMessage} />
         <label htmlFor="email">E-mail</label>
         <input type="text" 
-          className="max-w-2xl mb-4"
           name="email" 
           required
-          placeholder="E-mail"
+          placeholder="How do I contact you?"
           defaultValue={contactEmail}
-          onChange={handleChangeEmail}
-        />
+          onChange={handleChangeEmail} />
       </Form>
     </main>
   );

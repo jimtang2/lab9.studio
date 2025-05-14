@@ -6,7 +6,6 @@ import ColorThemeToggle from "@/components/buttons/ColorThemeToggle"
 import InboxButton from "@/components/buttons/InboxButton"
 import GithubLink from "@/components/buttons/GithubLink"
 import MenuToggle from "@/components/buttons/MenuToggle"
-import Inbox from "@/components/Inbox"
 
 import { useNavStore } from "@/lib/store"
 
@@ -15,7 +14,7 @@ export default function NavBar() {
 
   return (
   <nav className={`sticky
-    w-screen h-[44px] top-[0px] z-22
+    w-screen h-[44px] top-[0px] z-50
     px-2 sm:px-4
     bg-background-lt
     border-b border-divider
@@ -30,10 +29,9 @@ export default function NavBar() {
         flex-grow-1 pl-4
         font-bold
       `}>{title}</div>
-      {/*<ColorThemeToggle />*/}
-      <GithubLink />
+      {/*<GithubLink />*/}
+      <ColorThemeToggle />
       <InboxButton />
-      <Inbox />
     </ul>
   </nav>)
 }

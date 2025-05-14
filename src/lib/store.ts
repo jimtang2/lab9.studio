@@ -144,7 +144,8 @@ export const useCacheStore = create<CacheStoreState>()(
   )
 )
 
-export type InboxItemProps = {
+export type InboxItem = {
+  title: string
   message: string
   type: string
   isRead: boolean
@@ -155,23 +156,28 @@ type InboxStoreState = {
   show: boolean
   toggleShow: () => void
   setShow: (show: boolean) => void
-  items: InboxItemProps[]
+  items: InboxItem[]
+  pushItem: (props: InboxItem) => void
+  markItemAtIndexAsRead: (index: number) => void
+  markAllItemsAsRead: () => void
   reset: () => void
 }
 
-const defaultInboxItems: InboxItemProps[] = [
+const defaultInboxItems: InboxItem[] = [
   {
-    message: "Welcome to lab9.studio",
+    title: "Welcome to lab9.studio",
+    message: "Feel free to poke around and enjoy yourself. ❤️",
     type: "info",
     isRead: false,
     time: new Date()
   },
   {
-    message: "Sign up for newsletter",
+    title: "Sign up for newsletter",
+    message: "Just kidding, no newsletter here",
     type: "info",
     isRead: false,
     time: new Date()
-  }
+  },
 ]
 
 export const useInboxStore = create<InboxStoreState>()(
@@ -186,6 +192,30 @@ export const useInboxStore = create<InboxStoreState>()(
           show: false,
           items: defaultInboxItems
         })
+      },
+      pushItem: ({ title, message, type = "info", isRead = false, time = new Date() }: InboxItem) => {        
+        const item = {
+          title,
+          message, 
+          type, 
+          isRead, 
+          time,
+        }
+        set({ items: [item, ...get().items]})
+      },
+      markItemAtIndexAsRead: (index: number) => {
+        set({ items: get().items.map((item, idx) => {
+          if (idx === index) {
+            item.isRead = true
+          }
+          return item
+        })})
+      },
+      markAllItemsAsRead: () => {
+        set({ items: get().items.map(item => {
+          item.isRead = true
+          return item
+        })})
       },
     }),
     {

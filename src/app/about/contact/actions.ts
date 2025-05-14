@@ -19,3 +19,20 @@ export async function submitContactForm(prevState: any, formData: FormData) {
 		}
 	}	
 }
+
+export type SubmitContactFormState =
+  | {
+      success: true;
+      data: {
+        subject: string;
+        message: string;
+        email: string;
+      };
+      error?: undefined;
+    }
+  | {
+      success: false;
+      data?: undefined;
+      error: string;
+    }
+  | null
