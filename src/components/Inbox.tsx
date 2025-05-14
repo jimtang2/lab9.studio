@@ -6,12 +6,14 @@ import { useMenuStore, useInboxStore, InboxItem as InboxItemProps } from "@/lib/
 export default function Inbox() {
   const { show: showMenu } = useMenuStore()
   const { show: showInbox, items } = useInboxStore()
-	const [ display, setDisplay ] = useState(false)
+	const [ animate, setAnimate ] = useState(false)
+	const [ show, setShow ] = useState(false)
 
   useEffect(() => {
-  	if (showInbox) {
-  		setDisplay(showInbox)	
-  	} 
+  	setAnimate(true)
+  	setShow(showInbox)
+		const timer = setTimeout(() => setAnimate(false), 400)
+		return () => clearTimeout(timer)
   }, [showInbox])
 
   let count = items.filter(({ isRead}) => isRead === false).length
@@ -20,21 +22,20 @@ export default function Inbox() {
     <div id="inbox-view" 
       className={`
       	absolute z-40
-        border-l border-l-divider
       	top-[0px] right-0 
-      	overscroll-auto
-
-      	transition-all ease-in-out
-      	${showMenu ? "w-[calc(100vw-60px)]" : "w-screen"}
-      	${showInbox ? "mr-[0]" : "mr-[-100vw]"}
-      	h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
 
       	sm:relative 
-      	sm:min-w-[200px] sm:max-w-[240px]
-      	sm:mr-[0]
+      	sm:w-[20%] sm:min-w-[200px] sm:max-w-[240px]
+      	h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
+      	${showMenu ? "w-[calc(100vw-60px)]" : "w-screen"}
+
+      	sm:opacity-100
+      	${animate ? "transition-opacity ease-in-out duration-400" : ""}
+      	${show ? "opacity-100" : "opacity-0"}      	
          
         bg-background-lt
         border-l border-l-divider
+      	overscroll-auto
 	      overflow-y-scroll`}>
 
     	<div className={`relative flex flex-col
