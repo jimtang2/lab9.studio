@@ -12,7 +12,7 @@ export default function Inbox() {
   useEffect(() => {
   	setAnimate(true)
   	setShow(showInbox)
-		const timer = setTimeout(() => setAnimate(false), 400)
+		const timer = setTimeout(() => setAnimate(false), 50)
 		return () => clearTimeout(timer)
   }, [showInbox])
 
@@ -21,30 +21,23 @@ export default function Inbox() {
   return (
     <div id="inbox-view" 
       className={`
-      	absolute z-40
-      	top-[0px] right-0 
-
-      	sm:relative 
-      	sm:w-[20%] sm:min-w-[200px] sm:max-w-[240px]
-      	h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
+      	fixed top-[44px] right-0 z-40
+      	sm:relative sm:top-[0px]
+      	sm:w-[250px] sm:min-w-[250px] sm:max-w-[250px] 
+      	h-full min-h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
       	${showMenu ? "w-[calc(100vw-60px)]" : "w-screen"}
-
-      	sm:opacity-100
-      	${animate ? "transition-opacity ease-in-out duration-400" : ""}
-      	${show ? "opacity-100" : "opacity-0"}      	
-         
+      	${animate ? "transition-[margin-right] ease-in-out" : ""}
+      	${show ? "mr-0" : "mr-[-100%] sm:mr-[-250px]"}      	
         bg-background-lt
         border-l border-l-divider
       	overscroll-auto
 	      overflow-y-scroll`}>
-
     	<div className={`relative flex flex-col
-        w-full h-full
-      	transition-[opacity] duration-300`}>
+        w-full h-full`}>
 
     		{count > 0 ? 
 	    		items.map((inboxItemProps: InboxItemProps, idx: number) => 
-	    			<InboxItem key={idx} {...inboxItemProps} index={idx} />) : 
+	    			<InboxItem key={`${idx}-${inboxItemProps.time instanceof Date ? inboxItemProps.time.getTime() : inboxItemProps.time}`} {...inboxItemProps} index={idx} />) : 
 	    		
     		<InboxItem title="Inbox" message="Clear 🙂" type="info" time={new Date()} isRead={false} index={-1} />}
     	</div>
@@ -56,42 +49,50 @@ type _InboxItemProps = InboxItemProps & {
 }
 
 function InboxItem({title, message, type, time, isRead, index = -1}: _InboxItemProps) {
-	const [ pendingRemove, setPendingRemove ] = useState(false)
+	const [ hydrated, setHydrated ] = useState(false)
+	const [ animate, setAnimate ] = useState(false)
 	const { markItemAtIndexAsRead } = useInboxStore()
 
-	function handleClickXMark() {
-		setPendingRemove(true)
-	}
-
 	useEffect(() => {
-		if (!pendingRemove) return
-    const timer = setTimeout(() => {
-      markItemAtIndexAsRead(index)
-    }, 200)
-
+		if (!animate) return
+    const timer = setTimeout(() => markItemAtIndexAsRead(index), 300)
     return () => clearTimeout(timer)
-  }, [pendingRemove])
+  }, [animate])
+
+	useEffect(() => setHydrated(true), [])
 
 	if (isRead === true) {
 		return <></>
 	}
 
+	let formattedTime = ""
+	if (hydrated) {
+		if (typeof time === "string") {
+			formattedTime = new Date(time).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', hour12: true})
+		} else if (time instanceof Date) {
+			formattedTime = time.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', hour12: true})
+		}
+	}
+
 	return (
 		<div className={`flex flex-col items-stretch gap-2
-			p-4 bg-background-lt
-			sm:p-2
-			border-b-1 border-b-background-dk
-			transition-opacity ease-linear duration-300 
-			${pendingRemove ? "opacity-0" : "opacity-100"}`}>
-			<div className={`relative flex flex-row items-center gap-1`}>
-				<span className="font-bold flex-grow-1 whitespace-pre">{title}</span>
-				<button className={`${index === -1 ? "hidden" : ""} absolute right-[5px] top-[0px]`} onClick={handleClickXMark} type="button">
+			p-2 sm:p-2 bg-background-lt
+			border-b-1 border-b-divider
+			transition-opacity ease-linear 
+			${animate ? "opacity-0" : "opacity-100"}`}>
+			<div className={`relative flex flex-row items-center`}>
+				<div className="font-bold flex-grow-1 whitespace-pre">{title}</div>
+				{index === -1 ? <></> : 
+				<button className={`absolute right-[5px] top-[0px] bg-background-lt`} 
+					onClick={() => setAnimate(true)} 
+					type="button">
 					<Image src={"/heroicons/outline/x-mark.svg"} 
 						alt="inbox icon" width={20} height={20} />					
-				</button>
+				</button>}
 			</div>
 			<div className={`whitespace-pre-wrap text-sm`}>
 				{message}
 			</div>
+			<div className="self-end text-xs px-2">{formattedTime}</div>
 		</div>)
 }

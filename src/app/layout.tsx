@@ -25,7 +25,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
     <html lang="en">
       <DarkModeAgent />
       <AutoHideMenu />
-      <AutoHideInbox />
+      {/*<AutoHideInbox />*/}
 
       <body className={`
         antialiased 
@@ -34,9 +34,8 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         overflow-x-hidden
         
         `}>
-        <div id="layout" className={`
-          flex flex-col
-          min-h-screen`}>
+        <div id="layout" 
+          className={`flex flex-col min-h-screen`}>
           <NavBar />
           <div id="content" className={`relative
             flex flex-row flex-grow-1 items-stretch`}>

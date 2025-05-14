@@ -49,7 +49,9 @@ export default function Contact() {
         <div className="flex-grow-1"></div>
         <button onClick={handleClickSend} type="button">Send</button>
       </Toolbar>
-      <Form className="self-center" action={formAction} ref={formRef}>
+      <Form className="py-2 mx-auto" action={formAction} ref={formRef}>
+        <h2 className="px-2 sm:px-0">Contact Form</h2>
+        <p className="px-2 sm:px-0 mb-2">For technical support fill out this form and hit <b>Send</b>.</p>
         <label htmlFor="subject">Subject</label>
         <input type="text" 
           name="subject" 

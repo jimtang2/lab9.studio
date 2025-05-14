@@ -15,6 +15,7 @@ type PreferenceProps = {
 type CategoryProps = {
 	id: string 
 	label: string
+	description: string
 	items: PreferenceProps[]
 }
 
@@ -22,6 +23,7 @@ const PREFERENCE_CATEGORIES: CategoryProps[] = [
 	{
 		id: "settings",
 		label: "Settings",
+		description: "Application settings, appearance, etc",
 		items: [
 			{
 				id: "darkMode",
@@ -32,6 +34,7 @@ const PREFERENCE_CATEGORIES: CategoryProps[] = [
 	{
 		id: "privacy",
 		label: "Privacy",
+		description: "Cookies, data collection, etc",
 		items: [
 			{
 				id: "allowCookies",
@@ -86,10 +89,13 @@ export default function Preferences() {
 				className={`sm:hidden
 					flex flex-col items-stretch
 					flex-grow-1`}>
-				{PREFERENCE_CATEGORIES.map(({ id, label, items }: CategoryProps) => 
+				{PREFERENCE_CATEGORIES.map(({ id, label, description, items }: CategoryProps) => 
 					<Fragment key={id} >
-						<div className={`text-lg font-bold px-4 py-2 mt-2 
-							border-b-1 border-b-divider`}>{label}</div>
+						<div className={`flex flex-col
+							px-4 py-2 mt-2 
+							border-b-1 border-b-divider`}>
+							<div className={`text-lg font-bold`}>{label}</div>
+						</div>
 						<div className={`flex flex-col 
 							items-stretch w-full
 							divide-y-1 divide-divider
@@ -108,17 +114,21 @@ export default function Preferences() {
 
 				<div id="preferences-columns-layout-categories"
 					className={`flex flex-col items-stretch 
-						min-w-[240px] max-w-[300px] w-[40%]
+						min-w-[240px] max-w-[320px] w-[50%]
 						`}>
-					{PREFERENCE_CATEGORIES.map(({ id, label}: CategoryProps) =>
+					{PREFERENCE_CATEGORIES.map(({ id, label, description}: CategoryProps) =>
 						<button key={`column-${id}`}
 							className={`flex flex-row 
-								justify-start items-center p-2 pl-4
+								justify-start items-start p-2 pl-4
 								border-b-1 border-b-divider
-								${id === selectedCategoryId ? "bg-accent text-text-contrast" : ""}`}
+								${id === selectedCategoryId ? "bg-accent text-text-contrast shadow-lg" : ""}`}
 							onClick={() => setSelectedCategoryId(id)}>
-							<span className="flex-grow-1 text-left">{label}</span>
-							<Image className={`${id === selectedCategoryId ? "dark:invert" : ""}`}
+							
+							<div className={`flex flex-col gap-2 items-stretch justify-start flex-grow-1`}>
+								<div className="text-left font-bold">{label}</div>
+								<div className={`text-left text-sm`}>{description}</div>
+							</div>
+							<Image className={`pt-1 ${id === selectedCategoryId ? "dark:invert" : ""}`}
 							  width={16} height={16} alt="chevron" 
 							  src={`/heroicons/outline/chevron-right.svg`} />
 						</button>)}
@@ -126,8 +136,9 @@ export default function Preferences() {
 
 				<div id="preferences-columns-layout-preferences"
 						className={`flex flex-col items-stretch 
-							min-w-[240px] max-w-[320px] w-[60%]
-							divide-y-1 divide-divider`}>
+							min-w-[240px] max-w-[320px] w-[50%]
+							divide-y-1 divide-divider
+							border-r-1 border-r-divider`}>
 					{PREFERENCE_CATEGORIES.filter(({ id }: CategoryProps) => id === selectedCategoryId).map(({ id: _id, items }: CategoryProps) =>
 							<Fragment key={_id}>
 								{items.map((props: PreferenceProps) =>

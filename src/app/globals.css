@@ -62,23 +62,23 @@ main {
 }
 
 h1, h2{
-  @apply text-2xl text-text font-bold;  
+  @apply text-text font-bold;  
 }
 
 h1, h2, p {
-  @apply sm:w-lg w-full;
+  @apply w-lg text-left;
 }
 
 h1 {
-  @apply text-2xl py-6;
+  @apply text-base py-4;
 }
 
 h2 {
-  @apply text-xl py-3;
+  @apply text-base py-2;
 }
 
 p {
-  @apply text-base/8 text-text-lt;
+  @apply text-sm/6 text-text-lt;
 }
 
 .dark img{
@@ -86,13 +86,14 @@ p {
 }
 
 form {
-  @apply flex flex-col items-stretch;
+  @apply flex flex-col items-stretch justify-center;
   @apply w-full sm:max-w-lg my-4 sm:my-0;
 }
 
 form label {
-  @apply text-sm sm:text-text-dk;
-  @apply p-0 px-1 mx-1 my-0 sm:mx-2 sm:mt-2;
+  @apply sm:inline-block;
+  @apply p-0 px-1 mx-1 my-0;
+  @apply text-sm sm:text-text-dk p-0 sm:mx-0 sm:mt-2;
 }
 
 input[type="submit"], input[type="button"] {
@@ -106,7 +107,6 @@ input[type="submit"], input[type="button"], button {
 input[type="text"], input[type="email"], textarea, select {
   @apply text-base/6 outline-none resize-none;
   @apply py-1 px-2 mx-0;
-  @apply sm:mx-2;
 
   @apply border-t-1 border-b-1 border-t-divider border-b-divider;
   @apply mb-4;

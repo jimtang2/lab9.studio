@@ -4,20 +4,14 @@ import { useSettingsStore } from "@/lib/store"
 
 export default function ColorThemeToggle() {
 	const { darkMode, toggle } = useSettingsStore()
-	let icon = darkMode ? "/heroicons/outline/sun.svg" : "/heroicons/outline/moon.svg"
-	let size = 26
 
 	return (
-    <button className="
-      flex flex-row 
-      items-center 
-      p-2 
-      hover:bg-background-dk" 
+    <button className="flex flex-row items-center p-2 " 
       onClick={() => toggle("darkMode")}>
       <Image
       	alt={"dark mode"} 
-        src={icon}
-        width={size} 
-        height={size} />
+        src={darkMode ? "/heroicons/outline/sun.svg" : "/heroicons/outline/moon.svg"}
+        width={26} 
+        height={26} />
     </button>)
 }

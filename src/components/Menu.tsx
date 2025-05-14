@@ -85,15 +85,18 @@ const MENU_ITEMS: MenuItemProps[] = [
 
 export default function Menu() {
   const { show } = useMenuStore()
+  const [ hydrated, setHydrated ] = useState(false)
+
+  useEffect(() => setHydrated(true), [])
 
   return (
     <div id="menu" 
       className={`relative
         w-[60px] min-w-[60px] px-0 m-0 sm:px-0 
-        sm:w-[20%] sm:min-w-[180px] sm:max-w-[220px] 
+        sm:w-[250px] sm:min-w-[250px] sm:max-w-[250px] 
         ml-[-60px] sm:ml-0
         transition-[margin-left]
-        ${show ? "ml-[0px]" : ""}
+        ${hydrated && show ? "ml-[0px]" : ""}
         bg-background-lt
         border-r border-r-divider`}>
 
@@ -115,12 +118,13 @@ function MenuItem({
   }: MenuItemProps) {
   const path = usePathname()
   const isActive = href == path
-  
+  const [ hydrated, setHydrated ] = useState(false)
   const { getItemCollapsed, setItemCollapsed } = useMenuStore()
   const [ isCollapsed, setIsCollapsed ] = useState(false)
 
   useEffect(() => {
     setIsCollapsed(getItemCollapsed(id))
+    setHydrated(true)
   }, [])
 
   switch(type) {
@@ -135,11 +139,11 @@ function MenuItem({
     }
     return (
       <div className={`
-        ${parentCollapsed ? "hidden" : ""}
+        ${hydrated && parentCollapsed ? "hidden" : ""}
         px-0 py-2 my-1 
         sm:px-2
         text-sm w-full
-        ${isActive ? "bg-accent text-text-contrast shadow-lg" : ""}
+        ${hydrated && isActive ? "bg-accent text-text-contrast shadow-lg" : ""}
         `}>
         <Link className={`flex flex-row 
           items-center justify-center gap-4
@@ -185,7 +189,7 @@ function MenuItem({
             className={`
               hidden sm:block`}
             alt="chevron" 
-            src={`/heroicons/outline/chevron-${isCollapsed ? "right": "down"}.svg`} 
+            src={`/heroicons/outline/chevron-${hydrated && isCollapsed ? "right": "down"}.svg`} 
             width={16} 
             height={16}/>
         </button>

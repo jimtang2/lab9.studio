@@ -13,7 +13,7 @@ export default function InboxButton() {
     <li id="inbox-icon" className={`relative
       flex justify-center items-center 
       self-stretch place-self-stretch
-      sm:hidden`}>
+      `}>
       <button className="p-2 hover:bg-background-lt cursor-pointer"
         onClick={handleClick}>
         <Image className="" 
