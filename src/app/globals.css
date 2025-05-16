@@ -58,27 +58,32 @@ body {
 
 main {
   @apply relative flex flex-col;
-  @apply w-full;
+  @apply w-full overflow-y-scroll;
+  @apply h-[calc(100vh-44px)] max-h-[calc(100vh-44px)] min-h-[calc(100vh-44px)];
 }
 
 h1, h2{
   @apply text-text font-bold;  
 }
 
-h1, h2, p {
+h1, h2, h3, p {
   @apply w-lg text-left;
 }
 
 h1 {
-  @apply text-base py-4;
+  @apply text-xl py-4 mb-4;
 }
 
 h2 {
-  @apply text-base py-2;
+  @apply text-lg py-4 mt-4;
+}
+
+h3 {
+  @apply text-base py-4 underline;
 }
 
 p {
-  @apply text-sm/6 text-text-lt;
+  @apply text-base/6 text-text-lt;
 }
 
 .dark img{
@@ -128,3 +133,24 @@ input[type="checkbox"] {
   @apply bg-accent hover:bg-accent-lt px-4 ml-2;
   @apply text-text-contrast cursor-pointer;
 }
+
+#reader ul {
+  @apply list-disc list-inside;
+}
+
+#reader ul li {
+  @apply py-2;
+}
+
+#reader p, #reader h1, #reader h2, #reader h3 {
+  @apply w-full;
+}
+
+#reader pre {
+  @apply bg-background-lt p-2 my-4 whitespace-pre-line rounded-sm pl-12;
+}
+
+#reader code {
+  @apply text-sm;
+}
+

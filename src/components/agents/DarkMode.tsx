@@ -2,7 +2,7 @@
 import { useEffect } from "react"
 import { useSettingsStore } from "@/lib/store"
 
-export default function DarkModeAgent() {
+export default function DarkMode() {
 	const { darkMode, toggle } = useSettingsStore()
 
 	useEffect(() => {

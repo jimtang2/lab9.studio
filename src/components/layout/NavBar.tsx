@@ -1,12 +1,7 @@
 "use client"
 import { useState } from "react"
 import Image from "next/image"
-
-import ColorThemeToggle from "@/components/buttons/ColorThemeToggle"
-import InboxButton from "@/components/buttons/InboxButton"
-import GithubLink from "@/components/buttons/GithubLink"
-import MenuToggle from "@/components/buttons/MenuToggle"
-
+import { ColorThemeToggle, InboxButton, GithubLink, MenuToggle } from "@/components/buttons"
 import { useNavStore } from "@/lib/store"
 
 export default function NavBar() {

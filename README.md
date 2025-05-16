@@ -1,10 +1,11 @@
-This is the source code for the frontend of [lab9.studio](https://lab9.studio), a staging website of different dev concepts.
+This repository stores the source code of the frontend of [lab9.studio](https://lab9.studio), a concept website built with ❤️.
 
 ## Current list of features:
 
-- Slick dashboard 
-- Responsive UI 
-- Dark mode
+- UI responsiveness: mobile and web
+- Dark and light theme modes
 - Server and client components 
-- Persistent states 
+- Server functions
+- Client localStorage states 
+- Client SQLite state
 

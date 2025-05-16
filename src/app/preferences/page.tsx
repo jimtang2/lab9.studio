@@ -2,7 +2,7 @@
 import { Fragment, useState, useEffect } from "react"
 import Image from "next/image"
 
-import { useMenuStore, useSettingsStore, useCacheStore, SettingsStoreState, useInboxStore } from "@/lib/store"
+import { useMenuStore, useCacheStore, useInboxStore, useSettingsStore, SettingsStoreState } from "@/lib/store"
 import Title from "@/components/Title"
 import Toolbar from "@/components/Toolbar"
 import Modal from "@/components/Modal"

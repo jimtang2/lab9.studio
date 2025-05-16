@@ -24,14 +24,14 @@ export default function Inbox() {
       	fixed top-[44px] right-0 z-40
       	sm:relative sm:top-[0px]
       	sm:w-[250px] sm:min-w-[250px] sm:max-w-[250px] 
-      	h-full min-h-[calc(100vh-44px)] max-h-[calc(100vh-44px)]
+        h-[calc(100vh-44px)] max-h-[calc(100vh-44px)] min-h-[calc(100vh-44px)]
       	${showMenu ? "w-[calc(100vw-60px)]" : "w-screen"}
       	${animate ? "transition-[margin-right] ease-in-out" : ""}
       	${show ? "mr-0" : "mr-[-100%] sm:mr-[-250px]"}      	
         bg-background-lt
         border-l border-l-divider
       	overscroll-auto
-	      overflow-y-scroll`}>
+	      overflow-y-scroll overflow-x-hidden`}>
     	<div className={`relative flex flex-col
         w-full h-full`}>
 
