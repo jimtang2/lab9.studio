@@ -1,7 +1,7 @@
 import Title from "@/components/Title"
-import { fetchArticles } from "./actions"
-import { Article, ArticlesFetchResult, SearchParamsSchema } from "./types"
-import ArticleReader from "./ArticleReader"
+import { fetchEntries } from "./actions"
+import { Entry, EntriesFetchResult, SearchParamsSchema } from "./types"
+import EntryReader from "./EntryReader"
 
 export default async function SavedReading({ 
 	searchParams 
@@ -9,17 +9,17 @@ export default async function SavedReading({
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }> 
 }) {
 	const { limit, offset } = SearchParamsSchema.parse(await searchParams)
-	const { items, error }: ArticlesFetchResult = await fetchArticles({ limit, offset })
+	const { items, error }: EntriesFetchResult = await fetchEntries({ limit, offset })
 
 	let hasError = typeof error === "string"
 
 	return (
     <main className={``} style={{overflowY: "hidden"}}>
-			<Title title="Articles" />
+			<Title title="Entries" />
 
 			{hasError ? 
 				<div>{error}</div> : 
-				<ArticleReader articles={items} />}
+				<EntryReader entries={items} />}
 			
 		</main>
 		)

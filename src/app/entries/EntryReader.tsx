@@ -1,40 +1,40 @@
 "use client"
 import { useState, useEffect } from "react"
-import { Article, ArticleSelectorItemProps, UpdatedAtSchema } from "./types"
+import { Entry, EntrySelectorItemProps, UpdatedAtSchema } from "./types"
 
 import MarkdownTextRenderer from "@/components/MarkdownTextRenderer"
 import SyntaxHighlighter from "@/components/SyntaxHighlighter"
 
 
 
-export default function ArticleReader({ articles }: { articles: Article[]}) {
+export default function EntryReader({ entries }: { entries: Entry[]}) {
 	const [selectedId, setSelectedId] = useState(-1)
-	const article: Article[] = articles.filter(({id}) => id === selectedId)
+	const entry: Entry[] = entries.filter(({id}) => id === selectedId)
 
 	useEffect(() => {
-		if (selectedId === -1 && articles.length > 0) {
-			setSelectedId(articles[0].id)
+		if (selectedId === -1 && entries.length > 0) {
+			setSelectedId(entries[0].id)
 		}
 	}, [selectedId])
 	
 	return (
 		<div className={`relative flex flex-row items-stretch h-full`}>
-			<ArticleNavigator {...{ articles, selectedId, setSelectedId }} />
-			{article.length === 1 && <ArticleContent {...(article[0])} />}
+			<EntryNavigator {...{ entries, selectedId, setSelectedId }} />
+			{entry.length === 1 && <EntryContent {...(entry[0])} />}
 		</div>)
 }
 
-function ArticleNavigator({ articles, selectedId, setSelectedId }: { articles: Article[], selectedId: number, setSelectedId: (id: number) => void}) {
+function EntryNavigator({ entries, selectedId, setSelectedId }: { entries: Entry[], selectedId: number, setSelectedId: (id: number) => void}) {
 	return (
 		<div className={`flex flex-col gap-2 h-[calc(100vh-44px)] w-[240px] min-w-[240px] overflow-y-scroll border-r-1 border-r-divider`}>
-			{articles.map((article, idx) => 
-				<ArticleSelectorItem key={`${article.id}-${idx}`} {...article} {...{ selectedId, setSelectedId }} />
+			{entries.map((entry, idx) => 
+				<EntrySelectorItem key={`${entry.id}-${idx}`} {...entry} {...{ selectedId, setSelectedId }} />
 				)}
 		</div>
 	)
 }
 
-function ArticleSelectorItem({id, title, updated_at, selectedId, setSelectedId}: ArticleSelectorItemProps) {
+function EntrySelectorItem({id, title, updated_at, selectedId, setSelectedId}: EntrySelectorItemProps) {
 	let updated = UpdatedAtSchema.parse(updated_at)
 	let selected = id === selectedId
 	return (
@@ -44,7 +44,7 @@ function ArticleSelectorItem({id, title, updated_at, selectedId, setSelectedId}:
 		</div>)
 }
 
-function ArticleContent({ content }: Article) {
+function EntryContent({ content }: Entry) {
 	return (
 		<div id="reader" className={`flex flex-col flex-grow-1 h-[calc(100vh-44px)] overflow-y-scroll pb-20`}>
 			<MarkdownTextRenderer markdown={content} className={`px-10`} />

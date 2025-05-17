@@ -10,12 +10,12 @@ export const menuItems: MenuItemProps[] = [
     label: "Home",
   },
   {
-    id: "article",
+    id: "entry",
     type: "link",
-    href: "/articles",
-    alt: "article icon",
+    href: "/entries",
+    alt: "entry icon",
     icon: "/heroicons/solid/document-text.svg",
-    label: "Articles",
+    label: "Entries",
   },
   {
     id: "divider-1",

@@ -21,7 +21,6 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   return (
     <html lang="en">
       <body className={`antialiased flex flex-col bg-background-lt overflow-x-hidden`}>
-        {/*<link rel="stylesheet" href="/css/prism-dark.css"> */}
         <DarkMode />
         <AutoHideMenu />
         {/*<AutoHideInbox />*/}

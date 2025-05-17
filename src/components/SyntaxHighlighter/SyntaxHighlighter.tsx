@@ -41,9 +41,8 @@ const tag = {
 	id: "syntax-highlight",
 	rel: "stylesheet",
 	href: {
-		// dark: "/css/prism-one-dark.css",
-		dark: "/css/prism-xonokai.css",
-		// dark: "/css/prism-dark.css",
+		// dark: "/css/prism-xonokai.css",
+		dark: "/css/prism-dark.css",
 		light: "/css/prism-light.css",
 	},
 }

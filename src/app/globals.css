@@ -147,10 +147,10 @@ input[type="checkbox"] {
 }
 
 #reader pre {
-  @apply bg-background-lt p-2 my-4 whitespace-pre-line rounded-sm pl-12;
+  @apply py-0 pl-14 my-2 whitespace-pre-wrap rounded-sm;
 }
 
 #reader code {
-  @apply text-sm;
+  @apply text-sm/6 pt-[1px];
 }
 

@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export type Article = {
+export type Entry = {
 	id: number
 	title: string
 	content: string
@@ -9,22 +9,22 @@ export type Article = {
 	updated_at: string
 }
 
-export type ArticleSelectorItemProps = Article & {
+export type EntrySelectorItemProps = Entry & {
 	selectedId: number 
 	setSelectedId: (id: number) => void
 }
 
-export type FetchArticlesArgs = {
+export type FetchEntriesArgs = {
 	limit?: number
 	offset?: number
 }
 
-export type SearchArticleTitlesArgs = {
+export type SearchEntryTitlesArgs = {
 	input: string
 }
 
-export type ArticlesFetchResult = {
-	items: Article[]
+export type EntriesFetchResult = {
+	items: Entry[]
 	error?: string
 }
 
