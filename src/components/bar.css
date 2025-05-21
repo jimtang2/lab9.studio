@@ -1,0 +1,115 @@
+@import "../app/colors.css";
+
+#toolbar {
+	@apply flex-row items-center gap-1 px-2 h-[55px];
+  @apply border-b-1 border-b-edge;
+  @apply bg-background;
+}
+
+.logo {
+	@apply font-bold p-2;
+}
+
+.toolbar-button {
+	@apply flex items-center justify-center;
+	@apply p-[6px] rounded-full bg-background-2; 
+	@apply hover:bg-background-3;
+}
+
+.right-bar-toggle {
+	@apply relative;
+}
+
+.dark #toolbar img {
+  @apply dark:invert;
+}
+
+#navbar {
+	@apply flex-col; 
+  @apply min-h-0 max-h-screen overflow-y-auto;
+	@apply md:self-start;
+}
+
+.navbar-item {
+	@apply flex flex-row items-center gap-2;
+	@apply py-2 px-2;
+	@apply m-[1px];
+	@apply bg-background text-sm;
+}
+
+.navbar-item.active {
+	@apply bg-accent-1;
+}
+
+.dark #navbar img, .light .navbar-item.active span, .light .navbar-item.active img {
+	@apply dark:invert;
+}
+
+#notifications{
+	@apply flex-col items-stretch;
+  @apply md:min-h-0 md:overflow-y-auto;
+  @apply md:max-h-screen md:self-start;
+	@apply md:self-start;
+/*	@apply pb-3;*/
+	
+/*	@apply p-[1px];*/
+}
+
+.notification {
+	@apply grid grid-cols-[auto_24px] grid-rows-[1fr_auto_24px];
+	@apply bg-background text-sm p-2;
+	@apply md:border-1 md:border-edge md:rounded-md my-[1px];
+}
+
+.notification-title {
+	@apply row-start-1 row-end-2 col-start-1 col-end-2;
+	@apply font-bold;
+}
+
+.notification-message {
+	@apply row-start-2 row-end-3 col-start-1 col-end-2;
+}
+
+.notification-date {
+	@apply row-start-3 row-end-4 col-start-1 col-end-3;
+	@apply place-self-end;
+	@apply text-sm;
+}
+
+.notification-button {
+	@apply relative flex flex-col items-center;
+	@apply row-start-1 row-end-2 col-start-2 col-end-3;
+	@apply rounded-full bg-background-1;
+}
+
+.dark .notification-button button img {
+	@apply dark:invert;
+}
+
+.notification-menu {
+	@apply absolute flex-col items-stretch; 
+	@apply hidden top-[24px] right-[-6px];
+	@apply bg-background-1 rounded-md;
+	@apply border-1 border-edge divide-y-1 divide-edge-1;
+}
+
+.notification-menu.show {
+	@apply flex shadow-md;
+}
+
+.notification-menu button {
+	@apply py-1 px-2 pr-4;	
+	@apply text-sm text-left;
+	@apply hover:bg-background-3;
+}
+
+.notification-count-badge {
+	@apply hidden justify-center items-center;
+	@apply absolute w-5 h-5 top-[-4px] right-[-5px] z-35;
+	@apply bg-accent border-1 border-edge rounded-full;
+	@apply text-xs text-center font-bold text-white;
+}
+
+.notification-count-badge.show {
+	@apply flex;
+}

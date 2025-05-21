@@ -1,0 +1,16 @@
+@import "../../colors.css";
+
+main {
+	@apply min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
+}
+
+.markdown {
+	@apply m-[1px] p-2;
+	@apply bg-background;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+  @apply text-sm/6;
+}

@@ -1,9 +1,6 @@
-import Title from "@/components/Title"
-
 export default function Privacy() {
   return (
-    <main className={`flex flex-col items-center p-4`}>
-      <Title title="Privacy Policy" />
+    <main>
       <h3>Introduction</h3>
       <p>This Privacy Policy explains how lab9.studio collects, uses, and protects your information on lab9.studio.</p>
       <h3>Information We Collect</h3>

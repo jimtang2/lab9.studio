@@ -2,19 +2,17 @@
 import { useState, useEffect } from "react"
 
 
-type ModalProps = {
+export default function Modal({show, title, message, children}: {
 	show: boolean
 	title: string
 	message: string 
 	children: React.ReactNode
-}
-
-export default function Modal({show, title, message, children}: ModalProps) {
+}) {
 	const [ display, setDisplay ] = useState(false)
 
 	useEffect(() => {
 		if (show) {
-			setDisplay(show)	
+			setDisplay(show)
 		}
 	}, [show])
 

@@ -1,0 +1,19 @@
+@import "../colors.css";
+
+main {
+	@apply flex flex-col items-stretch;
+}
+
+.entry-list-item {
+	@apply flex flex-row items-center gap-2;
+	@apply bg-background;
+	@apply m-[1px] p-2;
+}
+
+.entry-title {
+	@apply text-base flex-grow-1;
+}
+
+.entry-updated_at {
+	@apply text-xs;
+}

@@ -2,13 +2,13 @@
 import { useState } from "react"
 import Image from "next/image"
 
-type DropdownProps = {
+import "./Inputs.css"
+
+export function Dropdown({ options, onChange, label }: {
 	options: string[]
 	onChange: (option: string) => void
 	label: string
-}
-
-export default function Dropdown({ options, onChange, label }: DropdownProps) {
+}) {
 	const [ showOptions, setShowOptions ] = useState(false)
 
 	const handleClickItem = (option: string) => {

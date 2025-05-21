@@ -1,9 +1,6 @@
-import Title from "@/components/Title"
-
 export default function Terms() {
   return (
-    <main className={`flex flex-col items-center p-4`}>
-      <Title title="Terms of Use" />
+    <main>
       <h3>Acceptance of Terms</h3>
       <p>By accessing lab9.studio, you agree to these Terms of Use. If you do not agree, do not use the site.</p>
       <h3>Use of Site</h3>

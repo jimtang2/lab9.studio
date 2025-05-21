@@ -1,108 +1,114 @@
-@import "tailwindcss";
+@import "./colors.css";
 
-:root {
-  --background-1: var(--color-neutral-200);
-  --background-2: var(--color-neutral-50);
-  --background-3: var(--color-neutral-300);
-  --foreground-1: var(--color-gray-950);
-  --foreground-2: var(--color-gray-800);
-  --foreground-3: var(--color-gray-600);
-  --foreground-contrast: var(--color-zinc-100);
-  --divider: var(--color-gray-300);
-  --alert: var(--color-red-800);
-  --warning: var(--color-yellow-600);
-  --accent-1: var(--color-blue-600);
-  --accent-2: var(--color-blue-700);
-  --accent-3: var(--color-blue-800);
-}
-
-.dark {
-  --background-1: var(--color-gray-900);
-  --background-2: var(--color-gray-950);
-  --background-3: var(--color-neutral-950);
-  --foreground-1: var(--color-neutral-50);
-  --foreground-2: var(--color-neutral-100);
-  --foreground-3: var(--color-neutral-300);
-  --foreground-contrast: var(--color-white);
-  --divider: var(--color-neutral-800);
-  --alert: var(--color-red-300);
-  --warning: var(--color-yellow-300);
-  --accent-1: var(--color-blue-700);
-  --accent-2: var(--color-blue-800);
-  --accent-3: var(--color-blue-900);
-}
-
-@theme inline {
-  --color-background: var(--background-2);
-  --color-background-lt: var(--background-1);
-  --color-background-dk: var(--background-3);
-  --color-text: var(--foreground-2);
-  --color-text-lt: var(--foreground-1);
-  --color-text-dk: var(--foreground-3);
-  --color-text-contrast: var(--foreground-contrast);
-  --color-accent: var(--accent-2);
-  --color-accent-lt: var(--accent-1);
-  --color-accent-dk: var(--accent-3);
-
-  --color-alert: var(--alert);
-  --color-warning: var(--warning);
-  --color-border-divider: var(--divider);
-  --color-divider: var(--divider);
+html {
+  font-family: Work, sans-serif;
+  @apply bg-background;
+  @apply min-h-screen;
 }
 
 body {
-  @apply bg-background;
-  @apply text-text;
-  font-family: Work, sans-serif;
+  @apply bg-background-1 text-text z-0;
+  @apply min-h-screen overflow-hidden;
+
+  @apply relative flex flex-col items-stretch; 
+  @apply md:grid; 
+  @apply md:grid-rows-[55px_auto];
+/*  @apply md:grid-cols-[minmax(100px,_180px)_minmax(100px,_6fr)_minmax(220px,_300px)];*/
+  @apply md:grid-cols-[minmax(100px,_180px)_minmax(100px,_6fr)];
 }
 
 main {
-  @apply relative flex flex-col;
-  @apply w-full overflow-y-scroll;
-  @apply h-[calc(100vh-44px)] max-h-[calc(100vh-44px)] min-h-[calc(100vh-44px)];
+  @apply order-4 z-15;
+  @apply md:row-start-2;
+  @apply md:col-start-1 md:col-end-4;
+/*  @apply flex-grow-1 self-stretch;*/
+  @apply overflow-x-hidden overflow-y-auto;
+/*  @apply p-2 mx-2 my-1 md:mx-1;*/
 }
 
-h1, h2{
-  @apply text-text font-bold;  
+.show-left-bar main {
+  @apply md:col-start-2;
 }
 
-h1, h2, h3, p {
-  @apply w-lg text-left;
+.show-right-bar main {
+  @apply md:col-end-3;
+}
+
+.top-bar {
+  @apply sticky top-0 z-30;
+  @apply flex order-1 self-stretch;
+  @apply md:row-start-1 md:row-end-2 md:col-span-full;
+}
+
+.left-bar {
+  @apply order-2 hidden self-stretch z-20;
+  @apply md:row-start-2 md:col-start-1 md:col-end-2;
+  @apply md:relative md:left-[-400px] md:transition-[left];
+}
+
+.show-left-bar .left-bar {
+  @apply flex md:left-0;
+}
+
+.right-bar {
+  @apply order-3 hidden z-20;
+  @apply md:max-w-[300px];
+  @apply md:absolute md:right-0 md:top-[55px];
+}
+
+.show-right-bar .right-bar {
+  @apply flex md:right-0;
 }
 
 h1 {
-  @apply text-xl py-4 mb-4;
+  @apply text-2xl font-bold;
+  @apply my-3;
 }
 
 h2 {
-  @apply text-lg py-4 mt-4;
+  @apply text-lg font-bold;
+  @apply my-2;
 }
 
 h3 {
-  @apply text-base py-4 underline;
+  @apply text-base font-bold;
+  @apply my-1;
 }
 
 p {
-  @apply text-base/6 text-text-lt;
+
 }
 
-.dark img{
-  @apply dark:invert;
+ul {
+  @apply list-disc list-inside;
+}
+
+li {
+  @apply py-2;
+}
+
+img{
+
+}
+
+label {
+
+}
+
+pre {
+  @apply py-0 pl-14 my-2 whitespace-pre-wrap rounded-sm;
+}
+
+code {
+  @apply text-sm/6 pt-[1px];
 }
 
 form {
-  @apply flex flex-col items-stretch justify-center;
-  @apply w-full sm:max-w-lg my-4 sm:my-0;
+
 }
 
-form label {
-  @apply sm:inline-block;
-  @apply p-0 px-1 mx-1 my-0;
-  @apply text-sm sm:text-text-dk p-0 sm:mx-0 sm:mt-2;
-}
-
-input[type="submit"], input[type="button"] {
-  @apply py-2 px-6 bg-accent text-text-contrast font-bold;
+input {
+  @apply accent-accent;
 }
 
 input[type="submit"], input[type="button"], button {
@@ -110,47 +116,10 @@ input[type="submit"], input[type="button"], button {
 }
 
 input[type="text"], input[type="email"], textarea, select {
-  @apply text-base/6 outline-none resize-none;
-  @apply py-1 px-2 mx-0;
 
-  @apply border-t-1 border-b-1 border-t-divider border-b-divider;
-  @apply mb-4;
-
-  @apply sm:border-1 sm:rounded-sm sm:border-divider;
-  @apply sm:mb-0;
 }
 
 input[type="checkbox"] {
-  @apply w-4 h-4 accent-accent-lt;
-}
-
-#content {
-  @apply max-w-screen overflow-x-hidden;
-}
-
-#toolbar button {
-  @apply flex flex-row items-center gap-4;
-  @apply bg-accent hover:bg-accent-lt px-4 ml-2;
-  @apply text-text-contrast cursor-pointer;
-}
-
-#reader ul {
-  @apply list-disc list-inside;
-}
-
-#reader ul li {
-  @apply py-2;
-}
-
-#reader p, #reader h1, #reader h2, #reader h3 {
-  @apply w-full;
-}
-
-#reader pre {
-  @apply py-0 pl-14 my-2 whitespace-pre-wrap rounded-sm;
-}
-
-#reader code {
-  @apply text-sm/6 pt-[1px];
+  @apply w-4 h-4;
 }
 
