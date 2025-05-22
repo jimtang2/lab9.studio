@@ -7,7 +7,7 @@ type Entry = {
 	content: string
 	metadata: string 
 	created_at: string
-	updated_at: string	
+	updated_at: string
 }
 
 export async function fetchEntries({ limit, offset}: {
@@ -18,7 +18,10 @@ export async function fetchEntries({ limit, offset}: {
 	error?: string
 }> {
 	try {
-		const query = 'select id, title, metadata, created_at, updated_at from entries order by updated_at desc limit $1 offset $2;'
+		const query = `SELECT id, title, updated_at FROM entries 
+ORDER BY updated_at DESC 
+LIMIT $1 
+OFFSET $2;`
 		const results = await pool.query(query, [limit, offset])
 		return { items: results.rows }
 	} catch (error: unknown) {
@@ -32,9 +35,9 @@ export async function fetchEntries({ limit, offset}: {
 
 export async function fetchEntry({ id }: {
 	id: number
-}): Promise<Entry & {error?: string}> {
+}): Promise<Entry & { error?: string }> {
 	try {
-		const query = 'select id, title, content, metadata, created_at, updated_at from entries where id=$1;'
+		const query = `SELECT * FROM entries WHERE id = $1;`
 		const results = await pool.query(query, [id])
 		return { ...results.rows[0] }
 	} catch (error: unknown) {
@@ -43,19 +46,67 @@ export async function fetchEntry({ id }: {
 				id: -1,
 				title: "",
 				content: "",
-				metadata: "", 
+				metadata: "",
 				created_at: "",
 				updated_at: "",
-				error: error.message,  
+				error: error.message,
 			}	
 		} else {
 			return {
 				id: -1,
 				title: "",
 				content: "",
-				metadata: "", 
+				metadata: "",
+				created_at: "",
+				updated_at: "",				
+			}
+		}
+	}	
+}
+
+export async function fetchNextEntry({ id }: {
+	id: number
+}): Promise<Entry & { error?: string }> {
+	try {
+		const query = `WITH target AS (
+  SELECT * FROM entries WHERE id = $1
+)
+SELECT id, title, updated_at FROM (
+  SELECT * FROM entries
+  WHERE updated_at < (SELECT updated_at FROM target)
+  ORDER BY updated_at ASC
+  LIMIT 1
+) AS next_entry
+UNION
+SELECT id, title, updated_at FROM (
+  SELECT * FROM entries
+  WHERE updated_at > (SELECT updated_at FROM target)
+  ORDER BY updated_at DESC
+  LIMIT 1
+) AS prev_entry
+ORDER BY updated_at
+LIMIT 1;`
+		const results = await pool.query(query, [id])
+		return { ...results.rows[0] }
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			return { 
+				id: -1,
+				title: "",
+				content: "",
+				metadata: "",
 				created_at: "",
 				updated_at: "",
+				error: error.message,
+			}	
+		} else {
+			return {
+				id: -1,
+				title: "",
+				content: "",
+				metadata: "",
+				created_at: "",
+				updated_at: "",				
 			}
 		}
 	}	
@@ -79,3 +130,4 @@ export async function searchEntryTitles({ input }: {
 		}
 	}	
 }
+

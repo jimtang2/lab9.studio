@@ -2,15 +2,32 @@
 
 main {
 	@apply min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
+	@apply relative;
 }
 
 .markdown {
-	@apply m-[1px] p-2;
-	@apply bg-background;
+	@apply m-[1px] pt-2 pb-12 px-4;
+	@apply bg-background; 
 }
 
 .line-numbers-rows > span {
   display: block;
   counter-increment: linenumber;
   @apply text-sm/6;
+}
+
+.entry-navigation {
+	@apply flex flex-row gap-4 h-[40px] justify-between;
+	@apply p-2 px-4;
+	@apply bg-background;
+	@apply sticky top-0 z-20;
+}
+
+.navigation-link {
+	@apply flex flex-row items-center gap-1;
+	@apply text-nowrap;
+}
+
+.dark .navigation-link img {
+	@apply dark:invert;
 }
