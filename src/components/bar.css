@@ -8,6 +8,7 @@
 
 .logo {
 	@apply font-bold p-2;
+	@apply hover:underline;
 }
 
 .toolbar-button {
@@ -31,14 +32,15 @@
 }
 
 .navbar-item {
-	@apply flex flex-row items-center gap-2;
-	@apply py-2 px-2;
+	@apply flex flex-row items-center;
+	@apply p-3 gap-3;
 	@apply m-[1px];
-	@apply bg-background text-sm;
+	@apply bg-background;
+	@apply hover:underline;
 }
 
 .navbar-item.active {
-	@apply bg-accent-1;
+	@apply bg-accent;
 }
 
 .dark #navbar img, .light .navbar-item.active span, .light .navbar-item.active img {

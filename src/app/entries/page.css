@@ -1,19 +1,23 @@
 @import "../colors.css";
 
-main {
-	@apply flex flex-col items-stretch;
+#entries-list {
+	@apply relative;
 }
 
-.entry-list-item {
-	@apply flex flex-row items-center gap-2;
-	@apply bg-background;
-	@apply m-[1px] p-2;
+#entries-list .entries-list {
+	@apply flex flex-col items-stretch relative;
+	@apply min-h-0 max-h-[calc(100vh-110px)] overflow-y-auto;
 }
 
-.entry-title {
-	@apply text-base flex-grow-1;
+#entries-list .entry-list-item {
+	@apply m-[1px] p-3 gap-3;
+	@apply bg-background; 
 }
 
-.entry-updated_at {
-	@apply text-xs;
+#entries-list .entry-title {
+	@apply text-base;
+}
+
+#entries-list .entry-updated_at {
+	@apply text-sm font-light italic;
 }

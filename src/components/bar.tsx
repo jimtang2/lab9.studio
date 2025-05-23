@@ -21,8 +21,8 @@ export function Toolbar({ className }: { className: string}) {
     notifications: `/heroicons/${!darkMode ? "outline" : "solid"}/inbox.svg`,
   }
   const size = {
-    width: 16,
-    height: 16,
+    width: 20,
+    height: 20,
   }
   function toggleTheme() {
     setMode(document.documentElement.classList.contains("dark") ? "light" : "dark")

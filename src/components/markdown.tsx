@@ -80,7 +80,6 @@ export default function Markdown({
 	}, [markdown])
 
   useEffect(() => {
-  	console.log("switch link")
     let t = (themeTag() === null ? createThemeTag() : themeTag()) as Element
     t.setAttribute("href", `/css/prism-${darkMode ? "dark" : "light"}.css`)
 		parseCode()

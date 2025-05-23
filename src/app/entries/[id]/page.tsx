@@ -4,19 +4,11 @@ import Image from "next/image"
 import { Error } from "@/components/error"
 import Markdown from "@/components/markdown"
 import { fetchEntry, fetchNextEntry } from "@/lib/actions"
-
+import EntriesList from "../entries"
+import IndexButton, { ActiveEntryLink } from "./components"
 import "./page.css"
 
-type Entry = {
-	id: number
-	title: string
-	content: string
-	metadata: string 
-	created_at: string
-	updated_at: string
-}
-
-export default async function EntryPage({ 
+export default async function EntryContentPage({ 
 	params 
 }: { 
 	params: Promise<{ [key: string]: string | string[] | undefined }> 
@@ -32,14 +24,15 @@ export default async function EntryPage({
 		return <Error error={"Invalid parameter 'id'"} />
 	}
 
-	const { content, error }: Entry & { error?: string } = await fetchEntry({ id })
+	const { content, error } = await fetchEntry({ id })
 
 	if (typeof error === "string") {
 		return <Error error={error} />
 	} else {
 		return (
-	    <main>
+	    <main id="entry-content">
 	    	<EntryNavigation id={id} />
+				<EntriesList />
 	    	<Markdown className="markdown" markdown={content} />
 			</main>
 			)		
@@ -47,22 +40,24 @@ export default async function EntryPage({
 }
 
 async function EntryNavigation({ id }: { id: number }) {
-	const { id: nextId, title, error }: Entry & { error?: string } = await fetchNextEntry({ id })
+	return (
+		<div className="navigation">
+			<IndexButton />
+			<NextEntryButton id={id} />
+			<ActiveEntryLink />
+		</div>)
+}
+
+async function NextEntryButton({ id }: { id: number }) {
+	const { id: nextId, title, error } = await fetchNextEntry({ id })
 
 	if (typeof error === "string") {
 		return <Error error={error} />
-	} else {
-		return (
-			<div className="entry-navigation">
-				<Link className="navigation-link" href="/entries">
-					<Image src="/heroicons/outline/list-bullet.svg" width={18} height={18} alt="List Entries" />
-					<span>Back to Index</span>
-				</Link>
-
-				<Link className="navigation-link" href={`/entries/${nextId}`}>
-					<span>{title}</span>
-					<Image src="/heroicons/outline/chevron-right.svg" width={18} height={18} alt="Next Entry" />
-				</Link>
-			</div>)
 	}
+
+	return (
+		<Link className="navigation-button" href={`/entries/${nextId}`}>
+			<span>{title}</span>
+			<Image src="/heroicons/outline/chevron-right.svg" width={18} height={18} alt="Next Entry" />
+		</Link>)	
 }

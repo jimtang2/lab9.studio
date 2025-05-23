@@ -1,33 +1,81 @@
 @import "../../colors.css";
 
-main {
-	@apply min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
-	@apply relative;
+#entry-content {
+	@apply flex flex-col items-stretch;
+	@apply md:grid md:grid-cols-[minmax(100px,1fr)_4fr] md:grid-rows-[55px_1fr];
+	@apply relative min-h-0 max-h-[calc(100vh-60px)] md:overflow-hidden;
 }
 
-.markdown {
+.navigation {
+	@apply flex flex-row gap-4 h-[55px] justify-between md:justify-end;
+	@apply bg-background p-2 px-4;
+	@apply sticky top-0 z-20;
+	@apply md:row-start-1 md:row-end-2 md:col-start-2 md:col-end-3;
+}
+
+.navigation-button {
+	@apply flex flex-row items-center gap-1;
+	@apply text-nowrap;
+	@apply hover:underline;
+}
+
+button#index-button {
+	@apply md:hidden;
+}
+
+.dark .navigation-button img {
+	@apply dark:invert;
+}
+
+#entry-content .entries-list {
+	@apply hidden md:flex;
+	@apply md:row-start-1 md:row-end-3 md:col-start-1 md:col-end-2;
+	@apply flex-col items-stretch;
+	@apply border-1 border-edge rounded-md shadow-lg; 
+	@apply bg-background-1;
+	@apply md:min-h-0 md:max-h-[calc(100vh-55px)] md:overflow-y-auto;
+}
+
+#entry-content.show-index .entries-list {
+	@apply flex;
+	@apply md:row-start-2 md:row-end-3 md:col-start-1 md:col-end-2;
+}
+
+#entry-content .entry-list-item {
+	@apply flex flex-row;
+	@apply m-[1px] p-3 gap-3;
+	@apply bg-background; 
+}
+
+#entry-content .entry-list-item.active {
+	@apply bg-accent;
+}
+
+.light #entry-content .entry-list-item.active .entry-title {
+	@apply dark:invert;
+}
+
+#entry-content .entry-title {
+	@apply text-base;
+}
+
+#entry-content .entry-updated_at {
+	@apply text-sm font-light italic;
+}
+
+#entry-content .markdown {
+	@apply md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-3;	
 	@apply m-[1px] pt-2 pb-12 px-4;
 	@apply bg-background; 
+	@apply md:min-h-0 md:overflow-y-auto;
+}
+
+#entry-content.show-index .markdown {
+	@apply md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-3;	
 }
 
 .line-numbers-rows > span {
   display: block;
   counter-increment: linenumber;
   @apply text-sm/6;
-}
-
-.entry-navigation {
-	@apply flex flex-row gap-4 h-[40px] justify-between;
-	@apply p-2 px-4;
-	@apply bg-background;
-	@apply sticky top-0 z-20;
-}
-
-.navigation-link {
-	@apply flex flex-row items-center gap-1;
-	@apply text-nowrap;
-}
-
-.dark .navigation-link img {
-	@apply dark:invert;
 }

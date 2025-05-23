@@ -10,9 +10,9 @@ type Entry = {
 	updated_at: string
 }
 
-export async function fetchEntries({ limit, offset}: {
-	limit: number 
-	offset: number
+export async function fetchEntries({ limit = 50, offset = 0}: {
+	limit?: number 
+	offset?: number
 }): Promise<{
 	items: Entry[]
 	error?: string
