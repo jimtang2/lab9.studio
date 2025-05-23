@@ -94,26 +94,24 @@ export async function fetchEntry({ id }: {
 	}	
 }
 
-export async function fetchPrevEntry({ id }: {
+export async function fetchNextEntry({ id }: {
 	id: number
 }): Promise<Entry & { error?: string }> {
 	try {
-		const query = `WITH target AS (
-  SELECT * FROM entries WHERE id = $1
-)
+		const query = `
 SELECT id, title, updated_at FROM (
   SELECT * FROM entries
-  WHERE updated_at < (SELECT updated_at FROM target)
-  ORDER BY updated_at DESC
+  WHERE id > $1
+  ORDER BY id ASC
   LIMIT 1
-) AS prev_entry
+) AS next_entry
 UNION
 SELECT id, title, updated_at FROM (
   SELECT * FROM entries
-  WHERE updated_at > (SELECT updated_at FROM target)
-  ORDER BY updated_at ASC
+  ORDER BY id ASC
   LIMIT 1
-) AS next_entry
+) AS first_entry
+ORDER BY id DESC
 LIMIT 1;`
 		const results = await pool.query(query, [id])
 		return { ...results.rows[0] }
