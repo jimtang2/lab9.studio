@@ -11,7 +11,7 @@ type Entry = {
 	updated_at: string
 }
 
-export async function fetchEntries({ limit = 50, offset = 0}: {
+export async function fetchEntries({ limit = 50, offset = 0 }: {
 	limit?: number 
 	offset?: number
 }): Promise<{
@@ -85,7 +85,6 @@ SELECT id, title, updated_at FROM (
   ORDER BY updated_at DESC
   LIMIT 1
 ) AS prev_entry
-ORDER BY updated_at
 LIMIT 1;`
 		const results = await pool.query(query, [id])
 		return { ...results.rows[0] }

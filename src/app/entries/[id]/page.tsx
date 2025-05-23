@@ -28,15 +28,15 @@ export default async function EntryContentPage({
 
 	if (typeof error === "string") {
 		return <Error error={error} />
-	} else {
-		return (
-	    <main id="entry-content">
-	    	<EntryNavigation id={id} />
-				<EntriesList />
-	    	<Markdown className="markdown" markdown={content} />
-			</main>
-			)		
 	}
+
+	return (
+    <main id="entry-content">
+    	<EntryNavigation id={id} />
+			<EntriesList />
+    	<Markdown className="markdown" markdown={content} />
+		</main>
+		)		
 }
 
 async function EntryNavigation({ id }: { id: number }) {
