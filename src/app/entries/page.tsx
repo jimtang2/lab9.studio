@@ -1,6 +1,6 @@
 import { z } from "zod"
-import EntriesList from "./entries"
-
+import { fetchLastEntryId } from "@/lib/actions"
+import { redirect } from "next/navigation"
 import "./page.css"
 
 const CollectionParamsSchema = z.object({
@@ -15,10 +15,12 @@ const CollectionParamsSchema = z.object({
 })
 
 export default async function EntriesListPage() {
-	return (
-    <main id="entries-list"> 
-    	<EntriesList />
-		</main>
-		)
+  const {id, error} = await fetchLastEntryId()
+
+  if (typeof error === "string") {
+    redirect(`/entries/3`)
+  }
+
+  redirect(`/entries/${id}`)
 }
 

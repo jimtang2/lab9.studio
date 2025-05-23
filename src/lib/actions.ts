@@ -11,6 +11,35 @@ type Entry = {
 	updated_at: string
 }
 
+export async function fetchLastEntryId(): Promise<Entry & { error?: string }> {
+	try {
+		const query = `SELECT * FROM entries ORDER BY updated_at DESC LIMIT 1;`
+		const results = await pool.query(query)
+		return { ...results.rows[0] }
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			return { 
+				id: -1,
+				title: "",
+				content: "",
+				metadata: "",
+				created_at: "",
+				updated_at: "",
+				error: error.message,
+			}	
+		} else {
+			return {
+				id: -1,
+				title: "",
+				content: "",
+				metadata: "",
+				created_at: "",
+				updated_at: "",				
+			}
+		}
+	}	
+}
+
 export async function fetchEntries({ limit = 50, offset = 0 }: {
 	limit?: number 
 	offset?: number
@@ -65,7 +94,7 @@ export async function fetchEntry({ id }: {
 	}	
 }
 
-export async function fetchNextEntry({ id }: {
+export async function fetchPrevEntry({ id }: {
 	id: number
 }): Promise<Entry & { error?: string }> {
 	try {
@@ -75,16 +104,16 @@ export async function fetchNextEntry({ id }: {
 SELECT id, title, updated_at FROM (
   SELECT * FROM entries
   WHERE updated_at < (SELECT updated_at FROM target)
-  ORDER BY updated_at ASC
+  ORDER BY updated_at DESC
   LIMIT 1
-) AS next_entry
+) AS prev_entry
 UNION
 SELECT id, title, updated_at FROM (
   SELECT * FROM entries
   WHERE updated_at > (SELECT updated_at FROM target)
-  ORDER BY updated_at DESC
+  ORDER BY updated_at ASC
   LIMIT 1
-) AS prev_entry
+) AS next_entry
 LIMIT 1;`
 		const results = await pool.query(query, [id])
 		return { ...results.rows[0] }

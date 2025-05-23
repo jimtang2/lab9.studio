@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Error } from "@/components/error"
 import Markdown from "@/components/markdown"
-import { fetchEntry, fetchNextEntry } from "@/lib/actions"
+import { fetchEntry, fetchPrevEntry } from "@/lib/actions"
 import EntriesList from "../entries"
 import IndexButton, { ActiveEntryLink } from "./components"
 import "./page.css"
@@ -49,7 +49,7 @@ async function EntryNavigation({ id }: { id: number }) {
 }
 
 async function NextEntryButton({ id }: { id: number }) {
-	const { id: nextId, title, error } = await fetchNextEntry({ id })
+	const { id: nextId, title, error } = await fetchPrevEntry({ id })
 
 	if (typeof error === "string") {
 		return <Error error={error} />

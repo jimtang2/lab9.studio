@@ -2,7 +2,6 @@ import { z } from "zod"
 import Link from "next/link"
 import { Error } from "@/components/error"
 import { fetchEntries } from "@/lib/actions"
-import logger from "@/lib/logger"
 
 function fmtDate(date: Date | string): string {
   return z
@@ -19,7 +18,7 @@ function fmtDate(date: Date | string): string {
 
 export default async function EntriesList() {
 	const { items, error } = await fetchEntries({})
-	// logger.info({ error, items })
+
 	if (typeof error === "string") {
 		return <Error error={error} />
 	}
