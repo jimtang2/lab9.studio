@@ -1,0 +1,4 @@
+{"level":30,"time":1748008095257,"pid":11052,"hostname":"mba25.local","query":"SELECT id, title, updated_at FROM entries \nORDER BY updated_at DESC \nLIMIT $1 \nOFFSET $2;","limit":50,"offset":0}
+{"level":30,"time":1748008098736,"pid":11052,"hostname":"mba25.local","query":"SELECT id, title, updated_at FROM entries \nORDER BY updated_at DESC \nLIMIT $1 \nOFFSET $2;","limit":50,"offset":0}
+{"level":30,"time":1748008182897,"pid":11052,"hostname":"mba25.local","items":[{"id":4,"title":"Spring Boot Microservices Notes","updated_at":"2025-05-15T10:55:52.738Z"},{"id":3,"title":"Typescript Type Assertion Cheatsheet","updated_at":"2025-05-14T08:56:56.177Z"}]}
+{"level":30,"time":1748008189065,"pid":11052,"hostname":"mba25.local","items":[{"id":4,"title":"Spring Boot Microservices Notes","updated_at":"2025-05-15T10:55:52.738Z"},{"id":3,"title":"Typescript Type Assertion Cheatsheet","updated_at":"2025-05-14T08:56:56.177Z"}]}
