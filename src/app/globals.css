@@ -2,62 +2,22 @@
 
 html {
   font-family: Work, sans-serif;
-  @apply bg-background;
+  @apply bg-background-1;
   @apply min-h-screen;
 }
 
 body {
-  @apply bg-background-1 text-text z-0;
-  @apply min-h-screen overflow-hidden;
+  @apply text-text;
+  @apply min-h-screen min-w-[360px] overflow-hidden;
 
   @apply relative flex flex-col items-stretch; 
   @apply md:grid; 
   @apply md:grid-rows-[55px_auto];
-/*  @apply md:grid-cols-[minmax(100px,_180px)_minmax(100px,_6fr)_minmax(220px,_300px)];*/
-  @apply md:grid-cols-[minmax(100px,_180px)_minmax(100px,_6fr)];
 }
 
 main {
-  @apply order-4 z-15;
   @apply md:row-start-2;
-  @apply md:col-start-1 md:col-end-4;
-/*  @apply flex-grow-1 self-stretch;*/
   @apply overflow-x-hidden overflow-y-auto;
-/*  @apply p-2 mx-2 my-1 md:mx-1;*/
-}
-
-.show-left-bar main {
-  @apply md:col-start-2;
-}
-
-.show-right-bar main {
-  @apply md:col-end-3;
-}
-
-.top-bar {
-  @apply sticky top-0 z-30;
-  @apply flex order-1 self-stretch;
-  @apply md:row-start-1 md:row-end-2 md:col-span-full;
-}
-
-.left-bar {
-  @apply order-2 hidden self-stretch z-20;
-  @apply md:row-start-2 md:col-start-1 md:col-end-2;
-  @apply md:relative md:left-[-400px] md:transition-[left];
-}
-
-.show-left-bar .left-bar {
-  @apply flex md:left-0;
-}
-
-.right-bar {
-  @apply order-3 hidden z-20;
-  @apply md:max-w-[300px];
-  @apply md:absolute md:right-0 md:top-[55px];
-}
-
-.show-right-bar .right-bar {
-  @apply flex md:right-0;
 }
 
 h1 {
@@ -79,6 +39,10 @@ p {
 
 }
 
+a, button {
+  @apply hover:text-accent hover:underline transition-[color];
+}
+
 ul {
   @apply list-disc list-inside;
 }
@@ -96,7 +60,7 @@ label {
 }
 
 pre {
-  @apply py-0 pl-14 my-2 whitespace-pre-wrap rounded-sm;
+  @apply py-0 pl-6 my-2 whitespace-pre-wrap rounded-sm;
 }
 
 code {

@@ -6,14 +6,14 @@
   --background-3: var(--color-gray-200);
   --background-4: var(--color-gray-300);
   --foreground-1: var(--color-gray-950);
-  --foreground-2: var(--color-gray-800);
+  --foreground-2: var(--color-gray-700);
   --foreground-3: var(--color-gray-600);
   --foreground-4: var(--color-gray-500);
   --foreground-contrast: var(--color-white);
-  --accent-1: var(--color-blue-500);
-  --accent-2: var(--color-blue-600);
-  --accent-3: var(--color-blue-700);
-  --accent-4: var(--color-blue-800);
+  --accent-1: var(--color-orange-600);
+  --accent-2: var(--color-orange-700);
+  --accent-3: var(--color-orange-800);
+  --accent-4: var(--color-orange-900);
   --edge-1: var(--color-gray-200);
   --edge-2: var(--color-gray-300);
   --edge-3: var(--color-gray-400);
@@ -26,18 +26,22 @@
   --background-3: var(--color-gray-950);
   --background-4: var(--color-black);
   --foreground-1: var(--color-gray-50);
-  --foreground-2: var(--color-gray-200);
+  --foreground-2: var(--color-gray-300);
   --foreground-3: var(--color-gray-400);
   --foreground-4: var(--color-gray-600);
   --foreground-contrast: var(--color-black);
-  --accent-1: var(--color-blue-700);
-  --accent-2: var(--color-blue-600);
-  --accent-3: var(--color-blue-500);
-  --accent-4: var(--color-blue-400);
+  --accent-1: var(--color-orange-500);
+  --accent-2: var(--color-orange-400);
+  --accent-3: var(--color-orange-300);
+  --accent-4: var(--color-orange-200);
   --edge-1: var(--color-gray-950);
   --edge-2: var(--color-gray-900);
   --edge-3: var(--color-gray-800);
   --edge-4: var(--color-gray-700);
+}
+
+.dark, .light {
+  @apply transition-all;
 }
 
 @theme inline {

@@ -1,9 +1,8 @@
-import "./globals.css"
-
 import type { Viewport, Metadata } from "next"
+import { Toolbar } from "@/components/bar"
+import { Dynamic } from "@/components/client-components"
 
-import Dynamic from "@/components/dynamic"
-import { Toolbar, Navbar, Notifications } from "@/components/bar"
+import "./globals.css"
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -21,10 +20,8 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   return (
     <html lang="en">
       <Dynamic />
-      <body className="">
-        <Toolbar className="top-bar" />
-        <Navbar className="left-bar" />
-        <Notifications className="right-bar" />
+      <body>
+        <Toolbar />
         {children}
       </body>
     </html>

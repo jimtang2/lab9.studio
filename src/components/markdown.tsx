@@ -1,42 +1,16 @@
 "use client"
 import { useState, useEffect } from "react"
+import { useSettings } from "@/lib/state"
 
+import MarkdownIt from 'markdown-it'
+import markdownItAnchor from 'markdown-it-anchor'
+import markdownItToc from 'markdown-it-toc-done-right'
 import { unified } from "unified"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
-
 import Prism from "prismjs"
-import "prismjs/components/prism-c" // required for cpp
-import "prismjs/components/prism-csharp"
-import "prismjs/components/prism-cpp"
-import 'prismjs/components/prism-markup-templating' // required for php
-import "prismjs/components/prism-php"
-import "prismjs/components/prism-javascript"
-import "prismjs/components/prism-python"
-import "prismjs/components/prism-java"
-import "prismjs/components/prism-csharp"
-import "prismjs/components/prism-docker"
-import "prismjs/components/prism-typescript"
-import "prismjs/components/prism-go"
-import "prismjs/components/prism-swift"
-import "prismjs/components/prism-sql"
-import "prismjs/components/prism-css"
-import "prismjs/components/prism-bash"
-import "prismjs/components/prism-yaml"
-import "prismjs/components/prism-jsx"
-import "prismjs/components/prism-tsx"
-import "prismjs/components/prism-toml"
-import "prismjs/components/prism-groovy"
-import "prismjs/components/prism-kotlin"
-import "prismjs/components/prism-rust"
-import "prismjs/components/prism-markup"
-import "prismjs/components/prism-ruby"
-
-import "prismjs/plugins/line-numbers/prism-line-numbers"
-import "prismjs/plugins/line-numbers/prism-line-numbers.css"
-
-import { useSettings } from "@/lib/state"
+import "@/lib/prism"
 
 async function toHTML(markdown: string): Promise<string> {
   return (await unified()
@@ -90,3 +64,34 @@ export default function Markdown({
 		)
 }
 
+export function Toc({ className, content }: { 
+  className: string
+  content: string
+}) {
+  const [toc, setToc] = useState('')
+  useEffect(() => {
+    const md = new MarkdownIt()
+      .use(markdownItAnchor)
+      .use(markdownItToc, { callback: (tocHtml: string) => setToc(tocHtml) })
+    md.render(content)
+  }, [content])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll('.toc li').forEach((li) => {
+              li.classList.toggle('is-active', li.querySelector('a')?.href.includes(entry.target.id))
+            })
+          }
+        })
+      },
+      { rootMargin: '0px 0px -50% 0px' }
+    )
+    document.querySelectorAll('h1, h2, h3').forEach((h) => observer.observe(h))
+    return () => observer.disconnect()
+  }, [])
+
+  return <div className={className} dangerouslySetInnerHTML={{ __html: toc }}></div>
+}

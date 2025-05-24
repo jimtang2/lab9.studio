@@ -16,10 +16,7 @@ export default function IndexButton() {
 
 	return (
 		<button id="index-button" type="button" className="navigation-button" 
-			onClick={() => setShowIndex(!showIndex)}>
-			<Image src="/heroicons/outline/list-bullet.svg" width={18} height={18} alt="List Entries" />
-			<span>Index</span>
-		</button>)
+			onClick={() => setShowIndex(!showIndex)}>Index</button>)
 }
 
 export function ActiveEntryLink() {
@@ -33,3 +30,4 @@ export function ActiveEntryLink() {
 	}, [])
 	return <></>
 }
+
