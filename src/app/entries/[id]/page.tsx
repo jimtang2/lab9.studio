@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Error } from "@/components/error"
 import Markdown, { Toc } from "@/components/markdown"
 import { fetchEntries, fetchEntry, fetchNextEntry } from "@/lib/actions"
-import IndexButton, { ActiveEntryLink } from "./components"
+import { ActiveEntriesListItemChecker } from "./page-client"
 import "./page.css"
 
 export default async function EntryContentPage({ 
@@ -31,21 +31,12 @@ export default async function EntryContentPage({
 
 	return (
     <main id="entry-content">
-    	<EntryNavigation id={id} />
 			<EntriesList />
     	<Markdown className="markdown" markdown={content} />
     	<Toc className="toc" content={content} />
+    	<ActiveEntriesListItemChecker />
 		</main>
 		)		
-}
-
-async function EntryNavigation({ id }: { id: number }) {
-	return (
-		<div className="navigation">
-			<IndexButton />
-			<NextEntryButton id={id} />
-			<ActiveEntryLink />
-		</div>)
 }
 
 async function NextEntryButton({ id }: { id: number }) {
@@ -70,22 +61,16 @@ async function EntriesList() {
 	}
 	return (
   	<div className="entries-list">
-  		{items.map((props, idx) => <Entry key={idx} {...props} />)}
+  		{items.map(({ id, title, updated_at }, idx) => {
+  			return (
+  				<Link key={`${id}.${idx}`} className="entry-list-item" href={`/entries/${id}`}>
+  					<span className="entry-title">{title}
+  						<span className="entry-updated_at"> – added on {fmtDate(updated_at)}</span>
+  					</span>
+  				</Link>)  			
+  		})}
   	</div>
 	)
-}
-
-function Entry({ id, title, updated_at }: {
-	id: number
-	title: string
-	updated_at: string
-}) {
-	return (
-		<Link className="entry-list-item" href={`/entries/${id}`}>
-			<span className="entry-title">{title}
-				<span className="entry-updated_at"> – added on {fmtDate(updated_at)}</span>
-			</span>
-		</Link>)
 }
 
 function fmtDate(date: Date | string): string {
@@ -100,5 +85,3 @@ function fmtDate(date: Date | string): string {
 			})
     }).parse(date)
 }
-
-

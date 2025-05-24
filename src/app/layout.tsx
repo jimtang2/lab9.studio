@@ -1,6 +1,5 @@
 import type { Viewport, Metadata } from "next"
-import { Toolbar } from "@/components/bar"
-import { Dynamic } from "@/components/client-components"
+import Toolbar from "@/components/toolbar"
 
 import "./globals.css"
 
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
-      <Dynamic />
       <body>
         <Toolbar />
         {children}

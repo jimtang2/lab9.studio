@@ -2,8 +2,8 @@
 
 #entry-content {
 	@apply flex flex-col items-stretch;
-	@apply relative min-h-0 max-h-screen;
-	@apply pb-30 md:pb-0;
+	@apply relative min-h-0 max-h-[calc(100vh-60px)];
+	@apply pb-30 md:pb-0 bg-background;
 	@apply md:grid;
 	@apply md:grid-cols-[minmax(100px,1fr)_3fr];
 	@apply xl:grid-cols-[minmax(120px,1fr)_3fr_minmax(120px,1fr)];
@@ -48,7 +48,7 @@
 
 #entry-content .entry-list-item {
 	@apply flex flex-row;
-	@apply p-1 md:p-2; 
+	@apply p-1 md:p-1; 
 }
 
 #entry-content .active {
@@ -56,11 +56,11 @@
 }
 
 #entry-content .active .entry-title {
-	@apply text-lg font-bold text-accent hover:no-underline;
+	@apply text-lg font-normal text-accent hover:no-underline;
 }
 
 #entry-content .entry-title {
-	@apply text-base 
+	@apply text-base font-light;
 }
 
 #entry-content .entry-updated_at {
@@ -68,10 +68,14 @@
 }
 
 #entry-content .markdown {
-	@apply pt-0 md:pt-4 pb-12 px-4 md:mt-0;
+	@apply pt-0 md:pt-4 px-4 md:mt-0;
 	@apply bg-background;
 	@apply md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3;	
 	@apply md:min-h-0 md:overflow-y-auto;
+}
+
+#entry-content .markdown code {
+	@apply text-accent-2;
 }
 
 #entry-content .markdown li {
