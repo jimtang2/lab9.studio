@@ -8,13 +8,13 @@
 
 .navigation {
 	@apply flex flex-row gap-4 h-[55px] justify-between md:justify-end;
-	@apply bg-background p-2 px-4;
+	@apply bg-background p-3;
 	@apply sticky top-0 z-20;
 	@apply md:row-start-1 md:row-end-2 md:col-start-2 md:col-end-3;
 }
 
 .navigation-button {
-	@apply flex flex-row items-center gap-1;
+	@apply flex flex-row items-center gap-3;
 	@apply text-nowrap;
 	@apply hover:underline;
 }
@@ -65,17 +65,11 @@ button#index-button {
 
 #entry-content .markdown {
 	@apply md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-3;	
-	@apply m-[1px] pt-2 pb-12 px-4;
+	@apply m-[1px] pt-2 pb-12 px-4 md:mt-0;
 	@apply bg-background; 
 	@apply md:min-h-0 md:overflow-y-auto;
 }
 
 #entry-content.show-index .markdown {
 	@apply md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-3;	
-}
-
-.line-numbers-rows > span {
-  display: block;
-  counter-increment: linenumber;
-  @apply text-sm/6;
 }
