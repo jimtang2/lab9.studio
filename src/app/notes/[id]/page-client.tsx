@@ -2,11 +2,11 @@
 import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
-export function ActiveEntriesListItemChecker() {
+export function AutoNoteActivator() {
   const currentPath = usePathname()
 
   useEffect(() => {
-    document.querySelectorAll(".entries-list .entry-list-item").forEach(element => {
+    document.querySelectorAll(".notes-list .note-list-item").forEach(element => {
       if (element.getAttribute("href") === currentPath) {
         element.classList.add("active")
       } else {

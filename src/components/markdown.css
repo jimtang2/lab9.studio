@@ -5,7 +5,7 @@
 	@apply md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3;	
 	@apply md:min-h-0 md:overflow-y-auto;
 	@apply px-4 pt-0 pb-[10vh]; 
-	@apply md:pt-4 md:pb-[80vh];
+	@apply md:pb-[50vh];
 }
 
 .markdown code {
@@ -18,7 +18,7 @@
 
 .toc {
 	@apply hidden xl:flex xl:flex-col xl:row-start-1 xl:row-end-3 xl:col-start-3 xl:col-end-4;
-	@apply xl:py-6;
+	@apply xl:py-2;
 	@apply bg-background min-h-0 overflow-y-auto;
 }
 

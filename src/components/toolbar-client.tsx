@@ -10,14 +10,14 @@ function ChevronSVG() {
   return <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4.5 5.65257C4.5 4.22644 6.029 3.32239 7.2786 4.00967L18.8192 10.357C20.1144 11.0694 20.1144 12.9304 18.8192 13.6428L7.2786 19.9901C6.029 20.6774 4.5 19.7733 4.5 18.3472V5.65257Z" fill="currentColor"/></svg>
 }
 
-export function EntriesToolbarButton() {
+export function NotesButton() {
   const [ showDropdown, setShowDropdown ] = useState(false)
   const currentPath = usePathname()
   
   // use Link on > md layout
   const linkProps = {
     className: "toolbar-item-control", 
-    href: "/entries",
+    href: "/notes",
   }
 
   // use button on < md layout
@@ -29,14 +29,40 @@ export function EntriesToolbarButton() {
   }
 
   useEffect(() => {
-    if (showDropdown) {
-      document.querySelector("#entries-toolbar-dropdown")?.classList.add("show")
-      document.querySelector("#entries-toolbar-button")?.classList.add("expand")  
-    } else {
-      document.querySelector("#entries-toolbar-dropdown")?.classList.remove("show")
-      document.querySelector("#entries-toolbar-button")?.classList.remove("expand")
+    if (!showDropdown) {
+      document.querySelector("#notes-toolbar-dropdown")?.classList.remove("show")
+      document.querySelector("#notes-toolbar-button")?.classList.remove("expand")
+      document.querySelector("#notes-toolbar-button")?.classList.remove("active")
     }
-  }, [showDropdown])
+
+    document.querySelectorAll("#notes-toolbar-dropdown .notes-toolbar-dropdown-item").forEach(element => {
+      if (element.getAttribute("href") === currentPath) {
+        element.classList.add("active")
+      } else {
+        element.classList.remove("active")
+      }
+    })
+
+    const logoItem = document.querySelector("#logo")
+    if (currentPath === "/") {
+      logoItem?.classList.add("active")
+    } else {
+      logoItem?.classList.remove("active")
+    }
+    const notesItem = document.querySelector("#notes-toolbar-button")
+    if (currentPath.indexOf("/notes") > -1) {
+      notesItem?.classList.add("active")
+    } else {
+      notesItem?.classList.remove("active")
+    }
+
+    if (showDropdown) {
+      document.querySelector("#notes-toolbar-dropdown")?.classList.add("show")
+      document.querySelector("#notes-toolbar-button")?.classList.add("expand")  
+      document.querySelector("#notes-toolbar-button")?.classList.add("active")
+    } 
+
+  }, [showDropdown, currentPath])
 
   useEffect(() => {
     if (showDropdown) {
@@ -45,10 +71,10 @@ export function EntriesToolbarButton() {
   }, [currentPath])
 
   return (
-    <div id="entries-toolbar-button" className="toolbar-item">
-      <Link {...linkProps}>Entries</Link>
+    <div id="notes-toolbar-button" className="toolbar-item">
+      <Link {...linkProps}>Notes</Link>
       <button type="button" {...buttonProps}>
-        <span>Entries</span><ChevronSVG />
+        <span>Notes</span><ChevronSVG />
       </button>
     </div>
     )
@@ -82,43 +108,4 @@ export function ThemeToolbarButton() {
     <button type="button" {...buttonProps}>
       <Image {...imageProps} />
     </button>)
-}
-
-// highlight active toolbar entries dropdown item
-export function ActiveToolbarDropdownItemChecker() {
-  const currentPath = usePathname()
-
-  useEffect(() => {
-    document.querySelectorAll("#entries-toolbar-dropdown .entries-toolbar-dropdown-item").forEach(element => {
-      if (element.getAttribute("href") === currentPath) {
-        element.classList.add("active")
-      } else {
-        element.classList.remove("active")
-      }
-    })
-  }, [currentPath])
-
-  return <></>
-}
-
-// highlight active toolbar item
-export function ActiveToolbarItemChecker() {
-  const currentPath = usePathname()
-
-  useEffect(() => {
-    const logo = document.querySelector("#logo")
-    if (currentPath === "/") {
-      logo?.classList.add("active")
-    } else {
-      logo?.classList.remove("active")
-    }
-    const entries = document.querySelector("#entries-toolbar-button")
-    if (currentPath.indexOf("/entries") > -1) {
-      entries?.classList.add("active")
-    } else {
-      entries?.classList.remove("active")
-    }
-  }, [currentPath])
-
-  return <></>
 }
