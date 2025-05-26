@@ -1,52 +1,44 @@
 import Link from "next/link"
 import { Error } from "@/components/error"
-import { fetchEntries } from "@/lib/db/actions"
+import { fetchNotes } from "@/lib/db/actions"
+import { fmtDate } from "@/lib/util"
+import { NotesButton, ThemeToolbarButton, HighlightActiveToolbarItem, HighlightActiveDropdownItem } from "./toolbar.client"
 
-import { 
-  EntriesToolbarButton, 
-  ThemeToolbarButton, 
-  ActiveToolbarDropdownItemChecker,
-  ActiveToolbarItemChecker,
-} from "./toolbar-client"
-
-import "./toolbar.css"
+import "@/css/toolbar.css"
 
 export default async function Toolbar() {
   return (
-    <>
-      <div id="toolbar">
-        <Logo />
-        <EntriesToolbarButton />
-        <EntriesToolbarDropdown />
-        <span className="flex-grow-1"></span>
-        <ThemeToolbarButton />
-      </div>
-      <ActiveToolbarItemChecker />
-    </>)
+    <div id="toolbar">
+      <Logo />
+      <NotesButton />
+      <NotesDropdown />
+      <span className="flex-grow-1" />
+      <ThemeToolbarButton />
+      <HighlightActiveToolbarItem />
+    </div>
+  )
 }
 
 async function Logo() {
   return <Link id="logo" className="toolbar-item" href="/">LAB9</Link>
 }
 
-async function EntriesToolbarDropdown() {
-  const { items, error } = await fetchEntries({})
-  if (typeof error === "string") {
-    const { items, error } = await fetchEntries({})
-  }
+async function NotesDropdown() {
+  const { items, error } = await fetchNotes({})
   if (typeof error === "string") {
     return <Error error={error} />
   }
 
   return (
-    <div id="entries-toolbar-dropdown">
-      {items.map(({ id, title }, idx) => {
-        const linkProps = {
-          className: "entries-toolbar-dropdown-item", 
-          href: `/entries/${id}`,
-        }
-        return <Link key={`${id}.${idx}`} {...linkProps}>{title}</Link>
-      })}
-      <ActiveToolbarDropdownItemChecker />
+    <div id="notes-toolbar-dropdown">
+      {items.map(({ id, title, updated_at }, idx) => 
+        <Link key={`${id}.${idx}`} className="notes-toolbar-dropdown-item" href={`/notes/${id}`}>
+          <span className="title">{title}</span>
+          <span className="date">{fmtDate(updated_at)}</span>
+        </Link>
+      )}
+      <HighlightActiveDropdownItem />
     </div>)
 }
+
+export const dynamic = "force-dynamic"

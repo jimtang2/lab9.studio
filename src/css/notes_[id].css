@@ -1,0 +1,46 @@
+@import "./colors.css";
+
+#note-content {
+	@apply flex flex-col items-stretch;
+	@apply relative top-[55px];
+	@apply min-h-0 max-h-[calc(100vh-50px)];
+	@apply md:grid md:top-0;
+	@apply md:grid-cols-[minmax(100px,1fr)_3fr];
+	@apply md:overflow-hidden;
+	@apply xl:grid-cols-[minmax(120px,1fr)_3fr_minmax(120px,1fr)];
+}
+
+#note-content .notes-list {
+	@apply row-start-1 row-end-3 col-start-1 col-end-2;
+	@apply hidden md:flex flex-col items-stretch; 
+	@apply min-h-0 max-h-[calc(100vh-55px)] overflow-y-auto;
+	@apply bg-gradient-to-b from-background to-background-3;
+	@apply divide-y divide-edge;
+	@apply pt-6;
+}
+
+#note-content .note-list-item {
+	@apply flex flex-col items-start;
+	@apply px-3 py-2;
+}
+
+#note-content .note-list-item .note-title {
+	@apply text-sm font-light;
+}
+
+#note-content .note-list-item .note-updated_at {
+	@apply text-xs font-light;
+}
+
+#note-content .note-list-item.active {
+	@apply pointer-events-none;
+}
+
+#note-content .note-list-item.active .note-title {
+	@apply font-bold text-accent;
+}
+
+#note-content .note-list-item.active .note-updated_at {
+	@apply font-normal text-accent;
+}
+

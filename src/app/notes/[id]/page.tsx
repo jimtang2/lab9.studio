@@ -1,14 +1,13 @@
 import { z } from "zod"
 import Link from "next/link"
-import Image from "next/image"
 import { Error } from "@/components/error"
 import Markdown from "@/components/markdown"
-import { fetchEntries, fetchEntry, fetchNextEntry } from "@/lib/db/actions"
-import { ActiveEntriesListItemChecker } from "./page-client"
+import { fetchNotes, fetchNote } from "@/lib/db/actions"
+import { HighlightActiveListItem, MinimizeNotesDropdown } from "./page.client"
 import { fmtDate } from "@/lib/util"
-import "./page.css"
+import "@/css/notes_[id].css"
 
-export default async function EntryContentPage({ 
+export default async function NoteContentPage({ 
 	params 
 }: { 
 	params: Promise<{ [key: string]: string | string[] | undefined }> 
@@ -20,11 +19,11 @@ export default async function EntryContentPage({
 	    .pipe(z.coerce.number().default(0)), 
 	}).parse(await params)
 
-	const { content, error: error1 } = await fetchEntry({ id })
-	const { items, error: error2 } = await fetchEntries({})
+	const { content, error: error1 } = await fetchNote({ id })
+	const { items, error: error2 } = await fetchNotes({})
 
 	if (id === 0) {
-		return <Error error={"entry not found"} />
+		return <Error error={"note not found"} />
 	} else if (typeof error1 === "string") {
 		return <Error error={error1} />
 	} else if (typeof error2 === "string") {
@@ -32,19 +31,20 @@ export default async function EntryContentPage({
 	}
 
 	return (
-    <main id="entry-content">
-    	<div className="entries-list">
+    <main id="note-content">
+    	<div className="notes-list">
     		{items.map(({ id, title, updated_at }, idx) => {
     			return (
-    				<Link key={`${id}.${idx}`} className="entry-list-item" href={`/entries/${id}`}>
-    					<span className="entry-title">{title}
-    						<span className="entry-updated_at"> – added on {fmtDate(updated_at)}</span>
-    					</span>
+    				<Link key={`${id}.${idx}`} className="note-list-item" href={`/notes/${id}`}>
+    					<span className="note-title">{title}</span>
+    					<span className="note-updated_at">{fmtDate(updated_at)}</span>
     				</Link>)
     		})}
+    		<HighlightActiveListItem />
+    		<MinimizeNotesDropdown />
     	</div>
     	<Markdown markdown={content} />
-    	<ActiveEntriesListItemChecker />
 		</main>
 		)		
 }
+

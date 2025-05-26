@@ -1,0 +1,51 @@
+@import "./colors.css";
+
+.markdown {
+	@apply md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3;	
+	@apply md:min-h-0 md:overflow-y-auto;
+	@apply px-4 pt-0 pb-30; 
+	@apply md:pb-[50vh];
+	@apply bg-background;
+
+}
+
+.markdown code {
+	@apply text-accent-2;
+}
+
+.markdown li {
+	/*@apply text-text-1;*/
+}
+
+.toc {
+	@apply hidden xl:flex xl:flex-col xl:row-start-1 xl:row-end-3 xl:col-start-3 xl:col-end-4;
+	@apply xl:py-2;
+	@apply bg-background min-h-0 overflow-y-auto;
+}
+
+.table-of-contents > ol {
+	@apply pb-12;
+}
+
+.table-of-contents > ol > li > a {
+	@apply block py-3 font-bold text-base;
+}
+
+.table-of-contents > ol > li > ol {
+	@apply pl-1 border-l-4 border-edge-2;
+}
+
+.table-of-contents > ol > li li {
+	@apply p-0 pl-4;
+}
+
+.table-of-contents > ol > li li a {
+	@apply block text-sm font-light py-[calc(var(--spacing)*1.5)];
+}
+
+.table-of-contents li.active {
+}
+
+.table-of-contents li.active > a {
+	@apply font-bold text-accent transition-none;
+}

@@ -2,7 +2,7 @@
 import { pool } from "./db"
 import logger from "@/lib/logger"
 
-type Entry = {
+type Note = {
 	id: number
 	title: string
 	content: string
@@ -11,9 +11,9 @@ type Entry = {
 	updated_at: string
 }
 
-export async function fetchLastEntryId(): Promise<Entry & { error?: string }> {
+export async function fetchLastNoteId(): Promise<Note & { error?: string }> {
 	try {
-		const query = `SELECT * FROM entries ORDER BY updated_at DESC LIMIT 1;`
+		const query = `SELECT * FROM notes ORDER BY updated_at DESC LIMIT 1;`
 		const results = await pool.query(query)
 		return { ...results.rows[0] }
 	} catch (error: unknown) {
@@ -40,15 +40,15 @@ export async function fetchLastEntryId(): Promise<Entry & { error?: string }> {
 	}	
 }
 
-export async function fetchEntries({ limit = 50, offset = 0 }: {
+export async function fetchNotes({ limit = 50, offset = 0 }: {
 	limit?: number 
 	offset?: number
 }): Promise<{
-	items: Entry[]
+	items: Note[]
 	error?: string
 }> {
 	try {
-		const query = `SELECT id, title, updated_at FROM entries 
+		const query = `SELECT id, title, updated_at FROM notes 
 ORDER BY updated_at DESC 
 LIMIT $1 OFFSET $2;`
 		const results = await pool.query(query, [limit, offset])
@@ -62,11 +62,11 @@ LIMIT $1 OFFSET $2;`
 	}	
 }
 
-export async function fetchEntry({ id }: {
+export async function fetchNote({ id }: {
 	id: number
-}): Promise<Entry & { error?: string }> {
+}): Promise<Note & { error?: string }> {
 	try {
-		const query = `SELECT * FROM entries WHERE id = $1;`
+		const query = `SELECT * FROM notes WHERE id = $1;`
 		const results = await pool.query(query, [id])
 		return { ...results.rows[0] }
 	} catch (error: unknown) {
@@ -93,23 +93,23 @@ export async function fetchEntry({ id }: {
 	}	
 }
 
-export async function fetchNextEntry({ id }: {
+export async function fetchNextNote({ id }: {
 	id: number
-}): Promise<Entry & { error?: string }> {
+}): Promise<Note & { error?: string }> {
 	try {
 		const query = `
 SELECT id, title, updated_at FROM (
-  SELECT * FROM entries
+  SELECT * FROM notes
   WHERE id > $1
   ORDER BY id ASC
   LIMIT 1
-) AS next_entry
+) AS next_note
 UNION
 SELECT id, title, updated_at FROM (
-  SELECT * FROM entries
+  SELECT * FROM notes
   ORDER BY id ASC
   LIMIT 1
-) AS first_entry
+) AS first_note
 ORDER BY id DESC
 LIMIT 1;`
 		const results = await pool.query(query, [id])
@@ -138,16 +138,16 @@ LIMIT 1;`
 	}	
 }
 
-export async function searchEntryTitles({ input }: {
+export async function searchNoteTitles({ input }: {
 	input: string
 }): Promise<{
-	items: Entry[]
+	items: Note[]
 	error?: string
 }> {
 	try {
-		const query = 'select id, title, content, metadata, created_at, updated_at from entries where title ilike $1 order by updated_at desc;'
+		const query = 'select id, title, content, metadata, created_at, updated_at from notes where title ilike $1 order by updated_at desc;'
 		const results = await pool.query(query, [input])
-		return { items: results.rows as Entry[]}
+		return { items: results.rows as Note[]}
 	} catch (error: unknown) {
 		if (error instanceof Error) {
 			return { error: error.message, items: [] }	

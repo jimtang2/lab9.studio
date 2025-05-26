@@ -6,50 +6,38 @@ import markdownItAnchor from "markdown-it-anchor"
 import markdownItToc from "markdown-it-toc-done-right"
 import Prism from "prismjs"
 import "@/lib/prism"
-import "./markdown.css"
+import "@/css/markdown.css"
 
 export default function Markdown({ 
   markdown
 }: {
   markdown: string
 }) {
+  const { darkMode } = useSettings()
   const [html, setHtml] = useState("")
   const [toc, setToc] = useState("")
-  const { darkMode } = useSettings()
 
-  function themeTag(): Element | null {
-    return document.querySelector(`link#syntax-highlight`)
-  }
-
-  function createThemeTag(): Element {
-    const t = document.createElement("link")
-    t.setAttribute("id", "syntax-highlight")
-    t.setAttribute("rel", "stylesheet")
-    t.setAttribute("href", "/css/prism-dark.css")
-    document.head.appendChild(t)
-    return t
-  }
-
-  function highlightCodeSyntax() {
-    document.querySelectorAll("pre").forEach(pre => pre.classList.add("line-numbers"))
-    Prism.highlightAll()
-  }
-
+  // render markdown and toc to html
   useEffect(() => {
     const md = new MarkdownIt()
       .use(markdownItAnchor, {
         uniqueSlugStartIndex: 1
       })
       .use(markdownItToc, { callback: (tocHtml: string) => setToc(tocHtml) })
-    const renderedHtml = md.render(markdown)
-    setHtml(renderedHtml)
-  }, [markdown, darkMode])
+    setHtml(md.render(markdown))
+  }, [markdown])
 
-  // Theme and syntax highlighting
+  // set prism style based on color theme
   useEffect(() => {
-    const t = themeTag() === null ? createThemeTag() : themeTag()!
+    let t: Element = document.querySelector(`link#syntax-highlight`) || (() => {
+      const t = document.createElement("link")
+      t.setAttribute("id", "syntax-highlight")
+      t.setAttribute("rel", "stylesheet")
+      document.head.appendChild(t)
+      return t
+    })()
     t.setAttribute("href", `/css/prism-${darkMode ? "dark" : "light"}.css`)
-    highlightCodeSyntax()
+    Prism.highlightAll()
   }, [html, darkMode])
 
   // Scroll-based TOC highlighting

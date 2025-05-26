@@ -24,6 +24,6 @@ import "prismjs/components/prism-rust"
 import "prismjs/components/prism-markup"
 import "prismjs/components/prism-ruby"
 
-import "./line-numbers"
-import "./line-numbers.css"
+// import "./line-numbers"
+// import "@/css/line-numbers.css"
 

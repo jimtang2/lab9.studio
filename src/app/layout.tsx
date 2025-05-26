@@ -1,7 +1,7 @@
 import type { Viewport, Metadata } from "next"
 import Toolbar from "@/components/toolbar"
 
-import "./globals.css"
+import "@/css/globals.css"
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -25,3 +25,5 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
     </html>
   )
 }
+
+export const dynamic = "force-dynamic"

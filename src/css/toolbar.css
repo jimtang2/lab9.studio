@@ -1,0 +1,100 @@
+@import "./colors.css";
+
+#toolbar {
+  @apply md:relative md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-3;
+	@apply absolute flex flex-row items-center;
+  @apply top-0 z-100;
+  @apply w-screen;
+  @apply gap-2 md:gap-4; 
+  @apply py-2 px-3; 
+  @apply md:py-0 md:px-2;
+  @apply bg-background;
+  @apply border-b-1 border-edge;  
+}
+
+#logo {
+
+}
+
+.toolbar-item {
+	@apply px-2 md:px-4 hover:underline;
+}
+
+.toolbar-item.active,
+.toolbar-item.active button,
+.toolbar-item.active a {
+	@apply text-accent font-bold;
+}
+
+.toolbar-button {
+	@apply flex items-center justify-center;
+	@apply p-2 rounded-full; 
+	@apply bg-background-2 hover:bg-background-3;
+}
+
+.dark #toolbar img {
+  @apply dark:invert;
+}
+
+#theme-toolbar-button {
+
+}
+
+#notes-toolbar-button {
+
+}
+
+#notes-toolbar-button .toolbar-item-control {
+
+}
+
+#notes-toolbar-button > a.toolbar-item-control {
+  @apply hidden md:flex;
+}
+
+#notes-toolbar-button > button.toolbar-item-control {
+  @apply relative md:hidden;
+  @apply flex flex-row items-center;
+}
+
+#notes-toolbar-button > button.toolbar-item-control svg {
+  @apply m-1 rotate-0 transition-all;
+}
+
+#notes-toolbar-button.expand > button.toolbar-item-control svg {
+  @apply rotate-90 transition-all;
+}
+
+#notes-toolbar-dropdown {
+  @apply hidden absolute z-20;
+  @apply w-screen;
+  @apply h-auto min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
+  @apply top-12 left-0 pt-4;
+  @apply divide-y-1 divide-edge-1;
+  @apply bg-gradient-to-b from-background to-background-3;
+  @apply shadow-lg;
+}
+
+#notes-toolbar-dropdown.show {
+  @apply flex flex-col items-stretch md:hidden;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item {
+  @apply flex flex-col items-start;
+  @apply text-left text-text font-normal;
+  @apply px-4 py-2;
+  @apply whitespace-nowrap text-ellipsis;
+  @apply hover:text-accent;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item .title {
+  /*@apply self-start;*/
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item .date {
+  @apply text-xs;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item.active {
+  @apply text-accent pointer-events-none;
+}
