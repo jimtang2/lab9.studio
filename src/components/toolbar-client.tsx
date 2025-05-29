@@ -12,70 +12,24 @@ function ChevronSVG() {
 
 export function NotesButton() {
   const [ showDropdown, setShowDropdown ] = useState(false)
-  const currentPath = usePathname()
   
-  // use Link on > md layout
-  const linkProps = {
-    className: "toolbar-item-control", 
-    href: "/notes",
-  }
-
-  // use button on < md layout
-  const buttonProps = {
-    className: "toolbar-item-control", 
-    onClick: () => {
-      setShowDropdown(!showDropdown)
-    },
-  }
-
   useEffect(() => {
     if (!showDropdown) {
       document.querySelector("#notes-toolbar-dropdown")?.classList.remove("show")
       document.querySelector("#notes-toolbar-button")?.classList.remove("expand")
-      document.querySelector("#notes-toolbar-button")?.classList.remove("active")
-    }
-
-    document.querySelectorAll("#notes-toolbar-dropdown .notes-toolbar-dropdown-item").forEach(element => {
-      if (element.getAttribute("href") === currentPath) {
-        element.classList.add("active")
-      } else {
-        element.classList.remove("active")
-      }
-    })
-
-    const logoItem = document.querySelector("#logo")
-    if (currentPath === "/") {
-      logoItem?.classList.add("active")
     } else {
-      logoItem?.classList.remove("active")
-    }
-    const notesItem = document.querySelector("#notes-toolbar-button")
-    if (currentPath.indexOf("/notes") > -1) {
-      notesItem?.classList.add("active")
-    } else {
-      notesItem?.classList.remove("active")
-    }
-
-    if (showDropdown) {
       document.querySelector("#notes-toolbar-dropdown")?.classList.add("show")
-      document.querySelector("#notes-toolbar-button")?.classList.add("expand")  
-      document.querySelector("#notes-toolbar-button")?.classList.add("active")
-    } 
-
-  }, [showDropdown, currentPath])
-
-  useEffect(() => {
-    if (showDropdown) {
-      setShowDropdown(false)
+      document.querySelector("#notes-toolbar-button")?.classList.add("expand")
     }
-  }, [currentPath])
+  }, [showDropdown])
 
   return (
     <div id="notes-toolbar-button" className="toolbar-item">
-      <Link {...linkProps}>Notes</Link>
-      <button type="button" {...buttonProps}>
+      <Link className="toolbar-item-control" href="/notes">Notes</Link>
+      <button type="button" className="toolbar-item-control" onClick={() => setShowDropdown(!showDropdown)}>
         <span>Notes</span><ChevronSVG />
       </button>
+      
     </div>
     )
 }
@@ -83,29 +37,38 @@ export function NotesButton() {
 export function ThemeToolbarButton() {
   const { darkMode, setMode } = useSettings()
 
-  const buttonProps = {
-    id: "theme-toolbar-button", 
-    className: "toolbar-button", 
-    onClick: () => {
-      setMode(document.documentElement.classList.contains("dark") ? "light" : "dark")
-    },
-  }
-  const imageProps = {
-    width: 20, 
-    height: 20,
-    src: `/heroicons/${!darkMode ? "outline/sun" : "solid/moon"}.svg`,
-    alt: "Theme",
-  }
-
-  function updateDOM(isDarkMode: boolean) {
-    document.documentElement.classList.add(isDarkMode ? "dark" : "light")
-    document.documentElement.classList.remove(isDarkMode ? "light" : "dark")
-  }
-
-  useEffect(() => updateDOM(darkMode), [darkMode])
+  useEffect(() => {
+    document.documentElement.classList.add(darkMode ? "dark" : "light")
+    document.documentElement.classList.remove(darkMode ? "light" : "dark")
+  }, [darkMode])
 
   return (
-    <button type="button" {...buttonProps}>
-      <Image {...imageProps} />
+    <button type="button" id="theme-toolbar-button" className="toolbar-button" onClick={() => setMode(darkMode ? "light" : "dark")}>
+      <Image width={20} height={20} src={`/heroicons/${!darkMode ? "outline/sun" : "solid/moon"}.svg`} alt="Theme" />
     </button>)
 }
+
+export function HighlightActiveToolbarItem() {
+  const currentPath = usePathname()
+
+  function updateToolbarActiveItem() {
+    if (currentPath === "/") {
+      document.querySelector("#logo")?.classList.add("active")
+    } else {
+      document.querySelector("#logo")?.classList.remove("active")
+    }
+    
+    if (currentPath.indexOf("/notes") > -1) {
+      document.querySelector("#notes-toolbar-button")?.classList.add("active")
+    } else {
+      document.querySelector("#notes-toolbar-button")?.classList.remove("active")
+    }
+  }
+
+  useEffect(() => {
+    updateToolbarActiveItem()
+  }, [currentPath])
+
+  return <></>
+}
+

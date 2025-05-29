@@ -2,46 +2,26 @@
 
 #note-content {
 	@apply flex flex-col items-stretch;
-	@apply relative min-h-0 max-h-[calc(100vh-60px)];
-	@apply pb-30 md:pb-0 bg-background;
-	@apply md:grid;
+	@apply relative top-[55px];
+	@apply min-h-0 max-h-[calc(100vh-50px)];
+	@apply md:grid md:top-0;
 	@apply md:grid-cols-[minmax(100px,1fr)_3fr];
-	@apply xl:grid-cols-[minmax(120px,1fr)_3fr_minmax(120px,1fr)];
 	@apply md:overflow-hidden;
-}
-
-.navigation {
-	@apply flex flex-row gap-4 justify-between items-center;
-	@apply bg-background px-3 py-1;
-	@apply md:hidden;
-}
-
-.navigation-button {
-	@apply flex flex-row items-center gap-3;
-	@apply text-nowrap;
-	@apply hover:underline;
-}
-
-.navigation-button span {
-	@apply max-w-[200px] sm:max-w-[300px] text-ellipsis overflow-x-hidden;
-}
-
-.navigation #index-button {
-	@apply md:hidden px-1;
+	@apply xl:grid-cols-[minmax(120px,1fr)_3fr_minmax(120px,1fr)];
 }
 
 #note-content .notes-list {
-	@apply hidden flex-col items-stretch; 
-	@apply bg-background px-3;
-	@apply md:row-start-1 md:row-end-3 md:col-start-1 md:col-end-2;
-	@apply md:min-h-0 md:max-h-[calc(100vh-55px)];
-	@apply md:flex md:overflow-y-auto md:px-3 md:py-6;
-	@apply md:divide-y md:divide-edge;
+	@apply row-start-1 row-end-3 col-start-1 col-end-2;
+	@apply hidden md:flex flex-col items-stretch; 
+	@apply min-h-0 max-h-[calc(100vh-55px)] overflow-y-auto;
+	@apply bg-gradient-to-b from-background to-background-3;
+	@apply divide-y divide-edge;
+	@apply pt-6;
 }
 
 #note-content .note-list-item {
 	@apply flex flex-col items-start;
-	@apply p-1 py-2;
+	@apply px-3 py-2;
 }
 
 #note-content .note-list-item .note-title {
@@ -64,3 +44,61 @@
 	@apply font-normal text-accent;
 }
 
+#notes-toolbar-button {
+
+}
+
+#notes-toolbar-button .toolbar-item-control {
+
+}
+
+#notes-toolbar-button > a.toolbar-item-control {
+	@apply hidden md:flex;
+}
+
+#notes-toolbar-button > button.toolbar-item-control {
+	@apply relative md:hidden;
+	@apply flex flex-row items-center;
+}
+
+#notes-toolbar-button > button.toolbar-item-control svg {
+	@apply m-1 rotate-0 transition-all;
+}
+
+#notes-toolbar-button.expand > button.toolbar-item-control svg {
+	@apply rotate-90 transition-all;
+}
+
+#notes-toolbar-dropdown {
+	@apply hidden absolute z-20;
+	@apply w-screen;
+	@apply h-auto min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
+	@apply top-12 left-0 pt-4;
+	@apply divide-y-1 divide-edge-1;
+	@apply bg-gradient-to-b from-background to-background-3;
+	@apply shadow-lg;
+}
+
+#notes-toolbar-dropdown.show {
+	@apply flex flex-col items-stretch md:hidden;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item {
+	@apply flex flex-col items-start;
+	@apply text-left text-text font-normal;
+	@apply px-4 py-2;
+	@apply whitespace-nowrap text-ellipsis;
+	@apply hover:text-accent;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item .title {
+	/*@apply self-start;*/
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item .date {
+	@apply text-xs;
+}
+
+#notes-toolbar-dropdown .notes-toolbar-dropdown-item.active {
+	@apply text-accent pointer-events-none;
+}

@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Error } from "@/components/error"
 import Markdown from "@/components/markdown"
 import { fetchNotes, fetchNote, fetchNextNote } from "@/lib/db/actions"
-import { AutoNoteActivator } from "./page-client"
+import { HighlightActiveListItem, HighlightActiveDropdownItem } from "./page-client"
 import { fmtDate } from "@/lib/util"
 import "./page.css"
 
@@ -41,11 +41,29 @@ export default async function NoteContentPage({
     					<span className="note-updated_at">{fmtDate(updated_at)}</span>
     				</Link>)
     		})}
-    		<AutoNoteActivator />
+    		<HighlightActiveListItem />
     	</div>
     	<Markdown markdown={content} />
 		</main>
 		)		
+}
+
+export async function NotesDropdown() {
+  const { items, error } = await fetchNotes({})
+  if (typeof error === "string") {
+    return <Error error={error} />
+  }
+
+  return (
+    <div id="notes-toolbar-dropdown">
+      {items.map(({ id, title, updated_at }, idx) => 
+        <Link key={`${id}.${idx}`} className="notes-toolbar-dropdown-item" href={`/notes/${id}`}>
+          <span className="title">{title}</span>
+          <span className="date">{fmtDate(updated_at)}</span>
+        </Link>
+      )}
+      <HighlightActiveDropdownItem />
+    </div>)
 }
 
 export const dynamic = "force-dynamic"

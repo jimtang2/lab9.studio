@@ -16,7 +16,7 @@ body {
 }
 
 main {
-  @apply md:row-start-2;
+  @apply md:row-start-2 md:col-start-1 md:col-end-3;
   @apply overflow-x-hidden overflow-y-auto;
 }
 

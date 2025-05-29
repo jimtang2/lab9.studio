@@ -1,11 +1,12 @@
 @import "../app/colors.css";
 
 .markdown {
-	@apply bg-background;
 	@apply md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3;	
 	@apply md:min-h-0 md:overflow-y-auto;
-	@apply px-4 pt-0 pb-[10vh]; 
+	@apply px-4 pt-0 pb-30; 
 	@apply md:pb-[50vh];
+	@apply bg-background;
+
 }
 
 .markdown code {

@@ -2,44 +2,27 @@ import Link from "next/link"
 import { Error } from "@/components/error"
 import { fetchNotes } from "@/lib/db/actions"
 import { fmtDate } from "@/lib/util"
-
-import { 
-  NotesButton, 
-  ThemeToolbarButton, 
-} from "./toolbar-client"
+import { NotesButton, ThemeToolbarButton, HighlightActiveToolbarItem } from "./toolbar-client"
+import { WebsocketIndicator } from "@/components/socket"
+import { NotesDropdown } from "@/app/notes/[id]/page"
 
 import "./toolbar.css"
 
 export default async function Toolbar() {
   return (
-    <>
-      <div id="toolbar">
-        <Logo />
-        <NotesButton />
-        <NotesDropdown />
-        <span className="flex-grow-1" />
-        <ThemeToolbarButton />
-      </div>
-    </>)
+    <div id="toolbar">
+      <Logo />
+      <NotesButton />
+      <NotesDropdown />
+      <span className="flex-grow-1" />
+      <ThemeToolbarButton />
+      <WebsocketIndicator />
+      <HighlightActiveToolbarItem />
+    </div>
+  )
 }
 
 async function Logo() {
   return <Link id="logo" className="toolbar-item" href="/">LAB9</Link>
 }
 
-async function NotesDropdown() {
-  const { items, error } = await fetchNotes({})
-  if (typeof error === "string") {
-    return <Error error={error} />
-  }
-
-  return (
-    <div id="notes-toolbar-dropdown">
-      {items.map(({ id, title, updated_at }, idx) => 
-        <Link key={`${id}.${idx}`} className="notes-toolbar-dropdown-item" href={`/notes/${id}`}>
-          <span className="title">{title}</span>
-          <span className="date">{fmtDate(updated_at)}</span>
-        </Link>
-      )}
-    </div>)
-}

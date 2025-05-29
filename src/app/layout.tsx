@@ -25,3 +25,5 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
     </html>
   )
 }
+
+export const dynamic = "force-dynamic"

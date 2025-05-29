@@ -1,0 +1,5 @@
+@import "../app/colors.css";
+
+#websocket-indicator {
+	@apply w-9 h-9 bg-background-2 rounded-full;
+}
