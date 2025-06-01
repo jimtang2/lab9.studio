@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          cd $GITHUB_WORKSPACE && docker build -t lab9.studio .          
+
+      - name: Restart Docker Compose service
+        run: |
+          cd /home/ubuntu
+          docker compose down web && docker compose up -d web
+
+      - name: Copy checked out code to NGINX projects directory
+        run: |
+          rm -rf /home/ubuntu/nginx/dev/lab9.studio/*
+          cp -r $GITHUB_WORKSPACE/* /home/ubuntu/nginx/dev/lab9.studio/
