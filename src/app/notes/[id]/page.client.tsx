@@ -20,8 +20,8 @@ export function HighlightActiveListItem() {
 
 export function MinimizeNotesDropdown() {
   useEffect(() => {
-    const dropdown = document.querySelector("#notes-toolbar-dropdown")
-    const button = document.querySelector("#notes-toolbar-button button.toolbar-item-control")
+    const dropdown: HTMLElement | null = document.querySelector("#notes-toolbar-dropdown")
+    const button: HTMLButtonElement | null = document.querySelector("#notes-toolbar-button button.toolbar-item-control")
     if (dropdown?.classList.contains("show")) button?.click()
   }, [])
 

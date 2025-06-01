@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-docker": "docker build -t lab9.studio ."
+    "docker": "docker build -t lab9.studio ."
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",

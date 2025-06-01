@@ -8,36 +8,56 @@ export function WebSocketIndicator() {
     <div id="websocket-indicator" className={``}></div>)
 }
 
-export function WebSocketClient() {
-const [ws, setWs] = useState<WebSocket | null>(null)
+export function WebSocketClient({ wsUrl }: {
+  wsUrl: string
+}) {
+  const [ws, setWs] = useState<WebSocket | null>(null)
   const [message, setMessage] = useState('')
   const [received, setReceived] = useState('')
 
   useEffect(() => {
-    console.log(`Connecting to ${process.env.NEXT_PUBLIC_WSURL}...`)
-    const socket = new WebSocket(process.env.NEXT_PUBLIC_WSURL)
+    console.log("websocket url:", wsUrl)
+
+    if (wsUrl === null) {
+      console.error("config error: check environment variable is set and service is accessible")
+      return
+    }
+
+    const socket: WebSocket = new WebSocket(wsUrl as string)
     setWs(socket)
 
-    socket.onopen = () => {
-      console.log(`Connected to ${process.env.NEXT_PUBLIC_WSURL}`)
-      // setMessage(JSON.stringify({type: "CHAT", content: "hello"}))
-      setMessage(JSON.stringify({type: "CHAT"}))
-      sendMessage()
+    socket.onerror = () => {
+      console.error(`connection error: check websocket server is running and accessible`)
+      return
     }
+
+    socket.onopen = () => {
+      console.log(`Connected to ${wsUrl}`)
+
+      setMessage(JSON.stringify({type: "CHAT", content: "hello"}))
+    }
+
     socket.onmessage = (e) => {
       setReceived(e.data)
-      console.log(`Received message ${e.data}`)
-    }
-    socket.onclose = () => {
-      console.log(`Disconnected from ${process.env.NEXT_PUBLIC_WSURL}`)
     }
 
-    return () => socket.close();
+    socket.onclose = () => {
+      console.log(`Disconnected from ${wsUrl}`)
+    }
+
+    return () => socket.close()
   }, [])
 
-  const sendMessage = () => {
-    if (ws && message) ws.send(message);
-  }
+  useEffect(() => {
+    if (ws && message) {
+      ws.send(message)
+      console.log(`send: ${message}`)
+    }
+  }, [message])
+
+  useEffect(() => {
+    console.log(`receive: ${received}`)
+  }, [received])
 
   return <></>
 }
