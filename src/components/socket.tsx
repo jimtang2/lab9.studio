@@ -8,8 +8,9 @@ export function WebSocketIndicator() {
     <div id="websocket-indicator" className={``}></div>)
 }
 
-export function WebSocketClient() {
-  const [wsUrl, setWsUrl] = useState(process.env.NEXT_PUBLIC_WSURL)
+export function WebSocketClient({ wsUrl }: {
+  wsUrl: string
+}) {
   const [ws, setWs] = useState<WebSocket | null>(null)
   const [message, setMessage] = useState('')
   const [received, setReceived] = useState('')
