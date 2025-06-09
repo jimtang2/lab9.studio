@@ -6,10 +6,10 @@
   @apply top-0 z-100;
   @apply w-screen;
   @apply gap-2 md:gap-4; 
-  @apply py-2 px-3; 
-  @apply md:py-0 md:px-2;
+  @apply pl-0 pr-3; 
+  @apply md:py-0 md:pl-1 md:pr-3;
   @apply bg-background;
-  @apply border-b-1 border-edge;  
+  @apply border-b-4 border-edge;  
 }
 
 #logo {
@@ -17,14 +17,17 @@
 }
 
 .toolbar-item {
-	@apply px-2 md:px-4 hover:underline;
+	@apply py-2 px-3 md:px-4 hover:underline;
 }
 
-.toolbar-item.active,
+.toolbar-item.active {
+  @apply bg-accent font-bold text-text-contrast;
+}
 .toolbar-item.active button,
 .toolbar-item.active a {
-	@apply text-accent font-bold;
+  @apply text-text-contrast hover:text-text-contrast;
 }
+
 
 .toolbar-button {
 	@apply flex items-center justify-center;
@@ -69,9 +72,9 @@
   @apply hidden absolute z-20;
   @apply w-screen;
   @apply h-auto min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
-  @apply top-12 left-0 pt-4;
+  @apply top-10 left-0 pt-0;
   @apply divide-y-1 divide-edge-1;
-  @apply bg-gradient-to-b from-background to-background-3;
+  @apply bg-gradient-to-b from-edge to-edge-1;
   @apply shadow-lg;
 }
 
@@ -96,5 +99,7 @@
 }
 
 #notes-toolbar-dropdown .notes-toolbar-dropdown-item.active {
-  @apply text-accent pointer-events-none;
+  @apply pointer-events-none;  
+  @apply bg-accent text-text-contrast;
+  @apply font-bold;
 }

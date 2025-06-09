@@ -26,11 +26,6 @@ export function WebSocketClient({ wsUrl }: {
     const socket: WebSocket = new WebSocket(wsUrl as string)
     setWs(socket)
 
-    socket.onerror = () => {
-      console.error(`connection error: check websocket server is running and accessible`)
-      return
-    }
-
     socket.onopen = () => {
       console.log(`Connected to ${wsUrl}`)
 

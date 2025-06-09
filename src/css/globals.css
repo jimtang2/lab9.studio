@@ -12,7 +12,7 @@ body {
 
   @apply relative flex flex-col items-stretch; 
   @apply md:grid; 
-  @apply md:grid-rows-[55px_auto];
+  @apply md:grid-rows-[45px_auto];
 }
 
 main {
