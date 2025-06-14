@@ -4,8 +4,8 @@
 	@apply md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3;	
 	@apply md:min-h-0 md:overflow-y-auto;
 	@apply px-4 pt-0 pb-30; 
-	@apply md:pb-[50vh];
-	@apply bg-background text-text-1;
+	@apply md:pb-[50vh] md:px-8;
+	@apply text-text-1;
 }
 
 .markdown h1,
@@ -18,11 +18,27 @@
 	@apply text-accent-2;
 }
 
+.markdown table {
+  @apply my-8;
+  @apply min-w-0 max-w-screen overflow-x-scroll;
+}
+
+.markdown th {
+  @apply text-left;
+}
+
 .toc {
-	@apply hidden; 
+	@apply hidden;
 	@apply xl:flex xl:flex-col; 
 	@apply xl:row-start-1 xl:row-end-3 xl:col-start-3 xl:col-end-4;
-	@apply bg-background min-h-0 overflow-y-auto;
+	@apply bg-background overflow-y-auto;
+	@apply ml-[calc(-3*var(--spacing))] pl-3;
+}
+
+.toc, 
+.table-of-contents,
+.table-of-contents > ol {
+	@apply min-h-[calc(100vh-45px)];
 }
 
 .table-of-contents ol {
@@ -37,7 +53,7 @@
 	@apply block;
 	@apply py-1;
 	@apply text-base font-light;
-	@apply border-l-8 border-edge;
+	@apply border-l-10 border-edge hover:border-edge-1;
 }
 
 .table-of-contents ol > li.active {
@@ -45,10 +61,9 @@
 }
 
 .table-of-contents ol > li.active > a {
-	@apply bg-accent text-text-contrast;
-	@apply text-base font-bold;
-	@apply transition-none;
-	@apply border-l-8 border-white;
+	@apply bg-background-2 text-text;
+	@apply text-base font-normal;
+	@apply border-l-10 border-accent;
 }
 
 .table-of-contents > ol > li {

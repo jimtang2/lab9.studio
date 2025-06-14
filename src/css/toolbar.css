@@ -1,31 +1,32 @@
 @import "./colors.css";
 
 #toolbar {
-  @apply md:relative md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-3;
-	@apply absolute flex flex-row items-center;
+  @apply relative row-start-1 row-end-2 col-start-1 col-end-3;
+	@apply flex flex-row items-stretch;
   @apply top-0 z-100;
   @apply w-screen;
-  @apply gap-2 md:gap-4; 
-  @apply pl-0 pr-3; 
-  @apply md:py-0 md:pl-1 md:pr-3;
   @apply bg-background;
-  @apply border-b-4 border-edge;  
+}
+
+#toolbar > .toolbar-item,
+#toolbar > span,
+#toolbar > div {
+  @apply border-b-8 border-edge;
 }
 
 #logo {
 
 }
 
-.toolbar-item {
-	@apply py-2 px-3 md:px-4 hover:underline;
+#toolbar > .toolbar-item {
+	@apply py-2 px-3 hover:border-edge-1 font-light;
 }
 
-.toolbar-item.active {
-  @apply bg-accent font-bold text-text-contrast;
+#toolbar > .toolbar-item.active {
+  @apply bg-background-2 border-accent font-bold;
 }
 .toolbar-item.active button,
 .toolbar-item.active a {
-  @apply text-text-contrast hover:text-text-contrast;
 }
 
 
@@ -72,10 +73,11 @@
   @apply hidden absolute z-20;
   @apply w-screen;
   @apply h-auto min-h-0 max-h-[calc(100vh-60px)] overflow-y-auto;
-  @apply top-10 left-0 pt-0;
-  @apply divide-y-1 divide-edge-1;
-  @apply bg-gradient-to-b from-edge to-edge-1;
-  @apply shadow-lg;
+  @apply top-12 left-0 pt-0;
+  @apply divide-y-1 divide-edge;
+  @apply border-b-8 border-edge;
+  @apply bg-background;
+  @apply shadow-2xl;
 }
 
 #notes-toolbar-dropdown.show {
@@ -84,14 +86,14 @@
 
 #notes-toolbar-dropdown .notes-toolbar-dropdown-item {
   @apply flex flex-col items-start;
-  @apply text-left text-text font-normal;
+  @apply text-left text-text font-light;
   @apply px-4 py-2;
+  @apply border-l-10 border-l-edge;
   @apply whitespace-nowrap text-ellipsis;
   @apply hover:text-accent;
 }
 
 #notes-toolbar-dropdown .notes-toolbar-dropdown-item .title {
-  /*@apply self-start;*/
 }
 
 #notes-toolbar-dropdown .notes-toolbar-dropdown-item .date {
@@ -100,6 +102,7 @@
 
 #notes-toolbar-dropdown .notes-toolbar-dropdown-item.active {
   @apply pointer-events-none;  
-  @apply bg-accent text-text-contrast;
+  @apply bg-background-2 text-text;
+  @apply border-l-accent;
   @apply font-bold;
 }

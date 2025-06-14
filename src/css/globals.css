@@ -11,13 +11,15 @@ body {
   @apply min-h-screen min-w-[360px] overflow-hidden;
 
   @apply relative flex flex-col items-stretch; 
-  @apply md:grid; 
-  @apply md:grid-rows-[45px_auto];
+  @apply grid; 
+  @apply grid-rows-[48px_auto];
 }
 
 main {
+  @apply row-start-2 col-start-1 col-end-3;
   @apply md:row-start-2 md:col-start-1 md:col-end-3;
   @apply overflow-x-hidden overflow-y-auto;
+  @apply bg-background;
 }
 
 h1 {
@@ -40,7 +42,7 @@ p {
 }
 
 a, button {
-  @apply hover:text-accent hover:underline transition-[color];
+  @apply hover:text-accent;
 }
 
 ul {
@@ -86,4 +88,3 @@ input[type="text"], input[type="email"], textarea, select {
 input[type="checkbox"] {
   @apply w-4 h-4;
 }
-

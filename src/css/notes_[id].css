@@ -2,7 +2,6 @@
 
 #note-content {
 	@apply flex flex-col items-stretch;
-	@apply relative top-[45px];
 	@apply min-h-0 max-h-[calc(100vh-50px)];
 	@apply md:grid md:top-0;
 	@apply md:grid-cols-[minmax(100px,1fr)_3fr];
@@ -14,13 +13,13 @@
 	@apply row-start-1 row-end-3 col-start-1 col-end-2;
 	@apply hidden md:flex flex-col items-stretch; 
 	@apply min-h-0 max-h-[calc(100vh-45px)] overflow-y-auto;
-	@apply bg-gradient-to-b from-background-3 to-background-1;
 	@apply divide-y-2 divide-edge;
 }
 
 #note-content .note-list-item {
 	@apply flex flex-col items-start;
 	@apply p-3;
+	@apply border-r-8 border-b-0 border-edge hover:border-edge-1;
 }
 
 #note-content .note-list-item .note-title {
@@ -33,16 +32,17 @@
 
 #note-content .note-list-item.active {
 	@apply pointer-events-none;
-	@apply text-text-contrast bg-accent;
+	@apply text-text bg-background-2;
+	@apply border-accent;
 }
 
 #note-content .note-list-item.active .note-title {
 	@apply font-bold;
-	@apply text-text-contrast;
+	@apply text-text;
 }
 
 #note-content .note-list-item.active .note-updated_at {
-	@apply font-normal;
-	@apply text-text-contrast;
+	@apply font-bold;
+	@apply text-text;
 }
 

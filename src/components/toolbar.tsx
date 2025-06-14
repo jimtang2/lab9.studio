@@ -8,14 +8,18 @@ import "@/css/toolbar.css"
 
 export default async function Toolbar() {
   return (
-    <div id="toolbar">
-      <Logo />
-      <NotesButton />
+    <>
+      <div id="toolbar">
+        <Logo />
+        <NotesButton />
+        <span className="flex-grow-1" />
+        <div>
+          <ThemeToolbarButton />  
+        </div>
+      </div>
       <NotesDropdown />
-      <span className="flex-grow-1" />
-      <ThemeToolbarButton />
       <HighlightActiveToolbarItem />
-    </div>
+    </>
   )
 }
 
