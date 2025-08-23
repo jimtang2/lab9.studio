@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background-1: var(--color-gray-50);
+  --background-2: var(--color-gray-200);
+  --background-3: var(--color-gray-400);
+  --foreground-1: var(--color-gray-950);
+  --foreground-2: var(--color-gray-800);
+  --foreground-3: var(--color-gray-600);
+  --accent-1: var(--color-blue-600);
+  --accent-2: var(--color-blue-700);
+  --accent-3: var(--color-blue-800);
+  --border-1: var(--color-gray-200);
+  --border-2: var(--color-gray-300);
+  --border-3: var(--color-gray-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-1: var(--color-neutral-900);
+    --background-2: var(--color-neutral-800);
+    --background-3: var(--color-neutral-700);
+    --foreground-1: var(--color-gray-100);
+    --foreground-2: var(--color-gray-300);
+    --foreground-3: var(--color-gray-500);
+    --accent-1: var(--color-yellow-500);
+    --accent-2: var(--color-yellow-400);
+    --accent-3: var(--color-yellow-300);
+    --border-1: var(--color-gray-800);
+    --border-2: var(--color-gray-700);
+    --border-3: var(--color-gray-600);
+  }
+}
+
+@theme inline {
+  --color-background-primary: var(--background-1);
+  --color-background-secondary: var(--background-2);
+  --color-background-ternary: var(--background-3);
+  --color-text-primary: var(--foreground-1);
+  --color-text-secondary: var(--foreground-2);
+  --color-text-ternary: var(--foreground-3);
+  --color-accent-primary: var(--accent-1);
+  --color-accent-secondary: var(--accent-2);
+  --color-accent-ternary: var(--accent-3);
+  --color-border-primary: var(--border-1);
+  --color-border-secondary: var(--border-2);
+  --color-border-ternary: var(--border-3);
+}
+
+h1 {
+  @apply text-lg/13 font-bold text-accent-primary;
+}
+
+h2 {
+  @apply text-base/13 font-bold text-accent-primary;
+}
+
+h3 {
+  @apply text-base/13;
+}
+
+p {
+
+}
+
+a, button {
+  @apply cursor-pointer hover:text-accent-secondary;
+}
+
+ul {
+  @apply list-disc list-inside;
+}
+
+li {
+  @apply py-2;
+}
+
+img{
+
+}
+
+label {
+
+}
+
+/*pre {
+  @apply py-0 pl-6 my-2 rounded-sm;
+  @apply break-all;
+}
+*/
+
+pre, code {
+  @apply text-sm/6 pt-[1px];
+  @apply wrap-break-word whitespace-pre;
+  @apply text-accent-ternary;
+}
+
+form {
+
+}
+
+input {
+  @apply accent-accent-primary;
+}
+
+input[type="submit"], input[type="button"], button {
+  @apply cursor-pointer;
+}
+
+input[type="text"], input[type="email"], textarea, select {
+
+}
+
+input[type="checkbox"] {
+  @apply w-4 h-4;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  #note-markdown {
+    @apply pb-25;
+  }
+}

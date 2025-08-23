@@ -1,0 +1,6 @@
+@import "./global.css";
+
+#websocket-indicator {
+	@apply w-8 h-8 rounded-full;
+	@apply bg-green-500;
+}
