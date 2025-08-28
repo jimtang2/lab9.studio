@@ -1,0 +1,141 @@
+/* styles/highlight.css */
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+
+/* Define color variables for light and dark themes */
+:root {
+  --hljs-bg: #ffffff;
+  --hljs-color: #24292e;
+  --hljs-keyword: #d73a49; /* prettylights-syntax-keyword */
+  --hljs-entity: #6f42c1; /* prettylights-syntax-entity */
+  --hljs-constant: #005cc5; /* prettylights-syntax-constant */
+  --hljs-string: #032f62; /* prettylights-syntax-string */
+  --hljs-variable: #e36209; /* prettylights-syntax-variable */
+  --hljs-comment: #6a737d; /* prettylights-syntax-comment */
+  --hljs-entity-tag: #22863a; /* prettylights-syntax-entity-tag */
+  --hljs-storage-modifier: #24292e; /* prettylights-syntax-storage-modifier-import */
+  --hljs-markup-heading: #005cc5; /* prettylights-syntax-markup-heading */
+  --hljs-markup-list: #735c0f; /* prettylights-syntax-markup-list */
+  --hljs-markup-italic: #24292e; /* prettylights-syntax-markup-italic */
+  --hljs-markup-bold: #24292e; /* prettylights-syntax-markup-bold */
+  --hljs-markup-inserted: #22863a; /* prettylights-syntax-markup-inserted */
+  --hljs-markup-inserted-bg: #f0fff4;
+  --hljs-markup-deleted: #b31d28; /* prettylights-syntax-markup-deleted */
+  --hljs-markup-deleted-bg: #ffeef0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hljs-bg: #0d1117;
+    --hljs-color: #c9d1d9;
+    --hljs-keyword: #ff7b72;
+    --hljs-entity: #d2a8ff;
+    --hljs-constant: #79c0ff;
+    --hljs-string: #a5d6ff;
+    --hljs-variable: #ffa657;
+    --hljs-comment: #8b949e;
+    --hljs-entity-tag: #7ee787;
+    --hljs-storage-modifier: #c9d1d9;
+    --hljs-markup-heading: #1f6feb;
+    --hljs-markup-list: #f2cc60;
+    --hljs-markup-italic: #c9d1d9;
+    --hljs-markup-bold: #c9d1d9;
+    --hljs-markup-inserted: #aff5b4;
+    --hljs-markup-inserted-bg: #033a16;
+    --hljs-markup-deleted: #ffdcd7;
+    --hljs-markup-deleted-bg: #67060c;
+  }
+}
+
+/* Apply variables */
+.hljs {
+  color: var(--hljs-color);
+  background: var(--hljs-bg);
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  color: var(--hljs-keyword);
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  color: var(--hljs-entity);
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: var(--hljs-constant);
+}
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  color: var(--hljs-string);
+}
+.hljs-built_in,
+.hljs-symbol {
+  color: var(--hljs-variable);
+}
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  color: var(--hljs-comment);
+}
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  color: var(--hljs-entity-tag);
+}
+.hljs-subst {
+  color: var(--hljs-storage-modifier);
+}
+.hljs-section {
+  color: var(--hljs-markup-heading);
+  font-weight: bold;
+}
+.hljs-bullet {
+  color: var(--hljs-markup-list);
+}
+.hljs-emphasis {
+  color: var(--hljs-markup-italic);
+  font-style: italic;
+}
+.hljs-strong {
+  color: var(--hljs-markup-bold);
+  font-weight: bold;
+}
+.hljs-addition {
+  color: var(--hljs-markup-inserted);
+  background-color: var(--hljs-markup-inserted-bg);
+}
+.hljs-deletion {
+  color: var(--hljs-markup-deleted);
+  background-color: var(--hljs-markup-deleted-bg);
+}
+.hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+  /* purposely ignored */
+}
