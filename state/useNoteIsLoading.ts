@@ -6,6 +6,8 @@ export function useNoteIsLoading(noteId: number) {
 	const setLoadingNoteId = useStore(state => state.setLoadingNoteId)
 
 	useEffect(() => {
+		console.log("loadingNoteId", loadingNoteId)
+		console.log("noteId", noteId)
 		if (loadingNoteId == noteId) {
 			setLoadingNoteId(0)
 		}
