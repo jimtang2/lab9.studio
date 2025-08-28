@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation"
 import { useStore } from "@/state/store"
 import Link from "next/link"
 import clsx from "clsx"
-import Icon from "/public/heroicons/solid/pencil-square.svg"
+import Icon from "/public/heroicons/solid/newspaper.svg"
 
 export default function NotesButton() {
   const active = useStore(state => state.showNav)
