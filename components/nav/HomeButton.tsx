@@ -12,11 +12,9 @@ export default function HomeButton() {
 
   const cls = {
   	base: [
-      current && "bg-background-secondary text-accent-secondary",
+      current && "font-bold text-accent-secondary bg-background-ternary sm:bg-background-secondary",
+      "sm:px-6",
       "flex items-center justify-center",
-      [
-        "sm:px-6",
-      ],
 	  ],
 	  icon: "sm:hidden",
 	  text: "not-sm:hidden",

@@ -1,7 +1,7 @@
 import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core"
 import { InferSelectModel } from "drizzle-orm"
 
-export const notes = pgTable("notes", {
+export const Notes = pgTable("notes", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   content: text("content").notNull(),
@@ -10,4 +10,4 @@ export const notes = pgTable("notes", {
   updated_at: varchar("updated_at").notNull(),
 })
 
-export type Note = InferSelectModel<typeof notes>
+export type Note = InferSelectModel<typeof Notes>

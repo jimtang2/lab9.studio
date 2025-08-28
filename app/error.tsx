@@ -20,13 +20,10 @@ export default function Error({ error, reset, }: { error: Error & { digest?: str
 
   return (
     <main className={clsx(cls.base)}>
-      <div className={clsx(cls.header)}> 
-        <ExclamationTriangle />
-        <h1>An error was caught</h1>
-      </div>
+      <h1>An error was caught</h1>
       <h3>Message</h3>
-      <div>{error.message}</div>
-      <h3>Actions</h3>
+      <p>{error.message}</p>
+      {/*<h3>Actions</h3>*/}
       <button className={clsx(cls.button)} onClick={() => reset()}>Reset</button>
     </main>
   )

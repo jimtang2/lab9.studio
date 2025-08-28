@@ -1,20 +1,33 @@
 import clsx from "clsx"
 
-export default function Loading() {
+export default function Loader() {
   const cls = {
-    base: [
-      "col-start-2 col-end-4 row-start-1 row-end-4",
-      "sm:col-start-1 sm:col-end-4 sm:row-start-2 sm:row-end-4",
+    container: [
+      "grid grid-cols-1 grid-rows-1",
+      "w-full h-full",
+    ],
+    spinnerContainer: [
+      "col-start-1 col-end-[-1]",
+      "row-start-1 row-end-[-1]",
+      "z-12",
       "flex flex-col justify-center items-center",
     ],
     spinner: [
-      "animate-spin rounded-full h-24 w-24 border-8 border-l-2 border-r-2 border-accent",
+      "animate-spin rounded-full h-24 w-24 border-8 border-l-2 border-r-2 border-accent-ternary",
+    ],
+    background: [
+      "col-start-1 col-end-[-1]",
+      "row-start-1 row-end-[-1]",
+      "z-10",
     ],
   }
 
-  return (
-    <main className={clsx(cls.base)}>
+
+
+  return <div className={clsx(cls.container)}>
+    <div className={clsx(cls.spinnerContainer)}>
       <div className={clsx(cls.spinner)}></div>
-    </main>
-  );
+    </div>
+    <div className={clsx(cls.background)}></div>
+  </div>
 }

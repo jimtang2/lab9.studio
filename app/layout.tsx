@@ -1,6 +1,6 @@
 import type { Viewport, Metadata } from "next"
-import { Body, Main } from "@/components/layout"
 import Nav from "@/components/nav"
+import {LoginButton} from "@/components/login"
 import clsx  from "clsx"
 import "@/styles/global.css"
 
@@ -36,15 +36,46 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   // additional rules for code organization:
   // 1. animation uses tailwind
 
-  const cls = [
-    "bg-background-primary text-text-primary",
-    "[font-family:_Work,_sans-serif]",
-  ]
+  const cls = {
+    html: [
+      "bg-background-primary text-text-primary",
+      "[font-family:_Work,_sans-serif]",
+      "max-h-screen max-w-screen",
+    ],
+    body: [
+      "bg-background-primary", 
+      "h-screen w-screen",
+      "max-h-screen max-w-screen",
+      "grid overflow-hidden",
+      // 50px width side nav on mobile
+      [
+        "grid-cols-[50px_auto_50px]",
+        "grid-rows-[50px_auto]",
+      ],
+      // 50px height top nav on desktop
+      [
+        "sm:grid-cols-[auto_min-content]",
+        "sm:grid-rows-[50px_auto]",  
+      ],
+    ],
+    main: [
+      [
+        "col-start-1 col-end-[-1]",
+        "row-start-1 row-end-[-1]",
+      ],
+      [
+        "sm:col-start-1 sm:col-end-[-1]",
+        "sm:row-start-2 sm:row-end-[-1]",
+      ],
+      "overflow-hidden",
+    ],
+  }
 
-  return <html lang="en" className={clsx(cls)}>
-    <Body>
+  return <html lang="en" className={clsx(cls.html)}>
+    <body className={clsx(cls.body)}>
       <Nav />
-      <Main>{children}</Main>
-    </Body>
+      <LoginButton />
+      <main className={clsx(cls.main)}>{children}</main>
+    </body>
   </html>
 }

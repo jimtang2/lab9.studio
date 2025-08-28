@@ -3,13 +3,13 @@
 :root {
   --background-1: var(--color-gray-50);
   --background-2: var(--color-gray-200);
-  --background-3: var(--color-gray-400);
+  --background-3: var(--color-gray-300);
   --foreground-1: var(--color-gray-950);
   --foreground-2: var(--color-gray-800);
   --foreground-3: var(--color-gray-600);
-  --accent-1: var(--color-blue-600);
-  --accent-2: var(--color-blue-700);
-  --accent-3: var(--color-blue-800);
+  --accent-1: var(--color-blue-950);
+  --accent-2: var(--color-blue-800);
+  --accent-3: var(--color-blue-700);
   --border-1: var(--color-gray-200);
   --border-2: var(--color-gray-300);
   --border-3: var(--color-gray-400);
@@ -48,19 +48,30 @@
 }
 
 h1 {
-  @apply text-lg/13 font-bold text-accent-primary;
+  @apply text-lg/13;
+  @apply first:border-t-0;
 }
 
-h2 {
-  @apply text-base/13 font-bold text-accent-primary;
-}
-
-h3 {
+h2, h3 {
   @apply text-base/13;
 }
 
-p {
+h1, h2 {
+  @apply font-bold text-accent-primary;
+  @apply sticky top-[-1px] bg-background-primary;
+  @apply uppercase overflow-hidden;
+}
 
+h1, h2, h3 {
+    @apply h-[50px] border-b-1 border-t-1 border-border-primary;
+}
+
+h1 + h2, h2 + h2 {
+  @apply border-t-0;
+}
+
+p, ul, li, table {
+  @apply py-2 min-h-[50px];
 }
 
 a, button {
@@ -71,32 +82,10 @@ ul {
   @apply list-disc list-inside;
 }
 
-li {
-  @apply py-2;
-}
-
-img{
-
-}
-
-label {
-
-}
-
-/*pre {
-  @apply py-0 pl-6 my-2 rounded-sm;
-  @apply break-all;
-}
-*/
-
 pre, code {
   @apply text-sm/6 pt-[1px];
   @apply wrap-break-word whitespace-pre;
   @apply text-accent-ternary;
-}
-
-form {
-
 }
 
 input {

@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import { z } from "zod"
 import { db } from "@/db"
-import { notes, Note } from "@/db/schema"
+import { Notes, Note } from "@/db/schema"
 import { eq, desc } from "drizzle-orm"
-import { ListToggle, NotesList, NoteContent } from "@/components/notes"
+import { NoteTitle, NotesList, NoteContent } from "@/components/notes"
 import clsx from "clsx"
-import "@/styles/prism.css"
+
+export const metadata: Metadata = {
+  title: "Notes",
+}
 
 export default async function NotesPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   let { id } = z.object({
@@ -23,37 +26,38 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
     return <h3>{note.error}</h3>
   }
 
- const allNotes = await fetchNotesList()
-  if ("error" in allNotes) {
-    return <h3>{allNotes.error}</h3>
+ const notes = await fetchNotesList()
+  if ("error" in notes) {
+    return <h3>{notes.error}</h3>
   }
  
   const cls = [
     "h-full max-h-full w-full max-w-full",
     "grid overflow-hidden",
+    "z-1",
     [
       "grid-cols-[50px_auto_50px]",
       "grid-rows-[50px_auto]",
     ],
     [
-      "sm:grid-cols-[1fr_3fr]",
+      "sm:grid-cols-[1fr_2fr]",
       "sm:grid-rows-1",
     ],
     [
-      "lg:grid-cols-[minmax(250px,1fr)_3fr_minmax(250px,1fr)]",
+      "xl:grid-cols-[3fr_6fr_3fr]",
     ],
   ]
 
   return <div id="notes-page" className={clsx(cls)}>
-    <ListToggle />
-    <NotesList notes={allNotes} />
+    <NoteTitle note={note} />
     <NoteContent note={note} />
+    <NotesList notes={notes} />
   </div>
 }
 
 async function fetchNote(id: number): Promise<Note | { error: string }> {
   try {
-    const result = await db.select().from(notes).where(eq(notes.id, id)).limit(1)
+    const result = await db.select().from(Notes).where(eq(Notes.id, id)).limit(1)
     if (!result[0]) return { error: "Note not found" }
     return result[0]
   } catch (error) {
@@ -63,7 +67,7 @@ async function fetchNote(id: number): Promise<Note | { error: string }> {
 
 async function fetchLastNote(): Promise<Note | { error: string }> {
   try {
-    const result = await db.select().from(notes).orderBy(desc(notes.updated_at)).limit(1)
+    const result = await db.select().from(Notes).orderBy(desc(Notes.updated_at)).limit(1)
     if (!result[0]) return { error: "No notes found" }
     return result[0]
   } catch (error) {
@@ -74,10 +78,10 @@ async function fetchLastNote(): Promise<Note | { error: string }> {
 async function fetchNotesList(): Promise<{ id: number; title: string; updated_at: string }[] | { error: string }> {
   try {
     const result = await db.select({
-      id: notes.id,
-      title: notes.title,
-      updated_at: notes.updated_at,
-    }).from(notes).orderBy(desc(notes.updated_at))
+      id: Notes.id,
+      title: Notes.title,
+      updated_at: Notes.updated_at,
+    }).from(Notes).orderBy(desc(Notes.updated_at))
     if (!result) return { error: "No note" }
     return result
   } catch (error) {
