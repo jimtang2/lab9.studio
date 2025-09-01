@@ -19,23 +19,23 @@ export default function NoteTitle({ note }: { note: Note }) {
 			[
 				"border-l-1 border-r-1 border-border-primary",
 				"sm:hidden",
+				showNotesList ? "bg-background-ternary" : "bg-background-secondary hover:bg-background-ternary",
+				"hover:text-accent-secondary",
+				"transition-all duration-300",
 			],
 	  ],
 	  text: [
-	  	"bg-background-secondary",
-	  	showNotesList && "text-accent-primary",
-	  	"px-2",
+	  	showNotesList ? "text-accent-ternary" : "",
 			"whitespace-nowrap overflow-hidden text-ellipsis",
 			"self-stretch flex items-center",
+	  	"px-2",
 	  ],
 	  iconContainer: [
-	  	"self-stretch flex items-center justify-center bg-background-secondary",
-			"border-l-1 border-border-primary",
+	  	"self-stretch flex items-center justify-center",
 			"z-11",
 	  ],
 	  icon: [
-			showNotesList && "text-accent-primary",
-			!showNotesList && "text-text-primary",
+	  	showNotesList ? "text-accent-ternary" : "",
 	  ],
   }
 

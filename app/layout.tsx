@@ -9,7 +9,7 @@
 
 import type { Viewport, Metadata } from "next"
 import Nav from "@/components/nav"
-import {LoginButton} from "@/components/login"
+import User from "@/components/user"
 import clsx  from "clsx"
 import "@/styles/global.css"
 
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return <html lang="en" className={clsx(cls.html)}>
     <body className={clsx(cls.body)}>
       <Nav />
-      <LoginButton />
+      <User />
       <main className={clsx(cls.main)}>{children}</main>
     </body>
   </html>

@@ -1,9 +1,8 @@
 "use client"
 import { useStore } from "@/state/store"
-import HomeButton from "./HomeButton"
-import NotesButton from "./NotesButton"
-import LoginButton from "@/components/login/LoginButton"
-import Icon from "/public/heroicons/solid/bars-3.svg"
+import NavToggleButton from "./NavToggleButton"
+import NavHomeButton from "./NavHomeButton"
+import NavNotesButton from "./NavNotesButton"
 import clsx from "clsx"
 
 export default function Nav() {
@@ -45,55 +44,19 @@ export default function Nav() {
 				"sm:divide-x-1 sm:divide-y-0",
 			],
 			[
-				showNav ? "translate-x-0" : "translate-x-[-100%]",
-				"sm:translate-x-0",
-				"transition-transform duration-300",
+				showNav ? "translate-x-0 opacity-100" : "translate-x-[-50%] opacity-0",
+				"sm:translate-x-0 sm:opacity-100",
+				"transition-all duration-300",
 			],
 		],
   }
 
 	return <div id="nav" className={clsx(cls.bar)}>
-		<ToggleButton />
+		<NavToggleButton />
 		<div id="nav-bar-items" className={clsx(cls.items)}>
-			<HomeButton />
-			<NotesButton />
+			<NavHomeButton />
+			<NavNotesButton />
 			<div></div>
 		</div>
 	</div>
-}
-
-function ToggleButton() {
-	const showNav = useStore(state => state.showNav)
-	const setShowNav = useStore(state => state.setShowNav)
-	const handleClick = () => setShowNav(!showNav)
-
-	const cls = {
-		button: [
-	  	[
-	  		"col-start-1 col-end-[-2]",
-	  		"row-start-1 row-end-2",
-	  	],
-	  	[
-				"hover:bg-background-ternary",
-				showNav && "bg-background-ternary",
-				!showNav && "bg-background-secondary",
-	  		"border-b-1 border-border-primary",
-		    "flex items-center justify-center",
-				"sm:hidden",
-				"z-4",
-	  	],
-	  	[
-	  		"transition-all duration-300",
-	  	],
-		],
-		icon: [
-			"hover:text-accent-ternary",
-	  	showNav && [
-	  		"text-accent-primary",
-	  	],
-	  	!showNav && [],
-		]
-	}
-
-	return <button className={clsx(cls.button)} onClick={handleClick}><Icon className={clsx(cls.icon)} /></button>
 }

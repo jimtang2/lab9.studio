@@ -3,25 +3,25 @@ import { usePathname } from "next/navigation"
 import { useStore } from "@/state/store"
 import Link from "next/link"
 import clsx from "clsx"
-import Icon from "/public/heroicons/solid/newspaper.svg"
+import Icon from "/public/heroicons/solid/home.svg"
 
-export default function NotesButton() {
+export default function NavHomeButton() {
   const active = useStore(state => state.showNav)
   const path = usePathname()
-  const current = path.indexOf("/notes") == 0
+  const current = path == "/"
 
   const cls = {
-    base: [
+  	base: [
       current && "font-bold text-accent-secondary bg-background-ternary sm:bg-background-secondary",
       "sm:px-6",
       "flex items-center justify-center",
-    ],
-    icon: "sm:hidden",
-    text: "not-sm:hidden",
+	  ],
+	  icon: "sm:hidden",
+	  text: "not-sm:hidden",
   }
 
-  return <Link id="nav-notes-btn" href="/notes" className={clsx(cls.base)} title="Notes">
-    <Icon className={clsx(cls.icon)} />
-    <span className={clsx(cls.text)}>Notes</span>
+  return <Link id="nav-home-btn" href="/" className={clsx(cls.base)} title="lab9.studio">
+  	<Icon className={clsx(cls.icon)} />
+  	<span className={clsx(cls.text)}>lab9.studio</span>
   </Link>
 }

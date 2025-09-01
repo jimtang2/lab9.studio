@@ -1,33 +1,48 @@
-import { create, StateCreator } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create, StateCreator } from "zustand"
+import { persist, createJSONStorage } from "zustand/middleware"
 
 interface Store {
+  // controls nav bar display
   showNav: boolean;
-  setShowNav: (showNav: boolean) => void;
+  setShowNav: (show: boolean) => void;
+  // controls notes list display
   showNotesList: boolean;
-  setShowNotesList: (showNotesList: boolean) => void;
+  setShowNotesList: (show: boolean) => void;
+  // controls login form display
   showLogin: boolean;
-  setShowLogin: (showLogin: boolean) => void;
+  setShowLogin: (show: boolean) => void;
+  // controls session menu display
+  showSession: boolean;
+  setShowSession: (show: boolean) => void;
+  // id reference to note being loaded 
+  // used to display loader between Link onClick and page render 
   loadingNoteId: number;
   setLoadingNoteId: (id: number) => void;
+  // controls multiple functions that rely on the presence
+  sid: string;
+  setSid: (sid: string) => void;
 }
+
+const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (set) => ({
+  showNav: false,
+  setShowNav: (show: boolean) => set({ showNav: show }),
+  showNotesList: false,
+  setShowNotesList: (show: boolean) => set({ showNotesList: show }),
+  showLogin: false,
+  setShowLogin: (show: boolean) => set({ showLogin: show }),
+  showSession: false,
+  setShowSession: (show: boolean) => set({ showSession: show }),
+  loadingNoteId: 0,
+  setLoadingNoteId: (id: number) => set({ loadingNoteId: id }),
+  sid: "",
+  setSid: (sid: string) => set({ sid: sid }),
+})
 
 const options = {
   name: "lab9.studio.state",
   storage: createJSONStorage(() => localStorage),
-};
+}
 
-const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (set) => ({
-  showNav: false,
-  setShowNav: (showNav: boolean) => set({ showNav }),
-  showNotesList: false,
-  setShowNotesList: (showNotesList: boolean) => set({ showNotesList }),
-  showLogin: false,
-  setShowLogin: (showLogin: boolean) => set({ showLogin }),
-  loadingNoteId: 0,
-  setLoadingNoteId: (id: number) => set({ loadingNoteId: id }),
-});
+const store = persist(storeCreator, options)
 
-const store = persist(storeCreator, options);
-
-export const useStore = create<Store>()(store);
+export const useStore = create<Store>()(store)

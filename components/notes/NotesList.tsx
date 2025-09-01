@@ -36,14 +36,14 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   			"grid gap-[1px] auto-rows-[min-content]",
   		],
   		[
-  			"transition-all duration-300 ease-in-out",
+  			"transition-all duration-300",
   			showNotesList && "translate-x-0 opacity-100", 
-  			!showNotesList && "translate-x-[100%] opacity-0",
+  			!showNotesList && "translate-x-[50%] opacity-0",
   			"sm:w-full sm:translate-x-0 sm:opacity-100",
   		],
 	  	[
-	  		showNav ? "w-[calc(100%-50px)]" : "w-full",
-	  		showNav ? "translate-x-[50px]" : "translate-x-0",
+	  		showNav && "w-[calc(100%-50px)] translate-x-[50px]",
+	  		!showNav && "w-full translate-x-0",
 	  		"sm:w-full sm:translate-x-0",
 	  	],
   	],
@@ -58,6 +58,7 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
 
 function NoteItem({ id, title, updated_at, active }: { id: number; title: string; updated_at: string; active: boolean }) {
 	const showNav = useStore(state => state.showNav)
+	const showNotesList = useStore(state => state.showNotesList)
 	const setShowNotesList = useStore(state => state.setShowNotesList)
 	const setLoadingNoteId = useStore(state => state.setLoadingNoteId)
 	const searchParams = useSearchParams()
@@ -84,7 +85,7 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 				"transition-all duration-300",
 				(active || current) && [
 					"hidden sm:flex",
-					"bg-background-secondary",
+					"bg-background-ternary",
 				],
 			],
 		],
@@ -99,11 +100,15 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 			"col-start-2 col-end-3",
 			"justify-self-stretch self-stretch",
 			"flex items-center justify-center",
-			"sm:hidden",
-			(active || current) && "text-accent-primary translate-x-1",
-			hovered && "text-accent-primary translate-x-1",
-			(!active && !current && !hovered) && "text-text-primary translate-x-0",
-			"transition-all duration-400 ease-in-out",
+			[
+				(active || current) && [
+					"text-accent-primary translate-x-1",
+					"sm:hidden sm:pointer-events-none",
+				],
+				(!active && !current && !hovered) && "text-text-primary translate-x-0",
+				hovered && "text-accent-primary translate-x-1",
+				"transition-all duration-400 ease-in-out",				
+			],
 		],
 	}
 
@@ -124,7 +129,8 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 		className={clsx(["note-item", cls.container])} 
 		onNavigate={handleNavigate} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
 		<span className={clsx(cls.text)}>{title}</span>
-		<button className={clsx(cls.linkIcon)}>
+		<button className={clsx(cls.linkIcon)}
+			tabIndex={showNotesList ? 0 : -1}>
 			<LinkIcon />
 		</button>
 	</Link>
