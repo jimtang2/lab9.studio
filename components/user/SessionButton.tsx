@@ -13,7 +13,7 @@ export default function SessionButton() {
   const setShowSession = useStore(state => state.setShowSession)
   const [user] = useSessionUser()
   const loggedIn = typeof(user?.name) === "string"
-  const displayName = loggedIn ? user?.name : "Not Logged In"
+  const displayName = loggedIn ? user?.name : "Anonymous"
 
   useEffect(() => {
     setShowLogin(false)
@@ -43,6 +43,7 @@ export default function SessionButton() {
     ],
     text: [
       "hidden sm:inline-block",
+      "whitespace-nowrap overflow-x-hidden text-ellipsis",
     ],
   }
 
