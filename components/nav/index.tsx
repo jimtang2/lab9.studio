@@ -18,17 +18,15 @@ export default function Nav() {
 			],
 			[
 				"grid grid-cols-1 grid-rows-[50px_auto]",
-				"sm:grid sm:grid-cols-1 sm:grid-rows-1",
+				"sm:grid-rows-1",
 				"z-10",
-				"sm:border-b-1 sm:border-border-primary sm:border-r-0",					
+				"sm:border-b-1 sm:border-border sm:border-r-0",					
 			],
 		],
 		items: [
 			[
-				"col-start-1 col-end-2",
-				"row-start-2 row-end-3",
-				"sm:col-start-1 sm:col-end-[-1]",
-				"sm:row-start-1 sm:row-end-[-1]",
+				"col-start-1 col-span-1 row-start-2 row-end-[-1]",
+				"sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-span-1",
 			],
 			[
 				"grid grid-rows-[repeat(2,50px)_auto_50px_100px]",
@@ -36,10 +34,10 @@ export default function Nav() {
 				"sm:grid-flow-col",
 			],
 			[
-				showNav && "bg-background-secondary",
-				"sm:bg-background-primary",
-				"border-r-1 border-border-primary",
-				"divide-y-1 divide-border-primary",
+				showNav && "bg-menu",
+				"sm:bg-background",
+				"border-r-1 border-border",
+				"divide-y-1 divide-border",
 				"sm:border-r-0",
 				"sm:divide-x-1 sm:divide-y-0",
 			],

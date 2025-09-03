@@ -7,13 +7,15 @@ import LoggedOffIcon from "/public/heroicons/outline/user.svg"
 import clsx from "clsx"
 
 export default function SessionButton() {
-  const showLogin = useStore(state => state.showLogin)
-  const setShowLogin = useStore(state => state.setShowLogin)
-  const showSession = useStore(state => state.showSession)
-  const setShowSession = useStore(state => state.setShowSession)
+  const {
+    showLogin,
+    setShowLogin,
+    showSession,
+    setShowSession,
+  } = useStore(state => state)
   const [user] = useSessionUser()
   const loggedIn = typeof(user?.name) === "string"
-  const displayName = loggedIn ? user?.name : "Anonymous"
+  const displayName = loggedIn ? user?.name : "Public"
 
   useEffect(() => {
     setShowLogin(false)
@@ -24,26 +26,27 @@ export default function SessionButton() {
     button: [
       [
         "flex flex-row items-center justify-center",
-        "relative top-[-1px]",
         "h-full w-full",
         "z-10",
-        "sm:px-6 sm:gap-2",
-        "hover:bg-background-ternary sm:hover:bg-background-secondary",
-        loggedIn && "text-accent-primary",
-        (showLogin || showSession) && "bg-background-ternary sm:bg-background-secondary text-accent-primary",
-        (!showLogin && !showSession) && "bg-background-secondary sm:bg-background-primary",
+        "sm:px-4 sm:gap-1",
+        showLogin && "bg-highlighted-background text-highlighted-foreground",
+        showSession && "bg-highlighted-background text-highlighted-foreground",
+        !showLogin && !showSession && "bg-menu",
+        loggedIn && "bg-selected-background text-selected-foreground",
         "transition-all duration-300",
-        "border-border-primary border-l-1",
+        "border-border border-l-1 border-b-1",
         "z-20",
         "pointer-events-auto",
       ],
     ],
-    icon: [
-      "scale-[80%]",
-    ],
     text: [
       "hidden sm:inline-block",
       "whitespace-nowrap overflow-x-hidden text-ellipsis",
+    ],
+    icon: [
+      "scale-[80%]",
+      "stroke-2",
+      "relative top-[-2px]",
     ],
   }
 
@@ -53,9 +56,9 @@ export default function SessionButton() {
     id="session-btn" 
     title="" 
     onClick={handleClick}
-    tabIndex={-1}>
-    <span className={clsx(cls.text)}>{displayName}</span>
+    tabIndex={-1} >
     {loggedIn ? <LoggedOnIcon className={clsx(cls.icon)} /> : <LoggedOffIcon className={clsx(cls.icon)} />}
+    <span className={clsx(cls.text)}>{displayName}</span>
   </button>
 }
 

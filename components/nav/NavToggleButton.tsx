@@ -15,24 +15,18 @@ export default function NavToggleButton() {
 	  		"row-start-1 row-end-2",
 	  	],
 	  	[
-				"hover:bg-background-ternary",
-				showNav && "bg-background-ternary",
-				!showNav && "bg-background-secondary",
-	  		"border-b-1 border-border-primary",
+				showNav ? "bg-selected-background text-selected-foreground" : "bg-menu text-text",
+	  		"border-b-1 border-r-1 border-border",
+	  		"transition-all duration-300",
+	  	],
+	  	[
 		    "flex items-center justify-center",
 				"sm:hidden",
 				"z-4",
 	  	],
-	  	[
-	  		"transition-all duration-300",
-	  	],
 		],
 		icon: [
-			"hover:text-accent-ternary",
-	  	showNav && [
-	  		"text-accent-primary",
-	  	],
-	  	!showNav && [],
+			showNav ? "stroke-2" : "",
 		]
 	}
 

@@ -7,17 +7,17 @@ export default function Loader() {
       "w-full h-full",
     ],
     spinnerContainer: [
-      "col-start-1 col-end-[-1]",
-      "row-start-1 row-end-[-1]",
-      "z-12",
+      "col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
       "flex flex-col justify-center items-center",
+      "z-12",
     ],
     spinner: [
-      "animate-spin rounded-full h-24 w-24 border-8 border-l-2 border-r-2 border-accent-ternary",
+      "rounded-full h-24 w-24",
+      "border-8 border-l-2 border-r-2 border-accent",
+      "animate-spin",
     ],
     background: [
-      "col-start-1 col-end-[-1]",
-      "row-start-1 row-end-[-1]",
+      "col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
       "z-10",
     ],
   }

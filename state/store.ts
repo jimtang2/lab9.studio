@@ -21,6 +21,9 @@ interface Store {
   // controls multiple functions that rely on the presence
   sid: string;
   setSid: (sid: string) => void;
+  // controls displaying loader during form request
+  loginFormLoading: boolean;
+  setLoginFormLoading: (loading: boolean) => void;
 }
 
 const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (set) => ({
@@ -36,6 +39,8 @@ const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (s
   setLoadingNoteId: (id: number) => set({ loadingNoteId: id }),
   sid: "",
   setSid: (sid: string) => set({ sid: sid }),
+  loginFormLoading: false,
+  setLoginFormLoading: (loading: boolean) => set({ loginFormLoading: loading }),
 })
 
 const options = {
@@ -43,6 +48,4 @@ const options = {
   storage: createJSONStorage(() => localStorage),
 }
 
-const store = persist(storeCreator, options)
-
-export const useStore = create<Store>()(store)
+export const useStore = create<Store>()(persist(storeCreator, options))

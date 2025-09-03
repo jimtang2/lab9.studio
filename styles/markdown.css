@@ -1,36 +1,36 @@
 @import "./global.css";
 
 .table-of-contents > ol {
-	@apply relative top-[-1px];
+	/*@apply relative top-[-1px];*/
+	@apply bg-background;
 	@apply pb-12;
 }
 
 .table-of-contents li {
-	@apply py-0 pl-3;
+	@apply py-0 pl-2;
 }
 
 .table-of-contents li > a {	
-	@apply block px-3;
+	@apply block px-2;
 	@apply h-[50px] text-base/[50px];
 	@apply truncate text-ellipsis;
-	@apply hover:bg-background-secondary hover:text-accent-ternary;
+	@apply hover:bg-background hover:text-accent;
 }
 
 .table-of-contents > ol > li > a,
 .table-of-contents > ol > li > ol > li > a {
 	@apply uppercase;
-	@apply border-b-1 border-border-primary;
+	/*@apply border-b-1 border-border;*/
 }
 
 .table-of-contents li > a {
-	@apply bg-background-primary;
 	@apply transition-all duration-300;
 }
 
 .table-of-contents li > a.active {
-	@apply bg-background-secondary;
+	@apply bg-menu;
 }
 
 .table-of-contents li > a.top.active {
-	@apply text-accent-secondary font-bold bg-background-ternary;
+	@apply text-accent bg-menu underline;
 }

@@ -13,16 +13,15 @@ export async function POST(request: NextRequest) {
 
     if (!uid || !password) {
       return NextResponse.json(
-        { error: "Missing id or password" },
+        { error: "Failed login" },
         { status: 400 }
       )
     }
 
     const isValid = await checkCredentials(uid, password)
-
     if (!isValid) {
       return NextResponse.json(
-        { error: "Invalid credentials" },
+        { error: "Failed login" },
         { status: 401 }
       )
     }

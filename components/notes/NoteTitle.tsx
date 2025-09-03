@@ -5,27 +5,26 @@ import { useStore } from "@/state/store"
 import clsx from "clsx"
 
 export default function NoteTitle({ note }: { note: Note }) {
+	const showNav = useStore(state => state.showNav)
+	const setShowNav = useStore(state => state.setShowNav)
 	const showNotesList = useStore(state => state.showNotesList)
 	const setShowNotesList = useStore(state => state.setShowNotesList)
-	const handleClick = () => setShowNotesList(!showNotesList)
 
   const cls = {
   	container: [
 			[
-				"col-start-2 col-end-[-2]",
-				"row-start-1 row-end-2",
+				"col-start-2 col-end-[-2] row-start-1 row-span-1",
 				"grid grid-rows-1 grid-cols-[auto_50px] grid-flow-row",
 			],
 			[
-				"border-l-1 border-r-1 border-border-primary",
+				"border-b-1 border-border",
+				showNotesList ? "bg-selected-background text-selected-foreground" : "bg-menu",
+
 				"sm:hidden",
-				showNotesList ? "bg-background-ternary" : "bg-background-secondary hover:bg-background-ternary",
-				"hover:text-accent-secondary",
 				"transition-all duration-300",
 			],
 	  ],
 	  text: [
-	  	showNotesList ? "text-accent-ternary" : "",
 			"whitespace-nowrap overflow-hidden text-ellipsis",
 			"self-stretch flex items-center",
 	  	"px-2",
@@ -35,8 +34,12 @@ export default function NoteTitle({ note }: { note: Note }) {
 			"z-11",
 	  ],
 	  icon: [
-	  	showNotesList ? "text-accent-ternary" : "",
 	  ],
+  }
+
+  const handleClick = () => {
+  	// setShowNav(!showNotesList)
+  	setShowNotesList(!showNotesList)
   }
 
 	return <button id="note-title" className={clsx(cls.container)} onClick={handleClick}>

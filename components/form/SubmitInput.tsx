@@ -11,25 +11,29 @@ interface SubmitInputProps {
 
 export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitInput({ className="", iconClassName="", tabIndex=0 }, ref) {
 	const [focus, setFocus] = useState(false)
+	const [hover, setHover] = useState(false)
 
 	const cls = {
 		button: [
 			"px-1",
-			"outline-accent-primary",
-			"bg-background-ternary",
-			"text-accent-primary",
+			"outline-accent",
+			"bg-control-background text-control-foreground",
 			className,
 		],
 		icon: [
 			"stroke-2",
-			iconClassName,
+			"text-control-foreground",
+			hover && "animate-pulse",
+			iconClassName,			
 		],
 	}
 
 	return <button className={clsx(cls.button)} 
 		type="submit"
 		ref={ref}
-		tabIndex={tabIndex}>
+		tabIndex={tabIndex}
+		onMouseOver={() => setHover(true)}
+		onMouseOut={() => setHover(false)}>
 		<Icon className={clsx(cls.icon)} />
 	</button>
 })

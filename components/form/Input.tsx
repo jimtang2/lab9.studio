@@ -16,18 +16,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, label, pla
 	const cls = {
 		container: [
 			"grid grid-cols-[repeat(2,auto)] grid-rows-[min-content_auto]",
+			"bg-menu",
 			className,
 		],
 		label: [
 			"col-start-1 col-end-2 row-start-1 row-end-2",
 			"relative left-1 px-1 pt-1",
-			"text-xs text-accent-primary",
+			"text-xs text-accent",
 			"transition-all duration-300",
 		],
 		input: [
 			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
 			"text-base px-3 pt-5 pb-2",
-			"outline-accent-primary",
+			"outline-accent",
 		],
 	}
 

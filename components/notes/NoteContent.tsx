@@ -37,11 +37,10 @@ function NoteMarkdown({text}: {text: string}) {
 			[
 				"h-full max-h-full",
 				"overflow-x-hidden overflow-y-auto",
-				"px-4",
-				"relative top-[-1px]",
+				"px-2",
 				"bg-background-primary",
 				showNotesList ? "pointer-events-none sm:pointer-events-auto" : "pointer-events-auto",
-				"sm:border-l-1 sm:border-border-primary sm:px-4",
+				"sm:border-l-1 sm:border-border",
 				"xl:border-r-1",
 			],
 			[
@@ -63,7 +62,7 @@ function NoteMarkdown({text}: {text: string}) {
   			"xl:row-start-1 xl:row-end-[-1]",
   		],
   		[
-  			"pr-3",
+  			"pr-2",
   			"overflow-y-auto",
   		],
   	],

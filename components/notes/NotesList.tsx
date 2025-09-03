@@ -15,36 +15,40 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   const cls = {
   	container: [  		
   		[
-  			"col-start-1 col-end-4",
-  			"row-start-2 row-end-3",
+  			"col-start-1 col-end-[-1] row-start-2 row-span-1",
+  			"sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-end-[-1]",	
   		],
-  		[
-  			"sm:col-start-1 sm:col-end-2",
-  			"sm:row-start-1 sm:row-end-3",	
-  		],
-  		"z-3",
   		[
   			showNotesList ? "pointer-events-auto" : "pointer-events-none",
   			"sm:pointer-events-auto",
+	  		"z-3",
+
   		],
   	],
   	items: [
-  		"bg-background-primary",
+  		[
+  			"bg-background",  			
+  		],
   		[
   			"w-full h-full max-h-full max-w-full", 
-  			"overflow-x-hidden overflow-y-scroll",
-  			"grid gap-[1px] auto-rows-[min-content]",
-  		],
-  		[
-  			"transition-all duration-300",
-  			showNotesList && "translate-x-0 opacity-100", 
-  			!showNotesList && "translate-x-[50%] opacity-0",
-  			"sm:w-full sm:translate-x-0 sm:opacity-100",
+  			"overflow-x-hidden overflow-y-auto",
+  			"grid auto-rows-[min-content]",
   		],
 	  	[
-	  		showNav && "w-[calc(100%-50px)] translate-x-[50px]",
-	  		!showNav && "w-full translate-x-0",
+	  		showNav && [
+	  			"w-[calc(100%-50px)]",
+	  			showNotesList && "translate-x-[50px] opacity-100", 
+	  			!showNotesList && "translate-x-[50%] opacity-0",
+
+	  		],
+	  		!showNav && [
+	  			"w-full",
+		  		showNotesList && "translate-x-0 opacity-100", 
+		  		!showNotesList && "translate-x-[50%] opacity-0",
+	  		],
+	  		"sm:w-full sm:translate-x-0 sm:opacity-100",
 	  		"sm:w-full sm:translate-x-0",
+  			"transition-all duration-300",
 	  	],
   	],
   }
@@ -57,10 +61,13 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
 }
 
 function NoteItem({ id, title, updated_at, active }: { id: number; title: string; updated_at: string; active: boolean }) {
-	const showNav = useStore(state => state.showNav)
-	const showNotesList = useStore(state => state.showNotesList)
-	const setShowNotesList = useStore(state => state.setShowNotesList)
-	const setLoadingNoteId = useStore(state => state.setLoadingNoteId)
+	const {
+		showNav, 
+		showNotesList, 
+		setShowNotesList,
+		setLoadingNoteId,
+	} = useStore(state => state)
+
 	const searchParams = useSearchParams()
 	const [hovered, setHovered] = useState(false)
 	const current = `${id}` === searchParams.get("id")
@@ -71,43 +78,39 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 				"grid grid-cols-[auto_50px] grid-rows-1",
 			],
 			[
-				"border-b-1 border-border-primary sm:mx-4",
+				"border-b-1 border-border",
+				"bg-background",
+				!active && !current && [
+					"text-text hover:text-accent",
+				],
+				(active || current) && [
+					"bg-selected-background text-selected-foreground",
+				],
 				"text-base/6",
-				"min-h-[50px]",
+				"overflow-x-hidden",
 			],
 			[
-				showNav && "w-[calc(100%-50px)] sm:w-full",
-				!showNav && "w-full",
-				"sm:max-w-[calc(100%-8*var(--spacing))]",
-				"overflow-x-hidden",
-				hovered && "bg-background-secondary",
-				!hovered && "bg-background-primary",
+				"min-h-[50px] sm:mx-2",
+				showNav ? "w-[calc(100%-50px)] sm:w-full" : "w-full",
+				"sm:max-w-[calc(100%-4*var(--spacing))]",
+			],
+			[
 				"transition-all duration-300",
-				(active || current) && [
-					"hidden sm:flex",
-					"bg-background-ternary",
-				],
 			],
 		],
 		text: [
 			"col-start-1 col-end-2",
 			"justify-self-start self-center",
-			"px-3 sm:px-2",
+			"max-w-full px-3 sm:px-2",
 			"whitespace-nowrap overflow-hidden text-ellipsis",
-			(active || current) && "font-bold text-accent-secondary",
 		],
 		linkIcon: [
 			"col-start-2 col-end-3",
 			"justify-self-stretch self-stretch",
 			"flex items-center justify-center",
-			[
-				(active || current) && [
-					"text-accent-primary translate-x-1",
-					"sm:hidden sm:pointer-events-none",
-				],
-				(!active && !current && !hovered) && "text-text-primary translate-x-0",
-				hovered && "text-accent-primary translate-x-1",
-				"transition-all duration-400 ease-in-out",				
+			hovered && "animate-pulse",
+			(active || current) && [
+				"sm:hidden sm:pointer-events-none",
 			],
 		],
 	}

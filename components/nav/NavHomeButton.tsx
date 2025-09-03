@@ -12,9 +12,9 @@ export default function NavHomeButton() {
 
   const cls = {
   	base: [
-      current && "font-bold text-accent-secondary bg-background-ternary sm:bg-background-secondary",
-      "sm:px-6",
+      current && "text-selected-foreground bg-selected-background",
       "flex items-center justify-center",
+      "sm:px-6",
 	  ],
 	  icon: "sm:hidden",
 	  text: "not-sm:hidden",
