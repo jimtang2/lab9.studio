@@ -12,6 +12,7 @@ export default function SessionButton() {
     setShowLogin,
     showSession,
     setShowSession,
+    loginFormLoading,
   } = useStore(state => state)
   const [user] = useSessionUser()
   const loggedIn = typeof(user?.name) === "string"
@@ -47,6 +48,13 @@ export default function SessionButton() {
       "scale-[80%]",
       "stroke-2",
       "relative top-[-2px]",
+      loginFormLoading && "hidden",
+    ],
+    loader: [
+      "rounded-full h-6 w-6",
+      "border-0 border-t-2",
+      "animate-spin",
+      !loginFormLoading && "hidden",
     ],
   }
 
@@ -58,6 +66,7 @@ export default function SessionButton() {
     onClick={handleClick}
     tabIndex={-1} >
     {loggedIn ? <LoggedOnIcon className={clsx(cls.icon)} /> : <LoggedOffIcon className={clsx(cls.icon)} />}
+    <div className={clsx(cls.loader)}></div>
     <span className={clsx(cls.text)}>{displayName}</span>
   </button>
 }

@@ -16,8 +16,8 @@ interface Store {
   setShowSession: (show: boolean) => void;
   // id reference to note being loaded 
   // used to display loader between Link onClick and page render 
-  loadingNoteId: number;
-  setLoadingNoteId: (id: number) => void;
+  noteContentLoading: boolean;
+  setNoteContentLoading: (loading: boolean) => void;
   // controls multiple functions that rely on the presence
   sid: string;
   setSid: (sid: string) => void;
@@ -35,8 +35,8 @@ const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (s
   setShowLogin: (show: boolean) => set({ showLogin: show }),
   showSession: false,
   setShowSession: (show: boolean) => set({ showSession: show }),
-  loadingNoteId: 0,
-  setLoadingNoteId: (id: number) => set({ loadingNoteId: id }),
+  noteContentLoading: true,
+  setNoteContentLoading: (loading: boolean) => set({ noteContentLoading: loading}),
   sid: "",
   setSid: (sid: string) => set({ sid: sid }),
   loginFormLoading: false,

@@ -55,22 +55,23 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
 
 	return <div id="notes-list" className={clsx(cls.container)}>
 		<div className={clsx(cls.items)}>
-			{notes.map((note, i) => <NoteItem key={note.id} {...note} active={i == 0 && nullId} />)}
+			{notes.map((note, i) => <NoteItem key={note.id} {...note} />)}
 		</div>
 	</div>
 }
 
-function NoteItem({ id, title, updated_at, active }: { id: number; title: string; updated_at: string; active: boolean }) {
+function NoteItem({ id, title, updated_at }: { id: number; title: string; updated_at: string; }) {
 	const {
 		showNav, 
 		showNotesList, 
 		setShowNotesList,
-		setLoadingNoteId,
+		setNoteContentLoading,
 	} = useStore(state => state)
 
 	const searchParams = useSearchParams()
-	const [hovered, setHovered] = useState(false)
-	const current = `${id}` === searchParams.get("id")
+	const [hover, setHover] = useState(false)
+	const currentId = searchParams.get("id")
+	const current = `${id}` === currentId
 
 	const cls = {
 		container: [
@@ -80,10 +81,10 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 			[
 				"border-b-1 border-border",
 				"bg-background",
-				!active && !current && [
+				!current && [
 					"text-text hover:text-accent",
 				],
-				(active || current) && [
+				current && [
 					"bg-selected-background text-selected-foreground",
 				],
 				"text-base/6",
@@ -108,29 +109,19 @@ function NoteItem({ id, title, updated_at, active }: { id: number; title: string
 			"col-start-2 col-end-3",
 			"justify-self-stretch self-stretch",
 			"flex items-center justify-center",
-			hovered && "animate-pulse",
-			(active || current) && [
-				"sm:hidden sm:pointer-events-none",
-			],
+			hover && "animate-pulse",
+			current && "sm:hidden sm:pointer-events-none",
 		],
-	}
-
-	const handleNavigate = () => {
-		setShowNotesList(false)
-		setLoadingNoteId(id)
-	}
-
-	const handleMouseOver = () => {
-		setHovered(true)
-	}
-
-	const handleMouseOut = () => {
-		setHovered(false)
 	}
 
 	return <Link href={`/notes?id=${id}`} 
 		className={clsx(["note-item", cls.container])} 
-		onNavigate={handleNavigate} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+		onNavigate={() => {
+			setShowNotesList(false)
+			setNoteContentLoading(current)
+		}} 
+		onMouseOver={() => setHover(true)} 
+		onMouseOut={() => setHover(false)}>
 		<span className={clsx(cls.text)}>{title}</span>
 		<button className={clsx(cls.linkIcon)}
 			tabIndex={showNotesList ? 0 : -1}>

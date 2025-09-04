@@ -1,18 +1,17 @@
 @import "./global.css";
 
 .table-of-contents > ol {
-	/*@apply relative top-[-1px];*/
 	@apply bg-background;
 	@apply pb-12;
 }
 
 .table-of-contents li {
-	@apply py-0 pl-2;
+	@apply py-0;
 }
 
 .table-of-contents li > a {	
-	@apply block px-2;
-	@apply h-[50px] text-base/[50px];
+	@apply block border-l-8 border-transparent;
+	@apply h-[50px] text-base/[50px] text-subtext;
 	@apply truncate text-ellipsis;
 	@apply hover:bg-background hover:text-accent;
 }
@@ -20,7 +19,18 @@
 .table-of-contents > ol > li > a,
 .table-of-contents > ol > li > ol > li > a {
 	@apply uppercase;
-	/*@apply border-b-1 border-border;*/
+}
+
+.table-of-contents > ol > li > a {
+	@apply pl-6;
+}
+
+.table-of-contents > ol > li > ol > li > a {
+	@apply pl-6;
+}
+
+.table-of-contents > ol > li > ol > li > ol > li > a {
+	@apply pl-12;
 }
 
 .table-of-contents li > a {
@@ -28,9 +38,9 @@
 }
 
 .table-of-contents li > a.active {
-	@apply bg-menu;
+	@apply text-text bg-menu border-accent;
 }
 
 .table-of-contents li > a.top.active {
-	@apply text-accent bg-menu underline;
+	/*@apply text-accent;*/
 }

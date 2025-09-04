@@ -3,7 +3,10 @@ import { useStore } from "@/state/store"
 import { User } from "@/db/schema"
 
 export function useSessionUser(): [User | null, boolean, string | null] {
-  const sid = useStore(state => state.sid)
+  const {
+    sid,
+    setLoginFormLoading,
+  } = useStore(state => state)
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -13,6 +16,7 @@ export function useSessionUser(): [User | null, boolean, string | null] {
       if (sid?.length <= 0) {
         setUser(null)
       } else {
+        setLoginFormLoading(true)
         try {
           const user = await fetchUser()
           setUser(user)
@@ -22,6 +26,7 @@ export function useSessionUser(): [User | null, boolean, string | null] {
         } finally {
           setLoading(false)
         }
+        setLoginFormLoading(false)
       }
     })()
   }, [sid])

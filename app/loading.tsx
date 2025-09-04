@@ -6,28 +6,14 @@ export default function Loader() {
       "grid grid-cols-1 grid-rows-1",
       "w-full h-full",
     ],
-    spinnerContainer: [
-      "col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-      "flex flex-col justify-center items-center",
-      "z-12",
-    ],
     spinner: [
-      "rounded-full h-24 w-24",
-      "border-8 border-l-2 border-r-2 border-accent",
+      "h-30 w-30 self-center justify-self-center",
+      "border-0 border-t-8 rounded-full",
       "animate-spin",
-    ],
-    background: [
-      "col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-      "z-10",
     ],
   }
 
-
-
   return <div className={clsx(cls.container)}>
-    <div className={clsx(cls.spinnerContainer)}>
-      <div className={clsx(cls.spinner)}></div>
-    </div>
-    <div className={clsx(cls.background)}></div>
+    <div className={clsx(cls.spinner)}></div>
   </div>
 }

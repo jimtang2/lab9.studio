@@ -123,19 +123,9 @@ function LoginFormHeader({ className="" }: { className: string; }) {
     text: [
       "flex-grow-1",
     ],
-    loader: [
-      "rounded-full h-6 w-6",
-      "block min-h-6 min-w-6",
-      "border-2 border-l-1 border-r-1 border-accent",
-      "animate-spin",
-      !loginFormLoading && [
-        "hidden",
-      ],
-    ],
   }
 
   return <div className={clsx(cls.container)}>
     <span className={clsx(cls.text)}>Sign In</span>
-    <div className={clsx(cls.loader)}></div>
   </div>
 }

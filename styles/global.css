@@ -17,7 +17,7 @@
   --background-color: var(--color-gray-100);
   --menu-color: var(--color-neutral-200);
   --text-color: var(--color-gray-950);
-  --subtext-color: var(--color-gray-800);
+  --subtext-color: var(--color-gray-400);
   --accent-color: var(--color-blue-600);
   --control-background-color: var(--color-blue-600);
   --control-foreground-color: var(--color-gray-100);
@@ -47,7 +47,7 @@
     --background-color: var(--color-neutral-950);
     --menu-color: var(--color-neutral-900);
     --text-color: var(--color-gray-100);
-    --subtext-color: var(--color-gray-300);
+    --subtext-color: var(--color-gray-500);
     --accent-color: var(--color-yellow-500);
     --control-background-color: var(--color-yellow-500);
     --control-foreground-color: var(--color-neutral-950);

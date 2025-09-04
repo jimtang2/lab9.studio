@@ -4,12 +4,14 @@ import Icon from "/public/heroicons/solid/chevron-up-down.svg"
 import { useStore } from "@/state/store"
 import clsx from "clsx"
 
-export default function NoteTitle({ note }: { note: Note }) {
-	const showNav = useStore(state => state.showNav)
-	const setShowNav = useStore(state => state.setShowNav)
-	const showNotesList = useStore(state => state.showNotesList)
-	const setShowNotesList = useStore(state => state.setShowNotesList)
-
+export default function NoteTitle({ note }: { note: Note | null }) {
+	const {
+		showNav,
+		setShowNav,
+		showNotesList,
+		setShowNotesList,
+	} = useStore(state => state)
+	const title = note?.title || "Tap to select note"
   const cls = {
   	container: [
 			[
@@ -37,13 +39,10 @@ export default function NoteTitle({ note }: { note: Note }) {
 	  ],
   }
 
-  const handleClick = () => {
-  	// setShowNav(!showNotesList)
-  	setShowNotesList(!showNotesList)
-  }
-
-	return <button id="note-title" className={clsx(cls.container)} onClick={handleClick}>
-			<span className={clsx(cls.text)}>{note.title}</span>
+	return <button className={clsx(cls.container)} 
+		id="note-title" 
+		onClick={() => setShowNotesList(!showNotesList)}>
+			<span className={clsx(cls.text)}>{title}</span>
 			<div className={clsx(cls.iconContainer)}>
 				<Icon className={clsx(cls.icon)} />	
 			</div>

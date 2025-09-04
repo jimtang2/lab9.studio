@@ -21,16 +21,6 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
     ).pipe(z.coerce.number().default(0)), 
   }).parse(await searchParams)
 
-  const note = id === 0 ? await fetchLastNote() : await fetchNote(id)
-  if ("error" in note) {
-    return <h3>{note.error}</h3>
-  }
-
- const notes = await fetchNotesList()
-  if ("error" in notes) {
-    return <h3>{notes.error}</h3>
-  }
- 
   const cls = [
     "h-full max-h-full w-full max-w-full",
     "grid overflow-hidden",
@@ -48,6 +38,17 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
     ],
   ]
 
+ const notes = await fetchNotesList()
+  if ("error" in notes) {
+    return <h3>{notes.error}</h3>
+  }
+
+  const note = id === 0 ? null : await fetchNote(id)
+  if (note === null) {
+  } else if ("error" in note) {
+    return <h3>{note?.error}</h3>
+  }
+ 
   return <div id="notes-page" className={clsx(cls)}>
     <NoteTitle note={note} />
     <NoteContent note={note} />
