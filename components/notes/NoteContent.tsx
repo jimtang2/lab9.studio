@@ -7,9 +7,22 @@ import { parseMarkdown } from "./markdown"
 import clsx from "clsx"
 
 export default function NoteContent({ note }: { note: Note | null }) {
-	const defaultContent = `# Nothing to show
-Select a note to view`
+	const { 
+		showNav, 
+		setShowNav,
+		setShowNotesList, 
+	} = useStore(state => state)
+	const defaultContent = ``
   const content = note?.content || defaultContent
+
+  useEffect(() => {
+  	if (note === null) {
+  		setShowNotesList(true)
+  	} else if (showNav) {
+  		setShowNav(false)
+  	}
+  }, [note])
+
   return <NoteMarkdown text={content} />
 }
 
@@ -48,16 +61,14 @@ function NoteMarkdown({text}: {text: string}) {
   	],
   	markdown: [
 			[
-				"col-start-1 col-end-[-1]",
-				"row-start-2 row-end-[-1]",
-				"sm:col-start-2 sm:col-end-[-1]",
-				"sm:row-start-1 sm:row-end-[-1]",
+				"col-start-1 col-end-[-1] row-start-2 row-end-[-1]",
+				"sm:col-start-2 sm:col-end-[-1] sm:row-start-1 sm:row-end-[-1]",
 				"xl:col-end-[-2]",
 			],
 			[
 				"h-full max-h-full",
 				"overflow-x-hidden overflow-y-auto",
-				"px-2",
+				"px-0 pb-40",
 				"bg-background-primary",
 				showNotesList ? "pointer-events-none" : "pointer-events-auto",
 				"sm:pointer-events-auto",
@@ -118,7 +129,7 @@ function observeToc(markdownId: string, tocId: string): IntersectionObserver {
 			}
 		})
 	}, { 
-	  // rootMargin: '0px 0px -50% 0px',
+	  rootMargin: '50% 0px 50% 0px',
 	  root: document.querySelector(`#${markdownId}`),
 	  threshold: 1
 	})

@@ -18,6 +18,7 @@ export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitIn
 			"px-1",
 			"outline-accent",
 			"bg-control-background text-control-foreground",
+			// "rounded-md",
 			className,
 		],
 		icon: [

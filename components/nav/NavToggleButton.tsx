@@ -11,18 +11,22 @@ export default function NavToggleButton() {
 	const cls = {
 		button: [
 	  	[
-	  		"col-start-1 col-end-[-2]",
-	  		"row-start-1 row-end-2",
+	  		"col-start-1 col-end-[-2] row-start-1 row-end-2",
 	  	],
 	  	[
-				showNav ? "bg-selected-background text-selected-foreground" : "bg-menu text-text",
-	  		"border-b-1 border-r-1 border-border",
+	  		showNav && [
+	  		  "text-selected-foreground bg-selected-background",
+	  		  "sm:rounded-md",
+	  		],
+				!showNav && "bg-menu text-text",
+	  		"border-1 border-t-0 border-border",
 	  		"transition-all duration-300",
 	  	],
 	  	[
 		    "flex items-center justify-center",
 				"sm:hidden",
 				"z-4",
+				// "rounded-md",
 	  	],
 		],
 		icon: [

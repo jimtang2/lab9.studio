@@ -8,7 +8,7 @@ interface LogoutButtonProps {
 	className: string;
 }
 
-export default function LogoutButton(props: LogoutButtonProps) {
+export default function LogoutButton({ className }: LogoutButtonProps) {
 	const [ hovered, setHovered ] = useState(false)
 	const {
 		setSid,
@@ -18,12 +18,11 @@ export default function LogoutButton(props: LogoutButtonProps) {
 	const cls = {
 		button: [
 			"whitespace-nowrap",
-			"transition-all duration-300",
       "pl-4 pr-2",
       "flex items-center",
       "hover:text-accent",
-      "flex ",
-			props.className,
+			"transition-all duration-300",
+			className,
 		],
 		text: [
 			"flex-grow-1",

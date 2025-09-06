@@ -11,19 +11,21 @@ export default function NoteTitle({ note }: { note: Note | null }) {
 		showNotesList,
 		setShowNotesList,
 	} = useStore(state => state)
-	const title = note?.title || "Tap to select note"
+	const title = note?.title || "Select Note:"
   const cls = {
-  	container: [
+  	button: [
 			[
 				"col-start-2 col-end-[-2] row-start-1 row-span-1",
 				"grid grid-rows-1 grid-cols-[auto_50px] grid-flow-row",
 			],
 			[
-				"border-b-1 border-border",
-				showNotesList ? "bg-selected-background text-selected-foreground" : "bg-menu",
-
-				"sm:hidden",
+				"border-b-1 border-t-1 border-border",
+				showNotesList && "bg-selected-background text-selected-foreground",
+				!showNotesList && "bg-menu text-text",
 				"transition-all duration-300",
+				// "rounded-md",
+				"pl-2",
+				"sm:hidden",
 			],
 	  ],
 	  text: [
@@ -39,7 +41,7 @@ export default function NoteTitle({ note }: { note: Note | null }) {
 	  ],
   }
 
-	return <button className={clsx(cls.container)} 
+	return <button className={clsx(cls.button)} 
 		id="note-title" 
 		onClick={() => setShowNotesList(!showNotesList)}>
 			<span className={clsx(cls.text)}>{title}</span>

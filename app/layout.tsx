@@ -20,8 +20,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   colorScheme: "dark light",
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: "#e5e7eb" },
-    { media: '(prefers-color-scheme: dark)', color: "#262626" },
+    { media: '(prefers-color-scheme: light)', color: "#e5e5e5" },
+    { media: '(prefers-color-scheme: dark)', color: "#171717" },
   ],
 }
 
@@ -38,38 +38,52 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {  
   const cls = {
     html: [
-      "bg-background-primary text-text-primary",
+      "bg-background text-text",
       "[font-family:_Work,_sans-serif]",
       "max-h-screen max-w-screen",
     ],
     body: [
-      "bg-background-primary", 
-      "h-screen w-screen max-h-screen max-w-screen",
-      "grid overflow-hidden",
       // 50px width side nav on mobile
       // 50px height top nav on desktop
       [
-        "grid-cols-[50px_auto_50px]",
-        "grid-rows-[50px_auto]",
-        "sm:grid-cols-[auto_min-content]",
-        "sm:grid-rows-[50px_auto]",  
+        "grid overflow-hidden",
+        "grid-cols-[50px_auto_50px] grid-rows-[50px_auto]",
+        "h-screen w-screen max-h-screen max-w-screen",
+        "bg-background",
+      ],
+      [
+        "sm:grid-cols-[auto_max-content_min-content] sm:grid-rows-[50px_auto]",
+      ],
+    ],
+    nav: [
+      [
+        "col-start-1 col-end-2 row-start-1 row-end-[-1]",
+        "sm:col-start-1 sm:col-end-[-1] sm:row-start-1 sm:row-end-2",
+      ],
+    ],
+    user: [
+      [
+        "col-start-3 row-start-1",
+      ],
+      [
+        "sm:col-start-[-2] sm:row-start-1",
       ],
     ],
     main: [
       [
-        "col-start-1 col-end-[-1]",
-        "row-start-1 row-end-[-1]",
-        "sm:col-start-1 sm:col-end-[-1]",
-        "sm:row-start-2 sm:row-end-[-1]",
+        "col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
+        "overflow-hidden",
       ],
-      "overflow-hidden",
+      [
+        "sm:col-start-1 sm:col-end-[-1] sm:row-start-2 sm:row-end-[-1]",
+      ],
     ],
   }
 
   return <html lang="en" className={clsx(cls.html)}>
     <body className={clsx(cls.body)}>
-      <Nav />
-      <User />
+      <Nav className={clsx(cls.nav)}/>
+      <User className={clsx(cls.user)}/>
       <main className={clsx(cls.main)}>{children}</main>
     </body>
   </html>

@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useStore } from "@/state/store"
@@ -7,8 +7,12 @@ import LinkIcon from "/public/heroicons/solid/chevron-right.svg"
 import clsx from "clsx"
 
 export default function NotesList({ notes }: { notes: { id: number; title: string; updated_at: string; }[] }) {
-	const showNav = useStore(state => state.showNav)
-	const showNotesList = useStore(state => state.showNotesList)
+	const {
+		showNav,
+		setShowNav,
+		showNotesList,
+	} = useStore(state => state)
+
 	const searchParams = useSearchParams()
 	const nullId = searchParams.get("id") === null
 
@@ -22,7 +26,7 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   			showNotesList ? "pointer-events-auto" : "pointer-events-none",
   			"sm:pointer-events-auto",
 	  		"z-3",
-
+	  		"mx-1 sm:mx-0",
   		],
   	],
   	items: [
@@ -52,6 +56,12 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
 	  	],
   	],
   }
+
+  useEffect(() => {
+  	if (showNav) {
+  		setShowNav(false)
+  	}
+  }, [])
 
 	return <div id="notes-list" className={clsx(cls.container)}>
 		<div className={clsx(cls.items)}>
@@ -86,6 +96,7 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 				],
 				current && [
 					"bg-selected-background text-selected-foreground",
+					"rounded-md",
 				],
 				"text-base/6",
 				"overflow-x-hidden",
@@ -118,11 +129,11 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 		className={clsx(["note-item", cls.container])} 
 		onNavigate={() => {
 			setShowNotesList(false)
-			setNoteContentLoading(current)
+			setNoteContentLoading(!current)
 		}} 
 		onMouseOver={() => setHover(true)} 
 		onMouseOut={() => setHover(false)}>
-		<span className={clsx(cls.text)}>{title}</span>
+		<span className={clsx(cls.text)}>On {title}</span>
 		<button className={clsx(cls.linkIcon)}
 			tabIndex={showNotesList ? 0 : -1}>
 			<LinkIcon />

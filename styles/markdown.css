@@ -1,5 +1,18 @@
 @import "./global.css";
 
+
+#note-markdown p, 
+#note-markdown li, 
+#note-markdown table {
+  @apply mx-4 my-2 min-h-[50px];
+}
+
+#note-markdown h1,
+#note-markdown h2,
+#note-markdown h3 {
+	@apply mx-2;
+}
+
 .table-of-contents > ol {
 	@apply bg-background;
 	@apply pb-12;

@@ -13,8 +13,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "No sid provided" }, { status: 401 })
     }
     const user = await findUser(sid)
-
-    return NextResponse.json({ uid: user.name }, { status: 200 })
+    return NextResponse.json({ uid: user.name, is_admin: user.is_admin, }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: "Invalid or expired session" }, { status: 401 })
   }
@@ -46,7 +45,7 @@ async function findUser(sid: string): Promise<User> {
       throw new Error("User not found")
     }
 
-    return user;
+    return user
   } catch (error) {
     console.error("Error finding user:", error)
     throw new Error("Failed to find user")

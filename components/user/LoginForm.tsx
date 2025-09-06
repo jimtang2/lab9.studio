@@ -7,6 +7,7 @@ import clsx from "clsx"
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const {
+    showNav,
     showLogin,
     setShowLogin,
     setSid,
@@ -20,31 +21,35 @@ export default function LoginForm() {
   const cls = {
     form: [
       [
-        "absolute right-0 top-[100%]",
+        "absolute right-0 top-[calc(100%-1px)]",
         !showLogin && "translate-x-[50%] opacity-0",
         showLogin && "translate-x-[0px] opacity-100",
         "transition-all duration-300",
         "bg-menu",
       ],
       [
-        "grid grid-cols-[auto_50px] grid-rows-[repeat(4,min-content)]",
+        "grid grid-cols-[auto_50px] grid-rows-[50px_repeat(3,min-content)]",
         showLogin ? "pointer-events-auto" : "pointer-events-none",
-        "border-l-1 border-b-1 border-border",
-        "shadow-lg",
+        "border-[0.5px] border-border",
+        // "rounded-md",
+        [
+          showNav ? "w-[calc(100vw-50px)]" : "w-screen",
+          "sm:w-min",
+        ]
       ],
     ],
     header: [
       "col-start-1 col-end-3 row-start-1 row-span-1",
-      "px-2 py-2",
+      "px-3 sm:px-2 py-2",
     ],
     nameInput: [
       "col-start-1 col-end-3 row-start-2 row-span-1",
-      "border-t-1 border-b-1 border-border",
+      "border-t-[0.5px] border-b-[0.5px] border-border",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
     ],
     passwordInput: [
       "col-start-1 col-end-3 row-start-3 row-span-1",
-      "border-b-1 border-border",
+      "border-b-[0.5px] border-border",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
     ],
     submitInput: [
@@ -57,6 +62,7 @@ export default function LoginForm() {
       "col-start-1 col-end-[-1] row-start-[-2] row-span-1",
       "text-error",
       "px-2 py-2",
+      error === null && "hidden",
     ],
   }
 

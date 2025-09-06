@@ -22,7 +22,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
   }).parse(await searchParams)
 
   const cls = [
-    "h-full max-h-full w-full max-w-full",
+    "h-full max-h-full w-screen max-w-screen",
     "grid overflow-hidden",
     "z-1",
     [
@@ -89,3 +89,5 @@ async function fetchNotesList(): Promise<{ id: number; title: string; updated_at
     return { error: "Database error" }
   }
 }
+
+export const dynamic = "force-dynamic"

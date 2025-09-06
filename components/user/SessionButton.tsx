@@ -4,6 +4,7 @@ import { useStore } from "@/state/store"
 import { useSessionUser } from "@/state/useSessionUser"
 import LoggedOnIcon from "/public/heroicons/solid/user.svg"
 import LoggedOffIcon from "/public/heroicons/outline/user.svg"
+import AdminIcon from "/public/heroicons/outline/user-circle.svg"
 import clsx from "clsx"
 
 export default function SessionButton() {
@@ -17,6 +18,7 @@ export default function SessionButton() {
   const [user] = useSessionUser()
   const loggedIn = typeof(user?.name) === "string"
   const displayName = loggedIn ? user?.name : "Public"
+  const isAdmin = user?.is_admin || false
 
   useEffect(() => {
     setShowLogin(false)
@@ -29,13 +31,17 @@ export default function SessionButton() {
         "flex flex-row items-center justify-center",
         "h-full w-full",
         "z-10",
-        "sm:px-4 sm:gap-1",
-        showLogin && "bg-highlighted-background text-highlighted-foreground",
-        showSession && "bg-highlighted-background text-highlighted-foreground",
-        !showLogin && !showSession && "bg-menu",
-        loggedIn && "bg-selected-background text-selected-foreground",
+        "sm:px-6 sm:gap-1",
+        (showSession || showLogin) ? [
+          loggedIn && "text-accent",
+          "text-selected-foreground bg-selected-background",
+          "sm:rounded-md",
+        ] : [
+          "bg-menu",
+          loggedIn && "text-accent",
+        ],
         "transition-all duration-300",
-        "border-border border-l-1 border-b-1",
+        "border-1 border-border",
         "z-20",
         "pointer-events-auto",
       ],
@@ -45,9 +51,7 @@ export default function SessionButton() {
       "whitespace-nowrap overflow-x-hidden text-ellipsis",
     ],
     icon: [
-      "scale-[80%]",
-      "stroke-2",
-      "relative top-[-2px]",
+      !isAdmin && "scale-[80%]",
       loginFormLoading && "hidden",
     ],
     loader: [
@@ -65,7 +69,8 @@ export default function SessionButton() {
     title="" 
     onClick={handleClick}
     tabIndex={-1} >
-    {loggedIn ? <LoggedOnIcon className={clsx(cls.icon)} /> : <LoggedOffIcon className={clsx(cls.icon)} />}
+    {isAdmin ? <AdminIcon className={clsx(cls.icon)} /> : 
+    (loggedIn ? <LoggedOnIcon className={clsx(cls.icon)} /> : <LoggedOffIcon className={clsx(cls.icon)} />)}
     <div className={clsx(cls.loader)}></div>
     <span className={clsx(cls.text)}>{displayName}</span>
   </button>

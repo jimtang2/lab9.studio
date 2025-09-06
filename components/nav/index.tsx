@@ -3,39 +3,40 @@ import { useStore } from "@/state/store"
 import NavToggleButton from "./NavToggleButton"
 import NavHomeButton from "./NavHomeButton"
 import NavNotesButton from "./NavNotesButton"
+import NavProfileButton from "./NavProfileButton"
 import clsx from "clsx"
 
-export default function Nav() {
+export default function Nav({ className }: { className: string; }) {
 	const showNav = useStore(state => state.showNav)
 
   const cls = {
   	bar: [
 			[
-				"col-start-1 col-end-2",
-				"row-start-1 row-end-[-1]",
-				"sm:col-start-1 sm:col-end-[-1]",
-				"sm:row-start-1 sm:row-end-2",
+				"grid grid-cols-1 grid-rows-[49px_auto]",
+				"border-t-1 border-border",
+				"z-10",
 			],
 			[
-				"grid grid-cols-1 grid-rows-[50px_auto]",
 				"sm:grid-rows-1",
-				"z-10",
-				"sm:border-b-1 sm:border-border sm:border-r-0",					
+				"sm:border-b-1 sm:border-border sm:border-r-0",
 			],
+			className,
 		],
 		items: [
 			[
 				"col-start-1 col-span-1 row-start-2 row-end-[-1]",
+			],
+			[
 				"sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-span-1",
 			],
 			[
-				"grid grid-rows-[repeat(2,50px)_auto_50px_100px]",
-				"sm:grid sm:grid-rows-1 sm:grid-cols-[repeat(2,min-content)_auto_min-content]",
+				"grid grid-rows-[repeat(3,50px)_auto_50px_100px]",
+				"sm:grid sm:grid-rows-1 sm:grid-cols-[repeat(3,min-content)_auto_min-content]",
 				"sm:grid-flow-col",
 			],
 			[
 				showNav && "bg-menu",
-				"sm:bg-background",
+				"sm:bg-menu",
 				"border-r-1 border-border",
 				"divide-y-1 divide-border",
 				"sm:border-r-0",
@@ -54,6 +55,7 @@ export default function Nav() {
 		<div id="nav-bar-items" className={clsx(cls.items)}>
 			<NavHomeButton />
 			<NavNotesButton />
+			<NavProfileButton />
 			<div></div>
 		</div>
 	</div>

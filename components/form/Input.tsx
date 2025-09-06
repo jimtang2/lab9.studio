@@ -21,14 +21,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, label, pla
 		],
 		label: [
 			"col-start-1 col-end-2 row-start-1 row-end-2",
-			"relative left-1 px-1 pt-1",
+			"relative",
+			"px-[calc(3*var(--spacing))] pt-[calc(1.5*var(--spacing))]",
 			"text-xs text-accent",
-			"transition-all duration-300",
 		],
 		input: [
 			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-			"text-base px-3 pt-5 pb-2",
+			"text-base px-3 pt-5 pb-2 m-1",
 			"outline-accent",
+			"rounded-md",
 		],
 	}
 

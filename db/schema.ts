@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, timestamp, integer, uuid, check } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, boolean, varchar, timestamp, integer, uuid, check } from "drizzle-orm/pg-core";
 import { InferSelectModel, sql } from "drizzle-orm"
 
 export const Notes = pgTable("notes", {
@@ -16,6 +16,7 @@ export const Users = pgTable("users", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull().unique(),
   password: varchar("password", { length: 255 }),
+  is_admin: boolean("is_admin").notNull().default(false),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),
 });

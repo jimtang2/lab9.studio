@@ -49,5 +49,5 @@ async function fetchUser(): Promise<User> {
   }
 
   const data = await response.json()
-  return { name: data.uid } as User
+  return { name: data.uid, is_admin: data.is_admin } as User
 }
