@@ -1,25 +1,12 @@
 @import "./global.css";
 
 
-#note-markdown p, 
-#note-markdown li, 
-#note-markdown table {
-  @apply mx-4 my-2 min-h-[50px];
-}
-
-#note-markdown h1,
-#note-markdown h2,
-#note-markdown h3 {
-	@apply mx-2;
-}
-
 .table-of-contents > ol {
-	@apply bg-background;
 	@apply pb-12;
 }
 
 .table-of-contents li {
-	@apply py-0;
+	@apply px-0 py-0;
 }
 
 .table-of-contents li > a {	
@@ -51,9 +38,9 @@
 }
 
 .table-of-contents li > a.active {
-	@apply text-text bg-menu border-accent;
+	@apply text-text bg-background border-accent;
 }
 
 .table-of-contents li > a.top.active {
-	/*@apply text-accent;*/
+	@apply text-accent;
 }

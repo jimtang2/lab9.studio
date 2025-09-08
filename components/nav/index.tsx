@@ -1,13 +1,17 @@
 "use client"
 import { useStore } from "@/state/store"
-import NavToggleButton from "./NavToggleButton"
-import NavHomeButton from "./NavHomeButton"
-import NavNotesButton from "./NavNotesButton"
-import NavProfileButton from "./NavProfileButton"
+import NavButton from "./NavButton"
+import MenuToggleIcon from "/public/heroicons/solid/bars-3.svg"
+import HomeIcon from "/public/heroicons/solid/home.svg"
+import NotesIcon from "/public/heroicons/solid/newspaper.svg"
+import ProfileIcon from "/public/heroicons/solid/document.svg"
 import clsx from "clsx"
 
 export default function Nav({ className }: { className: string; }) {
-	const showNav = useStore(state => state.showNav)
+	const {
+		showNav,
+		setShowNav,
+	} = useStore(state => state)
 
   const cls = {
   	bar: [
@@ -28,6 +32,7 @@ export default function Nav({ className }: { className: string; }) {
 			],
 			[
 				"sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-span-1",
+				"sm:px-1",
 			],
 			[
 				"grid grid-rows-[repeat(3,50px)_auto_50px_100px]",
@@ -48,14 +53,44 @@ export default function Nav({ className }: { className: string; }) {
 				"transition-all duration-300",
 			],
 		],
+		toggle: [
+	  	"col-start-1 col-end-[-2] row-start-1 row-end-2",
+  		"border-1 border-t-0 border-border",
+			"transition-all duration-300",
+			"sm:hidden",
+			"z-4",
+		],
+  }
+
+  const handleClickMenuToggle = () => {
+  	setShowNav(!showNav)
   }
 
 	return <div id="nav" className={clsx(cls.bar)}>
-		<NavToggleButton />
+		{/*<NavToggleButton />*/}
+		<NavButton 
+		  id={"nav-menu-toggle-btn"}
+		  onClick={handleClickMenuToggle}
+		  className={clsx(cls.toggle)}
+		  icon={<MenuToggleIcon />}
+		  active={showNav} />
+
 		<div id="nav-bar-items" className={clsx(cls.items)}>
-			<NavHomeButton />
-			<NavNotesButton />
-			<NavProfileButton />
+			<NavButton 
+			  id={"nav-home-btn"}
+			  href={"/"}
+			  title={"lab9.studio"}
+			  icon={<HomeIcon />} />
+			<NavButton 
+			  id={"nav-notes-btn"}
+			  href={"/notes"}
+			  title={"Notes"}
+			  icon={<NotesIcon />} />
+			<NavButton 
+			  id={"nav-profile-btn"}
+			  href={"/profile"}
+			  title={"Profile"}
+			  icon={<ProfileIcon />} />
 			<div></div>
 		</div>
 	</div>

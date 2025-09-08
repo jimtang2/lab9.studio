@@ -38,6 +38,8 @@ function NoteMarkdown({text}: {text: string}) {
 	const tocId = "note-toc"
 	const [html, toc] = parseMarkdown(text)
 
+	const hasText = text?.length > 0
+
 	const markdownHtml = useMemo(() => ({ __html: html }), [html])
 	const tocHtml = useMemo(() => ({ __html: toc }), [toc])
 
@@ -69,7 +71,6 @@ function NoteMarkdown({text}: {text: string}) {
 				"h-full max-h-full",
 				"overflow-x-hidden overflow-y-auto",
 				"px-0 pb-40",
-				"bg-background-primary",
 				showNotesList ? "pointer-events-none" : "pointer-events-auto",
 				"sm:pointer-events-auto",
 				"sm:border-l-1 sm:border-border",
@@ -86,6 +87,7 @@ function NoteMarkdown({text}: {text: string}) {
 					"translate-x-0 sm:translate-x-0",
 				],
 			],
+			hasText ? "bg-background" : "bg-menu",
   	],
   	toc: [
   		[
@@ -97,6 +99,7 @@ function NoteMarkdown({text}: {text: string}) {
   			"pr-2",
   			"overflow-y-auto",
   		],
+  		"bg-menu",
   	],
   }
 

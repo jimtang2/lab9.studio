@@ -4,15 +4,15 @@
   --background-color: var(--color-gray-100);
   --menu-color: var(--color-neutral-200);
   --text-color: var(--color-gray-950);
-  --subtext-color: var(--color-gray-400);
-  --accent-color: var(--color-blue-900);
+  --subtext-color: var(--color-gray-600);
+  --accent-color: var(--color-blue-800);
   --control-background-color: var(--accent-color);
   --control-foreground-color: var(--color-gray-100);
-  --selected-background-color: var(--accent-color);
+  --selected-background-color: var(--color-blue-800);
   --selected-foreground-color: var(--color-neutral-100);
-  --highlighted-background-color: var(--accent-color);
-  --highlighted-foreground-color: var(--color-neutral-200);
-  --border-color: var(--color-gray-200);
+  --highlighted-background-color: var(--color-neutral-300);
+  --highlighted-foreground-color: var(--color-blue-950);
+  --border-color: var(--color-gray-300);
   --error-foreground-color: var(--color-red-500);
 }
 
@@ -27,8 +27,8 @@
     --control-foreground-color: var(--color-neutral-950);
     --selected-background-color: var(--color-yellow-500);
     --selected-foreground-color: var(--color-neutral-900);
-    --highlighted-background-color: var(--color-yellow-500);
-    --highlighted-foreground-color: var(--color-neutral-800);
+    --highlighted-background-color: var(--color-neutral-900);
+    --highlighted-foreground-color: var(--color-yellow-500);
     --border-color: var(--color-gray-800);
     --error-foreground-color: var(--color-red-500);
   }
@@ -51,29 +51,23 @@
 }
 
 h1 {
-  @apply text-xl/13;
-  @apply bg-background text-accent font-bold;  
-  /*@apply sticky top-[-20px];*/
-  @apply h-[70px] pt-[20px]
-}
-
-h2 {
-  @apply bg-background text-accent font-bold;  
-  /*@apply sticky top-0;*/
+  @apply text-xl/8;
 }
 
 h2, h3 {
-  @apply text-base/13;
-  @apply h-[50px];
+  @apply text-base/8;
 }
 
 h1, h2 {
   @apply uppercase overflow-hidden;
+  @apply text-accent font-bold;  
 }
 
 h1, h2, h3 {
   @apply border-b-[0.5px] border-t-[0.5px] border-border;
-  @apply px-2;
+  @apply px-4 py-2;
+  @apply text-wrap;
+  @apply overflow-x-hidden max-w-full;
 }
 
 h1 + h2, h2 + h2 {
@@ -81,7 +75,11 @@ h1 + h2, h2 + h2 {
 }
 
 p, ul, li, table {
-  @apply py-2 min-h-[50px];
+  @apply px-2 py-2 min-h-[50px];
+}
+
+p, table {
+  @apply px-4 py-2 min-h-[50px];
 }
 
 a, button {

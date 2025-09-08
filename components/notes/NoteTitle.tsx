@@ -20,10 +20,8 @@ export default function NoteTitle({ note }: { note: Note | null }) {
 			],
 			[
 				"border-b-1 border-t-1 border-border",
-				showNotesList && "bg-selected-background text-selected-foreground",
-				!showNotesList && "bg-menu text-text",
+				showNotesList ? "bg-background text-accent" : "bg-menu text-text",
 				"transition-all duration-300",
-				// "rounded-md",
 				"pl-2",
 				"sm:hidden",
 			],

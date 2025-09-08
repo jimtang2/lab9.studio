@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useStore } from "@/state/store"
@@ -26,17 +26,16 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   			showNotesList ? "pointer-events-auto" : "pointer-events-none",
   			"sm:pointer-events-auto",
 	  		"z-3",
-	  		"mx-1 sm:mx-0",
+	  		"mx-0",
   		],
   	],
   	items: [
   		[
-  			"bg-background",  			
-  		],
-  		[
   			"w-full h-full max-h-full max-w-full", 
   			"overflow-x-hidden overflow-y-auto",
   			"grid auto-rows-[min-content]",
+  			"divide-y divide-border",
+  			"border-b-1 border-border",
   		],
 	  	[
 	  		showNav && [
@@ -54,6 +53,7 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
 	  		"sm:w-full sm:translate-x-0",
   			"transition-all duration-300",
 	  	],
+	  	"bg-menu",
   	],
   }
 
@@ -79,49 +79,34 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 	} = useStore(state => state)
 
 	const searchParams = useSearchParams()
-	const [hover, setHover] = useState(false)
 	const currentId = searchParams.get("id")
 	const current = `${id}` === currentId
 
 	const cls = {
 		container: [
 			[
-				"grid grid-cols-[auto_50px] grid-rows-1",
+				"flex flex-row items-center",
 			],
 			[
-				"border-b-1 border-border",
-				"bg-background",
-				!current && [
-					"text-text hover:text-accent",
-				],
-				current && [
-					"bg-selected-background text-selected-foreground",
-					"rounded-md",
-				],
+				!current && "text-subtext hover:text-text",
+				current && "text-accent font-bold bg-background",
 				"text-base/6",
-				"overflow-x-hidden",
 			],
 			[
-				"min-h-[50px] sm:mx-2",
-				showNav ? "w-[calc(100%-50px)] sm:w-full" : "w-full",
-				"sm:max-w-[calc(100%-4*var(--spacing))]",
+				"w-full min-h-[50px]",
+				showNav && "w-[calc(100%-50px)]",
 			],
 			[
 				"transition-all duration-300",
 			],
 		],
 		text: [
-			"col-start-1 col-end-2",
-			"justify-self-start self-center",
-			"max-w-full px-3 sm:px-2",
+			"flex-grow-1",
+			"max-w-full pl-3",
 			"whitespace-nowrap overflow-hidden text-ellipsis",
 		],
 		linkIcon: [
-			"col-start-2 col-end-3",
-			"justify-self-stretch self-stretch",
-			"flex items-center justify-center",
-			hover && "animate-pulse",
-			current && "sm:hidden sm:pointer-events-none",
+			"mx-2",
 		],
 	}
 
@@ -130,13 +115,8 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 		onNavigate={() => {
 			setShowNotesList(false)
 			setNoteContentLoading(!current)
-		}} 
-		onMouseOver={() => setHover(true)} 
-		onMouseOut={() => setHover(false)}>
+		}}>
 		<span className={clsx(cls.text)}>On {title}</span>
-		<button className={clsx(cls.linkIcon)}
-			tabIndex={showNotesList ? 0 : -1}>
-			<LinkIcon />
-		</button>
+		<LinkIcon className={clsx(cls.linkIcon)} />
 	</Link>
 }

@@ -3,8 +3,8 @@ import { useEffect } from "react"
 import { useStore } from "@/state/store"
 import { useSessionUser } from "@/state/useSessionUser"
 import LoggedOnIcon from "/public/heroicons/solid/user.svg"
-import LoggedOffIcon from "/public/heroicons/outline/user.svg"
-import AdminIcon from "/public/heroicons/outline/user-circle.svg"
+import LoggedOffIcon from "/public/heroicons/solid/user.svg"
+import AdminIcon from "/public/heroicons/solid/user-circle.svg"
 import clsx from "clsx"
 
 export default function SessionButton() {
@@ -34,11 +34,12 @@ export default function SessionButton() {
         "sm:px-6 sm:gap-1",
         (showSession || showLogin) ? [
           loggedIn && "text-accent",
-          "text-selected-foreground bg-selected-background",
+          "text-accent bg-background",
           "sm:rounded-md",
         ] : [
           "bg-menu",
           loggedIn && "text-accent",
+          !loggedIn && "text-subtext",
         ],
         "transition-all duration-300",
         "border-1 border-border",
