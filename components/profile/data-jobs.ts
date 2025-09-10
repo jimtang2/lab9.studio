@@ -1,19 +1,6 @@
-interface Job {
-  company: string;
-  url: string;
-  positions: Position[];
-}
+import { type Job } from "./types"
 
-interface Position {
-  department: string;
-  title: string;
-  start: string;
-  end: string;
-  city: string;
-  description: string;
-}
-
-const jobs: Job[] = [
+const jobsData: Job[] = [
   {
     company: "CLSA CITIC",
     url: "https://www.clsa.com/",
@@ -21,7 +8,7 @@ const jobs: Job[] = [
       {
         department: "Research IT",
         title: "Sr Software Engineer (Permanent)",
-        start: "4/2021",
+        start: "6/2021",
         end: "6/2023",
         city: "Hong Kong",
         description: "",
@@ -97,7 +84,7 @@ const jobs: Job[] = [
     url: "https://www.laserfiche.com",
     positions: [
       {
-        department: "Laseriche UK",
+        department: "UK Services",
         title: "Consultant",
         start: "2012",
         end: "11/2013",
@@ -124,4 +111,4 @@ const jobs: Job[] = [
   },
 ]
 
-export default jobs
+export default jobsData

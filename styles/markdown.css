@@ -1,5 +1,68 @@
 @import "./global.css";
 
+#note-markdown h1 {
+  @apply text-2xl/10;
+  @apply font-black;
+  @apply border-b-1 border-double border-border;
+  @apply bg-menu;
+  @apply px-3 py-6;
+}
+
+#note-markdown h2 {
+  @apply text-lg/8;
+  @apply font-bold;
+  @apply px-4 py-4;
+}
+
+#note-markdown h3 {
+  @apply text-base/8;
+  @apply font-normal;
+  @apply px-4 py-2;
+}
+
+#note-markdown h1, 
+#note-markdown h2, 
+#note-markdown h3 {
+  @apply text-accent;
+  @apply uppercase;
+  @apply text-wrap;
+  @apply overflow-x-hidden max-w-full;
+}
+
+#note-markdown h1 + h2, 
+#note-markdown h2 + h2 {
+  @apply border-t-0;
+}
+
+#note-markdown p, 
+#note-markdown ul, 
+#note-markdown li, 
+#note-markdown table {
+  @apply px-2 py-2;
+  @apply text-base/6;
+}
+
+#note-markdown p {
+	@apply mx-2;
+}
+
+#note-markdown table {
+	@apply mx-4;
+}
+
+#note-markdown ul {
+  @apply list-decimal list-inside;
+}
+
+#note-markdown ul ul {
+  @apply list-disc;
+}
+
+#note-markdown pre, code {
+  @apply text-sm/6 pt-[1px];
+  @apply wrap-break-word whitespace-pre;
+  @apply text-accent;
+}
 
 .table-of-contents > ol {
 	@apply pb-12;

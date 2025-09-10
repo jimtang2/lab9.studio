@@ -4,7 +4,7 @@
   --background-color: var(--color-gray-100);
   --menu-color: var(--color-neutral-200);
   --text-color: var(--color-gray-950);
-  --subtext-color: var(--color-gray-600);
+  --subtext-color: var(--color-gray-500);
   --accent-color: var(--color-blue-800);
   --control-background-color: var(--accent-color);
   --control-foreground-color: var(--color-gray-100);
@@ -50,50 +50,8 @@
   --color-error: var(--error-foreground-color);
 }
 
-h1 {
-  @apply text-xl/8;
-}
-
-h2, h3 {
-  @apply text-base/8;
-}
-
-h1, h2 {
-  @apply uppercase overflow-hidden;
-  @apply text-accent font-bold;  
-}
-
-h1, h2, h3 {
-  @apply border-b-[0.5px] border-t-[0.5px] border-border;
-  @apply px-4 py-2;
-  @apply text-wrap;
-  @apply overflow-x-hidden max-w-full;
-}
-
-h1 + h2, h2 + h2 {
-  @apply border-t-0;
-}
-
-p, ul, li, table {
-  @apply px-2 py-2 min-h-[50px];
-}
-
-p, table {
-  @apply px-4 py-2 min-h-[50px];
-}
-
 a, button {
   @apply cursor-pointer;
-}
-
-ul {
-  @apply list-disc list-inside;
-}
-
-pre, code {
-  @apply text-sm/6 pt-[1px];
-  @apply wrap-break-word whitespace-pre;
-  @apply text-accent;
 }
 
 input {

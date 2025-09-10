@@ -1,19 +1,9 @@
 import Link from "next/link"
+import { type Education } from "./types"
 import ChevronIcon from "/public/heroicons/solid/chevron-right.svg"
 import clsx from "clsx"
 
-interface EducationProps {
-  school: string;
-  url: string;
-  degree: string;
-  major: string;
-  minor?: string;
-  start: string;
-  end: string;
-  city: string;
-}
-
-export default function Education({ school, url, degree, major="", minor="", start, end, city, }: EducationProps) {
+export default function EducationItem({ school, url, degree, major="", minor="", start, end, city, }: Education) {
   const hasUrl = url.length > 0
 
    const cls = {
@@ -48,12 +38,17 @@ export default function Education({ school, url, degree, major="", minor="", sta
     ],
     date: [
       "px-3",
+      "text-subtext",
     ],
     linkIcon: [
       "scale-80",
       "relative top-[-1px]",
     ],
   }
+
+  const subtitle = `${degree.length > 0 ? degree : ""}${degree.length > 0 && major.length > 0 ? ", " : ""}${major.length > 0 ? major : ""}`
+  const date = `${start.length > 0 ? start : ""}${start.length > 0 && end.length > 0 ? " - " : ""}${end.length > 0 ? end : ""}`
+
   return <div className={clsx(cls.education)}>
     <div className={clsx(cls.title)}>
       {hasUrl ? 
@@ -63,16 +58,8 @@ export default function Education({ school, url, degree, major="", minor="", sta
       <span className={clsx(cls.school)}>{school}</span>}
     </div>
     <div className={clsx(cls.city)}>{city}</div>
-    <div className={clsx(cls.subtitle)}>
-    	<span className={clsx(cls.degree)}>{degree},</span>
-    	<span className={clsx(cls.major)}>{major}</span>
-    </div>
+    <div className={clsx(cls.subtitle)}>{subtitle}</div>
     <div className={clsx(cls.minor)}>Minor: {minor}</div>
-
-
-    <div className={clsx(cls.date)}>
-      <span>{start} - </span>
-     <span>{end}</span>
-    </div>
+    <div className={clsx(cls.date)}>{date}</div>
   </div>
 }

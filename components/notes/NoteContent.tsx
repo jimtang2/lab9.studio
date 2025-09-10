@@ -77,7 +77,7 @@ function NoteMarkdown({text}: {text: string}) {
 				"xl:border-r-1",
 			],
 			[
-				"transition-[width] transition-transform duration-300",
+				"transition-[width] transition-transform duration-150",
 				showNav && [
 					"w-[calc(100%-50px)] sm:w-full",
 					"translate-x-[50px] sm:translate-x-0",

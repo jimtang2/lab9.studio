@@ -28,7 +28,7 @@ export default function SessionMenu() {
 			  		"translate-y-[-50%] opacity-0",
 			  		"pointer-events-none",
 			  	],
-			  	"transition-all duration-300",			  	
+			  	"transition-all duration-150",			  	
 			  ],
 			],
 			[

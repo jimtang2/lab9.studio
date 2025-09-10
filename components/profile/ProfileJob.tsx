@@ -1,33 +1,21 @@
-"use client"
 import Link from "next/link"
-import { useState } from "react"
+import { type Job, type Position } from "./types"
 import ChevronIcon from "/public/heroicons/solid/chevron-right.svg"
 import clsx from "clsx"
 
-interface JobProps {
-  company: string;
-  url: string;
-  positions: PositionProps[];
-  onClick: (job: string) => void;
-  selected: boolean;
-}
-
-export default function Job({ company, url, positions=[], onClick, selected, }: JobProps) {
-  const multiplePositions = positions.length > 1
-  const hasUrl = url.length > 0
-
+export default function JobItem({ company, url, positions=[], }: Job) {
   const cls = {
-    job: [
+    container: [
       "profile-job",
       "flex flex-col",
       "pt-4 pb-2",
       "text-nowrap",
       "transition-all duration-300",
-
     ],
     title: [
       "px-3",
       "text-accent",
+      "flex flex-row gap-1",
     ],
     positions: [
       "flex flex-col divide-y divide-border",
@@ -35,40 +23,31 @@ export default function Job({ company, url, positions=[], onClick, selected, }: 
     ],
     company: [
       "font-bold",
-      "flex flex-row gap-1",
+      
     ],
     linkIcon: [
       "scale-80",
+      "inline",
       "relative top-[-1px]",
     ],
   }
 
-  return <div className={clsx(cls.job)}  >
+  return <div className={clsx(cls.container)}  >
   	<div className={clsx(cls.title)}>
-      {hasUrl ? 
+      {url.length > 0 ? 
       <Link className={clsx(cls.company)} href={url}>
-        {company}
+        <span>{company}</span>
         <ChevronIcon className={clsx(cls.linkIcon)} />
       </Link> : 
       <div className={clsx(cls.company)}>{company}</div>}
   	</div>
     <div className={clsx(cls.positions)}>
-      {positions.map((p,i) =>
-        <Position key={i} {...p} />)}
+      {positions.map((p,i) => <PositionItem key={i} {...p} />)}
     </div>
   </div>
 }
 
-interface PositionProps {
-  department: string;
-  title: string;
-  start: string;
-  end: string;
-  city: string;
-  description: string;  
-}
-
-function Position({title, department, city, start, end}: PositionProps) {
+function PositionItem({title, department, city, start, end}: Position) {
   const cls = {
     position: [
       "profile-job-position",
@@ -91,6 +70,7 @@ function Position({title, department, city, start, end}: PositionProps) {
 
     ],
     date: [
+      "text-subtext",
     ],
   }
   return <div className={clsx(cls.position)}>

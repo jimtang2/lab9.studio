@@ -50,15 +50,15 @@ export default function Nav({ className }: { className: string; }) {
 			[
 				showNav ? "translate-x-0 opacity-100" : "translate-x-[-50%] opacity-0",
 				"sm:translate-x-0 sm:opacity-100",
-				"transition-all duration-300",
+				"transition-all duration-150",
 			],
 		],
 		toggle: [
 	  	"col-start-1 col-end-[-2] row-start-1 row-end-2",
   		"border-1 border-t-0 border-border",
-			"transition-all duration-300",
+			"transition-all duration-150",
 			"sm:hidden",
-			"z-4",
+			// "z-20",
 		],
   }
 
@@ -67,7 +67,6 @@ export default function Nav({ className }: { className: string; }) {
   }
 
 	return <div id="nav" className={clsx(cls.bar)}>
-		{/*<NavToggleButton />*/}
 		<NavButton 
 		  id={"nav-menu-toggle-btn"}
 		  onClick={handleClickMenuToggle}

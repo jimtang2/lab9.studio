@@ -41,7 +41,7 @@ export default function SessionButton() {
           loggedIn && "text-accent",
           !loggedIn && "text-subtext",
         ],
-        "transition-all duration-300",
+        "transition-all duration-150",
         "border-1 border-border",
         "z-20",
         "pointer-events-auto",
@@ -50,6 +50,7 @@ export default function SessionButton() {
     text: [
       "hidden sm:inline-block",
       "whitespace-nowrap overflow-x-hidden text-ellipsis",
+      "font-bold",
     ],
     icon: [
       !isAdmin && "scale-[80%]",

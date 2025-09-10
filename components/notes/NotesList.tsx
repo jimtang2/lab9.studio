@@ -31,27 +31,36 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   	],
   	items: [
   		[
-  			"w-full h-full max-h-full max-w-full", 
-  			"overflow-x-hidden overflow-y-auto",
   			"grid auto-rows-[min-content]",
+  			"max-w-full max-h-full", 
+  			"overflow-x-hidden overflow-y-auto",
   			"divide-y divide-border",
   			"border-b-1 border-border",
+  		],
+  		[
+  			"sm:w-full sm:h-full",
+  			"sm:translate-x-0 sm:translate-y-0 sm:opacity-100",
   		],
 	  	[
 	  		showNav && [
 	  			"w-[calc(100%-50px)]",
-	  			showNotesList && "translate-x-[50px] opacity-100", 
-	  			!showNotesList && "translate-x-[50%] opacity-0",
-
+	  			"translate-x-[50px]",
 	  		],
 	  		!showNav && [
 	  			"w-full",
-		  		showNotesList && "translate-x-0 opacity-100", 
-		  		!showNotesList && "translate-x-[50%] opacity-0",
+	  			"translate-x-0",
 	  		],
-	  		"sm:w-full sm:translate-x-0 sm:opacity-100",
-	  		"sm:w-full sm:translate-x-0",
-  			"transition-all duration-300",
+	  		showNotesList && [
+	  			"h-full",
+	  			"opacity-100",
+	  			"translate-y-0",
+	  		], 
+	  		!showNotesList && [
+	  			"h-[0px]",
+	  			"opacity-0",
+	  			"translate-y-[-50px]",
+	  		],
+  			"transition-all duration-150",
 	  	],
 	  	"bg-menu",
   	],
@@ -62,6 +71,12 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   		setShowNav(false)
   	}
   }, [])
+
+  useEffect(() => {
+  	if (showNotesList && !showNav) {
+  		setShowNav(true)
+  	}
+  }, [showNotesList])
 
 	return <div id="notes-list" className={clsx(cls.container)}>
 		<div className={clsx(cls.items)}>
@@ -84,20 +99,15 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 
 	const cls = {
 		container: [
-			[
-				"flex flex-row items-center",
-			],
+			"flex flex-row items-center",
+			"w-full min-h-[50px]",
+			"last:border-b-1 border-border",
+			"text-base/6",
 			[
 				!current && "text-subtext hover:text-text",
 				current && "text-accent font-bold bg-background",
-				"text-base/6",
-			],
-			[
-				"w-full min-h-[50px]",
 				showNav && "w-[calc(100%-50px)]",
-			],
-			[
-				"transition-all duration-300",
+				"transition-all duration-150",
 			],
 		],
 		text: [

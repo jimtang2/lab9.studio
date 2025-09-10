@@ -22,17 +22,21 @@ export default function NavButton({ id, href="", onClick, className, title="", i
   	base: [
       "flex items-center justify-center",
       isCurrent ? [
-        "text-accent bg-background",
+        "bg-background text-accent",
         "sm:rounded-md",
       ] : [
+        "bg-menu",
         "text-subtext hover:text-text",
       ],
       "sm:px-6",
-      "transition-all duration-300",
+      "transition-all duration-150",
       className,
 	  ],
 	  icon: "sm:hidden",
-	  text: "not-sm:hidden",
+	  text: [
+      "font-bold",
+      "not-sm:hidden",
+    ],
   }
 
   if (isLink) {

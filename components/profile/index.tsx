@@ -1,20 +1,19 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useStore } from "@/state/store"
-import Job from "./ProfileJob"
-import Education from "./ProfileEducation"
-import Project from "./ProfileProject"
-import FunnelIcon from "/public/heroicons/outline/funnel.svg"
+import { type Header as HeaderProps } from "./types"
+import JobItem from "./ProfileJob"
+import EducationItem from "./ProfileEducation"
+import ProjectItem from "./ProfileProject"
+import jobsData from "./data-jobs"
+import educationData from "./data-edu"
+import projectsData from "./data-projects"
+// import ProjectsTable from "./ProfileProjectsTable"
 import clsx from "clsx"
-import jobs from "./data-jobs"
-import edu from "./data-edu"
-import projects from "./data-projects"
+import "@/styles/profile.css"
 
 export default function Page() {
   const { showNav, setShowNav, } = useStore(state => state)
-
-  const [ selectedJobs, setSelectedJobs ] = useState<string[]>([])
-  const selectedJobsKeys: Record<string,boolean> = {}
 
   const cls = {
     title: [
@@ -29,40 +28,6 @@ export default function Page() {
       [
         "sm:hidden",
       ],
-    ],
-    header: [
-      "profile-pane-header",
-      [
-        "flex flex-row items-center",
-        "h-[50px] w-full",
-        "text-lg font-bold",
-        "uppercase",
-        "sticky",
-        "top-0",
-        "z-1",
-      ],
-      [
-        "sm:top-[-16px]",
-        "sm:h-[60px] sm:min-h-[60px] sm:w-full",
-        "sm:text-lg",
-        "sm:rounded-t-md",
-      ],
-      "bg-menu",
-    ],
-    headerText: [
-      "profile-pane-header-text",
-      "px-3",
-    ],
-    headerControl: [
-      "profile-pane-header-btn",
-      "text-base font-normal justify-self-start",
-      "p-2",
-      "relative top-[-1px]",
-      "hidden",
-    ],
-    funnelIcon: [
-      "scale-85",
-      "stroke-[1.5]",
     ],
     page: [
       "profile-page",
@@ -115,10 +80,6 @@ export default function Page() {
       "sm:h-fit",
       "sm:mb-12",
     ],
-    placeholder: [
-      "profile-pane-placeholder",
-      "sm:col-start-1 sm:row-start-3 sm:row-span-1",
-    ],
   }
 
   useEffect(() => {
@@ -127,55 +88,48 @@ export default function Page() {
     }
   }, [])
 
-  selectedJobs.map(job => selectedJobsKeys[job] = true)
-  const handleClickJob = (job: string) => {
-    if (job in selectedJobsKeys) {
-      setSelectedJobs(selectedJobs.filter(selectedJob => selectedJob != job))
-    } else {
-      setSelectedJobs(selectedJobs.concat(job))
-    }
-  }
-
-  const handleClickSortButton = () => {
-    setSelectedJobs([])
-  }
-
   return <div id="profile-page" className={clsx(cls.page)}>
     <div className={clsx(cls.title)}>Profile</div>
 
     <div className={clsx([cls.jobs, cls.pane])}>
-      <div className={clsx(cls.header)}>
-        <span className={clsx(cls.headerText)}>Job History</span>
-      </div>
-      {jobs.map((job, i) => 
-        <Job key={i} {...job} 
-          onClick={handleClickJob}
-          selected={(job.company in selectedJobsKeys)} />)}
+      <Header text="Job History" />
+      {jobsData.map((job, i) => <JobItem key={i} {...job} />)}
     </div>
 
     <div className={clsx([cls.education, cls.pane])}>
-      <div className={clsx(cls.header)}>
-        <span className={clsx(cls.headerText)}>Education</span>
-      </div>
-      {edu.map((edu, i) => 
-        <Education key={i} {...edu} />)}
+      <Header text="Education" />
+      {educationData.map((edu, i) => <EducationItem key={i} {...edu} />)}
     </div>
 
     <div className={clsx([cls.projects, cls.pane])}>
-      <div className={clsx(cls.header)}>
-        <span className={clsx(cls.headerText)}>Projects List</span>
-        <button className={clsx(cls.headerControl)} 
-          onClick={handleClickSortButton}>
-          <FunnelIcon className={clsx(cls.funnelIcon)} />
-        </button>
-      </div>
-      {projects.map((project, i) => 
-        <Project key={i} {...project}
-          selected={(project.company in selectedJobsKeys)}
-          hasSelection={selectedJobs.length > 0} />
-      )}
+      <Header text="Projects List" />
+      
+      {/*<ProjectsTable />*/}
+      {projectsData.map((project, i) => <ProjectItem key={i} {...project} />)}
     </div>
-
-    <div className={clsx(cls.placeholder)}></div>
   </div>
+}
+
+function Header({ text }: HeaderProps) {
+  const cls = [
+    "profile-pane-header",
+    "flex flex-row items-center",
+    "text-lg font-bold",
+    "uppercase",
+    "sticky",
+    "z-1",
+    "bg-menu",
+    "px-3",
+    [
+      "h-[50px] w-full",
+      "top-0",
+    ],
+    [
+      "sm:top-[-16px]",
+      "sm:h-[60px] sm:min-h-[60px] sm:w-full",
+      "sm:rounded-t-md",
+    ],
+  ]
+
+  return <div className={clsx(cls)}>{text}</div>
 }
