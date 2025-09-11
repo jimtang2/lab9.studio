@@ -18,8 +18,9 @@ export default function JobItem({ company, url, positions=[], }: Job) {
       "flex flex-row gap-1",
     ],
     positions: [
-      "flex flex-col divide-y divide-border",
+      "flex flex-col",
       "w-full min-w-fit",
+      "divide-y divide-y-[0.5px] divide-border",
     ],
     company: [
       "font-bold",

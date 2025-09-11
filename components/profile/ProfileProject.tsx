@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import Link from "next/link"
 import { type Project } from "./types"
 import ChevronIcon from "/public/heroicons/solid/chevron-right.svg"
@@ -5,7 +6,55 @@ import GlobeIcon from "/public/heroicons/outline/globe-alt.svg"
 import GithubIcon from "/public/logos/github-icon.svg"
 import clsx from "clsx"
 
-export default function ProjectItem({ name, type=[], company, start, end, description, demoUrl="", repoUrl="", websiteUrl="", stack=[], items=[] }: Project) {
+export default function ProjectItems({items, layout}: {items: Project[]; layout: "0" | "1";}) {
+  if (layout == "0") {
+    return <>
+      {items.map((project, i) => <ProjectItem key={i} {...project} layout={layout}/>)}
+    </>
+  } else if (layout == "1") {
+    const cls = {
+      header: [
+        "flex flex-row items-center",
+        "font-black",
+        "text-lg text-accent",
+        "h-[44px] px-3",
+        "bg-menu",
+        "border-b-1 border-double border-border",
+        "sticky top-[48px] sm:top-[59px]",
+        "z-1",
+      ],
+    }
+    const data = new GroupedItems(items)
+    return <>
+      {data.groups.map(groupName =>
+        <Fragment key={groupName}>
+          <div className={clsx(cls.header)}>{groupName}</div>
+          {data.items[groupName].map(item =>
+            <ProjectItem key={item.name} {...item} layout={layout} />)}
+        </Fragment>)}
+    </>
+  }
+}
+
+class GroupedItems {
+  groups: string[];
+  items: Record<string, Project[]>;
+
+  constructor(items: Project[]) {
+    this.groups = []
+    this.items = {}
+    items.map(item => {
+      const { company } = item
+      if (!(company in this.items)) {
+        this.items[company] = []
+        this.groups.push(company)
+      }
+      this.items[company].push(item)
+    })    
+  }
+}
+
+function ProjectItem({ name, type=[], company, start, end, description, demoUrl="", repoUrl="", websiteUrl="", stack=[], items=[], layout="0", }: Project & { layout: "0" | "1";}) {
    const cls = {
     container: [
       "profile-project",
@@ -13,7 +62,10 @@ export default function ProjectItem({ name, type=[], company, start, end, descri
       "text-wrap",
       "text-base/6",
       "px-3 py-2",
-      "max-h-lg;"
+      "max-h-lg",
+      "border-b-1 border-border",
+      // layout == "0" && "border-t-5 border-double border-border",
+      // layout == "1" && "border-double border-border",
     ],
     title: [
       "py-2",
@@ -22,6 +74,7 @@ export default function ProjectItem({ name, type=[], company, start, end, descri
       "font-bold",
       "text-accent",
       "pr-1",
+      layout == "1" && "hidden",
     ],
     name: [
       "font-bold",
@@ -76,6 +129,7 @@ export default function ProjectItem({ name, type=[], company, start, end, descri
     ],
     chevron: [
       "scale-75",
+      "z-0",
     ],
   }
 

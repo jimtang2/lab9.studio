@@ -19,10 +19,10 @@ export default function NoteTitle({ note }: { note: Note | null }) {
 				"grid grid-rows-1 grid-cols-[auto_50px] grid-flow-row",
 			],
 			[
-				"border-b-1 border-t-1 border-border",
 				showNotesList ? "bg-background text-accent" : "bg-menu text-text",
 				"transition-all duration-300",
-				"pl-2",
+				"pl-2 mx-1",
+				"rounded-md",
 				"sm:hidden",
 			],
 	  ],

@@ -23,7 +23,7 @@ export default function NavButton({ id, href="", onClick, className, title="", i
       "flex items-center justify-center",
       isCurrent ? [
         "bg-background text-accent",
-        "sm:rounded-md",
+        "rounded-md sm:rounded-sm",
       ] : [
         "bg-menu",
         "text-subtext hover:text-text",

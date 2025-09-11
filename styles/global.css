@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: var(--color-neutral-950);
+    --background-color: var(--color-neutral-800);
     --menu-color: var(--color-neutral-900);
     --text-color: var(--color-gray-100);
     --subtext-color: var(--color-gray-500);
@@ -29,7 +29,7 @@
     --selected-foreground-color: var(--color-neutral-900);
     --highlighted-background-color: var(--color-neutral-900);
     --highlighted-foreground-color: var(--color-yellow-500);
-    --border-color: var(--color-gray-800);
+    --border-color: var(--color-stone-800);
     --error-foreground-color: var(--color-red-500);
   }
 }

@@ -34,7 +34,6 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   			"grid auto-rows-[min-content]",
   			"max-w-full max-h-full", 
   			"overflow-x-hidden overflow-y-auto",
-  			"divide-y divide-border",
   			"border-b-1 border-border",
   		],
   		[
@@ -67,12 +66,6 @@ export default function NotesList({ notes }: { notes: { id: number; title: strin
   }
 
   useEffect(() => {
-  	if (showNav) {
-  		setShowNav(false)
-  	}
-  }, [])
-
-  useEffect(() => {
   	if (showNotesList && !showNav) {
   		setShowNav(true)
   	}
@@ -100,19 +93,21 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 	const cls = {
 		container: [
 			"flex flex-row items-center",
-			"w-full min-h-[50px]",
-			"last:border-b-1 border-border",
+			"min-h-[50px]",
+			// "last:border-b-1 border-border",
+			"ml-3 pl-2",
+			"rounded-md sm:rounded-sm",
 			"text-base/6",
 			[
-				!current && "text-subtext hover:text-text",
+				!current && "text-text hover:text-accent",
 				current && "text-accent font-bold bg-background",
-				showNav && "w-[calc(100%-50px)]",
+				showNav ? "w-[calc(100%-3*var(--spacing))]" : "w-[calc(100%-3*var(--spacing))]",
 				"transition-all duration-150",
 			],
 		],
 		text: [
 			"flex-grow-1",
-			"max-w-full pl-3",
+			"max-w-full",
 			"whitespace-nowrap overflow-hidden text-ellipsis",
 		],
 		linkIcon: [

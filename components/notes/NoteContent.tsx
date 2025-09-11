@@ -70,11 +70,9 @@ function NoteMarkdown({text}: {text: string}) {
 			[
 				"h-full max-h-full",
 				"overflow-x-hidden overflow-y-auto",
-				"px-0 pb-40",
+				"px-0 pb-40 sm:mx-2",
 				showNotesList ? "pointer-events-none" : "pointer-events-auto",
 				"sm:pointer-events-auto",
-				"sm:border-l-1 sm:border-border",
-				"xl:border-r-1",
 			],
 			[
 				"transition-[width] transition-transform duration-150",
@@ -87,7 +85,7 @@ function NoteMarkdown({text}: {text: string}) {
 					"translate-x-0 sm:translate-x-0",
 				],
 			],
-			hasText ? "bg-background" : "bg-menu",
+			"bg-menu",
   	],
   	toc: [
   		[

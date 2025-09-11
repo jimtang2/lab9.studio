@@ -1,10 +1,10 @@
 "use client"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useStore } from "@/state/store"
 import { type Header as HeaderProps } from "./types"
 import JobItem from "./ProfileJob"
 import EducationItem from "./ProfileEducation"
-import ProjectItem from "./ProfileProject"
+import ProjectItems from "./ProfileProject"
 import jobsData from "./data-jobs"
 import educationData from "./data-edu"
 import projectsData from "./data-projects"
@@ -13,6 +13,7 @@ import clsx from "clsx"
 import "@/styles/profile.css"
 
 export default function Page() {
+  const [ projectLayout, setProjectLayout ] = useState<"0" | "1">("1")
   const { showNav, setShowNav, } = useStore(state => state)
 
   const cls = {
@@ -23,7 +24,6 @@ export default function Page() {
       "flex items-center",
       "bg-menu text-xl",
       "px-2",
-      "border-1 border-border",
       "z-10",
       [
         "sm:hidden",
@@ -37,14 +37,16 @@ export default function Page() {
         "w-[calc(100%+8px)]] max-w-screen",
         "overflow-x-hidden overflow-y-auto",
         "pt-[50px] pb-[100px]",
+        "bg-menu",
       ],
       [
         "sm:grid-cols-[min-content_1fr] sm:grid-rows-[min-content_min-content_1fr]",
         "sm:gap-x-4 sm:gap-y-8",
         "sm:max-h-[calc(100%-10px)]",
-        "sm:max-w-7xl mx-auto",
+        // "sm:max-w-5xl",
+        // "sm:min-w-xl sm:w-min",
         "sm:overflow-y-auto",
-        "sm:p-4",
+        "sm:px-4 sm:pt-0",
       ],
       [
         "relative sm:left-0 w-full",
@@ -52,35 +54,38 @@ export default function Page() {
         !showNav && "left-0",
         "transition-all duration-300",
       ],
-      "bg-menu",
-
     ],
     pane: [
       "profile-pane",
       [
         "px-0",
-        "divide-y-1 divide-border",
       ],
       [
         "sm:border-1 sm:border-border",
         "sm:rounded-md",
-        "sm:max-w-4xl",
+        "sm:max-w-2xl",
       ],
-      "bg-background",
+      "bg-menu",
     ],
     jobs: [
       "profile-pane-jobs",
       "sm:col-start-1 sm:row-start-1",
+      "divide-y-1 divide-border",
     ],
     education: [
       "profile-pane-education",
       "sm:col-start-1 sm:row-start-2 sm:row-span-1",
+      "divide-y-1 divide-border",
     ],
     projects: [
       "profile-pane-education",
       "sm:col-start-2 sm:row-start-1 sm:row-span-3",
       "sm:h-fit",
       "sm:mb-12",
+    ],
+    select: [
+      "font-normal",
+      "text-right",
     ],
   }
 
@@ -104,34 +109,51 @@ export default function Page() {
     </div>
 
     <div className={clsx([cls.projects, cls.pane])}>
-      <Header text="Projects List" />
+      <Header text="Projects List">
+        <select className={clsx(cls.select)}
+          defaultValue={projectLayout}
+          onChange={e => setProjectLayout(e.target.value as ("0" | "1"))}>
+          <option value="0">Latest</option>
+          <option value="1">Latest by company</option>  
+        </select>
+      </Header>
       
       {/*<ProjectsTable />*/}
-      {projectsData.map((project, i) => <ProjectItem key={i} {...project} />)}
+
+      <ProjectItems items={projectsData} layout={projectLayout} />
     </div>
   </div>
 }
 
-function Header({ text }: HeaderProps) {
-  const cls = [
-    "profile-pane-header",
-    "flex flex-row items-center",
-    "text-lg font-bold",
-    "uppercase",
-    "sticky",
-    "z-1",
-    "bg-menu",
-    "px-3",
-    [
-      "h-[50px] w-full",
-      "top-0",
+function Header({ text, children }: HeaderProps & { children?: React.ReactNode; }) {
+  const cls = {
+    container: [
+      "profile-pane-header",
+      "flex flex-row items-center",
+      "text-lg font-bold",
+      "uppercase",
+      "sticky",
+      "z-1",
+      "bg-menu",
+      "px-3",
+      "border-b-5 border-double border-border",
+      [
+        "h-[50px] w-full",
+        "top-[-2px]",
+      ],
+      [
+        "sm:top-[-1px]",
+        "sm:h-[60px] sm:min-h-[60px] sm:w-full",
+        "sm:rounded-t-md",
+      ],
     ],
-    [
-      "sm:top-[-16px]",
-      "sm:h-[60px] sm:min-h-[60px] sm:w-full",
-      "sm:rounded-t-md",
+    text: [
+      "flex-grow-1",
     ],
-  ]
+  }
 
-  return <div className={clsx(cls)}>{text}</div>
+  return <div className={clsx(cls.container)}>
+    <span className={clsx(cls.text)}>{text}</span>
+    {children}
+  </div>
 }

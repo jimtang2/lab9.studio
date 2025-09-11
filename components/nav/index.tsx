@@ -17,7 +17,7 @@ export default function Nav({ className }: { className: string; }) {
   	bar: [
 			[
 				"grid grid-cols-1 grid-rows-[49px_auto]",
-				"border-t-1 border-border",
+				// "border-t-1 border-border",
 				"z-10",
 			],
 			[
@@ -42,10 +42,10 @@ export default function Nav({ className }: { className: string; }) {
 			[
 				showNav && "bg-menu",
 				"sm:bg-menu",
-				"border-r-1 border-border",
-				"divide-y-1 divide-border",
-				"sm:border-r-0",
-				"sm:divide-x-1 sm:divide-y-0",
+				"border-t-2 border-menu",
+				"divide-y-2 divide-menu",
+				"sm:border-r-0 sm:border-t-0",
+				// "sm:divide-x-1 sm:divide-y-0",
 			],
 			[
 				showNav ? "translate-x-0 opacity-100" : "translate-x-[-50%] opacity-0",
@@ -55,7 +55,7 @@ export default function Nav({ className }: { className: string; }) {
 		],
 		toggle: [
 	  	"col-start-1 col-end-[-2] row-start-1 row-end-2",
-  		"border-1 border-t-0 border-border",
+  		// "border-1 border-t-0 border-border",
 			"transition-all duration-150",
 			"sm:hidden",
 			// "z-20",

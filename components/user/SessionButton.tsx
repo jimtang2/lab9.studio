@@ -35,16 +35,16 @@ export default function SessionButton() {
         (showSession || showLogin) ? [
           loggedIn && "text-accent",
           "text-accent bg-background",
-          "sm:rounded-md",
+          "rounded-md sm:rounded-sm",
         ] : [
           "bg-menu",
           loggedIn && "text-accent",
           !loggedIn && "text-subtext",
         ],
         "transition-all duration-150",
-        "border-1 border-border",
         "z-20",
         "pointer-events-auto",
+        "sm:border-b-1 border-border",
       ],
     ],
     text: [

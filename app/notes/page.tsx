@@ -30,11 +30,11 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
       "grid-rows-[50px_auto]",
     ],
     [
-      "sm:grid-cols-[1fr_2fr]",
+      "sm:grid-cols-[2fr_6fr]",
       "sm:grid-rows-1",
     ],
     [
-      "xl:grid-cols-[3fr_6fr_3fr]",
+      "xl:grid-cols-[2fr_6fr_2fr]",
     ],
   ]
 
