@@ -34,7 +34,7 @@ export default function Page() {
       [
         "grid grid-cols-1 auto-rows-min",
         "h-full max-h-full",
-        "w-[calc(100%+8px)]]",
+        "w-[calc(100%+8px)]] max-w-screen",
         "overflow-x-hidden overflow-y-auto",
         "pt-[50px] pb-[100px]",
       ],
@@ -42,6 +42,7 @@ export default function Page() {
         "sm:grid-cols-[min-content_1fr] sm:grid-rows-[min-content_min-content_1fr]",
         "sm:gap-x-4 sm:gap-y-8",
         "sm:max-h-[calc(100%-10px)]",
+        "sm:max-w-7xl mx-auto",
         "sm:overflow-y-auto",
         "sm:p-4",
       ],
@@ -63,6 +64,7 @@ export default function Page() {
       [
         "sm:border-1 sm:border-border",
         "sm:rounded-md",
+        "sm:max-w-4xl",
       ],
       "bg-background",
     ],

@@ -49,7 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         "grid overflow-hidden",
         "grid-cols-[50px_auto_50px] grid-rows-[50px_auto]",
         "h-screen w-screen max-h-screen max-w-screen",
-        "bg-background",
+        "bg-menu",
       ],
       [
         "sm:grid-cols-[auto_max-content_min-content] sm:grid-rows-[50px_auto]",

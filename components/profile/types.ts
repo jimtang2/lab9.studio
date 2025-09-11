@@ -42,4 +42,4 @@ export type Project = {
   items?: string[];
 }
 
-export type ProjectType = "frontend" | "backend" | "mobile" | "devops" | "ux" | "ios" ;
+export type ProjectType = "frontend" | "backend" | "mobile" | "devops" | "ux" | "ios" | "pm";

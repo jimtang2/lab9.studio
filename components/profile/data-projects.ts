@@ -67,12 +67,13 @@ const projectsData: Project[] = [
     description: "Prototype audiobooks synchronization app for iOS and WatchOS with metadata providers.",
     items: [
       "XCode project built in SwiftUI.",
-      "Experiment with various synchronization methods and user experiences.",
+      "Experiment with various data synchronization protocols and user experiences.",
     ],
     stack: [
       "SwiftUI",
+      "SwiftData",
+      "CloudKit",
     ],
-    demoUrl: "",
     repoUrl: "https://github.com/jimtang2/audiohub",
   },
   // {
@@ -100,9 +101,9 @@ const projectsData: Project[] = [
     end: "6/2023",
     description: "Maintenance and enhancement of a complex system of web applications built with various legacy technologies.",
     items: [
-      "Debug various internal and external system components.",
-      "Reduce bugs by implementing various systems and automation processes.",
-      "Enhance content management applications.",
+      "Bug squashing. Investigate and debug various end users issues reports.",
+      "Triage. Discuss, plan, implement various feature requests with end users and infrastructure engineers.",
+      "Propose and implement various automation processes to reduce bugs.",
     ],
     stack: [
       "Coldfusion",
@@ -115,7 +116,7 @@ const projectsData: Project[] = [
     websiteUrl: "https://www.clsa.com",
   },
   {
-    name: "Unified Authentication System Migration",
+    name: "Unified Authentication System Migration and Single-Sign-On",
     type: [
       "backend",
       "frontend",
@@ -123,11 +124,11 @@ const projectsData: Project[] = [
     company: "CLSA CITIC",
     start: "4/2022",
     end: "8/2022",
-    description: "Migration to unified authentication system using Keycloak.",
+    description: "Migration from fragmented to unified authentication system, using Keycloak.",
     items: [
-      'Develop unified-authentication-enabled container deployment template.',
-      "Deliver Single-Sign-On function to various existing client applications.",
-      "Update authentication system. ",
+      "Develop Keycloak authentication functions for various client applications.",
+      "Configure and deploy Single-Sign-On middleware services.",
+      "Iterate and discuss with end users on various authentication scenarios.",
     ],
     stack: [
       "Keycloak",
@@ -146,11 +147,12 @@ const projectsData: Project[] = [
     company: "CLSA CITIC",
     start: "9/2019",
     end: "9/2020",
-    description: "Zoom integrated system to automate web meetings and webinars creation of all scheduled forum events.",
+    description: "Zoom integrated system to automate web meetings and webinars creation of corporate events.",
     items: [
-      "Develop Zoom account and objects management system.",
-      "Develop events system and Zoom component interface.",
-      "Develop admin dashboard.",
+      "Develop Zoom account and objects management functions.",
+      "Develop interface component between events system and Zoom account.",
+      "Develop automation scripts.",
+      "Develop admin dashboard to expose system levers.",
       "Document, test, project management.",
     ],
     stack: [
@@ -172,15 +174,17 @@ const projectsData: Project[] = [
     description: "System specifications and requirements gathering for FinTech startup.",
     stack: [
       "React",
+      "React Native",
       "Go",
       "PostgreSQL",
       "Adobe XD",
     ],
     items: [
-      "Identify various technical requirements and define preliminary specifications.",
-      "Develop wireframes storyboards.",
+      "Define business requirements and develop preliminary technical specifications.",
+      "Develop user stories.",
+      "Develop wireframes and storyboards.",
+      "Build web and mobile prototypes.",
     ],
-    demoUrl: ""
   },
   // {
   //   name: "Frontend Continuous Integration Pipeline",
@@ -204,7 +208,7 @@ const projectsData: Project[] = [
   //   demoUrl: ""
   // },
   {
-    name: "Content Management System",
+    name: "Content Management System Enhancements",
     type: [
       "backend",
       "frontend",
@@ -212,9 +216,10 @@ const projectsData: Project[] = [
     company: "Sure Promise",
     start: "4/2017",
     end: "9/2017",
-    description: "Content management system for multiple Shopify stores to manage logistical processes.",
+    description: "Content management system to drive logistics and inventory processes powering multiple Shopify stores.",
     items: [
-      "Develop features and enhancements.",
+      "Develop applications data input and output systems and ensure logical consistency with business needs and expectations.",
+      "Maintain good code quality.",
     ],
     stack: [
       "Django",
@@ -224,7 +229,6 @@ const projectsData: Project[] = [
       "jQuery",
       "ReactJS",
     ],
-    demoUrl: ""
   },
   {
     name: "theconsumerdatabase.com",
@@ -232,11 +236,17 @@ const projectsData: Project[] = [
     company: "Lab9",
     start: "2016",
     end: "",
-    description: "",
-    stack: [
-
+    description: "Consumer electronics specifications comparison engine.",
+    items: [
+      "Develop data crawler scripts and configuration.",
+      "Data cleaning.",
+      "Develop advanced search UI.",
+    ],    stack: [
+      "Selenium",
+      "PhantomJS",
+      "Go",
+      "React",
     ],
-    demoUrl: ""
   },
   {
     name: "RoadTunes",
@@ -244,60 +254,55 @@ const projectsData: Project[] = [
     company: "Lab9",
     start: "2015",
     end: "",
-    description: "",
-    stack: [
-
-    ],
-    demoUrl: ""
-  },
-  {
-    name: "RubyDocs",
-    type: [],
-    company: "Lab9",
-    start: "2015",
-    end: "",
-    description: "",
-    stack: [
-
-    ],
-    demoUrl: ""
-  },
-  {
-    name: "LightWeight!",
-    type: [],
-    company: "Lab9",
-    start: "2015",
-    end: "",
-    description: "",
-    stack: [
-
-    ],
-    demoUrl: ""
-  },
-  {
-    name: "Royal London Group Content Management System",
-    type: [],
-    company: "Laserfiche",
-    start: "2010",
-    end: "",
-    description: "",
-    stack: [
-
-    ],
-    demoUrl: ""
-  },
-  {
-    name: "Time Warner Cable Content Management System",
-    type: [],
-    company: "Laserfiche",
-    start: "2007",
-    end: "",
-    description: "",
-    stack: [
-
-    ],
+    description: "Experiment using iOS gyroscope acceleration data to modify music cadence.",
     items: [
-      "Analyze and review all system specifications.",
+      "Experiment and research with Objective-C iOS development",
+    ],
+    stack: [
+      "Objective-C",
+      "Core Data",
+      "UIKit",
+    ],
+  },
+  // {
+  //   name: "RubyDocs",
+  //   type: [],
+  //   company: "Lab9",
+  //   start: "2015",
+  //   end: "",
+  //   description: "",
+  //   stack: [
+
+  //   ],
+  //   demoUrl: ""
+  // },
+  // {
+  //   name: "LightWeight!",
+  //   type: [],
+  //   company: "Lab9",
+  //   start: "2015",
+  //   end: "",
+  //   description: "",
+  //   stack: [
+
+  //   ],
+  //   demoUrl: ""
+  // },
+  {
+    name: "Laserfiche Content Management System Migration",
+    type: [
+      "pm",
+    ],
+    company: "Laserfiche",
+    start: "2011",
+    end: "2009",
+    description: "Data migration from legacy data silos to Laserfiche. Multiple clients include Royal London Group, Time Warner Cable, Wells Fargo Bank, Nara Bank, Santa Ana Police Department, and more.",
+    items: [
+
+    ],
+    stack: [
+      "Laserfiche",
+      "C#.NET",
     ],
   },
 ]

@@ -11,26 +11,27 @@ export default function ProjectItem({ name, type=[], company, start, end, descri
       "profile-project",
       "flex flex-col",
       "text-wrap",
-      "px-3 py-4",
+      "text-base/6",
+      "px-3 py-2",
+      "max-h-lg;"
     ],
     title: [
-      "flex flex-row gap-1 items-center",
-      "h-6 mb-2",
+      "py-2",
     ],
     company: [
       "font-bold",
       "text-accent",
+      "pr-1",
     ],
     name: [
       "font-bold",
     ],
     subtitle: [
       "flex flex-row gap-1 items-center",
-      "h-6",
     ],
     description: [
       "flex flex-row gap-1 items-center",
-      "text-base/6",
+      
       "py-2",
     ],
     date: [
@@ -52,11 +53,10 @@ export default function ProjectItem({ name, type=[], company, start, end, descri
       "font-bold",
     ],
     stackValue: [
-      "font-light",
+      "font-normal",
     ],
     links: [
       "flex flex-row gap-1 items-center",
-      "text-base/6",
       "pt-2",
     ],
     demo: [
