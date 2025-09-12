@@ -1,7 +1,7 @@
 @import "./global.css";
 
 #profile-page ul {
-	@apply px-4 py-2;
+	@apply px-4 py-1;
 	@apply list-disc;
 }
 

@@ -6,12 +6,9 @@ import ExclamationTriangle from "/public/heroicons/solid/exclamation-triangle.sv
 export default function Error({ error, reset, }: { error: Error & { digest?: string }; reset: () => void; }) {
   const cls = {
     base: [
-      "py-2 px-4 max-w-7xl",
+      "py-2 px-4",
       "col-start-2 col-end-4 row-start-1 row-end-4",
       "sm:col-start-1 sm:col-end-4 sm:row-start-2 sm:row-end-3",
-    ],
-    header: [
-      "flex flex-row gap-2 items-center",
     ],
     button: [
       "py-1 px-3 border-1",

@@ -11,19 +11,20 @@ export default function EducationItem({ school, url, degree, major="", minor="",
       "profile-education",
       "flex flex-col",
       "whitespace-nowrap",
-      "py-4",
+      "py-2",
       "font-light",
+      "last:border-b-1 border-border",
     ],
     title: [
       "flex flex-row gap-1",
-      "px-3",
+      "px-4",
     ],
     city: [
-      "px-3",
+      "px-4",
     ],
     subtitle: [
       "flex flex-row gap-1",      
-      "px-3",
+      "px-4",
     ],
     school: [
       "font-bold",
@@ -34,10 +35,10 @@ export default function EducationItem({ school, url, degree, major="", minor="",
     major: [],
     minor: [
       minor.length == 0 && "hidden",
-      "px-3",
+      "px-4",
     ],
     date: [
-      "px-3",
+      "px-4",
       "text-subtext",
     ],
     linkIcon: [

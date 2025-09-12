@@ -1,0 +1,32 @@
+"use client"
+import { useState, useEffect } from "react"
+
+export default function Home({ url }: { url: string; }) {
+  const [socket, setSocket] = useState<WebSocket | null>(null)
+  const [clientMessage, setClientMessage] = useState("")
+  const [serverMessage, setServerMessage] = useState("")
+
+  const sendTestMessage = () => {
+  	socket?.send(JSON.stringify({ 
+  		type: "CHAT", 
+  		content: "test from home on open", 
+  	}))
+  }
+
+  const receiveMessage = (message: string) => {
+  	console.log("received", message)
+  }
+
+  useEffect(() => {
+  	const ws = new WebSocket(url)
+  	setSocket(ws)
+  	ws.onopen = () => {
+  		sendTestMessage()
+  	}
+  	ws.onmessage = e => receiveMessage(e.data)
+  	ws.onclose = () => setSocket(null)
+  	return () => ws.close()
+  }, [url])
+
+  return <></>
+}

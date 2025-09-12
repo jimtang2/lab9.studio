@@ -3,26 +3,26 @@
 #note-markdown h1 {
   @apply text-xl/8;
   @apply font-black;
-  @apply px-3 py-3 sm:px-1;
+  @apply px-2 py-2 sm:px-2;
 }
 
 #note-markdown h2 {
-  @apply text-lg/8;
+  @apply text-lg/12;
   @apply font-bold;
-  @apply px-4 py-4 sm:px-1;
+  @apply px-2 py-0 sm:px-2;
 }
 
 #note-markdown h3 {
-  @apply text-base/8;
+  @apply text-base/10;
   @apply font-normal;
-  @apply px-4 py-2 sm:px-1;
+  @apply px-2 py-0 sm:px-2;
+  @apply underline;
 }
 
 #note-markdown h1, 
 #note-markdown h2, 
 #note-markdown h3 {
-  @apply text-accent;
-  @apply uppercase;
+  /*@apply text-accent;*/
   @apply text-wrap;
   @apply overflow-x-hidden max-w-full;
 }
@@ -32,16 +32,19 @@
   @apply border-t-0;
 }
 
+#note-markdown ul {
+  @apply px-1;
+}
+
 #note-markdown p, 
-#note-markdown ul, 
 #note-markdown li, 
 #note-markdown table {
-  @apply px-2 py-2 sm:px-1;
+  @apply px-2 py-2 sm:px-2;
   @apply text-base/6;
 }
 
 #note-markdown p {
-	@apply mx-2;
+	@apply mx-1;
 }
 
 #note-markdown table {
@@ -71,27 +74,26 @@
 }
 
 .table-of-contents li > a {	
-	@apply block border-l-8 border-transparent;
-	@apply text-base/10 text-subtext;
-	@apply truncate text-ellipsis;
-	@apply hover:bg-background hover:text-accent;
+	/*@apply block border-l-4 border-transparent;*/
+	@apply text-base/8 text-subtext;
+	@apply text-wrap;
+	@apply hover:text-accent;
 }
 
 .table-of-contents > ol > li > a,
 .table-of-contents > ol > li > ol > li > a {
-	@apply uppercase;
 }
 
 .table-of-contents > ol > li > a {
-	@apply pl-6;
+	@apply pl-1;
 }
 
 .table-of-contents > ol > li > ol > li > a {
-	@apply pl-6;
+	@apply pl-1;
 }
 
 .table-of-contents > ol > li > ol > li > ol > li > a {
-	@apply pl-12;
+	@apply pl-4;
 }
 
 .table-of-contents li > a {
@@ -99,9 +101,9 @@
 }
 
 .table-of-contents li > a.active {
-	@apply text-text bg-background border-accent;
+	@apply text-text border-accent;
 }
 
 .table-of-contents li > a.top.active {
-	@apply text-accent;
+	/*@apply text-accent;*/
 }

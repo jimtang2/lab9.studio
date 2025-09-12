@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, label, pla
 		],
 		input: [
 			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-			"text-base px-3 pt-5 pb-2 m-1",
+			"text-base px-3 pt-4 pb-1 m-1",
 			"outline-accent",
 			"rounded-md",
 		],

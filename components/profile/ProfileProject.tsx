@@ -16,11 +16,11 @@ export default function ProjectItems({items, layout}: {items: Project[]; layout:
       header: [
         "flex flex-row items-center",
         "font-black",
-        "text-lg text-accent",
-        "h-[44px] px-3",
-        "bg-menu",
+        "text-lg/10 text-accent",
+        "px-4",
+        "bg-background",
         "border-b-1 border-double border-border",
-        "sticky top-[48px] sm:top-[59px]",
+        "sticky top-20 sm:top-10",
         "z-1",
       ],
     }
@@ -61,14 +61,12 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
       "flex flex-col",
       "text-wrap",
       "text-base/6",
-      "px-3 py-2",
+      "px-4 py-1",
       "max-h-lg",
       "border-b-1 border-border",
-      // layout == "0" && "border-t-5 border-double border-border",
-      // layout == "1" && "border-double border-border",
     ],
     title: [
-      "py-2",
+      "py-1",
     ],
     company: [
       "font-bold",
@@ -85,7 +83,7 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
     description: [
       "flex flex-row gap-1 items-center",
       
-      "py-2",
+      "py-1",
     ],
     date: [
       "text-subtext",
@@ -99,7 +97,7 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
     stack: [
       "pl-0",
       "text-base/6",
-      "py-2",
+      "py-1",
       "text-subtext",
     ],
     stackLabel: [
@@ -110,7 +108,7 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
     ],
     links: [
       "flex flex-row gap-1 items-center",
-      "pt-2",
+      "pt-1",
     ],
     demo: [
       demoUrl.length == 0 && "hidden",

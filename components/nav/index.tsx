@@ -1,6 +1,7 @@
 "use client"
 import { useStore } from "@/state/store"
 import NavButton from "./NavButton"
+import UserButton from "./UserButton"
 import MenuToggleIcon from "/public/heroicons/solid/bars-3.svg"
 import HomeIcon from "/public/heroicons/solid/home.svg"
 import NotesIcon from "/public/heroicons/solid/newspaper.svg"
@@ -15,82 +16,53 @@ export default function Nav({ className }: { className: string; }) {
 
   const cls = {
   	bar: [
-			[
-				"grid grid-cols-1 grid-rows-[49px_auto]",
-				// "border-t-1 border-border",
-				"z-10",
-			],
-			[
-				"sm:grid-rows-1",
-				"sm:border-b-1 sm:border-border sm:border-r-0",
-			],
+  		"flex flex-col sm:flex-row",
+  		"h-full w-[50px] sm:h-[50px] sm:w-full",
+  		"border-border border-r-1 sm:border-b-1 sm:border-r-0",
+  		"px-1 pt-0 pb-29 sm:px-1 sm:py-1",
+  		"bg-background",
 			className,
 		],
-		items: [
-			[
-				"col-start-1 col-span-1 row-start-2 row-end-[-1]",
-			],
-			[
-				"sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-span-1",
-				"sm:px-1",
-			],
-			[
-				"grid grid-rows-[repeat(3,50px)_auto_50px_100px]",
-				"sm:grid sm:grid-rows-1 sm:grid-cols-[repeat(3,min-content)_auto_min-content]",
-				"sm:grid-flow-col",
-			],
-			[
-				showNav && "bg-menu",
-				"sm:bg-menu",
-				"border-t-2 border-menu",
-				"divide-y-2 divide-menu",
-				"sm:border-r-0 sm:border-t-0",
-				// "sm:divide-x-1 sm:divide-y-0",
-			],
-			[
-				showNav ? "translate-x-0 opacity-100" : "translate-x-[-50%] opacity-0",
-				"sm:translate-x-0 sm:opacity-100",
-				"transition-all duration-150",
-			],
+		button: [
+			"h-[calc(50px-2*var(--spacing))] sm:h-full",
+			"mt-1 sm:mt-0",
 		],
 		toggle: [
-	  	"col-start-1 col-end-[-2] row-start-1 row-end-2",
-  		// "border-1 border-t-0 border-border",
-			"transition-all duration-150",
 			"sm:hidden",
-			// "z-20",
+			"hidden",
 		],
-  }
-
-  const handleClickMenuToggle = () => {
-  	setShowNav(!showNav)
+		separator: [
+			"h-1 mb-1 border-b-1 border-border",
+			"flex-grow-1 sm:border-none sm:m-0",
+		],
   }
 
 	return <div id="nav" className={clsx(cls.bar)}>
 		<NavButton 
 		  id={"nav-menu-toggle-btn"}
-		  onClick={handleClickMenuToggle}
-		  className={clsx(cls.toggle)}
+		  onClick={() => setShowNav(!showNav)}
+		  className={clsx([cls.button, cls.toggle])}
 		  icon={<MenuToggleIcon />}
 		  active={showNav} />
-
-		<div id="nav-bar-items" className={clsx(cls.items)}>
-			<NavButton 
-			  id={"nav-home-btn"}
-			  href={"/"}
-			  title={"lab9.studio"}
-			  icon={<HomeIcon />} />
-			<NavButton 
-			  id={"nav-notes-btn"}
-			  href={"/notes"}
-			  title={"Notes"}
-			  icon={<NotesIcon />} />
-			<NavButton 
-			  id={"nav-profile-btn"}
-			  href={"/profile"}
-			  title={"Profile"}
-			  icon={<ProfileIcon />} />
-			<div></div>
-		</div>
+		<NavButton 
+		  className={clsx(cls.button)}
+		  id={"nav-home-btn"}
+		  href={"/"}
+		  title={"lab9.studio"}
+		  icon={<HomeIcon />} />
+		<NavButton 
+		  className={clsx(cls.button)}
+		  id={"nav-notes-btn"}
+		  href={"/notes"}
+		  title={"Notes"}
+		  icon={<NotesIcon />} />
+		<NavButton 
+		  className={clsx(cls.button)}
+		  id={"nav-profile-btn"}
+		  href={"/profile"}
+		  title={"Profile"}
+		  icon={<ProfileIcon />} />
+		<div className={clsx(cls.separator)}></div>
+		<UserButton id={"nav-user-btn"} />
 	</div>
 }

@@ -1,68 +1,70 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import { useStore } from "@/state/store"
+import { useSessionUser } from "@/state/useSessionUser"
 import { TextInput, PasswordInput, SubmitInput } from "@/components/form"
 import clsx from "clsx"
 
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const {
-    showNav,
     showLogin,
     setShowLogin,
+    showSession,
+    setShowSession,
     setSid,
     setLoginFormLoading,
   } = useStore(state => state)
+  const [user] = useSessionUser()
+  const loggedIn = typeof(user?.name) === "string"
 
   const [focus, setFocus] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    setShowLogin(false)
+    setShowSession(false)
+  }, [loggedIn])
+
   const cls = {
     form: [
-      [
-        "absolute right-0 top-[calc(100%-1px)]",
-        !showLogin && "translate-x-[50%] opacity-0",
-        showLogin && "translate-x-[0px] opacity-100",
-        "transition-all duration-300",
-        "bg-menu",
-      ],
-      [
-        "grid grid-cols-[auto_50px] grid-rows-[50px_repeat(3,min-content)]",
-        showLogin ? "pointer-events-auto" : "pointer-events-none",
-        "border-[0.5px] border-border",
-        // "rounded-md",
-        [
-          showNav ? "w-[calc(100vw-50px)]" : "w-screen",
-          "sm:w-min",
-        ]
-      ],
-    ],
-    header: [
-      "col-start-1 col-end-3 row-start-1 row-span-1",
-      "px-3 sm:px-2 py-2",
+      "absolute",
+      "bottom-4 left-14 max-w-[360px]",
+      "sm:top-full sm:left-auto sm:right-0",
+      "bg-menu",
+      "z-10",
+      "sm:translate-x-0",
+      !showLogin && "translate-x-[-50px] sm:translate-x-0 sm:translate-y-[-50px] opacity-0",
+      showLogin && "translate-x-0 sm:translate-y-0 opacity-100",
+      "transition-all duration-150",
+      "flex flex-col",
+      showLogin ? "pointer-events-auto" : "pointer-events-none",
     ],
     nameInput: [
-      "col-start-1 col-end-3 row-start-2 row-span-1",
-      "border-t-[0.5px] border-b-[0.5px] border-border",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
+      "border-t-1 border-b-1 border-background",
     ],
     passwordInput: [
-      "col-start-1 col-end-3 row-start-3 row-span-1",
-      "border-b-[0.5px] border-border",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
+      "border-b-1 border-background",
+    ],
+    footer: [
+      "flex flex-row items-center",
     ],
     submitInput: [
-      "col-start-2 col-end-3 row-start-1 row-span-1",
-      "border-l-1 border-border",
-      "flex items-center justify-center",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
+      "px-1 mx-1",
+      "order-1 sm:order-2",
     ],
     error: [
-      "col-start-1 col-end-[-1] row-start-[-2] row-span-1",
+      "order-2 sm:order-1",
+      "flex-grow-1",
       "text-error",
-      "px-2 py-2",
-      error === null && "hidden",
+      "text-base/10",
+      "px-2",
+      "min-h-full",
+      "bg-menu",
     ],
   }
 
@@ -100,7 +102,6 @@ export default function LoginForm() {
     onBlur={() => setFocus(false)}
     ref={formRef}
     onSubmit={handleSubmit} >
-    <LoginFormHeader className={clsx(cls.header)} />
     <TextInput className={clsx(cls.nameInput)}
       name="id"
       label="UserID"
@@ -112,26 +113,11 @@ export default function LoginForm() {
       label="Password"
       placeholder="Password"
       tabIndex={showLogin ? 0 : -1} />
-    <SubmitInput className={clsx(cls.submitInput)}
-      tabIndex={showLogin ? 0 : -1} />
-    <div className={clsx(cls.error)}>{error}</div>
+    <div className={clsx(cls.footer)}>
+      <div className={clsx(cls.error)}>{error}</div>
+      <SubmitInput className={clsx(cls.submitInput)}
+        tabIndex={showLogin ? 0 : -1}
+        text="Sign In" />
+    </div>
   </form>
-}
-
-function LoginFormHeader({ className="" }: { className: string; }) {
-  const { loginFormLoading } = useStore(state => state)
-  const cls = {
-    container: [
-      "flex flex-row items-center gap-2",
-      "w-[calc(100%-50px)]",
-      className,
-    ],
-    text: [
-      "flex-grow-1",
-    ],
-  }
-
-  return <div className={clsx(cls.container)}>
-    <span className={clsx(cls.text)}>Sign In</span>
-  </div>
 }

@@ -8,12 +8,13 @@ export default function JobItem({ company, url, positions=[], }: Job) {
     container: [
       "profile-job",
       "flex flex-col",
-      "pt-4 pb-2",
+      "pt-2 pb-1",
       "text-nowrap",
       "transition-all duration-300",
+      "last:border-b-1 border-border",
     ],
     title: [
-      "px-3",
+      "px-4",
       "text-accent",
       "flex flex-row gap-1",
     ],
@@ -52,7 +53,7 @@ function PositionItem({title, department, city, start, end}: Position) {
   const cls = {
     position: [
       "profile-job-position",
-      "py-2 px-3",
+      "py-1 px-4",
       "font-light",
     ],
     main: [

@@ -7,23 +7,26 @@ interface SubmitInputProps {
 	className?: string; 
 	iconClassName?: string;
 	tabIndex?: number;
+	text?: string;
 }
 
-export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitInput({ className="", iconClassName="", tabIndex=0 }, ref) {
+export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitInput({ className="", iconClassName="", tabIndex=0, text="", }, ref) {
 	const [focus, setFocus] = useState(false)
 	const [hover, setHover] = useState(false)
 
 	const cls = {
 		button: [
-			"px-1",
+			"flex flex-row items-center",
 			"outline-accent",
 			"bg-control-background text-control-foreground",
-			// "rounded-md",
+			"rounded-lg",
 			className,
 		],
+		text: [
+			"text-sm/10",
+			"px-1",
+		],
 		icon: [
-			"stroke-2",
-			"text-control-foreground",
 			hover && "animate-pulse",
 			iconClassName,			
 		],
@@ -35,6 +38,7 @@ export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitIn
 		tabIndex={tabIndex}
 		onMouseOver={() => setHover(true)}
 		onMouseOut={() => setHover(false)}>
+		<span className={clsx(cls.text)}>{text}</span>
 		<Icon className={clsx(cls.icon)} />
 	</button>
 })

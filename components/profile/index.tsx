@@ -14,46 +14,38 @@ import "@/styles/profile.css"
 
 export default function Page() {
   const [ projectLayout, setProjectLayout ] = useState<"0" | "1">("1")
-  const { showNav, setShowNav, } = useStore(state => state)
+  const { showNav, } = useStore(state => state)
 
   const cls = {
-    title: [
-      "profile-title",
-      "fixed top-0 left-[50px]",
-      "h-[50px] w-[calc(100%-100px)]",
-      "flex items-center",
-      "bg-menu text-xl",
-      "px-2",
-      "z-10",
-      [
-        "sm:hidden",
-      ],
-    ],
     page: [
       "profile-page",
       [
         "grid grid-cols-1 auto-rows-min",
         "h-full max-h-full",
-        "w-[calc(100%+8px)]] max-w-screen",
+        "w-full max-w-screen",
         "overflow-x-hidden overflow-y-auto",
-        "pt-[50px] pb-[100px]",
-        "bg-menu",
+        "pb-[100px]",
+        "bg-background",
       ],
       [
-        "sm:grid-cols-[min-content_1fr] sm:grid-rows-[min-content_min-content_1fr]",
-        "sm:gap-x-4 sm:gap-y-8",
+        "sm:grid-cols-[1fr_2fr] sm:grid-rows-[min-content_min-content_1fr]",
         "sm:max-h-[calc(100%-10px)]",
-        // "sm:max-w-5xl",
-        // "sm:min-w-xl sm:w-min",
         "sm:overflow-y-auto",
-        "sm:px-4 sm:pt-0",
+        "sm:px-1 sm:pt-0",
       ],
       [
-        "relative sm:left-0 w-full",
-        showNav && "left-[50px] w-[calc(100%-42px)]",
-        !showNav && "left-0",
-        "transition-all duration-300",
+        "xl:grid-cols-[1fr_2fr_1fr] xl:grid-rows-1",
       ],
+      "transition-all duration-150",
+    ],
+    title: [
+      "w-full",
+      "sticky top-0",
+      "bg-background text-lg/10",
+      "pb-[1px] border-b-3 border-double border-border",
+      "px-4",
+      "sm:hidden",
+      "z-1",
     ],
     pane: [
       "profile-pane",
@@ -62,19 +54,21 @@ export default function Page() {
       ],
       [
         "sm:border-1 sm:border-border",
-        "sm:rounded-md",
-        "sm:max-w-2xl",
+        "sm:max-w-full",
+        "xl:max-w-full",
       ],
-      "bg-menu",
+      "bg-background",
     ],
     jobs: [
       "profile-pane-jobs",
       "sm:col-start-1 sm:row-start-1",
+      "xl:col-start-1 xl:row-start-1",
       "divide-y-1 divide-border",
     ],
     education: [
       "profile-pane-education",
       "sm:col-start-1 sm:row-start-2 sm:row-span-1",
+      "xl:col-start-3 xl:row-start-1",
       "divide-y-1 divide-border",
     ],
     projects: [
@@ -82,18 +76,13 @@ export default function Page() {
       "sm:col-start-2 sm:row-start-1 sm:row-span-3",
       "sm:h-fit",
       "sm:mb-12",
+      "xl:col-start-2 xl:row-start-1",
     ],
     select: [
       "font-normal",
       "text-right",
     ],
   }
-
-  useEffect(() => {
-    if (showNav) {
-      setShowNav(false)
-    }
-  }, [])
 
   return <div id="profile-page" className={clsx(cls.page)}>
     <div className={clsx(cls.title)}>Profile</div>
@@ -130,25 +119,18 @@ function Header({ text, children }: HeaderProps & { children?: React.ReactNode; 
     container: [
       "profile-pane-header",
       "flex flex-row items-center",
-      "text-lg font-bold",
-      "uppercase",
       "sticky",
       "z-1",
-      "bg-menu",
+      "bg-background",
       "px-3",
-      "border-b-5 border-double border-border",
-      [
-        "h-[50px] w-full",
-        "top-[-2px]",
-      ],
-      [
-        "sm:top-[-1px]",
-        "sm:h-[60px] sm:min-h-[60px] sm:w-full",
-        "sm:rounded-t-md",
-      ],
+      "border-b-1 border-border",
+      "w-full",
+      "top-10 sm:top-0",
     ],
     text: [
       "flex-grow-1",
+      "text-lg/10 font-bold",
+      "uppercase",
     ],
   }
 
