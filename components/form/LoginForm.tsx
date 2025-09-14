@@ -1,7 +1,7 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import { useStore } from "@/state/store"
-import { useSessionUser } from "@/state/useSessionUser"
+import { useSessionUser } from "@/state/hooks/useSessionUser"
 import { TextInput, PasswordInput, SubmitInput } from "@/components/form"
 import clsx from "clsx"
 

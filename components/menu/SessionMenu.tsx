@@ -32,18 +32,6 @@ export default function SessionMenu() {
 function LogoutButton() {
 	const { setSid, setLoginFormLoading, } = useStore(state => state)
 
-	const cls = {
-		button: [
-			"whitespace-nowrap",
-			"w-full min-w-full",
-      "flex flex-row items-center",
-			"bg-control-background text-control-foreground",
-			"rounded-lg",
-		],
-		text: "flex-grow-1 text-left text-sm/10 px-2",
-		icon: [],
-	}
-
 	const handleClick = async () => {
 		setLoginFormLoading(true)
 		try {
@@ -60,6 +48,18 @@ function LogoutButton() {
     }
     setLoginFormLoading(false)
 	}	
+
+	const cls = {
+		button: [
+			"whitespace-nowrap",
+			"w-full min-w-full",
+      "flex flex-row items-center",
+			"bg-control-background text-control-foreground",
+			"rounded-lg",
+		],
+		text: "flex-grow-1 text-left text-sm/10 px-2",
+		icon: [],
+	}
 
 	return <button className={clsx(cls.button)}
 		onClick={handleClick} >

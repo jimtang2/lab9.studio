@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import NotesPageClient from "@/components/notes"
-import { getNotes } from "@/lib/globals/notes"
+import { getNotes, getNote } from "@/state/global/notes"
 
 export const metadata: Metadata = {
   title: "Notes",
@@ -18,7 +18,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
       .pipe(z.coerce.number().default(0))
   }).parse(await searchParams)
 
-  const notes = getNotes()
+  const notes = await getNotes()
   if (id === 0 && notes.length > 0) {
     if (notes.length > 0) {
       const redirectId = notes[0].id
@@ -26,9 +26,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
       return null
     }
   }
-
-  const filterNotes = notes.filter(n => String(n.id) === String(id))  
-  const note = filterNotes.length > 0 ? filterNotes[0] : null
+  const note = await getNote(id)
 
   return <NotesPageClient notes={notes} note={note} />
 }

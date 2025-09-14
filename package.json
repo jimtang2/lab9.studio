@@ -15,6 +15,7 @@
     "@types/bcrypt": "^6.0.0",
     "ag-grid-community": "^34.1.2",
     "ag-grid-react": "^34.1.2",
+    "async-mutex": "^0.5.0",
     "bcrypt": "^6.0.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.4",

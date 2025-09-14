@@ -2,9 +2,6 @@ import type { Viewport, Metadata } from "next"
 import Nav from "@/components/nav"
 import clsx  from "clsx"
 import "@/styles/global.css"
-import { updateNotesJob } from "@/lib/jobs/scheduler"
-
-updateNotesJob()
 
 export const viewport: Viewport = {
   width: "device-width",

@@ -13,7 +13,7 @@ import clsx from "clsx"
 import "@/styles/profile.css"
 
 export default function Page() {
-  const [ projectLayout, setProjectLayout ] = useState<"0" | "1">("1")
+  const [ projectLayout, setProjectLayout ] = useState<"0" | "1">("0")
   const { showNav, } = useStore(state => state)
 
   const cls = {

@@ -23,11 +23,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, label, pla
 			"col-start-1 col-end-2 row-start-1 row-end-2",
 			"relative",
 			"px-[calc(3*var(--spacing))] pt-[calc(1.5*var(--spacing))]",
-			"text-xs text-accent",
+			"text-xs/4 text-accent",
 		],
 		input: [
 			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-			"text-base px-3 pt-4 pb-1 m-1",
+			"text-base px-2 pt-4 pb-0 m-1",
 			"outline-accent",
 			"rounded-md",
 		],
