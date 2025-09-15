@@ -1,7 +1,7 @@
 "use client"
 import { useEffect } from "react"
 import { useStore } from "@/state/store"
-import { useSessionUser } from "@/state/hooks/useSessionUser"
+import { useSessionUser } from "@/state/hooks"
 import LoginForm from "@/components/form/LoginForm"
 import SessionMenu from "@/components/menu/SessionMenu"
 import LoggedOnIcon from "/public/heroicons/solid/user.svg"

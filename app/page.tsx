@@ -1,9 +1,10 @@
-import HomePage from "@/components/home"
+import Home from "@/components/home"
 
-export default function Home() {
-  const socketUrl = process.env.WSURL || ""
+export default function HomePage() {
+  const marketSocketUrl = process.env.WS_MARKETS_URL || ""
+  const systemSocketUrl = process.env.WS_SYSTEM_URL || ""
 
-  return <HomePage socketUrl={socketUrl} />
+  return <Home {...{marketSocketUrl, systemSocketUrl}} />
 }
 
 export const dynamic = "force-dynamic"

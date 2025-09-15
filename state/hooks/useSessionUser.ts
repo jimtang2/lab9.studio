@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useStore } from "@/state/store"
 import { User } from "@/db/schema"
 
-export function useSessionUser(): [User | null, boolean, string | null] {
+export default function useSessionUser(): [User | null, boolean, string | null] {
   const {
     sid,
     setLoginFormLoading,

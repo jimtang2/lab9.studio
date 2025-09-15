@@ -6,6 +6,7 @@ import { User, Users, Sessions } from "@/db/schema"
 import { eq } from "drizzle-orm"
 
 export async function GET(request: Request) {
+  console.log("api/me")
   try {
     const sid = request.headers.get("cookie")?.match(/sid=([^;]+)/)?.[1]
 
