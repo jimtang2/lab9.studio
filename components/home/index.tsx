@@ -15,9 +15,9 @@ export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
   
   const cls = {
     page: [
-      "grid grid-cols-1 grid-rows-[min-content_1fr]",
-      "sm:grid-cols-3 sm:grid-rows-[min-content_1fr]",
-      "xl:grid-cols-4 xl:grid-rows-2",
+      "grid grid-cols-1 grid-rows-1",
+      "sm:grid-cols-3 sm:grid-rows-1",
+      "xl:grid-cols-4 xl:grid-rows-1",
       "w-[calc(100vw-50px)] h-screen",
       "sm:w-screen sm:h-[calc(100vh-50px)]",
       "p-2 gap-2",

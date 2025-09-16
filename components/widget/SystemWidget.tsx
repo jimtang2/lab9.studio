@@ -14,6 +14,12 @@ interface SystemMessage {
   used_mem: number
   cpu: number
   used_cpu: number
+  cpu_speed: number
+  cpu_cores: number
+  network_egress_speed: number
+  network_ingress_speed: number
+  uptime: number
+  disk_io_rate: number
 }
 interface RowData {
   label: string
@@ -30,6 +36,12 @@ export default memo(({ className, message }: SystemWidgetProps) => {
     used_mem = 0,
     cpu = 0,
     used_cpu = 0,
+    cpu_speed = 0,
+    cpu_cores = 0,
+    network_egress_speed = 0,
+    network_ingress_speed = 0,
+    uptime = 0,
+    disk_io_rate = 0
   } = json || {}
   const cls = {
     widget: [className],
@@ -47,11 +59,17 @@ export default memo(({ className, message }: SystemWidgetProps) => {
     }
   ]
   const rowData: RowData[] = [
-    { label: "Connections", value: markets_sessions },
+    { label: "CPU Cores", value: cpu_cores },
+    { label: "CPU Speed", value: `${(cpu_speed / 1000 || 0).toFixed(2)} GHz` },
     { label: "Memory", value: `${(mem / 1000000000 || 0).toFixed(2)} GB` },
-    { label: "Used Memory", value: `${(used_mem || 0).toFixed(1)}%` },
     { label: "CPU (OS)", value: `${(cpu * 100 || 0).toFixed(1)}%` },
-    { label: "CPU (JVM)", value: `${(used_cpu || 0).toFixed(1)}%` }
+    { label: "CPU (JVM)", value: `${(used_cpu || 0).toFixed(1)}%` },
+    { label: "Used Memory", value: `${(used_mem || 0).toFixed(1)}%` },
+    { label: "Network Egress", value: `${(network_egress_speed / 1000000 || 0).toFixed(2)} MB/s` },
+    { label: "Network Ingress", value: `${(network_ingress_speed / 1000000 || 0).toFixed(2)} MB/s` },
+    { label: "Uptime", value: `${(uptime || 0).toFixed(0)} s` },
+    { label: "Disk I/O Rate", value: `${(disk_io_rate || 0).toFixed(0)} IOPS` },
+    { label: "Broadcasts", value: markets_sessions },
   ]
   return (
     <div className={clsx(cls.widget)}>

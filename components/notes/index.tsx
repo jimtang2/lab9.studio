@@ -100,7 +100,7 @@ function observeToc(markdownId: string, tocId: string): IntersectionObserver {
 			}
 		})
 	}, { 
-	  rootMargin: '50% 0px 50% 0px',
+	  // rootMargin: '0% 0px 0% 0px',
 	  root: document.querySelector(`#${markdownId}`),
 	  threshold: 1
 	})
