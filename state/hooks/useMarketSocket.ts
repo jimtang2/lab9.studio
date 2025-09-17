@@ -10,6 +10,9 @@ export default function useMarketWebSocket(url: string) {
   function connect() {
     const socket = new WebSocket(url)
     socket.onopen = () => {
+      if (!ws) {
+        ws?.close()
+      }
       setWs(socket)
     }
     socket.onmessage = (e) => {

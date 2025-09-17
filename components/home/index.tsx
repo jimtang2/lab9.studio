@@ -1,4 +1,5 @@
 "use client"
+import { memo } from "react"
 import { useMarketSocket, useSystemSocket } from "@/state/hooks"
 import MarketsTable from "@/components/table/MarketsTable"
 import SystemWidget from "@/components/widget/SystemWidget"
@@ -9,7 +10,7 @@ interface HomeProps {
   systemSocketUrl: string;
 }
 
-export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
+export default memo(({ marketSocketUrl, systemSocketUrl }: HomeProps) => {
   const { data: marketsData, ok: marketsOk } = useMarketSocket(marketSocketUrl)
   const { data: systemData, ok: systemOk } = useSystemSocket(systemSocketUrl)
   
@@ -40,4 +41,4 @@ export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
       <SystemWidget className={clsx(cls.systemWidget)} message={systemData} ok={systemOk} />
     </div>
   )
-}
+})
