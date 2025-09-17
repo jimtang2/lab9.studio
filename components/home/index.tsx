@@ -10,8 +10,8 @@ interface HomeProps {
 }
 
 export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
-  const { data: marketsData } = useMarketSocket(marketSocketUrl)
-  const { data: systemData } = useSystemSocket(systemSocketUrl)
+  const { data: marketsData, ok: marketsOk } = useMarketSocket(marketSocketUrl)
+  const { data: systemData, ok: systemOk } = useSystemSocket(systemSocketUrl)
   
   const cls = {
     page: [
@@ -36,8 +36,8 @@ export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
 
   return (
     <div className={clsx(cls.page)}>
-      <MarketsTable className={clsx(cls.marketsTable)} message={marketsData} />
-      <SystemWidget className={clsx(cls.systemWidget)} message={systemData} />
+      <MarketsTable className={clsx(cls.marketsTable)} message={marketsData} ok={marketsOk} />
+      <SystemWidget className={clsx(cls.systemWidget)} message={systemData} ok={systemOk} />
     </div>
   )
 }

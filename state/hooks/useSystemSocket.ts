@@ -3,34 +3,42 @@ import { useState, useEffect } from "react"
 
 export default function useSystemWebSocket(url: string) {
   const [ws, setWs] = useState<WebSocket | null>(null)
-  const [dataResponse, setDataResponse] = useState("")
-  const [data, setData] = useState("")
-  const [retry, setRetry] = useState<number | null>(null)
+  // const [messageOut, setMessageOut] = useState("")
+  const [messageIn, setMessageIn] = useState("")
+  const [health, setHealth] = useState<number>(new Date().getTime())
   function connect() {
-    // console.log("connect:", ws)
     const socket = new WebSocket(url)
     socket.onopen = () => {
-      console.log(`Connected to ${url}`)
+      setWs(socket)
     }
     socket.onmessage = (e) => {
-      setData(e.data)
+      setMessageIn(e.data)
     }
     socket.onclose = () => {
-      console.log(`Disconnected from ${url} (${ws?.readyState || -1})`)
-      // setTimeout(() => setRetry(new Date().getTime()), 3000)
     }
     socket.onerror = e => {
-      console.log(`Error from ${url}`, e)
-      setTimeout(() => setRetry(new Date().getTime()), 3000)
     }
-    setWs(socket)
-    return () => socket.close()
+    return socket
   }
-  useEffect(() => connect(), [url, retry])
-  useEffect(() => {
-    if (ws && dataResponse) {
-      ws.send(dataResponse)
-    }
-  }, [dataResponse])
-  return { ws, setDataResponse, data }
+  useEffect(
+    () => {
+      const timeoutId = setTimeout(() => setHealth(new Date().getTime()), 3000)
+      if (!ws || ws?.readyState == 3) {
+        connect()
+      }    
+      return () => {
+        clearTimeout(timeoutId)
+      }
+    }, 
+    [health],
+  )
+  // useEffect(
+  //   () => {
+  //     if (ws && messageOut) {
+  //       ws.send(messageOut)
+  //     }
+  //   }, 
+  //   [messageOut],
+  // )
+  return { data: messageIn, ok: ws?.readyState == 2 }
 }

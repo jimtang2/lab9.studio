@@ -7,6 +7,7 @@ ModuleRegistry.registerModules([AllCommunityModule])
 interface MarketsTableProps {
   className: string
   message: string
+  ok: boolean
 }
 interface MarketsMessage {
   n: string
@@ -50,7 +51,7 @@ const parseMarketsMessage = (message: string): MarketsMessage[] => {
     return []
   }
 }
-export default memo(({ className, message }: MarketsTableProps) => {
+export default memo(({ className, message, ok }: MarketsTableProps) => {
   const marketsData = useMemo(() => parseMarketsMessage(message), [message])
   const [markets, setMarkets] = useState<string[]>([])
   const [marketsMap, setMarketsMap] = useState<Record<string, MarketsMessage>>({})
@@ -74,13 +75,6 @@ export default memo(({ className, message }: MarketsTableProps) => {
     widget: [className],
     grid: ["h-full w-full", "overflow-x-hidden", "ag-theme-alpine-auto-dark", "bg-background"]
   }
-  const options = {
-  	rowSelection: {
-  		checkboxes: false,
-  		mode: "singleRow", 
-  		enableClickSelection: false,
-  	}
-  }
   const columnDefs: ColDef<MarketsMessage>[] = [
     { 
 	    headerName: "Market", 
@@ -89,29 +83,21 @@ export default memo(({ className, message }: MarketsTableProps) => {
 		  sortable: true,
 		},
     {
-      headerName: "Last Price",
+      headerName: "Price",
       field: "lp",
       flex: 1,
       // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => (params.value || 0).toFixed(2),
       sortable: true,
     },
-    {
-      headerName: "Timestamp",
-      field: "t",
-      flex: 1,
-      // cellStyle: { textAlign: "right" },
-      valueFormatter: (params) => new Date(params.value * 1000).toLocaleString(),
-      sortable: true,
-    },
-    {
-      headerName: "Volume",
-      field: "volume",
-      flex: 1,
-      // cellStyle: { textAlign: "right" },
-      valueFormatter: (params) => (params.value || 0).toFixed(0),
-      sortable: true,
-    },
+    // {
+    //   headerName: "Timestamp",
+    //   field: "t",
+    //   flex: 1,
+    //   // cellStyle: { textAlign: "right" },
+    //   valueFormatter: (params) => new Date(params.value * 1000).toLocaleString(),
+    //   sortable: true,
+    // },
     {
       headerName: "Change %",
       field: "chp",
@@ -126,6 +112,14 @@ export default memo(({ className, message }: MarketsTableProps) => {
       flex: 1,
       // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => (params.value || 0).toFixed(2),
+      sortable: true,
+    },
+    {
+      headerName: "Volume",
+      field: "volume",
+      flex: 1,
+      // cellStyle: { textAlign: "right" },
+      valueFormatter: (params) => (params.value || 0).toFixed(0),
       sortable: true,
     },
     // { headerName: "Status", field: "s", flex: 1, sortable: true }
@@ -147,8 +141,9 @@ export default memo(({ className, message }: MarketsTableProps) => {
         <AgGridReact
           columnDefs={columnDefs}
           rowData={rowData}
-          domLayout="autoHeight"
-          rowSelection={options.rowSelection}
+          headerHeight={36}
+	        rowHeight={32}
+	        domLayout="autoHeight"
           getRowId={getRowId}
         />
       </div>

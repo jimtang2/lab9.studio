@@ -1,4 +1,4 @@
-import { memo } from "react"
+import { memo, useMemo } from "react"
 import clsx from "clsx"
 import { AgGridReact } from "ag-grid-react"
 import { ModuleRegistry, AllCommunityModule, ColDef } from "ag-grid-community"
@@ -7,6 +7,7 @@ ModuleRegistry.registerModules([AllCommunityModule])
 interface SystemWidgetProps {
   className: string
   message: string
+  ok: boolean
 }
 interface SystemMessage {
   markets_sessions: number
@@ -25,7 +26,7 @@ interface RowData {
   label: string
   value: string | number
 }
-export default memo(({ className, message }: SystemWidgetProps) => {
+export default memo(({ className, message, ok }: SystemWidgetProps) => {
   let json: SystemMessage | null = null
   try {
     json = JSON.parse(message)
@@ -67,13 +68,6 @@ export default memo(({ className, message }: SystemWidgetProps) => {
     	// "border-t-0! border-l-0! border-r-0! border-b-1! border-border!",
     ],
   }
-  const options = {
-  	rowSelection: {
-  		checkboxes: false,
-  		mode: "singleRow", 
-  		enableClickSelection: false,
-  	}
-  }
   const columnDefs: ColDef<RowData>[] = [
     { headerName: "Metric", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
     { headerName: "Value", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
@@ -99,11 +93,10 @@ export default memo(({ className, message }: SystemWidgetProps) => {
           columnDefs={columnDefs}
           rowData={rowData}
           domLayout="autoHeight"
-          rowSelection={options.rowSelection}
-          // headerHeight={0}
           getRowId={getRowId}
           // rowClass={clsx(cls.row)}
-          // rowHeight={24}
+          headerHeight={36}
+          rowHeight={32}
           rowClass={clsx(cls.row)} 
         />
       </div>

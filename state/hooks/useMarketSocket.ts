@@ -3,47 +3,59 @@ import { useState, useEffect } from "react"
 
 export default function useMarketWebSocket(url: string) {
   const [ws, setWs] = useState<WebSocket | null>(null)
-  const [dataResponse, setDataResponse] = useState("")
-  const [data, setData] = useState("")
-  const [retry, setRetry] = useState<number | null>(null)
-  const [messageCount, setMessageCount] = useState<number>(0)
+  const [messageOut, setMessageOut] = useState("")
+  const [messageIn, setMessageIn] = useState("")
+  const [inMessageCount, setInMessageCount] = useState<number>(0)
+  const [health, setHealth] = useState<number>(new Date().getTime())
   function connect() {
     const socket = new WebSocket(url)
     socket.onopen = () => {
-      console.log(`Connected to ${url}`)
+      setWs(socket)
     }
     socket.onmessage = (e) => {
-      setData(e.data)
+      setMessageIn(e.data)
     }
     socket.onclose = () => {
-      console.log(`Disconnected from ${url} (${ws?.readyState || -1})`)
-      setTimeout(() => setRetry(new Date().getTime()), 3000)
     }
     socket.onerror = e => {
-      console.log(`Error from ${url}`, e)
-      setTimeout(() => setRetry(new Date().getTime()), 3000)
     }
-    setWs(socket)    
     return socket
   }
-  useEffect(() => {
-    const socket = connect()
-    return () => socket.close()
-  }, [url, retry])
-  useEffect(() => {
-    if (ws && dataResponse) {
-      ws.send(dataResponse)
-    }
-  }, [dataResponse])
-  useEffect(() => setMessageCount(messageCount + 1), [data])
-  useEffect(() => {
-    if (messageCount >= 10) {
-      setDataResponse(JSON.stringify({ 
-        t: new Date().getTime(), 
-        c: messageCount, 
-      }))
-      setMessageCount(0)
-    }
-  }, [messageCount])
-  return { ws, setDataResponse, data }
+  useEffect(
+    () => {
+      const timeoutId = setTimeout(() => setHealth(new Date().getTime()), 3000)
+      if (!ws || ws?.readyState == 3) {
+        connect()
+      }    
+      return () => {
+        clearTimeout(timeoutId)
+      }
+    }, 
+    [health],
+  )
+  useEffect(
+    () => {
+      if (ws && messageOut) {
+        ws.send(messageOut)
+      }
+    }, 
+    [messageOut],
+  )
+  useEffect(
+    () => setInMessageCount(inMessageCount + 1), 
+    [messageIn],
+  )
+  useEffect(
+    () => {
+      if (inMessageCount >= 10) {
+        setMessageOut(JSON.stringify({ 
+          t: new Date().getTime(), 
+          c: inMessageCount, 
+        }))
+        setInMessageCount(0)
+      }
+    }, 
+    [inMessageCount],
+  )
+  return { data: messageIn, ok: ws?.readyState == 2 }
 }
