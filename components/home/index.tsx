@@ -16,22 +16,23 @@ export default memo(({ marketSocketUrl, systemSocketUrl }: HomeProps) => {
   
   const cls = {
     page: [
-      "grid grid-cols-1 grid-rows-1",
-      "sm:grid-cols-3 sm:grid-rows-1",
-      "xl:grid-cols-4 xl:grid-rows-1",
+      "grid grid-cols-1 grid-rows-[min-content_auto]",
+      "sm:grid-cols-[2fr_1fr] sm:grid-rows-1",
+      "xl:grid-cols-[3fr_1fr] xl:grid-rows-1",
       "w-[calc(100vw-50px)] h-screen",
       "sm:w-screen sm:h-[calc(100vh-50px)]",
       "p-1 gap-1",
     ],
     marketsTable: [
-      "col-start-1 row-start-2",
-      "sm:col-start-1 sm:col-span-2 sm:row-start-1",
-      "xl:col-start-1 xl:col-span-3 xl:row-start-1",
+      "col-start-1 row-start-1 row-span-1",
+      "sm:col-start-1 sm:col-span-1 sm:row-start-1",
+      "xl:col-start-1 xl:col-span-1 xl:row-start-1",
     ],
     systemWidget: [
-      "col-start-1 row-start-1",
-      "sm:col-start-3 sm:row-start-1",
-      "xl:col-start-4 xl:row-start-1",
+      "min-h-40",
+      "col-start-1 row-start-2 row-span-1",
+      "sm:col-start-2 sm:row-start-1",
+      "xl:col-start-2 xl:row-start-1",
     ],
   }
 

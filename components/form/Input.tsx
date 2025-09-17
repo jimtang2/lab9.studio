@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, label, pla
 	const cls = {
 		container: [
 			"grid grid-cols-[repeat(2,auto)] grid-rows-[min-content_auto]",
-			"bg-menu",
+			"bg-background",
 			className,
 		],
 		label: [

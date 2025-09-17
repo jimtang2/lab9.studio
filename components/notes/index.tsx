@@ -30,8 +30,8 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
     page: [
       "grid overflow-hidden",
       "grid-cols-1 grid-rows-[50px_auto]",
-      "sm:grid-cols-[2fr_6fr] sm:grid-rows-1",
-      "xl:grid-cols-[2fr_6fr_2fr]",
+      "sm:grid-cols-[1fr_2fr] sm:grid-rows-1",
+      "xl:grid-cols-[1fr_2fr_1fr]",
     ], 
     title: [
       "col-start-1 row-start-1",

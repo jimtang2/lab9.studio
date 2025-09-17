@@ -61,7 +61,7 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 			"ml-1 p-1",
 			"flex flex-row items-center",
 			"h-full w-full",
-			current ? "text-accent sm:bg-menu" : "text-text hover:text-accent",
+			current ? "text-accent font-bold sm:bg-menu" : "text-text hover:text-accent",
 			"transition-all duration-150",
 			"bg-menu sm:bg-background sm:hover:bg-menu",
 			"sm:rounded-lg",

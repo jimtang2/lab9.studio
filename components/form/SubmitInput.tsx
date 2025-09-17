@@ -23,7 +23,7 @@ export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitIn
 			className,
 		],
 		text: [
-			"text-sm/10",
+			"text-sm/9",
 			"px-1",
 		],
 		icon: [

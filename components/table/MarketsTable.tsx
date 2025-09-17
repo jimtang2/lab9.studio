@@ -72,8 +72,16 @@ export default memo(({ className, message, ok }: MarketsTableProps) => {
     })
   }, [marketsData])
   const cls = {
-    widget: [className],
-    grid: ["h-full w-full", "overflow-x-hidden", "ag-theme-alpine-auto-dark", "bg-background"]
+    widget: [
+    	"h-full w-full", 
+    	"min-h-fit",    	
+    	className,
+    ],
+    grid: [
+    	"overflow-x-hidden", 
+    	"ag-theme-alpine-auto-dark", 
+    	"bg-background",
+    ]
   }
   const columnDefs: ColDef<MarketsMessage>[] = [
     { 

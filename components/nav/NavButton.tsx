@@ -27,8 +27,8 @@ export default function NavButton({ id, href="", onClick, className, title="", i
         "text-subtext hover:text-text",
       ],
       "transition-all duration-150",
-      "sm:h-[calc(100%-2*var(--spacing))] sm:my-1 sm:px-6",
-      "rounded-lg",
+      "py-1",
+      "sm:h-[calc(100%-1*var(--spacing))] sm:my-1 sm:px-6",
       className,
 	  ],
 	  icon: [

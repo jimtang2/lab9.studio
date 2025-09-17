@@ -49,28 +49,19 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
     grid: [
     	"h-full w-full", 
     	"overflow-x-hidden", 
-    	// "ag-theme-alpine-auto-dark", 
     	"ag-theme-alpine-auto-dark",
     ],
     header: [
-    	// "text-right",
     ],
-
     row: [
-    	// "bg-blue-600!",
-    	// "h-8! max-h-8!",
-    	// "border-b-1! border-green-500!",
     ],
     cell: [
     	"text-left",
-    	// "bg-background",
-    	// "h-8! p-0!",
-    	// "border-t-0! border-l-0! border-r-0! border-b-1! border-border!",
     ],
   }
   const columnDefs: ColDef<RowData>[] = [
-    { headerName: "Metric", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
-    { headerName: "Value", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
+    { headerName: "Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
+    { headerName: "", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
   ]
   const rowData: RowData[] = [
     { label: "CPU Cores", value: cpu_cores },

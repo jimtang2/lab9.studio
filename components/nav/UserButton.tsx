@@ -11,9 +11,10 @@ import clsx from "clsx"
 
 interface UserButtonProps {
   id?: string;
+  className?: string;
 }
 
-export default function SessionButton({ id="" }: UserButtonProps) {
+export default function SessionButton({ id="", className="" }: UserButtonProps) {
   const {
     showLogin,
     setShowLogin,
@@ -34,8 +35,8 @@ export default function SessionButton({ id="" }: UserButtonProps) {
   const cls = {
     button: [
       "flex flex-row items-center justify-center gap-0 sm:gap-2",
-      "h-[calc(50px-2*var(--spacing))] w-[calc(50px-2*var(--spacing))]",
-      "sm:h-[calc(50px-2*var(--spacing))] sm:w-min",
+      "h-[calc(44px-1*var(--spacing))] w-[calc(44px-1*var(--spacing))]",
+      "sm:h-[calc(44px-1*var(--spacing))] sm:w-min",
       "sm:px-4",
       (showSession || showLogin) ? [
         loggedIn && "text-accent",
@@ -47,8 +48,9 @@ export default function SessionButton({ id="" }: UserButtonProps) {
       ],
       "transition-all duration-150",
       "pointer-events-auto",
-      "rounded-lg",
+      // "rounded-lg",
       "relative",
+      className,
     ],
     text: [
       "hidden sm:inline-block",
