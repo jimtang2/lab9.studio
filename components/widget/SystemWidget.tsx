@@ -1,8 +1,8 @@
 import { memo } from "react"
 import clsx from "clsx"
 import { AgGridReact } from "ag-grid-react"
-import "ag-grid-community/styles/ag-theme-alpine.css"
 import { ModuleRegistry, AllCommunityModule, ColDef } from "ag-grid-community"
+import "@/styles/ag-theme-alpine-custom.css"
 ModuleRegistry.registerModules([AllCommunityModule])
 interface SystemWidgetProps {
   className: string
@@ -45,18 +45,38 @@ export default memo(({ className, message }: SystemWidgetProps) => {
   } = json || {}
   const cls = {
     widget: [className],
-    grid: ["h-full w-full", "overflow-x-hidden", "ag-theme-alpine-auto-dark", "bg-background"]
+    grid: [
+    	"h-full w-full", 
+    	"overflow-x-hidden", 
+    	// "ag-theme-alpine-auto-dark", 
+    	"ag-theme-alpine-auto-dark",
+    ],
+    header: [
+    	// "text-right",
+    ],
+
+    row: [
+    	// "bg-blue-600!",
+    	// "h-8! max-h-8!",
+    	// "border-b-1! border-green-500!",
+    ],
+    cell: [
+    	"text-left",
+    	// "bg-background",
+    	// "h-8! p-0!",
+    	// "border-t-0! border-l-0! border-r-0! border-b-1! border-border!",
+    ],
+  }
+  const options = {
+  	rowSelection: {
+  		checkboxes: false,
+  		mode: "singleRow", 
+  		enableClickSelection: false,
+  	}
   }
   const columnDefs: ColDef<RowData>[] = [
-    { headerName: "Metric", field: "label", flex: 1, sortable: false },
-    {
-      headerName: "Value",
-      field: "value",
-      flex: 1,
-      cellStyle: { textAlign: "right" },
-      valueFormatter: (params) => params.value || "0",
-      sortable: false
-    }
+    { headerName: "Metric", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
+    { headerName: "Value", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
   ]
   const rowData: RowData[] = [
     { label: "CPU Cores", value: cpu_cores },
@@ -71,6 +91,7 @@ export default memo(({ className, message }: SystemWidgetProps) => {
     { label: "Disk I/O Rate", value: `${(disk_io_rate || 0).toFixed(0)} IOPS` },
     { label: "Broadcasts", value: markets_sessions },
   ]
+  const getRowId = (params: { data: RowData }) => params.data.label
   return (
     <div className={clsx(cls.widget)}>
       <div className={clsx(cls.grid)}>
@@ -78,7 +99,12 @@ export default memo(({ className, message }: SystemWidgetProps) => {
           columnDefs={columnDefs}
           rowData={rowData}
           domLayout="autoHeight"
-          suppressRowClickSelection
+          rowSelection={options.rowSelection}
+          // headerHeight={0}
+          getRowId={getRowId}
+          // rowClass={clsx(cls.row)}
+          // rowHeight={24}
+          rowClass={clsx(cls.row)} 
         />
       </div>
     </div>

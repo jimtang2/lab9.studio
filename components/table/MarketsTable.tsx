@@ -1,8 +1,8 @@
 import { memo, useState, useEffect, useMemo } from "react"
 import clsx from "clsx"
 import { AgGridReact } from "ag-grid-react"
-import "ag-grid-community/styles/ag-theme-alpine.css"
 import { ModuleRegistry, AllCommunityModule, ColDef } from "ag-grid-community"
+import "@/styles/ag-theme-alpine-custom.css"
 ModuleRegistry.registerModules([AllCommunityModule])
 interface MarketsTableProps {
   className: string
@@ -74,49 +74,61 @@ export default memo(({ className, message }: MarketsTableProps) => {
     widget: [className],
     grid: ["h-full w-full", "overflow-x-hidden", "ag-theme-alpine-auto-dark", "bg-background"]
   }
+  const options = {
+  	rowSelection: {
+  		checkboxes: false,
+  		mode: "singleRow", 
+  		enableClickSelection: false,
+  	}
+  }
   const columnDefs: ColDef<MarketsMessage>[] = [
-    { headerName: "Market", field: "n", flex: 1, sortable: true },
+    { 
+	    headerName: "Market", 
+		  field: "n", 
+		  flex: 1, 
+		  sortable: true,
+		},
     {
       headerName: "Last Price",
       field: "lp",
       flex: 1,
-      cellStyle: { textAlign: "right" },
+      // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => (params.value || 0).toFixed(2),
-      sortable: true
+      sortable: true,
     },
     {
       headerName: "Timestamp",
       field: "t",
       flex: 1,
-      cellStyle: { textAlign: "right" },
+      // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => new Date(params.value * 1000).toLocaleString(),
-      sortable: true
+      sortable: true,
     },
     {
       headerName: "Volume",
       field: "volume",
       flex: 1,
-      cellStyle: { textAlign: "right" },
+      // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => (params.value || 0).toFixed(0),
-      sortable: true
+      sortable: true,
     },
     {
       headerName: "Change %",
       field: "chp",
       flex: 1,
-      cellStyle: { textAlign: "right" },
+      // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => `${(params.value || 0).toFixed(2)}%`,
-      sortable: true
+      sortable: true,
     },
     {
       headerName: "Change",
       field: "ch",
       flex: 1,
-      cellStyle: { textAlign: "right" },
+      // cellStyle: { textAlign: "right" },
       valueFormatter: (params) => (params.value || 0).toFixed(2),
-      sortable: true
+      sortable: true,
     },
-    { headerName: "Status", field: "s", flex: 1, sortable: true }
+    // { headerName: "Status", field: "s", flex: 1, sortable: true }
   ]
   const rowData = markets.map(market => marketsMap[market] || {
     n: market,
@@ -127,6 +139,8 @@ export default memo(({ className, message }: MarketsTableProps) => {
     ch: 0,
     s: ""
   })
+  const getRowId = (params: { data: MarketsMessage }) => params.data.n
+
   return (
     <div className={clsx(cls.widget)}>
       <div className={clsx(cls.grid)}>
@@ -134,7 +148,8 @@ export default memo(({ className, message }: MarketsTableProps) => {
           columnDefs={columnDefs}
           rowData={rowData}
           domLayout="autoHeight"
-          suppressRowClickSelection
+          rowSelection={options.rowSelection}
+          getRowId={getRowId}
         />
       </div>
     </div>

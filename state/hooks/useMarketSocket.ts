@@ -3,38 +3,47 @@ import { useState, useEffect } from "react"
 
 export default function useMarketWebSocket(url: string) {
   const [ws, setWs] = useState<WebSocket | null>(null)
-  const [marketsResponse, setMarketsResponse] = useState("")
-  const [markets, setMarkets] = useState("")
+  const [dataResponse, setDataResponse] = useState("")
+  const [data, setData] = useState("")
+  const [retry, setRetry] = useState<number | null>(null)
   const [messageCount, setMessageCount] = useState<number>(0)
-  useEffect(() => {
+  function connect() {
     const socket = new WebSocket(url)
     socket.onopen = () => {
       console.log(`Connected to ${url}`)
     }
     socket.onmessage = (e) => {
-      setMarkets(e.data)
+      setData(e.data)
     }
     socket.onclose = () => {
-      console.log(`Disconnected from ${url}`)
+      console.log(`Disconnected from ${url} (${ws?.readyState || -1})`)
+      setTimeout(() => setRetry(new Date().getTime()), 3000)
     }
-    setWs(socket)
+    socket.onerror = e => {
+      console.log(`Error from ${url}`, e)
+      setTimeout(() => setRetry(new Date().getTime()), 3000)
+    }
+    setWs(socket)    
+    return socket
+  }
+  useEffect(() => {
+    const socket = connect()
     return () => socket.close()
-  }, [url])
+  }, [url, retry])
   useEffect(() => {
-    console.log("response:", marketsResponse)
-    if (ws && marketsResponse) {
-      ws.send(marketsResponse)
+    if (ws && dataResponse) {
+      ws.send(dataResponse)
     }
-  }, [marketsResponse])
+  }, [dataResponse])
+  useEffect(() => setMessageCount(messageCount + 1), [data])
   useEffect(() => {
-    setMessageCount(messageCount + 1)
-  }, [markets])
-  useEffect(() => {
-    if (messageCount < 10) {
-    } else {
-      setMarketsResponse(JSON.stringify({ t: new Date().getTime(), c: messageCount, }))
-      setMessageCount(0)      
+    if (messageCount >= 10) {
+      setDataResponse(JSON.stringify({ 
+        t: new Date().getTime(), 
+        c: messageCount, 
+      }))
+      setMessageCount(0)
     }
   }, [messageCount])
-  return { ws, setMarketsResponse, markets }
+  return { ws, setDataResponse, data }
 }

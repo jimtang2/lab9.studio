@@ -10,8 +10,8 @@ interface HomeProps {
 }
 
 export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
-  const { ws: marketsWs, markets: marketsMessage, setMarketsResponse } = useMarketSocket(marketSocketUrl)
-  const { ws: systemWs, system: systemMessage, setSystemResponse } = useSystemSocket(systemSocketUrl)
+  const { data: marketsData } = useMarketSocket(marketSocketUrl)
+  const { data: systemData } = useSystemSocket(systemSocketUrl)
   
   const cls = {
     page: [
@@ -20,7 +20,7 @@ export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
       "xl:grid-cols-4 xl:grid-rows-1",
       "w-[calc(100vw-50px)] h-screen",
       "sm:w-screen sm:h-[calc(100vh-50px)]",
-      "p-2 gap-2",
+      "p-1 gap-1",
     ],
     marketsTable: [
       "col-start-1 row-start-2",
@@ -36,8 +36,8 @@ export default function Home({ marketSocketUrl, systemSocketUrl }: HomeProps) {
 
   return (
     <div className={clsx(cls.page)}>
-      <MarketsTable className={clsx(cls.marketsTable)} message={marketsMessage} />
-      <SystemWidget className={clsx(cls.systemWidget)} message={systemMessage} />
+      <MarketsTable className={clsx(cls.marketsTable)} message={marketsData} />
+      <SystemWidget className={clsx(cls.systemWidget)} message={systemData} />
     </div>
   )
 }
