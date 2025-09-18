@@ -9,9 +9,8 @@ export default function JobItem({ company, url, positions=[], }: Job) {
       "profile-job",
       "flex flex-col",
       "pt-2 pb-1",
-      "text-nowrap",
-      "transition-all duration-300",
-      "last:border-b-1 border-border",
+      "text-wrap",
+      "bg-background",
     ],
     title: [
       "px-4",

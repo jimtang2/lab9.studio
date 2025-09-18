@@ -13,11 +13,10 @@ export default function NoteTitle({ note, className="", }: { note: Note | null; 
   const cls = {
   	container: [
   		"flex flex-row items-center",
-			"max-w-[calc(100vw-50px-2*var(--spacing))]",
-			showNotesList ? "bg-menu text-accent" : "bg-background text-text",
-			"transition-all duration-300",
-			"px-2 my-1 mx-1",
-			"border-b-1 border-border",
+			"px-2",
+			"border-b-1",
+			showNotesList ? "text-accent border-background" : "bg-background text-text border-border",
+			"transition-all duration-150",
 			className,
 	  ],
 	  text: [

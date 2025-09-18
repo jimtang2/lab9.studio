@@ -1,21 +1,25 @@
 @import "./global.css";
 
+#note-markdown {
+  @apply bg-background;
+}
+
 #note-markdown h1 {
   @apply text-xl/8;
   @apply font-black;
-  @apply px-2 py-2 sm:px-2;
+  @apply px-1 py-1;
 }
 
 #note-markdown h2 {
   @apply text-lg/12;
   @apply font-bold;
-  @apply px-2 py-0 sm:px-2;
+  @apply px-1 py-0;
 }
 
 #note-markdown h3 {
   @apply text-base/10;
   @apply font-normal;
-  @apply px-2 py-0 sm:px-2;
+  @apply px-1 py-0;
   @apply underline;
 }
 
@@ -39,7 +43,7 @@
 #note-markdown p, 
 #note-markdown li, 
 #note-markdown table {
-  @apply px-2 py-2 sm:px-2;
+  @apply p-1;
   @apply text-base/6;
 }
 
@@ -48,7 +52,7 @@
 }
 
 #note-markdown table {
-	@apply mx-4;
+	@apply mx-3;
 }
 
 #note-markdown ul {
@@ -66,7 +70,8 @@
 }
 
 .table-of-contents > ol {
-	@apply pb-12;
+	@apply px-1 pb-4 pt-1;
+  @apply bg-background;
 }
 
 .table-of-contents li {
@@ -75,7 +80,7 @@
 
 .table-of-contents li > a {	
 	/*@apply block border-l-4 border-transparent;*/
-	@apply text-base/8 text-subtext;
+	@apply text-base/9 text-subtext;
 	@apply text-wrap;
 	@apply hover:text-accent;
 }

@@ -5,7 +5,7 @@ import { useSessionUser } from "@/state/hooks"
 import LoginForm from "@/components/form/LoginForm"
 import SessionMenu from "@/components/menu/SessionMenu"
 import LoggedOnIcon from "/public/heroicons/solid/user.svg"
-import LoggedOffIcon from "/public/heroicons/solid/user.svg"
+import LoggedOffIcon from "/public/heroicons/solid/key.svg"
 import AdminIcon from "/public/heroicons/solid/user-circle.svg"
 import clsx from "clsx"
 
@@ -24,7 +24,7 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
   } = useStore(state => state)
   const [user] = useSessionUser()
   const loggedIn = typeof(user?.name) === "string"
-  const displayName = loggedIn ? user?.name : "Public"
+  const displayName = loggedIn ? user?.name : "Sign In"
   const isAdmin = user?.is_admin || false
 
   useEffect(() => {
@@ -34,10 +34,7 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
 
   const cls = {
     button: [
-      "flex flex-row items-center justify-center gap-0 sm:gap-2",
-      "h-[calc(44px-1*var(--spacing))] w-[calc(44px-1*var(--spacing))]",
-      "sm:h-[calc(44px-1*var(--spacing))] sm:w-min",
-      "sm:px-4",
+      "flex flex-row items-center justify-center gap-0 sm:gap-1",
       (showSession || showLogin) ? [
         loggedIn && "text-accent",
         "text-accent bg-menu",
@@ -48,8 +45,6 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
       ],
       "transition-all duration-150",
       "pointer-events-auto",
-      // "rounded-lg",
-      "relative",
       className,
     ],
     text: [

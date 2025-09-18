@@ -16,14 +16,14 @@ export default memo(({ }: DataProps) => {
       "w-[calc(100vw-50px)] h-screen",
       "sm:w-screen sm:h-[calc(100vh-50px)]",
       "overflow-x-hidden overflow-y-auto",
-      "p-1 gap-1",
+      "gap-[1px]",
     ],
     categories: [
       "col-start-1 col-span-1 row-start-1 row-span-1",
       "sm:col-start-1 sm:col-span-1 sm:row-start-1 sm:row-span-2",
       // "xl:col-start-1 xl:col-span-1 xl:row-start-1",
       "min-h-12",
-      "bg-menu",
+      "bg-background",
       // "bg-red-300",
     ],
     subcategories: [
@@ -31,7 +31,7 @@ export default memo(({ }: DataProps) => {
       "sm:col-start-2 sm:col-span-1 sm:row-start-1 sm:row-span-1",
       "xl:col-start-2 xl:col-span-2 xl:row-start-1",
       "min-h-12",
-      "bg-menu",
+      "bg-background",
       // "bg-purple-300",
     ],
     main: [

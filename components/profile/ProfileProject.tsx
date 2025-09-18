@@ -20,7 +20,7 @@ export default function ProjectItems({items, layout}: {items: Project[]; layout:
         "px-4",
         "bg-background",
         "border-b-1 border-double border-border",
-        "sticky top-20 sm:top-10",
+        "sticky top-[89px] sm:top-10",
         "z-1",
       ],
     }
@@ -64,6 +64,7 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
       "px-4 py-1",
       "max-h-lg",
       "border-b-1 border-border",
+      "bg-background",
     ],
     title: [
       "py-1",

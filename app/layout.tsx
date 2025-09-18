@@ -6,7 +6,7 @@ import "@/styles/global.css"
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 2,
+  // maximumScale: 2,
   viewportFit: "cover",
   colorScheme: "dark light",
   themeColor: [
@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | lab9.studio",
-    default: "lab9.studio",
+    template: `%s | lab9.studio${process.env.NODE_ENV==="development"?" [dev]": ""}`,
+    default: `lab9.studio${process.env.NODE_ENV==="development"?" [dev]": ""}`,
   },
   description: "built by jimtang",
   creator: "jimtang",
@@ -30,20 +30,34 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     html: [
       "bg-background text-text",
       "[font-family:_Work,_sans-serif]",
-      "max-h-screen max-w-screen",
+      "max-w-screen",
+      "max-h-safe",
+      "overscroll-none",
     ],
     body: [
       "flex flex-row sm:flex-col",
-      "h-screen w-screen max-h-screen max-w-screen",
-      "bg-background",
+      "h-screen w-screen",
+      "max-w-screen",
+      // "max-h-safe",
+      "bg-menu gap-[1px]",
+      // "max-h-[calc(100vh-81px)]",
+      // "sm:max-h-full",
+      "overscroll-none",
     ],
     nav: [
       "sm:sticky sm:top-0",
       "sm:z-10",
+      "max-h-safe",
+      "overscroll-none",
     ],
     main: [
-      "max-w-[calc(100%-50px-1*var(--spacing))] overflow-x-hidden",
-      "sm:max-w-full sm:w-full sm:max-h-screen sm:overflow-y-hidden",
+      "max-w-[calc(100%-44px)]",
+      // "max-h-safe",
+      "sm:max-w-full sm:max-h-[calc(100%-44px)]",
+      "w-full h-full",
+      "overflow-hidden",
+      "overscroll-none",
+      "pb-safe",
     ],
   }
 

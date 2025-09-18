@@ -21,14 +21,8 @@ export default function NavButton({ id, href="", onClick, className, title="", i
   const cls = {
   	base: [
       "flex items-center justify-center",
-      isCurrent ? [
-        "text-accent bg-menu",
-      ] : [
-        "text-subtext hover:text-text",
-      ],
+      isCurrent ? "text-accent bg-menu" : "text-subtext hover:text-text",
       "transition-all duration-150",
-      "py-1",
-      "sm:h-[calc(100%-1*var(--spacing))] sm:my-1 sm:px-6",
       className,
 	  ],
 	  icon: [

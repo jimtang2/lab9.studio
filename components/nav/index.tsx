@@ -18,27 +18,29 @@ export default function Nav({ className }: { className: string; }) {
   const cls = {
   	bar: [
   		"flex flex-col sm:flex-row sm:items-center",
-  		"h-full w-[50px] sm:h-[44px] sm:w-full",
-  		"border-border border-1",
-  		"px-1 pt-0 sm:px-1 sm:py-[2px]",
-			"gap-y-1 divide-y-1 divide-border",
+  		"h-full max-h-screen w-[50px] sm:h-[44px] sm:w-full",
+  		// "border-border border-t-0 border-l-0 border-b-0 border-1",
+  		"px-1 sm:py-[2px]",
+			"gap-y-1 divide-y-1 sm:divide-y-0 divide-border",
   		"sm:gap-x-[2px] sm:divide-x-1 sm:divide-border",
   		"bg-background",
 			className,
 		],
 		button: [
-			"h-[calc(44px-2*var(--spacing))] sm:h-full",
+      "h-[44px] w-[44px] sm:h-full sm:w-fit",
+      "sm:px-6",
 		],
 		toggle: [
 			"sm:hidden",
 			"hidden",
 		],
-		separator: [
-			"h-1 mb-1 border-b-1 border-border",
-			"flex-grow-1 sm:border-none sm:m-0",
+		placeholder: [
+			"flex-grow-1 h-0",
 		],
 		userBtn: [
-			"mb-20 sm:mb-0",
+			"order-999",
+			// "place-self-stretch",
+			// "justify-self-end",
 		],
   }
 
@@ -73,7 +75,7 @@ export default function Nav({ className }: { className: string; }) {
 		  href={"/profile"}
 		  title={"Profile"}
 		  icon={<ProfileIcon />} />
-		<div className={clsx(cls.separator)}></div>
+		 <div className={clsx(cls.placeholder)}></div>
 		<UserButton className={clsx(cls.button, cls.userBtn)} id={"nav-user-btn"} />
 	</div>
 }

@@ -24,7 +24,7 @@ export default function NotesList({ notes, className="" }: { notes: { id: number
 			"grid auto-rows-[min-content]",
 			"max-w-full max-h-full", 
 			"overflow-x-hidden overflow-y-auto",
-  		showNotesList ? "h-full opacity-100 translate-y-[-3px]" : "h-[0px] opacity-0 translate-y-[-50px]",
+  		showNotesList ? "h-full opacity-100 translate-y-[0]" : "h-[0px] opacity-0 translate-y-[-50px]",
 			"sm:w-full sm:h-full sm:translate-x-0 sm:translate-y-0 sm:opacity-100",
 			"transition-all duration-150",
   	],
@@ -52,19 +52,18 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 	const cls = {
 		container: [
 			"flex flex-row items-stretch",
-			"text-base/7",
-			"w-[calc(100%-1*var(--spacing))] sm:w-[calc(100%-1*var(--spacing))]",
+			"text-base/8",
+			"w-full",
 			"border-b-1 border-background sm:border-border",
-			"sm:py-[2px]",
+			// "sm:py-[2px]",
 		],
 		selection: [
-			"ml-1 p-1",
+			"p-1 sm:m-0",
 			"flex flex-row items-center",
 			"h-full w-full",
 			current ? "text-accent font-bold sm:bg-menu" : "text-text hover:text-accent",
 			"transition-all duration-150",
 			"bg-menu sm:bg-background sm:hover:bg-menu",
-			"sm:rounded-lg",
 		],
 		text: [
 			"flex-grow-1",

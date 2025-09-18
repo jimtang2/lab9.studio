@@ -28,10 +28,12 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
 
   const cls = {
     page: [
-      "grid overflow-hidden",
-      "grid-cols-1 grid-rows-[50px_auto]",
+      "grid",
+      "grid-cols-1 grid-rows-[44px_auto]",
       "sm:grid-cols-[1fr_2fr] sm:grid-rows-1",
       "xl:grid-cols-[1fr_2fr_1fr]",
+      "xl:overflow-hidden",
+      "h-full max-h-full",
     ], 
     title: [
       "col-start-1 row-start-1",
@@ -46,19 +48,18 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
 			"col-start-1 col-end-[-1] row-start-2 row-end-[-1]",
 			"sm:col-start-2 sm:col-end-[-1] sm:row-start-1 sm:row-end-[-1]",
 			"xl:col-end-[-2]",
-			"h-full sm:max-h-[calc(100vh-50px)] sm:max-h-screen max-w-full",
-			"overflow-x-hidden overflow-y-auto",
-			showNotesList ? "pointer-events-none" : "pointer-events-auto",
 			"sm:pointer-events-auto",
 			"sm:border-l-1 sm:border-border",
 			"xl:border-r-1",
 			"transition-all transition-transform duration-150",
-			"mx-0 px-0 pb-40 sm:px-2 sm:mx-0",
+			"mx-0 px-0 sm:px-2 sm:mx-0",
+			"h-full sm:max-h-full sm:max-h-screen max-w-full",
+			"overflow-x-hidden overflow-y-auto",
+			showNotesList ? "pointer-events-none" : "pointer-events-auto",
   	],
   	toc: [
 			"hidden xl:block",
 			"xl:col-start-3 xl:col-end-[-1] xl:row-start-1 xl:row-end-[-1]",
-			"mx-1 my-1",
 			"h-full sm:max-h-[calc(100vh-50px)] sm:max-h-screen max-w-full",
 			"whitespace-pre-wrap",
 			"overflow-x-hidden overflow-y-auto",

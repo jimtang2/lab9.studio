@@ -14,6 +14,11 @@
   --highlighted-foreground-color: var(--color-blue-950);
   --border-color: var(--color-gray-300);
   --error-foreground-color: var(--color-red-500);
+
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,6 +77,11 @@ input[type="checkbox"] {
 
 @supports (-webkit-overflow-scrolling: touch) {
   #note-markdown {
-    @apply pb-25;
+    /*@apply pb-25;*/
   }
+}
+
+body.safari {
+  @apply max-h-[calc(100vh-81px)];
+  @apply sm:max-h-full;
 }

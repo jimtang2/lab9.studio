@@ -10,10 +10,10 @@ export default function EducationItem({ school, url, degree, major="", minor="",
     education: [
       "profile-education",
       "flex flex-col",
-      "whitespace-nowrap",
+      "text-wrap",
       "py-2",
       "font-light",
-      "last:border-b-1 border-border",
+      "bg-background",
     ],
     title: [
       "flex flex-row gap-1",
