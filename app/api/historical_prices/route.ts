@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { db } from "@/db"
 import { HistoricalPrices } from "@/db/schema"
-import { eq, gte, lte, and } from "drizzle-orm"
+import { eq, gte, lte, and, desc, } from "drizzle-orm"
 
 export async function GET(request: NextRequest) {
   try {
@@ -27,14 +27,14 @@ export async function GET(request: NextRequest) {
     }
     const results = await db
       .select({
-        symbol: HistoricalPrices.symbol,
         date: HistoricalPrices.date,
-        // interval: HistoricalPrices.interval,
         open: HistoricalPrices.open,
         high: HistoricalPrices.high,
         low: HistoricalPrices.low,
         close: HistoricalPrices.close,
         volume: HistoricalPrices.volume,
+        // symbol: HistoricalPrices.symbol,
+        // interval: HistoricalPrices.interval,
         // splitRatio: HistoricalPrices.splitRatio,
         // vwap: HistoricalPrices.vwap,
         // dividend: HistoricalPrices.dividend,
@@ -51,6 +51,7 @@ export async function GET(request: NextRequest) {
           lte(HistoricalPrices.date, endDateParsed),
         )
       )
+      .orderBy(desc(HistoricalPrices.date))
     return NextResponse.json(results, { status: 200 })
   } catch (error) {
     console.error('Query failed:', error)

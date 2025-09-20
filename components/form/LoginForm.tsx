@@ -30,7 +30,7 @@ export default function LoginForm() {
   const cls = {
     form: [
       "absolute",
-      "bottom-4 left-14 max-w-[360px] sm:h-fit",
+      "bottom-5 left-13 max-w-[360px] sm:h-fit",
       "sm:top-[calc(100%+4px)] sm:left-auto sm:right-0",
       "bg-background",
       "z-10",
@@ -38,9 +38,10 @@ export default function LoginForm() {
       !showLogin && "translate-x-[-50px] sm:translate-x-0 sm:translate-y-[-50px] opacity-0",
       showLogin && "translate-x-0 sm:translate-y-0 opacity-100",
       "transition-all duration-150",
-      "flex flex-col",
+      "flex flex-col gap-[1px]",
       showLogin ? "pointer-events-auto" : "pointer-events-none",
       "border-1 border-border",
+      "px-[2px]",
     ],
     nameInput: [
       showLogin ? "pointer-events-auto" : "pointer-events-none",
@@ -56,7 +57,7 @@ export default function LoginForm() {
     ],
     submitInput: [
       showLogin ? "pointer-events-auto" : "pointer-events-none",
-      "px-1 mx-1",
+      "px-1 mx-0",
       "order-1 sm:order-2",
     ],
     error: [

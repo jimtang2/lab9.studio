@@ -19,7 +19,7 @@ export default forwardRef<HTMLButtonElement, SubmitInputProps>(function SubmitIn
 			"flex flex-row items-center",
 			"outline-accent",
 			"bg-control-background text-control-foreground",
-			"rounded-lg",
+			// "rounded-lg",
 			className,
 		],
 		text: [

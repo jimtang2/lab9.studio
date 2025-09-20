@@ -20,7 +20,7 @@ export default function Nav({ className }: { className: string; }) {
   		"flex flex-col sm:flex-row sm:items-center",
   		"h-full max-h-screen w-[50px] sm:h-[44px] sm:w-full",
   		// "border-border border-t-0 border-l-0 border-b-0 border-1",
-  		"px-1 sm:py-[2px]",
+  		"px-1 pb-25 sm:py-[2px] sm:pb-0",
 			"gap-y-1 divide-y-1 sm:divide-y-0 divide-border",
   		"sm:gap-x-[2px] sm:divide-x-1 sm:divide-border",
   		"bg-background",

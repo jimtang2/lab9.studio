@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { useStore } from "@/state/store"
 import { type Header as HeaderProps } from "./types"
+import { Select } from "@/components/form"
 import JobItem from "./ProfileJob"
 import EducationItem from "./ProfileEducation"
 import ProjectItems from "./ProfileProject"
@@ -57,6 +58,8 @@ export default function ProfilePage() {
     select: [
       "font-normal",
       "text-right",
+      "relative right-[calc(-4*var(--spacing))]",
+      "bg-background!",
     ],
   }
 
@@ -73,13 +76,13 @@ export default function ProfilePage() {
     </div>
     <div className={clsx([cls.projects, cls.pane])}>
       <Header text="Projects List">
-        <select className={clsx(cls.select)}
+        <Select className={clsx(cls.select)}
           defaultValue={projectLayout}
           onChange={e => setProjectLayout(e.target.value as ("0" | "1" | "2"))}>
           <option value="0">Latest</option>
           <option value="1">Latest by company</option>
           <option value="2">Hide personal projects</option>
-        </select>
+        </Select>
       </Header>
       <ProjectItems items={projectsData} layout={projectLayout} />
     </div>

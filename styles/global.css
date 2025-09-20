@@ -62,16 +62,8 @@ a, button {
   @apply cursor-pointer;
 }
 
-input {
-  @apply accent-accent;
-}
-
 input[type="submit"], input[type="button"], button {
   @apply cursor-pointer;
-}
-
-input[type="text"], input[type="email"], textarea, select {
-
 }
 
 input[type="checkbox"] {

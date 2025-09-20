@@ -304,7 +304,7 @@ const projectsData: Project[] = [
     description: "Data migration from legacy data silos to Laserfiche. Multiple clients include Royal London Group, Time Warner Cable, Wells Fargo Bank, Nara Bank, Santa Ana Police Department, and more.",
     items: [
       "Analyze migration data, configure migration software, test migration scripts and perform post-migration checks.",
-      "Build custom ECM solution demos to showcase Laserfiche products suite.",
+      "Build custom ECM solution demos post-migration to showcase various Laserfiche business solutions.",
     ],
     stack: [
       "Laserfiche",

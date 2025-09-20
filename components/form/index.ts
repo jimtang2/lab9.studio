@@ -1,3 +1,5 @@
 export { default as TextInput } from "./TextInput"
+export { default as DateInput } from "./DateInput"
 export { default as PasswordInput } from "./PasswordInput"
 export { default as SubmitInput } from "./SubmitInput"
+export { default as Select } from "./Select"

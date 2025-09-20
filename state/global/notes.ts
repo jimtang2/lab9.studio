@@ -62,7 +62,7 @@ class NotesManager {
     try {
       const timeoutPromise = new Promise((_, reject) => 
         setTimeout(() => {
-          console.log("node-schedule: refreshNotes timeout after 3s")
+          console.log(`node-schedule: ${new Date().toLocaleString()}: refreshNotes timeout after 3s`)
           reject(new Error('Query timeout'))
         }, 3000)
       );

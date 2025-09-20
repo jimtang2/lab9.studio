@@ -9,8 +9,8 @@ export default function SessionMenu() {
 	const cls = {
 		container: [
 		  "absolute",
-      "bottom-29 left-14",
-      "sm:top-full sm:left-auto sm:right-0",
+      "bottom-[calc(25*var(--spacing)+2px)] left-[calc(12*var(--spacing)+0px)]",
+      "sm:top-[calc(100%+2px)] sm:left-auto sm:right-[-1px]",
 		  "w-min max-w-[360px]",
       "border-1 border-background",
       "bg-menu",
@@ -55,7 +55,6 @@ function LogoutButton() {
 			"w-full min-w-full",
       "flex flex-row items-center",
 			"bg-control-background text-control-foreground",
-			"rounded-lg",
 		],
 		text: "flex-grow-1 text-left text-sm/10 px-2",
 		icon: [],
