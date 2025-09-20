@@ -29,7 +29,7 @@ export default function NavButton({ id, href="", onClick, className, title="", i
       "sm:hidden",
     ],
 	  text: [
-      "font-bold",
+      "text-sm",
       "not-sm:hidden",
     ],
   }

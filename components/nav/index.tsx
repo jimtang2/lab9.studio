@@ -28,7 +28,7 @@ export default function Nav({ className }: { className: string; }) {
 		],
 		button: [
       "h-[44px] w-[44px] sm:h-full sm:w-fit",
-      "sm:px-6",
+      "sm:px-4",
 		],
 		toggle: [
 			"sm:hidden",

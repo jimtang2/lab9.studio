@@ -11,6 +11,7 @@ export default function JobItem({ company, url, positions=[], }: Job) {
       "pt-2 pb-1",
       "text-wrap",
       "bg-background",
+      "last:border-b-1 last:border-border",
     ],
     title: [
       "px-4",

@@ -14,6 +14,7 @@ export default function EducationItem({ school, url, degree, major="", minor="",
       "py-2",
       "font-light",
       "bg-background",
+      "last:border-b-1 last:border-border",
     ],
     title: [
       "flex flex-row gap-1",

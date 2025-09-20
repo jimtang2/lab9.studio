@@ -6,7 +6,6 @@ export const metadata: Metadata = {
 }
 
 export default function DataPage() {
-
   return <Data />
 }
 

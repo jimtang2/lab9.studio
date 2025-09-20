@@ -1,5 +1,6 @@
 import type { Viewport, Metadata } from "next"
 import Nav from "@/components/nav"
+import BrowserCheck from "@/components/layout/BrowserCheck"
 import clsx  from "clsx"
 import "@/styles/global.css"
 
@@ -38,10 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "flex flex-row sm:flex-col",
       "h-screen w-screen",
       "max-w-screen",
-      // "max-h-safe",
       "bg-menu gap-[1px]",
-      // "max-h-[calc(100vh-81px)]",
-      // "sm:max-h-full",
       "overscroll-none",
     ],
     nav: [
@@ -52,7 +50,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ],
     main: [
       "max-w-[calc(100%-44px)]",
-      // "max-h-safe",
       "sm:max-w-full sm:max-h-[calc(100%-44px)]",
       "w-full h-full",
       "overflow-hidden",
@@ -66,5 +63,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <Nav className={clsx(cls.nav)}/>
       <main className={clsx(cls.main)}>{children}</main>
     </body>
+    <BrowserCheck />
   </html>
 }

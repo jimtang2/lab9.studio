@@ -5,21 +5,21 @@
 }
 
 #note-markdown h1 {
-  @apply text-xl/8;
-  @apply font-black;
-  @apply px-1 py-1;
+  @apply text-xl/9;
+  @apply font-bold;
+  @apply px-2 py-1;
 }
 
 #note-markdown h2 {
-  @apply text-lg/12;
+  @apply text-lg/9;
   @apply font-bold;
-  @apply px-1 py-0;
+  @apply px-2 py-0;
 }
 
 #note-markdown h3 {
-  @apply text-base/10;
+  @apply text-base/9;
   @apply font-normal;
-  @apply px-1 py-0;
+  @apply px-2 py-0;
   @apply underline;
 }
 
@@ -37,18 +37,18 @@
 }
 
 #note-markdown ul {
-  @apply px-1;
+  /*@apply px-2;*/
 }
 
 #note-markdown p, 
 #note-markdown li, 
 #note-markdown table {
-  @apply p-1;
+  @apply px-2 py-1;
   @apply text-base/6;
 }
 
 #note-markdown p {
-	@apply mx-1;
+	/*@apply mx-1;*/
 }
 
 #note-markdown table {
@@ -69,8 +69,14 @@
   @apply text-accent;
 }
 
+.table-of-contents {
+  @apply xl:min-h-full;
+  @apply xl:pb-[88px];
+  @apply bg-background;
+}
+
 .table-of-contents > ol {
-	@apply px-1 pb-4 pt-1;
+	@apply px-2 pb-4 pt-1;
   @apply bg-background;
 }
 

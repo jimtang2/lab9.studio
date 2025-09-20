@@ -40,6 +40,7 @@ export type Project = {
   type?: ProjectType[];
   stack?: string[];
   items?: string[];
+  personal?: boolean;
 }
 
 export type ProjectType = "frontend" | "backend" | "mobile" | "devops" | "ux" | "ios" | "pm";

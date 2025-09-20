@@ -12,7 +12,7 @@ import clsx from "clsx"
 import "@/styles/profile.css"
 
 export default function ProfilePage() {
-  const [ projectLayout, setProjectLayout ] = useState<"0" | "1">("0")
+  const [ projectLayout, setProjectLayout ] = useState<"0" | "1" | "2">("2")
   const { showNav, } = useStore(state => state)
 
   const cls = {
@@ -21,14 +21,13 @@ export default function ProfilePage() {
       "h-full w-full",
       "overflow-x-hidden overflow-y-auto xl:overflow-y-hidden",
       "sm:grid-cols-[1fr_2fr] sm:grid-rows-[min-content_min-content_1fr]",
-      // "sm:max-h-[calc(100%-10px)]",
       "sm:overflow-y-auto",
       "xl:grid-cols-[1fr_2fr_1fr] xl:grid-rows-1",
     ],
     title: [
       "w-full h-[44px]",
       "sticky top-0 z-3",
-      "bg-background text-lg/10",
+      "bg-background text-base/10",
       "pb-[1px] px-4",
       "border-b-1 border-border",
       "sm:hidden",
@@ -37,23 +36,22 @@ export default function ProfilePage() {
       "sm:border-1 sm:border-t-0 border-border",
       "last:border-b-1",
       "divide-y-1 divide-border",
-      "h-full",
-      "sm:overflow-y-auto xl:max-h-full"
+      "h-fit",
+      "sm:overflow-y-auto xl:max-h-full",
+      "xl:min-h-screen xl:bg-background",
+      "xl:pb-[88px]",
     ],
     jobs: [
       "sm:col-start-1 sm:row-start-1",
       "xl:col-start-1 xl:row-start-1",
-
     ],
     education: [
       "sm:col-start-1 sm:row-start-2 sm:row-span-1",
       "xl:col-start-3 xl:row-start-1",
-
     ],
     projects: [
       "sm:col-start-2 sm:row-start-1 sm:row-span-3",
       "sm:h-fit",
-      // "sm:mb-12",
       "xl:col-start-2 xl:row-start-1",
     ],
     select: [
@@ -77,9 +75,10 @@ export default function ProfilePage() {
       <Header text="Projects List">
         <select className={clsx(cls.select)}
           defaultValue={projectLayout}
-          onChange={e => setProjectLayout(e.target.value as ("0" | "1"))}>
+          onChange={e => setProjectLayout(e.target.value as ("0" | "1" | "2"))}>
           <option value="0">Latest</option>
-          <option value="1">Latest by company</option>  
+          <option value="1">Latest by company</option>
+          <option value="2">Hide personal projects</option>
         </select>
       </Header>
       <ProjectItems items={projectsData} layout={projectLayout} />
@@ -90,20 +89,18 @@ export default function ProfilePage() {
 function Header({ text, children }: HeaderProps & { children?: React.ReactNode; }) {
   const cls = {
     container: [
-      "profile-pane-header",
       "flex flex-row items-center",
-      "z-2",
       "bg-background",
-      "px-3",
       "border-b-1 border-border",
       "w-full",
       "sticky",
       "top-[44px] sm:top-0",
+      "px-4",
+      "z-2",
     ],
     text: [
       "flex-grow-1",
-      "text-lg/11 font-bold",
-      "uppercase",
+      "text-base/11",
     ],
   }
 

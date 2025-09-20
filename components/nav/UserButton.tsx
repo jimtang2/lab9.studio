@@ -48,12 +48,12 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
       className,
     ],
     text: [
+      "text-sm",
       "hidden sm:inline-block",
       "whitespace-nowrap overflow-x-hidden text-ellipsis",
-      "font-bold",
     ],
     icon: [
-      !isAdmin && "scale-[80%]",
+      isAdmin ? "scale-[85%]" : "scale-[70%]",
       loginFormLoading && "hidden",
     ],
     loader: [

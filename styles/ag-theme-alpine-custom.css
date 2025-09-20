@@ -18,14 +18,14 @@
   --ag-range-selection-background-color-3: rgba(33, 150, 243, 0.49);
   --ag-range-selection-background-color-4: rgba(33, 150, 243, 0.59);
   --ag-row-numbers-selected-color: color-mix(in srgb, transparent, var(--ag-alpine-active-color) 50%);
-  --ag-background-color: var(--background-color);
+  --ag-background-color: var(--background-color-alt);
   --ag-foreground-color: #181d1f;
   /*--ag-border-color: #babfc7;*/
   --ag-border-color: var(--color-border);
   --ag-secondary-border-color: #dde2eb;
-  --ag-header-background-color: var(--menu-color);
+  --ag-header-background-color: var(--color-background);
   --ag-tooltip-background-color: #f8f8f8;
-  --ag-odd-row-background-color: var(--menu-color);
+  --ag-odd-row-background-color: var(--color-background);
   --ag-control-panel-background-color: #f8f8f8;
   --ag-subheader-background-color: #fff;
   --ag-invalid-color: #e02525;
@@ -90,14 +90,14 @@
 }
 
 .ag-theme-alpine-dark {
-  --ag-background-color: var(--background-color);
+  --ag-background-color: var(--background-color-alt);
   --ag-foreground-color: #fff;
   --ag-border-color: var(--color-border);;
   --ag-secondary-border-color: rgba(88, 86, 82, 0.5);
   --ag-modal-overlay-background-color: rgba(24, 29, 31, 0.66);
-  --ag-header-background-color: var(--menu-color);
+  --ag-header-background-color: var(--color-background);
   --ag-tooltip-background-color: #222628;
-  --ag-odd-row-background-color: var(--menu-color);
+  --ag-odd-row-background-color: var(--color-background);
   --ag-control-panel-background-color: #222628;
   --ag-subheader-background-color: #000;
   --ag-input-disabled-background-color: #282c2f;
@@ -123,14 +123,14 @@
 
 @media (prefers-color-scheme: dark) {
   .ag-theme-alpine-auto-dark {
-    --ag-background-color: var(--background-color);
+    --ag-background-color: var(--background-color-alt);
     --ag-foreground-color: #fff;
     --ag-border-color: var(--color-border);;
     --ag-secondary-border-color: rgba(88, 86, 82, 0.5);
     --ag-modal-overlay-background-color: rgba(24, 29, 31, 0.66);
-    --ag-header-background-color: var(--menu-color);
+    --ag-header-background-color: var(--color-background);
     --ag-tooltip-background-color: #222628;
-    --ag-odd-row-background-color: var(--menu-color);
+    --ag-odd-row-background-color: var(--color-background);
     --ag-control-panel-background-color: #222628;
     --ag-subheader-background-color: #000;
     --ag-input-disabled-background-color: #282c2f;

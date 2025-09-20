@@ -6,8 +6,8 @@ import GlobeIcon from "/public/heroicons/outline/globe-alt.svg"
 import GithubIcon from "/public/logos/github-icon.svg"
 import clsx from "clsx"
 
-export default function ProjectItems({items, layout}: {items: Project[]; layout: "0" | "1";}) {
-  if (layout == "0") {
+export default function ProjectItems({items, layout}: {items: Project[]; layout: "0" | "1" | "2";}) {
+  if (layout == "0" || layout == "2") {
     return <>
       {items.map((project, i) => <ProjectItem key={i} {...project} layout={layout}/>)}
     </>
@@ -54,7 +54,7 @@ class GroupedItems {
   }
 }
 
-function ProjectItem({ name, type=[], company, start, end, description, demoUrl="", repoUrl="", websiteUrl="", stack=[], items=[], layout="0", }: Project & { layout: "0" | "1";}) {
+function ProjectItem({ name, type=[], company, start, end, description, demoUrl="", repoUrl="", websiteUrl="", stack=[], items=[], layout="0", personal=false, }: Project & { layout: "0" | "1" | "2";}) {
    const cls = {
     container: [
       "profile-project",
@@ -65,6 +65,7 @@ function ProjectItem({ name, type=[], company, start, end, description, demoUrl=
       "max-h-lg",
       "border-b-1 border-border",
       "bg-background",
+      layout === "2" && personal && "hidden",
     ],
     title: [
       "py-1",

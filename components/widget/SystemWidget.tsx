@@ -60,7 +60,7 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
     ],
   }
   const columnDefs: ColDef<RowData>[] = [
-    { headerName: "Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
+    { headerName: "System Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
     { headerName: "", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
   ]
   const rowData: RowData[] = [
@@ -78,19 +78,17 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
   ]
   const getRowId = (params: { data: RowData }) => params.data.label
   return (
-    <div className={clsx(cls.widget)}>
-      <div className={clsx(cls.grid)}>
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={rowData}
-          domLayout="autoHeight"
-          getRowId={getRowId}
-          // rowClass={clsx(cls.row)}
-          headerHeight={36}
-          rowHeight={32}
-          rowClass={clsx(cls.row)} 
-        />
-      </div>
+    <div className={clsx([cls.widget, cls.grid])}>
+      <AgGridReact
+        columnDefs={columnDefs}
+        rowData={rowData}
+        domLayout="autoHeight"
+        getRowId={getRowId}
+        // rowClass={clsx(cls.row)}
+        headerHeight={36}
+        rowHeight={32}
+        rowClass={clsx(cls.row)} 
+      />
     </div>
   )
 })

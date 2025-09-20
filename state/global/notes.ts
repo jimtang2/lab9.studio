@@ -60,8 +60,18 @@ class NotesManager {
   async refreshNotes(): Promise<void> {
     const release = await this.mutex.acquire()
     try {
-      this.notes = await db.select().from(Notes).orderBy(desc(Notes.updated_at))
-      this.notes.map(note => this.map[note.id] = note)
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => {
+          console.log("node-schedule: refreshNotes timeout after 3s")
+          reject(new Error('Query timeout'))
+        }, 3000)
+      );
+      const queryPromise = db.select().from(Notes).orderBy(desc(Notes.updated_at)).limit(1000)
+      const notes = await Promise.race([queryPromise, timeoutPromise])
+      if (notes) {
+        this.notes = notes as Note[]
+        this.notes.map(note => this.map[note.id] = note)        
+      }
     } catch (error) {
       console.error("error:", error)
     } finally {

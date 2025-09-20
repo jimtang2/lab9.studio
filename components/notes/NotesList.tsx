@@ -27,6 +27,7 @@ export default function NotesList({ notes, className="" }: { notes: { id: number
   		showNotesList ? "h-full opacity-100 translate-y-[0]" : "h-[0px] opacity-0 translate-y-[-50px]",
 			"sm:w-full sm:h-full sm:translate-x-0 sm:translate-y-0 sm:opacity-100",
 			"transition-all duration-150",
+			"bg-background"
   	],
   }
 
@@ -61,7 +62,7 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 			"p-1 sm:m-0",
 			"flex flex-row items-center",
 			"h-full w-full",
-			current ? "text-accent font-bold sm:bg-menu" : "text-text hover:text-accent",
+			current ? "text-accent sm:bg-menu" : "text-text hover:text-accent",
 			"transition-all duration-150",
 			"bg-menu sm:bg-background sm:hover:bg-menu",
 		],

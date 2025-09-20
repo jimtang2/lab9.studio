@@ -31,6 +31,7 @@ const projectsData: Project[] = [
       "AWS",
       "GitHub Actions",
     ],
+    personal: true,
   },
   {
     name: "Tetris WASM",
@@ -55,6 +56,7 @@ const projectsData: Project[] = [
     ],
     demoUrl: "https://tetris-wasm-three.vercel.app/",
     repoUrl: "https://github.com/jimtang2/tetris-wasm",
+    personal: true,
   },
   {
     name: "AudioHub",
@@ -75,6 +77,7 @@ const projectsData: Project[] = [
       "CloudKit",
     ],
     repoUrl: "https://github.com/jimtang2/audiohub",
+    personal: true,
   },
   // {
   //   name: "AstroCharts",
@@ -247,6 +250,7 @@ const projectsData: Project[] = [
       "Go",
       "React",
     ],
+    personal: true,
   },
   {
     name: "RoadTunes",
@@ -263,6 +267,7 @@ const projectsData: Project[] = [
       "Core Data",
       "UIKit",
     ],
+    personal: true,
   },
   // {
   //   name: "RubyDocs",
@@ -298,7 +303,8 @@ const projectsData: Project[] = [
     end: "2009",
     description: "Data migration from legacy data silos to Laserfiche. Multiple clients include Royal London Group, Time Warner Cable, Wells Fargo Bank, Nara Bank, Santa Ana Police Department, and more.",
     items: [
-
+      "Analyze migration data, configure migration software, test migration scripts and perform post-migration checks.",
+      "Build custom ECM solution demos to showcase Laserfiche products suite.",
     ],
     stack: [
       "Laserfiche",

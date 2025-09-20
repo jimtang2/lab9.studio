@@ -2,6 +2,7 @@
 
 :root {
   --background-color: var(--color-gray-100);
+  --background-color-alt: var(--color-neutral-50);
   --menu-color: var(--color-neutral-200);
   --text-color: var(--color-gray-950);
   --subtext-color: var(--color-gray-500);
@@ -24,6 +25,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: var(--color-neutral-900);
+    --background-color-alt: var(--color-neutral-950);
     --menu-color: var(--color-neutral-800);
     --text-color: var(--color-gray-100);
     --subtext-color: var(--color-gray-500);
@@ -41,6 +43,7 @@
 
 @theme inline {
   --color-background: var(--background-color);
+  --color-background-alt: var(--background-color-alt);
   --color-menu: var(--menu-color);
   --color-text: var(--text-color);
   --color-subtext: var(--subtext-color);
