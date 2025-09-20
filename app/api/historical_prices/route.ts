@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { db } from "@/db"
 import { HistoricalPrices } from "@/db/schema"
-import { eq, gte, lte, and, desc, } from "drizzle-orm"
+import { eq, gte, lte, and, asc, } from "drizzle-orm"
 
 export async function GET(request: NextRequest) {
   try {
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
           lte(HistoricalPrices.date, endDateParsed),
         )
       )
-      .orderBy(desc(HistoricalPrices.date))
+      .orderBy(asc(HistoricalPrices.date))
     return NextResponse.json(results, { status: 200 })
   } catch (error) {
     console.error('Query failed:', error)
