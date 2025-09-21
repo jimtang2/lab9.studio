@@ -12,7 +12,6 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@apollo/client-integration-nextjs": "^0.12.2",
-    "@types/bcrypt": "^6.0.0",
     "ag-grid-community": "^34.2.0",
     "ag-grid-react": "^34.2.0",
     "async-mutex": "^0.5.0",
@@ -39,11 +38,13 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/node-schedule": "^2.1.8",
     "@types/pg": "^8.15.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/recharts": "^1.8.29",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

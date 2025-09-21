@@ -34,6 +34,7 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
       "xl:grid-cols-[1fr_2fr_1fr]",
       "xl:overflow-hidden",
       "h-full max-h-full",
+      "sm:border-t-1 border-border",
     ], 
     title: [
       "col-start-1 row-start-1",

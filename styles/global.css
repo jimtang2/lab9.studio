@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background-color: var(--color-gray-100);
-  --background-color-alt: var(--color-neutral-50);
-  --menu-color: var(--color-neutral-200);
-  --text-color: var(--color-gray-950);
-  --subtext-color: var(--color-gray-500);
-  --accent-color: var(--color-blue-800);
+  --background-color: var(--color-stone-50);
+  --background-color-alt: var(--color-slate-200);
+  --menu-color: var(--color-slate-100);
+  --text-color: var(--color-gray-800);
+  --subtext-color: var(--color-gray-400);
+  --accent-color: var(--color-indigo-800);
   --control-background-color: var(--accent-color);
   --control-foreground-color: var(--color-gray-100);
   --selected-background-color: var(--color-blue-800);
   --selected-foreground-color: var(--color-neutral-100);
   --highlighted-background-color: var(--color-neutral-300);
   --highlighted-foreground-color: var(--color-blue-950);
-  --border-color: var(--color-gray-300);
+  --border-color: var(--color-stone-200);
   --error-foreground-color: var(--color-red-500);
 
   --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);

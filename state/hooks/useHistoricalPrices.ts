@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react"
 import { HistoricalPrice } from "@/db/schema"
 
-export default function useHistoricalPrices({ symbol, startDate, endDate }: { symbol: string; startDate: Date; endDate: Date; }): HistoricalPrice[] {
+interface UseHistoricalPricesProps {
+	symbol: string; 
+	startDate: Date; 
+	endDate: Date;
+}
+
+interface UseHistoricalPricesOutput {
+	prices: HistoricalPrice[];
+	loading: boolean;
+}
+
+export default function useHistoricalPrices({ symbol, startDate, endDate }: UseHistoricalPricesProps): UseHistoricalPricesOutput {
 	const [prices, setPrices] = useState<HistoricalPrice[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
 	useEffect(() => {
+		setLoading(true)
 		const sd = startDate?.toISOString().split("T")[0]
 		const ed = endDate?.toISOString().split("T")[0]
 
@@ -19,9 +32,15 @@ export default function useHistoricalPrices({ symbol, startDate, endDate }: { sy
 
 		fetch(u.toString())
 			.then(resp => resp.json())
-			.then(json => setPrices(json))
-			.catch(err => console.error(err))
+			.then(json => {
+				setPrices(json)
+				setLoading(false)
+			})
+			.catch(err => {
+				console.error(err)
+				setLoading(false)
+			})
 	}, [symbol, startDate, endDate])
 
-	return prices
+	return { loading, prices }
 } 

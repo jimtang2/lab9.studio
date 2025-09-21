@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "flex flex-row sm:flex-col",
       "h-screen w-screen",
       "max-w-screen",
-      "bg-menu gap-[1px]",
+      "gap-[1px]",
       "overscroll-none",
     ],
     nav: [

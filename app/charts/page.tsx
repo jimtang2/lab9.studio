@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
-import Data from "@/components/data"
+import Charts from "@/components/chart"
 
 export const metadata: Metadata = {
-  title: "Data",
+  title: "Charts",
 }
 
-export default function DataPage() {
-  return <Data />
+export default function ChartsPage() {
+  return <Charts />
 }
 
 export const dynamic = "force-dynamic"

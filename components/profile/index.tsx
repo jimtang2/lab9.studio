@@ -20,10 +20,12 @@ export default function ProfilePage() {
     page: [
       "grid grid-cols-1 auto-rows-min",
       "h-full w-full",
+      "sm:py-[2px]",
       "overflow-x-hidden overflow-y-auto xl:overflow-y-hidden",
       "sm:grid-cols-[1fr_2fr] sm:grid-rows-[min-content_min-content_1fr]",
       "sm:overflow-y-auto",
       "xl:grid-cols-[1fr_2fr_1fr] xl:grid-rows-1",
+      "sm:border-t-1 border-border",
     ],
     title: [
       "w-full h-[44px]",

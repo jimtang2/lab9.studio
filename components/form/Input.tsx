@@ -25,25 +25,28 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
 	disabled=false, 
 	tabIndex=0, 
 	list="",
-	onChange, }, ref?) => {
+	onChange, 
+}, ref?) => {
 	const cls = {
 		container: [
-			"grid grid-cols-[repeat(2,auto)] grid-rows-[min-content_auto]",
+			"grid auto-cols-auto grid-rows-[min-content_auto]",
 			"bg-menu",
+			"h-[44px]",
 			className,
 		],
 		label: [
-			"col-start-1 col-end-2 row-start-1 row-end-2",
+			"col-start-1 row-start-1 row-end-2",
 			"relative",
-			"px-[calc(2*var(--spacing))] pt-[calc(1.0*var(--spacing))]",
 			"text-xs/4 text-accent",
 		],
 		input: [
-			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
-			"accent-accent",
-			"text-base px-2 pt-5 pb-1",
+			"col-start-1 row-start-2 row-span-1",
 			"outline-accent",
+			"text-base/6",
 			"w-full",
+			"px-2",
+			// "m-0! p-0! indent-0!",
+			type === "date" ? "" : "accent-accent",
 		],
 	}
 	

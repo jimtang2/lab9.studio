@@ -4,9 +4,9 @@ import NavButton from "./NavButton"
 import UserButton from "./UserButton"
 import MenuToggleIcon from "/public/heroicons/solid/bars-3.svg"
 import HomeIcon from "/public/heroicons/solid/home.svg"
-import DataIcon from "/public/heroicons/solid/circle-stack.svg"
-import NotesIcon from "/public/heroicons/solid/newspaper.svg"
-import ProfileIcon from "/public/heroicons/solid/document.svg"
+import ChartIcon from "/public/heroicons/solid/chart-pie.svg"
+import NotesIcon from "/public/heroicons/solid/document.svg"
+import ProfileIcon from "/public/heroicons/solid/academic-cap.svg"
 import clsx from "clsx"
 
 export default function Nav({ className }: { className: string; }) {
@@ -59,10 +59,10 @@ export default function Nav({ className }: { className: string; }) {
 		  icon={<HomeIcon />} />
 		<NavButton 
 		  className={clsx(cls.button)}
-		  id={"nav-data-btn"}
-		  href={"/data"}
-		  title={"Data"}
-		  icon={<DataIcon />} />
+		  id={"nav-charts-btn"}
+		  href={"/charts"}
+		  title={"Charts"}
+		  icon={<ChartIcon />} />
 		<NavButton 
 		  className={clsx(cls.button)}
 		  id={"nav-notes-btn"}

@@ -5,10 +5,10 @@ import HistoricalPriceChart from "./HistoricalPriceChart"
 import useIndexCompanies from "@/state/hooks/useIndexCompanies"
 import clsx from "clsx"
 
-interface DataProps {
+interface ChartsProps {
 }
 
-export default memo(({ }: DataProps) => {
+export default memo(({ }: ChartsProps) => {
   const [type, setType] = useState<string>("historical")
   const [ticker, setTicker] = useState<string>("")
   const [tickerInput, setTickerInput] = useState<string>("")
@@ -26,17 +26,18 @@ export default memo(({ }: DataProps) => {
       "sm:max-w-screen sm:max-h-[calc(100vh-44px)]",
       "overflow-hidden",
       "gap-[1px]",
+      "sm:border-t-1 border-border",
     ],
     controls: [
-      "flex flex-row flex-wrap gap-1",
-      "bg-background",
-      "py-1 px-1",
+      "flex flex-row flex-wrap sm:flex-nowrap gap-[2px] sm:gap-[4px]",
+      "justify-evenly sm:justify-center",
+      "px-1",
     ],
     control: [
-      "w-40 max-w-40",
+      "w-[49%] ",
+      "sm:w-[24%] sm:max-w-60",
     ],
     select: [
-      "w-40 max-w-40",
     ],
     textInput: [
 
