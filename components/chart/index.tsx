@@ -2,6 +2,7 @@
 import { memo, useState, useEffect, } from "react"
 import { TextInput, DateInput, Select } from "@/components/form"
 import HistoricalPriceChart from "./HistoricalPriceChart"
+import HistoricalPriceChartWebGL from "./HistoricalPriceChartWebGL"
 import useIndexCompanies from "@/state/hooks/useIndexCompanies"
 import clsx from "clsx"
 
@@ -9,7 +10,7 @@ interface ChartsProps {
 }
 
 export default memo(({ }: ChartsProps) => {
-  const [type, setType] = useState<string>("historical")
+  const [type, setType] = useState<string>("historical-webgl")
   const [ticker, setTicker] = useState<string>("")
   const [tickerInput, setTickerInput] = useState<string>("")
   const [startDate, setStartDate] = useState<Date>(new Date(new Date().getTime()-1000*3600*24*365*5))
@@ -72,6 +73,7 @@ export default memo(({ }: ChartsProps) => {
           defaultValue={type} 
           onChange={e => setType(e.target.value)}>
           <option value="historical">Historical Prices</option>
+          <option value="historical-webgl">Historical Prices (WebGL)</option>
           <option value="details">Details</option>
         </Select>
         <TextInput className={clsx([cls.textInput, cls.control])}
@@ -97,6 +99,11 @@ export default memo(({ }: ChartsProps) => {
       <div className={clsx(cls.chart)}>
         {type === "historical" && 
         <HistoricalPriceChart 
+          symbol={ticker}
+          startDate={startDate}
+          endDate={endDate} />}
+        {type === "historical-webgl" && 
+        <HistoricalPriceChartWebGL 
           symbol={ticker}
           startDate={startDate}
           endDate={endDate} />}
