@@ -43,6 +43,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
 			"accent-accent",
 			"text-base px-2 pt-5 pb-1",
 			"outline-accent",
+			"w-full",
 		],
 	}
 	

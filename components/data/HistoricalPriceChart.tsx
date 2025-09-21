@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import useHistoricalPrices from "@/state/hooks/useHistoricalPrices"
+import Loader from "@/components/home/Loader"
 import clsx from "clsx"
 
 interface HistoricalPrice {
@@ -35,33 +36,26 @@ export default function HistoricalPriceChart({ symbol, startDate, endDate }: His
   const cls = {
     container: [
       "flex items-center justify-center",
+      "bg-background-alt",
       "h-full w-full"
     ],
-    loader: [
-      !loading && "hidden",
-      "h-16 w-16 border-t-8 animate-spin rounded-full border-accent"
-    ],
     chart: [
-      "w-full h-50",
-      "bg-background-alt",
+      
     ]
   }
 
   return (
     <div className={clsx(cls.container)}>
-      {loading ? (
-        <div className={clsx(cls.loader)}></div>
-      ) : (
-        <ResponsiveContainer className={clsx(cls.chart)}>
-          <LineChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="close" stroke="#8884d8" dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      )}
+  		<Loader show={loading} />
+  	  <ResponsiveContainer className={clsx(cls.chart)}>
+  	    <LineChart data={chartData} margin={{}}>
+  	      <CartesianGrid strokeDasharray="3 3" />
+  	      <XAxis dataKey="date" />
+  	      <YAxis />
+  	      <Tooltip />
+  	      <Line type="monotone" dataKey="close" stroke="var(--color-accent, #8884d8)" dot={false} />
+  	    </LineChart>
+  	  </ResponsiveContainer>
     </div>
   )
 }

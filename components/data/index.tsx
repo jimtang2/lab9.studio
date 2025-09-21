@@ -11,29 +11,32 @@ interface DataProps {
 export default memo(({ }: DataProps) => {
   const [type, setType] = useState<string>("historical")
   const [ticker, setTicker] = useState<string>("")
+  const [tickerInput, setTickerInput] = useState<string>("")
   const [startDate, setStartDate] = useState<Date>(new Date(new Date().getTime()-1000*3600*24*365*5))
   const [endDate, setEndDate] = useState<Date>(new Date())
   const companies = useIndexCompanies("^GSPC") || []
+  const companiesIndex: Record<string,number> = {}
+  companies.map(({symbol,}, i) => companiesIndex[symbol] = i)
 
   const cls = {
     page: [
-      "grid grid-cols-1 auto-rows-auto",
-      "sm:grid-cols-[1fr_2fr]",
-      "xl:grid-cols-[1fr_3fr]",
+      "flex flex-col",
       "w-full h-full",
-      "max-w-[calc(100vw-50px)] max-h-screen",
+      "max-w-[calc(100vw-44px)] max-h-screen",
       "sm:max-w-screen sm:max-h-[calc(100vh-44px)]",
       "overflow-hidden",
       "gap-[1px]",
     ],
     controls: [
-      "col-start-1",
-      "flex flex-col gap-1",
+      "flex flex-row flex-wrap gap-1",
       "bg-background",
       "py-1 px-1",
     ],
-    typeSelect: [
-
+    control: [
+      "w-40 max-w-40",
+    ],
+    select: [
+      "w-40 max-w-40",
     ],
     textInput: [
 
@@ -42,9 +45,7 @@ export default memo(({ }: DataProps) => {
 
     ],
     chart: [
-      "col-start-1",
-      "sm:col-start-2",
-      "xl:col-start-2",
+      "flex-grow-1 w-full",
       "bg-background",
     ],
   }
@@ -55,10 +56,16 @@ export default memo(({ }: DataProps) => {
     }
   }, [companies])
 
+  useEffect(() => {
+    if (tickerInput in companiesIndex) {
+      setTicker(tickerInput)
+    }
+  }, [tickerInput])
+
   return (
     <div className={clsx(cls.page)}>
       <div className={clsx(cls.controls)}>
-        <Select className={clsx(cls.typeSelect)} 
+        <Select className={clsx([cls.select, cls.control])} 
           label="Chart Type"
           name="type"
           defaultValue={type} 
@@ -66,19 +73,20 @@ export default memo(({ }: DataProps) => {
           <option value="historical">Historical Prices</option>
           <option value="details">Details</option>
         </Select>
-        <TextInput className={clsx(cls.textInput)}
+        <TextInput className={clsx([cls.textInput, cls.control])}
           label="Ticker"
           name="symbol"
           placeholder=""
           list="companies-list"
-          defaultValue={ticker} />
-        <DateInput className={clsx(cls.dateInput)}
+          defaultValue={ticker}
+          onChange={e => setTickerInput(e.target.value)} />
+        <DateInput className={clsx([cls.dateInput, cls.control])}
           label="Start Date"
           name="start_date"
           placeholder=""
           onChange={e => setStartDate(new Date(e.target.value))}
           defaultValue={startDate.toISOString().split("T")[0]} />
-        <DateInput className={clsx(cls.dateInput)}
+        <DateInput className={clsx([cls.dateInput, cls.control])}
           label="End Date"
           name="end_date"
           placeholder=""

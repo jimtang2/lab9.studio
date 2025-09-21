@@ -21,18 +21,16 @@ export async function GET(request: NextRequest) {
       .select({
         symbol: Companies.symbol,
         name: Companies.name,
-        // industry_id: Companies.industry_id,
-        // sector_id: Companies.sector_id,
         industry: Industries.name,
         sector: Sectors.name,
+        // industry_id: Companies.industry_id,
+        // sector_id: Companies.sector_id,
       })
       .from(Companies)
       .innerJoin(CompanyIndex, eq(Companies.symbol, CompanyIndex.symbol))
       .leftJoin(Industries, eq(Companies.industry_id, Industries.industry_id))
       .leftJoin(Sectors, eq(Companies.sector_id, Sectors.sector_id))
       .where(eq(CompanyIndex.index_symbol, indexSymbol))
-
-    console.log(`Fetched ${results.length} companies for index_symbol: ${indexSymbol}`)
 
     return NextResponse.json(results, { status: 200 })
   } catch (error) {

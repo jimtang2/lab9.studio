@@ -30,6 +30,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(({
 			"grid grid-cols-[repeat(2,auto)] grid-rows-[min-content_auto]",
 			className,
 			"bg-menu",
+			"overflow-hidden",
 		],
 		label: [
 			"col-start-1 col-end-2 row-start-1 row-end-2",
@@ -40,10 +41,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(({
 		select: [
 			"col-start-1 col-end-[-1] row-start-1 row-end-[-1]",
 			"accent-accent",
-			"text-base px-2 m-1",
+			"text-base px-2",
 			label.length == 0 ? "py-3" : "pt-5 pb-1",
 			"outline-accent",
-			"rounded-md",
+			"max-w-full",
 		],
 	}
 
