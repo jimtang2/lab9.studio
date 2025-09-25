@@ -18,7 +18,7 @@
   --ag-range-selection-background-color-3: rgba(33, 150, 243, 0.49);
   --ag-range-selection-background-color-4: rgba(33, 150, 243, 0.59);
   --ag-row-numbers-selected-color: color-mix(in srgb, transparent, var(--ag-alpine-active-color) 50%);
-  --ag-background-color: var(--background-color-alt);
+  --ag-background-color: var(--background-color);
   --ag-foreground-color: #181d1f;
   /*--ag-border-color: #babfc7;*/
   --ag-border-color: var(--color-border);
@@ -90,7 +90,7 @@
 }
 
 .ag-theme-alpine-dark {
-  --ag-background-color: var(--background-color-alt);
+  --ag-background-color: var(--background-color);
   --ag-foreground-color: #fff;
   --ag-border-color: var(--color-border);;
   --ag-secondary-border-color: rgba(88, 86, 82, 0.5);
@@ -123,7 +123,7 @@
 
 @media (prefers-color-scheme: dark) {
   .ag-theme-alpine-auto-dark {
-    --ag-background-color: var(--background-color-alt);
+    --ag-background-color: var(--background-color);
     --ag-foreground-color: #fff;
     --ag-border-color: var(--color-border);;
     --ag-secondary-border-color: rgba(88, 86, 82, 0.5);
@@ -626,4 +626,5 @@
 
 .ag-root-wrapper{
   border-radius:0;
+  border:none;
 }

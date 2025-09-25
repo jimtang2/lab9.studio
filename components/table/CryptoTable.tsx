@@ -43,15 +43,16 @@ export default memo(({ className, message, ok }: CryptoTableProps) => {
       field: "s",
       flex: 1, 
       sortable: true,
-      filter: true
+      filter: true,
+      // valueFormatter: params => `${params.value.split("USD")[0]}`
     },
-    {
-      headerName: "Close",
-      field: "c",
-      width: 200,
-      sortable: true,
-      valueFormatter: params => `$${parseFloat(params.value).toFixed(2)}`
-    },
+    // {
+    //   headerName: "Close",
+    //   field: "c",
+    //   flex: 1, 
+    //   sortable: true,
+    //   valueFormatter: params => `$${parseFloat(params.value).toFixed(2)}`
+    // },
     {
       headerName: "Open",
       field: "o",
@@ -80,13 +81,13 @@ export default memo(({ className, message, ok }: CryptoTableProps) => {
       sortable: true,
       valueFormatter: params => `${(parseInt(params.value) / 1e6).toFixed(1)}M`
     },
-    {
-      headerName: "Quote Volume",
-      field: "q",
-      flex: 1, 
-      sortable: true,
-      valueFormatter: params => `${(parseInt(params.value) / 1e6).toFixed(1)}M`
-    }
+    // {
+    //   headerName: "Quote Volume",
+    //   field: "q",
+    //   flex: 1, 
+    //   sortable: true,
+    //   valueFormatter: params => `${(parseInt(params.value) / 1e6).toFixed(1)}M`
+    // }
   ]
 
   const rowData = list.map(symbol => map[symbol])
@@ -101,7 +102,7 @@ export default memo(({ className, message, ok }: CryptoTableProps) => {
     grid: [
       "overflow-x-hidden",
       "ag-theme-alpine-auto-dark",
-      "bg-background"
+      "bg-background",
     ]
   }
 
@@ -111,8 +112,8 @@ export default memo(({ className, message, ok }: CryptoTableProps) => {
         <AgGridReact
           columnDefs={columnDefs}
           rowData={rowData}
-          headerHeight={36}
-          rowHeight={32}
+          headerHeight={44}
+          rowHeight={44}
           domLayout="autoHeight"
           getRowId={getRowId}
           onGridReady={() => console.log("Grid rendered")}

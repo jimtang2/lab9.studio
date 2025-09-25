@@ -60,7 +60,7 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
     ],
   }
   const columnDefs: ColDef<RowData>[] = [
-    { headerName: "System Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
+    { headerName: "System Health Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
     { headerName: "", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
   ]
   const rowData: RowData[] = [
@@ -84,9 +84,8 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
         rowData={rowData}
         domLayout="autoHeight"
         getRowId={getRowId}
-        // rowClass={clsx(cls.row)}
-        headerHeight={36}
-        rowHeight={32}
+        headerHeight={44}
+        rowHeight={44}
         rowClass={clsx(cls.row)} 
       />
     </div>

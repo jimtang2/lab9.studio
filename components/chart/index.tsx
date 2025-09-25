@@ -31,7 +31,6 @@ export default memo(({ }: ChartsProps) => {
     ],
     controls: [
       "flex flex-row flex-wrap sm:flex-nowrap gap-[2px] sm:gap-[4px]",
-      "justify-evenly sm:justify-center",
       "px-1",
     ],
     control: [

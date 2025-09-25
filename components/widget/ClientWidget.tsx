@@ -66,8 +66,8 @@ export default memo(({ className = "" }: ClientWidgetProps) => {
         rowData={rowData}
         domLayout="autoHeight"
         getRowId={getRowId}
-        headerHeight={36}
-        rowHeight={32}
+        headerHeight={44}
+        rowHeight={44}
         rowClass={clsx(cls.row)}
       />
     </div>

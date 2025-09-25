@@ -20,42 +20,53 @@ export default memo(({ marketSocketUrl, systemSocketUrl, cryptoSocketUrl, }: Hom
   
   const cls = {
     page: [
+      "w-[calc(100vw-44px)] h-screen",
+      "sm:w-screen sm:h-[calc(100vh-50px)]",
       "grid",
       "grid-cols-1 auto-rows-min",
-      "sm:grid-cols-[2fr_1fr] sm:grid-rows-2",
+      "sm:grid-cols-[2fr_1fr] sm:grid-rows-[repeat(2,min-content)]",
       "xl:grid-cols-[3fr_1fr]",
-      "w-[calc(100vw-50px)] h-screen overflow-y-auto",
-      "sm:w-screen sm:h-[calc(100vh-50px)] sm:overflow-y-hidden",
+      "overflow-y-auto sm:overflow-y-hidden",
       "px-[1px] gap-[1px]",
     ],
     marketsTable: [
       "col-start-1",
       "sm:col-start-1 sm:col-span-1 sm:row-start-1",
       "xl:col-start-1 xl:col-span-1 xl:row-start-1",
+      "border-1 border-border",
     ],
     cryptoTable: [
       "col-start-1",
-      "sm:col-start-1 sm:col-span-1 sm:row-start-1",
+      "sm:col-start-1 sm:col-span-1 sm:row-start-2",
       "xl:col-start-1 xl:col-span-1 xl:row-start-2",
+      "border-1 border-t-0 border-border",
     ],
     systemWidget: [
       "col-start-1",
-      "sm:col-start-2 sm:row-start-1",
-      "xl:col-start-2 xl:row-start-1",
+      "sm:col-start-2 sm:row-start-2",
+      "xl:col-start-2 xl:row-start-2",
+      "border-1 border-t-0 sm:border-l-0 border-border",
     ],
     clientWidget: [
       "col-start-1",
       "sm:col-start-2",
       "z-20",
+      "border-1 border-t-0 sm:border-t-1 sm:border-l-0 border-border",
     ],
   }
 
   return (
     <div className={clsx(cls.page)}>
-      <MarketsTable className={clsx(cls.marketsTable)} message={marketsData} ok={marketsOk} />
-      <CryptoTable className={clsx(cls.cryptoTable)} message={cryptoData} ok={cryptoOk} />
-      <SystemWidget className={clsx(cls.systemWidget)} message={systemData} ok={systemOk} />
+      <MarketsTable className={clsx(cls.marketsTable)} 
+        message={marketsData} 
+        ok={marketsOk} />
+      <CryptoTable className={clsx(cls.cryptoTable)} 
+        message={cryptoData} 
+        ok={cryptoOk} />
       <ClientWidget className={clsx(cls.clientWidget)} />
+      <SystemWidget className={clsx(cls.systemWidget)} 
+        message={systemData} 
+        ok={systemOk} />
     </div>
   )
 })

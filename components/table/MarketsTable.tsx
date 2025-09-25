@@ -149,8 +149,8 @@ export default memo(({ className, message, ok }: MarketsTableProps) => {
         <AgGridReact
           columnDefs={columnDefs}
           rowData={rowData}
-          headerHeight={36}
-	        rowHeight={32}
+          headerHeight={44}
+	        rowHeight={44}
 	        domLayout="autoHeight"
           getRowId={getRowId}
         />

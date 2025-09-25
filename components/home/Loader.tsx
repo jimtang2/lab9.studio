@@ -12,7 +12,7 @@ export default function Loader({ show=true, }: LoaderProps) {
       "pointer-events-none",
     ],
     spinner: [
-      "h-36 w-36 border-t-12 animate-spin rounded-full border-accent"
+      "h-36 w-36 border-t-12 animate-spin rounded-full border-text opacity-50"
     ],
   }
 

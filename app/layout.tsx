@@ -32,7 +32,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "bg-background text-text",
       "[font-family:_Work,_sans-serif]",
       "max-w-screen",
-      "max-h-safe",
       "overscroll-none",
     ],
     body: [
@@ -45,16 +44,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     nav: [
       "sm:sticky sm:top-0",
       "sm:z-10",
-      "max-h-safe",
       "overscroll-none",
     ],
     main: [
+      "w-full h-full",
       "max-w-[calc(100%-44px)]",
       "sm:max-w-full sm:max-h-[calc(100%-44px)]",
-      "w-full h-full",
-      "overflow-hidden",
-      "overscroll-none",
-      "pb-safe",
+      "overflow-hidden overscroll-none",
     ],
   }
 
