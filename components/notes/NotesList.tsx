@@ -3,10 +3,9 @@ import { useEffect } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useStore } from "@/state/store"
-import LinkIcon from "/public/heroicons/solid/chevron-right.svg"
 import clsx from "clsx"
 
-export default function NotesList({ notes, className="" }: { notes: { id: number; title: string; updated_at: string; }[]; className?: string; }) {
+export default function NotesList({ notes, className="" }: { notes: { id: number; title: string; created_at: string; }[]; className?: string; }) {
 	const {
 		showNav,
 		setShowNav,
@@ -18,16 +17,18 @@ export default function NotesList({ notes, className="" }: { notes: { id: number
 			showNotesList ? "pointer-events-auto" : "pointer-events-none",
 			"sm:pointer-events-auto",
   		"z-3",
+  		"border-l-1 border-border sm:border-l-0",
   		className,
   	],
   	items: [
-			"grid auto-rows-[min-content]",
+			"flex flex-col",
 			"max-w-full max-h-full", 
 			"overflow-x-hidden overflow-y-auto",
   		showNotesList ? "h-full opacity-100 translate-y-[0]" : "h-[0px] opacity-0 translate-y-[-50px]",
 			"sm:w-full sm:h-full sm:translate-x-0 sm:translate-y-0 sm:opacity-100",
 			"transition-all duration-150",
-			"bg-background"
+			"bg-background",
+			"px-2 sm:py-6",
   	],
   }
 
@@ -38,7 +39,7 @@ export default function NotesList({ notes, className="" }: { notes: { id: number
 	</div>
 }
 
-function NoteItem({ id, title, updated_at }: { id: number; title: string; updated_at: string; }) {
+function NoteItem({ id, title, created_at }: { id: number; title: string; created_at: string; }) {
 	const {
 		showNav, 
 		showNotesList, 
@@ -50,27 +51,27 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 	const currentId = searchParams.get("id")
 	const current = `${id}` === currentId
 
+	const date = new Date(created_at)
+	const displayDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+
 	const cls = {
 		container: [
 			"flex flex-row items-stretch",
-			"text-base/8",
+			"text-base/6",
 			"w-full",
-			"border-b-1 border-background sm:border-border",
-			// "sm:py-[2px]",
+			"py-1",
 		],
 		selection: [
-			"p-1 sm:m-0",
-			"flex flex-row items-center",
+			"py-1 px-2 sm:m-0",
 			"h-full w-full",
-			current ? "text-accent sm:bg-menu" : "text-text hover:text-accent",
+			current ? "text-accent font-bold" : "text-text hover:text-accent",
 			"transition-all duration-150",
-			"bg-menu sm:bg-background sm:hover:bg-menu",
+			"bg-background",
+			"gap-1",
 		],
-		text: [
-			"flex-grow-1",
-			"max-w-full",
-			"whitespace-nowrap overflow-hidden text-ellipsis",
-			"indent-2",
+		date: [
+			"text-subtext font-light",
+			"px-1",
 		],
 		linkIcon: [
 			"mx-1",
@@ -84,8 +85,8 @@ function NoteItem({ id, title, updated_at }: { id: number; title: string; update
 			setNoteContentLoading(!current)
 		}}>
 		<div className={clsx(cls.selection)}>
-			<span className={clsx(cls.text)}>On {title}</span>
-			<LinkIcon className={clsx(cls.linkIcon)} />
+			{title} 
+			<span className={clsx(cls.date)}>– {displayDate}</span>
 		</div>
 	</Link>
 }

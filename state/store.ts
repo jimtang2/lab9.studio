@@ -1,5 +1,6 @@
 import { create, StateCreator } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
+import { User } from "@/db/schema"
 
 interface Store {
   // controls nav bar display
@@ -21,9 +22,16 @@ interface Store {
   // controls multiple functions that rely on the presence
   sid: string;
   setSid: (sid: string) => void;
+  user: User | null;
+  setUser: (u: User | null) => void;
   // controls displaying loader during form request
   loginFormLoading: boolean;
   setLoginFormLoading: (loading: boolean) => void;
+  // controls for editing notes
+  editNotes: boolean;
+  setEditNotes: (enabled: boolean) => void;
+  previewNotes: boolean;
+  setPreviewNotes: (enabled: boolean) => void;
 }
 
 const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (set) => ({
@@ -36,11 +44,17 @@ const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (s
   showSession: false,
   setShowSession: (show: boolean) => set({ showSession: show }),
   noteContentLoading: true,
-  setNoteContentLoading: (loading: boolean) => set({ noteContentLoading: loading}),
+  setNoteContentLoading: (enabled: boolean) => set({ noteContentLoading: enabled}),
   sid: "",
   setSid: (sid: string) => set({ sid: sid }),
+  user: null,
+  setUser: (u: User | null) => set({ user: u }),
   loginFormLoading: false,
-  setLoginFormLoading: (loading: boolean) => set({ loginFormLoading: loading }),
+  setLoginFormLoading: (enabled: boolean) => set({ loginFormLoading: enabled }),
+  editNotes: false,
+  setEditNotes: (enabled: boolean) => set({ editNotes: enabled }),
+  previewNotes: false,
+  setPreviewNotes: (enabled: boolean) => set({ previewNotes: enabled }),
 })
 
 const options = {

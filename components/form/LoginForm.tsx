@@ -13,6 +13,7 @@ export default function LoginForm() {
     showSession,
     setShowSession,
     setSid,
+    setUser,
     setLoginFormLoading,
   } = useStore(state => state)
   const [user] = useSessionUser()
@@ -92,6 +93,7 @@ export default function LoginForm() {
         setError(data.error)
       } else {
         setSid(data.sid)
+        setUser(data.user)
         setShowLogin(false)
       }
     } catch (error) {

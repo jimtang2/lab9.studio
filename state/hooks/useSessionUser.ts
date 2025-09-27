@@ -6,12 +6,17 @@ export default function useSessionUser(): [User | null, boolean, string | null] 
   const {
     sid,
     setLoginFormLoading,
+    user,
+    setUser,
   } = useStore(state => state)
-  const [user, setUser] = useState<User | null>(null)
+  
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (user) {
+      return
+    }
     (async () => {
       if (sid?.length <= 0) {
         setUser(null)
@@ -39,7 +44,7 @@ export default function useSessionUser(): [User | null, boolean, string | null] 
 }
 
 async function fetchUser(): Promise<User> {
-  const response = await fetch("/api/me", {
+  const response = await fetch("/api/session", {
     method: "GET",
     credentials: "include", 
   })

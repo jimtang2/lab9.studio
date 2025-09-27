@@ -30,7 +30,11 @@ export default function SessionMenu() {
 }
 
 function LogoutButton() {
-	const { setSid, setLoginFormLoading, } = useStore(state => state)
+	const { 
+		setSid, 
+		setLoginFormLoading,
+		setUser,
+		 } = useStore(state => state)
 
 	const handleClick = async () => {
 		setLoginFormLoading(true)
@@ -43,6 +47,7 @@ function LogoutButton() {
         throw new Error("Failed to log out")
       } 
       setSid("")
+      setUser(null)
     } catch (error) {
       console.error("Logout error:", error)
     }

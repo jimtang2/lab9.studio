@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useStore } from "@/state/store"
 import { useSessionUser } from "@/state/hooks"
 import LoginForm from "@/components/form/LoginForm"
@@ -21,16 +21,29 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
     showSession,
     setShowSession,
     loginFormLoading,
+    user,
   } = useStore(state => state)
-  const [user] = useSessionUser()
-  const loggedIn = typeof(user?.name) === "string"
-  const displayName = loggedIn ? user?.name : "Sign In"
-  const isAdmin = user?.is_admin || false
+
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [displayName, setDisplayName] = useState("Sign In")
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     setShowLogin(false)
     setShowSession(false)
   }, [loggedIn])
+
+  useEffect(() => {
+    if (!user) {
+      setLoggedIn(false)
+      setDisplayName("Sign In")
+      setIsAdmin(false)
+    } else {
+      setLoggedIn(true)
+      setDisplayName(user.name)
+      setIsAdmin(user.is_admin)
+    }
+  }, [user])
 
   const cls = {
     button: [

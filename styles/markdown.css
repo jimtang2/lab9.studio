@@ -5,13 +5,13 @@
 }
 
 #note-markdown h1 {
-  @apply text-xl/9;
+  @apply text-xl/12;
   @apply font-bold;
   @apply px-2 py-1;
 }
 
 #note-markdown h2 {
-  @apply text-lg/9;
+  @apply text-lg/12;
   @apply font-bold;
   @apply px-2 py-0;
 }
@@ -52,7 +52,18 @@
 }
 
 #note-markdown table {
-	@apply mx-3;
+	@apply mx-1;
+  @apply w-full;
+}
+
+#note-markdown table th {
+  @apply font-bold;
+}
+
+#note-markdown table th,
+#note-markdown table td {
+  @apply border-1 border-table-border;
+  @apply text-base/8 px-2 text-left;
 }
 
 #note-markdown ul {

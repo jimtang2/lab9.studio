@@ -14,6 +14,7 @@
   --highlighted-background-color: var(--color-neutral-300);
   --highlighted-foreground-color: var(--color-blue-950);
   --border-color: var(--color-stone-200);
+  --table-border-color: var(--color-stone-600);
   --error-foreground-color: var(--color-red-500);
 
   --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
@@ -29,14 +30,15 @@
     --menu-color: var(--color-neutral-800);
     --text-color: var(--color-gray-100);
     --subtext-color: var(--color-gray-500);
-    --accent-color: var(--color-yellow-500);
-    --control-background-color: var(--color-yellow-500);
-    --control-foreground-color: var(--color-neutral-950);
-    --selected-background-color: var(--color-yellow-500);
+    --accent-color: var(--color-blue-500);
+    --control-background-color: var(--color-blue-500);
+    --control-foreground-color: var(--color-neutral-50);
+    --selected-background-color: var(--color-blue-500);
     --selected-foreground-color: var(--color-neutral-900);
     --highlighted-background-color: var(--color-neutral-900);
-    --highlighted-foreground-color: var(--color-yellow-500);
+    --highlighted-foreground-color: var(--color-blue-500);
     --border-color: var(--color-stone-800);
+    --table-border-color: var(--color-stone-600);
     --error-foreground-color: var(--color-red-500);
   }
 }
@@ -55,6 +57,7 @@
   --color-highlighted-background: var(--highlighted-background-color);
   --color-highlighted-foreground: var(--highlighted-foreground-color);
   --color-border: var(--border-color);
+  --color-table-border: var(--table-border-color);
   --color-error: var(--error-foreground-color);
 }
 
