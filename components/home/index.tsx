@@ -14,7 +14,7 @@ interface HomeProps {
 }
 
 export default memo(({ marketSocketUrl, systemSocketUrl, cryptoSocketUrl, }: HomeProps) => {
-  const { data: marketsData, ok: marketsOk } = useMarketSocket(marketSocketUrl)
+  // const { data: marketsData, ok: marketsOk } = useMarketSocket(marketSocketUrl)
   const { data: systemData, ok: systemOk } = useSystemSocket(systemSocketUrl)
   const { data: cryptoData, ok: cryptoOk } = useCryptoSocket(cryptoSocketUrl)
   
@@ -29,22 +29,22 @@ export default memo(({ marketSocketUrl, systemSocketUrl, cryptoSocketUrl, }: Hom
       "overflow-y-auto sm:overflow-y-hidden",
       "px-[1px] gap-[1px]",
     ],
-    marketsTable: [
+    // marketsTable: [
+    //   "col-start-1",
+    //   "sm:col-start-1 sm:col-span-1 sm:row-start-1",
+    //   "xl:col-start-1 xl:col-span-1 xl:row-start-1",
+    //   "border-1 border-border",
+    // ],
+    cryptoTable: [
       "col-start-1",
       "sm:col-start-1 sm:col-span-1 sm:row-start-1",
       "xl:col-start-1 xl:col-span-1 xl:row-start-1",
-      "border-1 border-border",
-    ],
-    cryptoTable: [
-      "col-start-1",
-      "sm:col-start-1 sm:col-span-1 sm:row-start-2",
-      "xl:col-start-1 xl:col-span-1 xl:row-start-2",
       "border-1 border-t-0 border-border",
     ],
     systemWidget: [
       "col-start-1",
-      "sm:col-start-2 sm:row-start-2",
-      "xl:col-start-2 xl:row-start-2",
+      "sm:col-start-2 sm:row-start-1",
+      "xl:col-start-2 xl:row-start-1",
       "border-1 border-t-0 sm:border-l-0 border-border",
     ],
     clientWidget: [
@@ -57,9 +57,9 @@ export default memo(({ marketSocketUrl, systemSocketUrl, cryptoSocketUrl, }: Hom
 
   return (
     <div className={clsx(cls.page)}>
-      <MarketsTable className={clsx(cls.marketsTable)} 
+      {/*<MarketsTable className={clsx(cls.marketsTable)} 
         message={marketsData} 
-        ok={marketsOk} />
+        ok={marketsOk} />*/}
       <CryptoTable className={clsx(cls.cryptoTable)} 
         message={cryptoData} 
         ok={cryptoOk} />
