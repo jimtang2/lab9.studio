@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@apollo/client-integration-nextjs": "^0.12.2",
+    "@telegram-apps/sdk": "^3.11.5",
     "ag-grid-community": "^34.2.0",
     "ag-grid-react": "^34.2.0",
     "async-mutex": "^0.5.0",
