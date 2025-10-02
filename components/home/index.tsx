@@ -86,7 +86,7 @@ export default memo(({ marketSocketUrl, systemSocketUrl, cryptoSocketUrl, notes,
       {/*<SystemWidget className={clsx(cls.systemWidget)} 
         message={systemData} 
         ok={systemOk} />*/}
-      <div className={clsx(cls.content)}>content</div>
+      <div className={clsx(cls.content)}></div>
       <div className={clsx(cls.notes)}>
         <NotesList notes={notes} /> 
       </div>
