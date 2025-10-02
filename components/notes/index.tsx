@@ -7,7 +7,7 @@ import NotesList from "./NotesList"
 import NoteTitle from "./NoteTitle"
 import NoteMarkdown from "./NoteMarkdown"
 import NoteContent from "./NoteContent"
-import NoteToc from "./NoteToc"
+import NoteToc, { observeToc } from "./NoteToc"
 import NoteEditor from "./NoteEditor"
 import clsx from "clsx"
 
@@ -38,8 +38,8 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
     page: [
       "grid",
       "grid-cols-1 grid-rows-[44px_auto]",
-      "sm:grid-cols-[1fr_2fr] sm:grid-rows-1",
-      "xl:grid-cols-[1fr_2fr_1fr]",
+      "sm:grid-cols-[1fr_3fr] sm:grid-rows-1",
+      "xl:grid-cols-[1fr_4fr_1fr]",
       "xl:overflow-hidden",
       "h-full max-h-full",
       "sm:border-t-1 border-border",
@@ -72,7 +72,8 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
 			"h-full sm:max-h-[calc(100vh-50px)] sm:max-h-screen max-w-full",
 			"whitespace-pre-wrap",
 			"overflow-x-hidden overflow-y-auto",
-			"sm:py-6",
+			"sm:py-2",
+			// "bg-background",
 			editNotes ? "hidden" : "hidden xl:block",
   	],
   	editor: [
@@ -103,30 +104,3 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
 	</div>
 }
 
-function observeToc(markdownId: string, tocId: string): IntersectionObserver {
-	const observer = new IntersectionObserver(entries => {
-		
-		entries.forEach(entry => {
-			const tocEl = document.querySelector(`#${tocId} li > a[href='#${entry.target.id }']`)
-			entry.isIntersecting ? tocEl?.classList.add("active"): tocEl?.classList.remove("active")
-		})
-
-		document.querySelectorAll(`#${tocId} li > a.active`).forEach((el, i) => {
-			if (i === 0) {
-				el?.classList.add("top")
-				el?.scrollIntoView({ behavior: "smooth", block: "center" })
-			} else {
-				el?.classList.remove("top")
-			}
-		})
-	}, { 
-	  // rootMargin: '0% 0px 0% 0px',
-	  root: document.querySelector(`#${markdownId}`),
-	  threshold: 1
-	})
-
-	const headings = document.querySelectorAll(`#${markdownId} h1, #${markdownId} h2, #${markdownId} h3`)
-	headings.forEach(el => observer.observe(el))	
-
-	return observer
-}

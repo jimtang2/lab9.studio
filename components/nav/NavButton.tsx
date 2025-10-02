@@ -21,7 +21,7 @@ export default function NavButton({ id, href="", onClick, className, title="", i
   const cls = {
   	base: [
       "flex items-center justify-center",
-      isCurrent ? "text-accent bg-menu" : "text-subtext hover:text-text",
+      isCurrent ? "text-accent font-bold" : "text-subtext hover:text-text",
       "transition-all duration-150",
       className,
 	  ],

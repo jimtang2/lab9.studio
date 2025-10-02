@@ -2,7 +2,7 @@
 import { useState, useEffect, type ChangeEvent } from "react"
 import { useStore } from "@/state/store"
 import { Note } from "@/db/schema"
-import NotesButtons from "./NotesButtons"
+import NotesToolbar from "./NotesToolbar"
 import { parseMarkdown } from "./NoteMarkdown"
 import clsx from "clsx"
 
@@ -26,8 +26,8 @@ export default function NoteEditor({ className="", note, }: NoteEditorProps) {
 			editNotes ? "pointer-events-auto" : "pointer-events-none",
 			className,
 		],
-    buttons: [
-    	"col-start-2 col-end-3 row-start-1 row-end-2",
+    toolbar: [
+    	"col-start-1 col-end-2 row-start-1 row-end-2",
     ],
 		title: [
 			"col-start-1 col-end-2 row-start-1 row-end-2",
@@ -80,7 +80,7 @@ export default function NoteEditor({ className="", note, }: NoteEditorProps) {
 	}
 
 	return <div className={clsx(cls.container)}>
-		<NotesButtons className={clsx(cls.buttons)} title={title} content={content} note={note} />
+		<NotesToolbar className={clsx(cls.toolbar)} title={title} content={content} note={note} />
 		<textarea className={clsx(cls.title)} value={title} onChange={handleChangeTitle}></textarea>
 		<textarea className={clsx(cls.content)} value={content} onChange={handleChangeContent}></textarea>
 		<div className={clsx(cls.preview)} id="note-markdown" dangerouslySetInnerHTML={{__html: markup}}></div>

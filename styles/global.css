@@ -2,11 +2,12 @@
 
 :root {
   --background-color: var(--color-stone-50);
-  --background-color-alt: var(--color-slate-200);
-  --menu-color: var(--color-slate-100);
-  --text-color: var(--color-gray-800);
+  --background-color-alt: var(--color-slate-100);
+  --menu-color: var(--color-slate-50);
+  --text-color: var(--color-gray-950);
+  --secondary-text-color: var(--color-gray-700);
   --subtext-color: var(--color-gray-400);
-  --accent-color: var(--color-indigo-800);
+  --accent-color: var(--color-blue-800);
   --control-background-color: var(--accent-color);
   --control-foreground-color: var(--color-gray-100);
   --selected-background-color: var(--color-blue-800);
@@ -27,16 +28,17 @@
   :root {
     --background-color: var(--color-neutral-900);
     --background-color-alt: var(--color-neutral-950);
-    --menu-color: var(--color-neutral-800);
+    --menu-color: var(--color-neutral-900);
     --text-color: var(--color-gray-100);
+    --secondary-text-color: var(--color-gray-300);
     --subtext-color: var(--color-gray-500);
-    --accent-color: var(--color-blue-500);
-    --control-background-color: var(--color-blue-500);
+    --accent-color: var(--color-orange-500);
+    --control-background-color: var(--color-orange-500);
     --control-foreground-color: var(--color-neutral-50);
-    --selected-background-color: var(--color-blue-500);
+    --selected-background-color: var(--color-orange-500);
     --selected-foreground-color: var(--color-neutral-900);
     --highlighted-background-color: var(--color-neutral-900);
-    --highlighted-foreground-color: var(--color-blue-500);
+    --highlighted-foreground-color: var(--color-orange-500);
     --border-color: var(--color-stone-800);
     --table-border-color: var(--color-stone-600);
     --error-foreground-color: var(--color-red-500);
@@ -48,6 +50,7 @@
   --color-background-alt: var(--background-color-alt);
   --color-menu: var(--menu-color);
   --color-text: var(--text-color);
+  --color-text-secondary: var(--secondary-text-color);
   --color-subtext: var(--subtext-color);
   --color-accent: var(--accent-color);
   --color-control-background: var(--control-background-color);

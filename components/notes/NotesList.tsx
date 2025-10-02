@@ -21,14 +21,14 @@ export default function NotesList({ notes, className="" }: { notes: { id: number
   		className,
   	],
   	items: [
-			"flex flex-col",
+			"flex flex-col divide-y-1 divide-border",
 			"max-w-full max-h-full", 
 			"overflow-x-hidden overflow-y-auto",
   		showNotesList ? "h-full opacity-100 translate-y-[0]" : "h-[0px] opacity-0 translate-y-[-50px]",
 			"sm:w-full sm:h-full sm:translate-x-0 sm:translate-y-0 sm:opacity-100",
 			"transition-all duration-150",
-			"bg-background",
-			"px-2 sm:py-6",
+			// "bg-background",
+			"px-2 sm:py-2",
   	],
   }
 
@@ -52,7 +52,7 @@ function NoteItem({ id, title, created_at }: { id: number; title: string; create
 	const current = `${id}` === currentId
 
 	const date = new Date(created_at)
-	const displayDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+	const displayDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
 
 	const cls = {
 		container: [
@@ -66,12 +66,17 @@ function NoteItem({ id, title, created_at }: { id: number; title: string; create
 			"h-full w-full",
 			current ? "text-accent font-bold" : "text-text hover:text-accent",
 			"transition-all duration-150",
-			"bg-background",
-			"gap-1",
+			// "bg-background",
+			"flex flex-col",
+			"px-1",
 		],
 		date: [
-			"text-subtext font-light",
-			"px-1",
+			!current ? "text-subtext font-light" : "font-normal",
+			"text-xs",
+		],
+		title: [
+			!current && "text-text-secondary hover:text-text",
+			"transition-all duration-150",
 		],
 		linkIcon: [
 			"mx-1",
@@ -85,8 +90,8 @@ function NoteItem({ id, title, created_at }: { id: number; title: string; create
 			setNoteContentLoading(!current)
 		}}>
 		<div className={clsx(cls.selection)}>
-			{title} 
-			<span className={clsx(cls.date)}>– {displayDate}</span>
+			<span className={clsx(cls.title)}>{title}</span>
+			<span className={clsx(cls.date)}>{displayDate}</span>
 		</div>
 	</Link>
 }

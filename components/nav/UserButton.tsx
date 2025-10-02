@@ -52,7 +52,7 @@ export default function SessionButton({ id="", className="" }: UserButtonProps) 
         loggedIn && "text-accent",
         "text-accent bg-menu",
       ] : [
-        "bg-background",
+        // "bg-background",
         loggedIn && "text-accent",
         !loggedIn && "text-subtext",
       ],

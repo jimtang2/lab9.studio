@@ -48,7 +48,7 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
     widget: [className],
     grid: [
     	"h-full w-full", 
-    	"overflow-x-hidden", 
+    	// "overflow-x-hidden", 
     	"ag-theme-alpine-auto-dark",
     ],
     header: [
@@ -61,8 +61,9 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
   }
   const columnDefs: ColDef<RowData>[] = [
     { headerName: "System Health Monitor", field: "label", flex: 1, sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), },
-    { headerName: "", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), }
+    { headerName: "", field: "value", flex: 1, valueFormatter: (params) => params.value || "0", sortable: false, headerClass: clsx(cls.header), cellClass: clsx(cls.cell), wrapText: true, autoHeight: true, }
   ]
+
   const rowData: RowData[] = [
     { label: "CPU Cores", value: cpu_cores },
     { label: "CPU Speed", value: `${(cpu_speed / 1000 || 0).toFixed(2)} GHz` },
@@ -75,6 +76,7 @@ export default memo(({ className, message, ok }: SystemWidgetProps) => {
     { label: "Uptime", value: `${(uptime || 0).toFixed(0)} s` },
     { label: "Disk I/O Rate", value: `${(disk_io_rate || 0).toFixed(0)} IOPS` },
     { label: "Broadcasts", value: markets_sessions },
+    { label: "User Agent", value: navigator.userAgent },
   ]
   const getRowId = (params: { data: RowData }) => params.data.label
   return (

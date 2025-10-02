@@ -15,6 +15,9 @@ interface Store {
   // controls session menu display
   showSession: boolean;
   setShowSession: (show: boolean) => void;
+  // controls stats widget display
+  showStats: boolean;
+  setShowStats: (show: boolean) => void;
   // id reference to note being loaded 
   // used to display loader between Link onClick and page render 
   noteContentLoading: boolean;
@@ -43,6 +46,8 @@ const storeCreator: StateCreator<Store, [], [["zustand/persist", unknown]]> = (s
   setShowLogin: (show: boolean) => set({ showLogin: show }),
   showSession: false,
   setShowSession: (show: boolean) => set({ showSession: show }),
+  showStats: false,
+  setShowStats: (show: boolean) => set({ showStats: show }),
   noteContentLoading: true,
   setNoteContentLoading: (enabled: boolean) => set({ noteContentLoading: enabled}),
   sid: "",

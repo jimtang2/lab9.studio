@@ -4,22 +4,35 @@ import Icon from "/public/heroicons/solid/chevron-right.svg"
 import clsx from "clsx"
 
 export default function SessionMenu() {
-	const { showSession, } = useStore(state => state)
+	const { showSession, showNav, } = useStore(state => state)
 
 	const cls = {
 		container: [
 		  "absolute",
-      "bottom-[calc(25*var(--spacing)+2px)] left-[calc(12*var(--spacing)+0px)]",
-      "sm:top-[calc(100%+2px)] sm:left-auto sm:right-[-1px]",
+      "bottom-0 right-0",
+      "sm:top-[calc(100%+2px)] sm:left-auto sm:right-0",
 		  "w-min max-w-[360px]",
       "border-1 border-background",
       "bg-menu",
       "mx-1",
       "z-10",
       "sm:translate-x-0",
-      !showSession && "translate-x-[-50px] sm:translate-x-0 sm:translate-y-[-50px] opacity-0",
-      showSession && "translate-x-0 sm:translate-y-0 opacity-100",
-      showSession ? "pointer-events-auto" : "pointer-events-none",
+      // !showSession && "translate-x-0 translate-y-[-100%] sm:translate-x-0 sm:translate-y-[-50px] opacity-0",
+      // showSession && "translate-x-0 translate-y-[-120%] sm:translate-y-0 opacity-100",
+      // showSession ? "pointer-events-auto" : "pointer-events-none",
+      showSession ? [
+        "translate-x-[-44px] translate-y-[-100px]",
+        "sm:translate-y-0",
+        "pointer-events-auto",
+        "opacity-100",
+      ] : [
+        "translate-x-0 translate-y-[-100px]",
+        "sm:translate-x-0 sm:translate-y-[-50px]",
+        "pointer-events-none",
+        "opacity-0",
+      ],
+      showSession && !showNav && "hidden sm:flex",
+
       "transition-all duration-150",
 		  "flex flex-col",
 		],

@@ -7,7 +7,6 @@ import "@/styles/global.css"
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // maximumScale: 2,
   viewportFit: "cover",
   colorScheme: "dark light",
   themeColor: [
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {  
   const cls = {
     html: [
-      "bg-background text-text",
+      "text-text",
       "[font-family:_Work,_sans-serif]",
       "max-w-screen",
       "overscroll-none",
@@ -40,24 +39,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "max-w-screen",
       "gap-[1px]",
       "overscroll-none",
+      "overflow-hidden",
     ],
     nav: [
       "sm:sticky sm:top-0",
       "sm:z-10",
       "overscroll-none",
     ],
-    main: [
-      "w-full h-full",
-      "max-w-[calc(100%-44px)]",
-      "sm:max-w-full sm:max-h-[calc(100%-44px)]",
-      "overflow-hidden overscroll-none",
-    ],
+  }
+
+  const navProps = {
+    systemSocketUrl: process.env.WS_SYSTEM_URL || "",
   }
 
   return <html lang="en" className={clsx(cls.html)}>
     <body className={clsx(cls.body)}>
-      <Nav className={clsx(cls.nav)}/>
-      <main className={clsx(cls.main)}>{children}</main>
+      <Nav className={clsx(cls.nav)} {...navProps}/>
+      {children}
     </body>
     <BrowserCheck />
   </html>

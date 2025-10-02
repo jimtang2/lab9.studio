@@ -9,7 +9,7 @@ import SaveIcon from "/public/heroicons/solid/server.svg"
 import PreviewIcon from "/public/heroicons/solid/eye.svg"
 import clsx from "clsx"
 
-interface NotesButtonsProps {
+interface NotesToolbarProps {
   className: string
 }
 interface SaveButtonProps {
@@ -18,12 +18,12 @@ interface SaveButtonProps {
   note: Note | null
 }
 
-export default function NotesButtons({
+export default function NotesToolbar({
   className,
   title,
   content,
   note,
-}: NotesButtonsProps & SaveButtonProps) {
+}: NotesToolbarProps & SaveButtonProps) {
   const isAdmin = useIsAdmin()
   if (!isAdmin) {
     return null

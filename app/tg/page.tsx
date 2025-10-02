@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
-import Page from "@/components/tg/Page"
+import TelegramApp from "@/components/tg/Page"
 
 export const metadata: Metadata = {
   title: "Telegram",
 }
 
 export default async function TelegramPage() {
-  return <Page />
+  return <TelegramApp />
 }
 
 export const dynamic = "force-dynamic"

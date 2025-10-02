@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { z } from "zod"
+import Main from "@/components/layout/Main"
 import NotesPageClient from "@/components/notes"
 import { getNotes, getNote } from "@/state/global/notes"
 
@@ -28,7 +29,7 @@ export default async function NotesPage({ searchParams }: { searchParams: Promis
   }
   const note = await getNote(id)
 
-  return <NotesPageClient notes={notes} note={note} />
+  return <Main><NotesPageClient notes={notes} note={note} /></Main>
 }
 
 export const dynamic = "force-dynamic"
