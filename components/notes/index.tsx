@@ -61,7 +61,7 @@ export default function NotesPage({ note, notes, }: NotesPageProps) {
 			"sm:border-l-1 sm:border-border",
 			"xl:border-r-1 xl:pb-[88px]",
 			"transition-all transition-transform duration-150",
-			"mx-0 px-0 sm:px-2 sm:mx-0 sm:py-6",
+			"mx-0 px-0 sm:px-2 sm:mx-0 sm:py-0",
 			"h-full sm:max-h-full sm:max-h-screen max-w-full",
 			"overflow-x-hidden overflow-y-auto",
 			showNotesList ? "pointer-events-none" : "pointer-events-auto",

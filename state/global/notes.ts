@@ -1,4 +1,4 @@
-import { scheduleJob, scheduledJobs, gracefulShutdown } from "node-schedule"
+// import { scheduleJob, scheduledJobs, gracefulShutdown } from "node-schedule"
 import { db } from "@/db"
 import { Notes, Note } from "@/db/schema"
 import { desc } from "drizzle-orm"
@@ -19,16 +19,16 @@ class NotesManager {
     this.notes = null
     this.map = {}
 
-    scheduleJob(
-      "refreshNotes",
-      "*/1 * * * *",
-      this.refreshNotes.bind(this)
-    )
-    process.on("SIGTERM", async () => {
-      await gracefulShutdown()
-      process.exit(0)
-    })
-    console.log("global: NotesManager initialized")
+    // scheduleJob(
+    //   "refreshNotes",
+    //   "*/1 * * * *",
+    //   this.refreshNotes.bind(this)
+    // )
+    // process.on("SIGTERM", async () => {
+    //   await gracefulShutdown()
+    //   process.exit(0)
+    // })
+    // console.log("global: NotesManager initialized")
   }
 
   async getNotes(): Promise<Note[]> {

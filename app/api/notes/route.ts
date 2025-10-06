@@ -42,8 +42,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    await updateNotes()
-
     return NextResponse.json(
       {
         message: "Note updated successfully",
@@ -65,4 +63,10 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
+}
+
+
+export async function GET(request: NextRequest) {
+  await updateNotes() 
+  return NextResponse.json({ status: 200 })
 }
